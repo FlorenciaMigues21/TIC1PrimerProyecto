@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <ImageView fitHeight="213.0" fitWidth="332.0" layoutX="34.0" layoutY="96.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Images/wp9142497-black-tech-wallpapers.jpg" />
+      </image>
+   </ImageView>
+   <Label layoutX="67.0" layoutY="96.0" style="-fx-content-display: white;" text="Welcome to " textFill="#f2eeee">
+      <font>
+         <Font size="28.0" />
+      </font>
+   </Label>
+    <AnchorPane layoutX="385.0" layoutY="23.0" prefHeight="347.0" prefWidth="291.0" style="-fx-background-color: #c0392b;">
+        <Button fx:id="btnNext" alignment="CENTER" layoutX="32.0" layoutY="238.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="228.0" style="-fx-background-color: #ec7063;" text="Next" textAlignment="CENTER" textFill="#fcf8f8" />
+        <Label layoutX="118.0" layoutY="33.0" style="-fx-content-display: #fdfefe;" text="Sign In" textFill="#fcf3f3">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+      <TextField layoutX="32.0" layoutY="160.0" prefHeight="27.0" prefWidth="228.0" promptText="password" />
+      <TextField fx:id="username" layoutX="32.0" layoutY="118.0" prefHeight="27.0" prefWidth="228.0" promptText="username" />
+      <Hyperlink layoutX="88.0" layoutY="290.0" text="Forgot password?" textFill="#fcfcfc" underline="true" />
+    </AnchorPane>
+   <Label layoutX="94.0" layoutY="157.0" style="-fx-content-display: white;" text="Lo que sea que diga la despcripción" textFill="#f8f4f4" />
+   <Button fx:id="btnSignUp" alignment="CENTER" layoutX="67.0" layoutY="222.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="228.0" style="-fx-background-color: #ec7063;" text="Sign Up" textAlignment="CENTER" textFill="WHITE" />
+</AnchorPane>
