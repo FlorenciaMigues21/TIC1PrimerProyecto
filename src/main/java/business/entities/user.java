@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -17,8 +19,13 @@ import javax.persistence.Table;
 public class user {
 
     @Id
+    @Column(name = "mail")
     private String mail;
+
+    @Column(name = "username")
     private String username;
+
+    @Column(name = "password")
     private String password;
 
 
