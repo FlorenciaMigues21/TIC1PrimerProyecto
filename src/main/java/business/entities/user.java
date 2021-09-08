@@ -48,17 +48,21 @@ public class user {
         return true;
     }
 
-    public boolean singupUser(user userobj) throws UserAlreadyExist, InvalidUserInformation {
-        if(userobj.mail == null || userobj.mail.equals("") || userobj.password == null || userobj.password.equals("") || userobj.username == null || userobj.username.equals("")){
+    public static boolean singupUser(String mail, String password, String username, String passwordafirmation) throws UserAlreadyExist, InvalidUserInformation {
+        if(mail == null || mail.equals("") || password == null || password.equals("") || username == null || username.equals("")){
             throw new InvalidUserInformation("Datos del usuario vacios");
         }else {
-            Configuration con = new Configuration().configure().addAnnotatedClass(user.class);
-            SessionFactory sf = con.buildSessionFactory();
-            Session session = sf.openSession();
-            Transaction tx = session.beginTransaction();
-            session.save(userobj);
-            tx.commit();
-            return true;
+            if(password.equals(passwordafirmation)) {
+                Configuration con = new Configuration().configure().addAnnotatedClass(user.class);
+                SessionFactory sf = con.buildSessionFactory();
+                Session session = sf.openSession();
+                Transaction tx = session.beginTransaction();
+                session.save(new user(mail,username,password));
+                tx.commit();
+                return true;
+            }else{
+                throw new InvalidUserInformation("Las contraseñas no coinciden");
+            }
         }
     }
 
