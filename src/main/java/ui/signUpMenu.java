@@ -2,14 +2,10 @@ package ui;
 
 
 import business.entities.user;
-import business.exceptions.InvalidUserInformation;
 import business.exceptions.UserNotFound;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -17,20 +13,23 @@ import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
 @Component
-public class MenuInicial {
+public class signUpMenu {
 
     @Autowired
-    private user userSignIn;
+    private user userSignUp;
+
     @FXML
-    private Button btnNext;
+    private TextField email;
 
     @FXML
     private TextField password;
 
     @FXML
     private TextField username;
+
+    @FXML
+    private TextField confirmPassword;
 
     @FXML
     private Button btnSignUp;
@@ -43,10 +42,12 @@ public class MenuInicial {
     }
 
     @FXML
-    void SignIn(ActionEvent event) {
+    void SignUp(ActionEvent event) {
 
         if (password.getText() == null || password.getText().equals("") ||
-                username.getText() == null || username.getText().equals("")) {
+                username.getText() == null || username.getText().equals("")
+                || confirmPassword.getText() == null || confirmPassword.getText().equals("")
+                || email.getText() == null || email.getText().equals("")) {
 
             showAlert(
                     "Error",
@@ -57,26 +58,21 @@ public class MenuInicial {
             try {
 
                 String name = username.getText();
-                String UserPassword = password.getText();
+                String passwordUser = password.getText();
+                String ConfirmPassword = confirmPassword.getText();
+                String mail = email.getText();
 
-                try {
+                userSignUp = new user(mail,name,passwordUser);
+                //userSignUp.singupUser();
 
-                    userSignIn.loginUser(name,UserPassword);
+                showAlert("Your account was created!" , "Please login to access");
 
-                    showAlert("Login successful!" , "You have successfully signed into your count. You can close this window and continue using the product");
-
-                    close(event);
-                } catch (UserNotFound userNotFound) {
-                    userNotFound.printStackTrace();
-                    showAlert(
-                            "Invalid Email or password",
-                            "Please try again");
-                }
+                close(event);
 
             } catch (NumberFormatException e) {
 
                 showAlert(
-                        "Invalid Email or password",
+                        "Invalid Information",
                         "Please try again");
 
             }
@@ -90,8 +86,5 @@ public class MenuInicial {
         alert.showAndWait();
     }
 
-    @FXML
-    void signUp(ActionEvent event){
 
-    }
 }
