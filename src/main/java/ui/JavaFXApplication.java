@@ -3,6 +3,7 @@ package ui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -35,9 +36,15 @@ public class JavaFXApplication extends Application {
         JavaFXApplication.primaryStage = primaryStage;
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
-        root = fxmlLoader.load(Principal.class.getResourceAsStream("Principal.fxml"));
+        root = fxmlLoader.load(Principal.class.getResourceAsStream("principalPage.fxml"));
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+
+    }
+
+    @Override
+    public void stop() {
+        Main.getContext().close();
 
     }
 }
