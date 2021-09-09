@@ -12,7 +12,7 @@ public class Main {
     private static ConfigurableApplicationContext context;
 
     public static void main(String[] args) {
-        Main.context = SpringApplication.run(Main.class);
+        Main.context = SpringApplication.run(JavaFXApplication.class);
 
         Application.launch(JavaFXApplication.class, args);
     }

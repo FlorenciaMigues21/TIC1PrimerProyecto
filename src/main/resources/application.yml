@@ -10,6 +10,6 @@
     show-sql: true
     hibernate.ddl-auto: update
     generate-ddl: true
-logging:
-  level:
-    ROOT: INFO
+  logging:
+    level:
+      ROOT: INFO
