@@ -19,6 +19,7 @@ public class User {
     private String username;
 
     public User() {
+
     }
 
     public User(String mail, String password) {
@@ -62,7 +63,7 @@ public class User {
         this.username = username;
     }
 
-    public User loginUser(String mail,String password) throws UserNotFound {
+    public User loginUser() throws UserNotFound {
 
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -71,11 +72,12 @@ public class User {
         User u = new User();
 
         try {
+
             transaction.begin();
 
             TypedQuery<User> empLogin = entityManager.createNamedQuery("User.login", User.class);
-            empLogin.setParameter(1,mail);
-            empLogin.setParameter(2,password);
+            empLogin.setParameter(1,this.mail);
+            empLogin.setParameter(2,this.password);
             u = empLogin.getSingleResult();
 
             transaction.commit();
