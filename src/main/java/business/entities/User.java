@@ -81,10 +81,9 @@ public class User {
             u = empLogin.getSingleResult();
 
             transaction.commit();
-
+            return u;
         }catch(Exception e){
             throw new UserNotFound("User not found");
-
         }finally{
 
             if(transaction.isActive()){
@@ -93,8 +92,6 @@ public class User {
 
             entityManager.close();
             entityManagerFactory.close();
-
-            return u;
         }
     }
 
@@ -106,14 +103,15 @@ public class User {
                 EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
                 EntityManager entityManager = entityManagerFactory.createEntityManager();
                 EntityTransaction transaction = entityManager.getTransaction();
-
+                User usuario;
                 try {
                     transaction.begin();
 
-                    User usuario = new User(mail, password, username);
+                     usuario = new User(mail, password, username);
                     entityManager.persist(usuario);
 
                     transaction.commit();
+                    return true;
                 }catch(Exception e){ //VERIFICAMOS SI EL USUARIO YA ESTABA REGISTRADO O ES UN ERROR EN LA CONEXION CON LA BASE DE DATOS
                     int cantidad = 0;
                     try{
@@ -148,8 +146,6 @@ public class User {
 
                     entityManager.close();
                     entityManagerFactory.close();
-
-                    return true;
                 }
             }else{
                 throw new InvalidUserInformation("Las contraseñas no coinciden");
