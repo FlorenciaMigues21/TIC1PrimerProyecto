@@ -1,7 +1,7 @@
 package ui;
 
 
-import business.entities.user;
+import business.entities.User;
 import business.exceptions.UserNotFound;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class signUpMenu {
 
     @Autowired
-    private user userSignUp;
+    private User userSignUp;
 
     @FXML
     private TextField email;
@@ -62,7 +62,7 @@ public class signUpMenu {
                 String ConfirmPassword = confirmPassword.getText();
                 String mail = email.getText();
 
-                userSignUp = new user(mail,name,passwordUser);
+                userSignUp = new User(mail,name,passwordUser);
                 //userSignUp.singupUser();
 
                 showAlert("Your account was created!" , "Please login to access");

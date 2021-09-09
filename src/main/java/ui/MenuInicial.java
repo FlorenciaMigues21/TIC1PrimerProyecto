@@ -1,7 +1,7 @@
 package ui;
 
 
-import business.entities.user;
+import business.entities.User;
 import business.exceptions.InvalidUserInformation;
 import business.exceptions.UserNotFound;
 import javafx.application.Platform;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 public class MenuInicial {
 
     @Autowired
-    private user userSignIn;
+    private User userSignIn;
     @FXML
     private Button btnNext;
 
