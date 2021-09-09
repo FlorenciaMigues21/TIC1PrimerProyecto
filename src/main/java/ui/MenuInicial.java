@@ -46,7 +46,7 @@ public class MenuInicial {
     }
 
     @FXML
-    void SignIn(ActionEvent event) {
+    void btnNext(ActionEvent event) {
 
         if (password.getText() == null || password.getText().equals("") ||
                 username.getText() == null || username.getText().equals("")) {
@@ -94,7 +94,7 @@ public class MenuInicial {
     }
 
     @FXML
-    void signUp(ActionEvent event) throws IOException {
+    void btnSignUp(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
 
@@ -103,5 +103,5 @@ public class MenuInicial {
         stage.setScene(new Scene(root));
         stage.show();
     }
-    }
 }
+
