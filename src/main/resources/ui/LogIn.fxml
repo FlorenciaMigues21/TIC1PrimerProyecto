@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" styleClass="anchor" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.LogIn">
+<AnchorPane prefHeight="400.0" prefWidth="700.0" styleClass="anchor" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.signUpMenu">
     <stylesheets>
         <URL value="@LogInStyle.css" />
     </stylesheets>
@@ -27,27 +27,27 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <TextField layoutX="14.0" layoutY="102.0" promptText="Username">
+            <TextField fx:id="username" layoutX="14.0" layoutY="102.0" promptText="Username">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
-            <TextField layoutX="14.0" layoutY="192.0" promptText="Password">
+            <TextField fx:id="password" layoutX="14.0" layoutY="192.0" promptText="Password">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
-            <TextField layoutX="14.0" layoutY="148.0" promptText="Email">
+            <TextField fx:id="email" layoutX="14.0" layoutY="148.0" promptText="Email">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
-            <TextField layoutX="14.0" layoutY="235.0" promptText="Confirm Password">
+            <TextField fx:id="confirmPassword" layoutX="14.0" layoutY="235.0" promptText="Confirm Password">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
-            <Button fx:id="btnSignUp1" alignment="CENTER" layoutX="70.0" layoutY="289.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="228.0" style="-fx-background-color: #ec7063;" text="Sign Up" textAlignment="CENTER" textFill="WHITE" />
+            <Button fx:id="btnSignUp" onAction="#SignUp" alignment="CENTER" layoutX="70.0" layoutY="289.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="228.0" style="-fx-background-color: #ec7063;" text="Sign Up" textAlignment="CENTER" textFill="WHITE" />
          </children>
       </AnchorPane>
       <Hyperlink layoutX="279.0" layoutY="359.0" style="-fx-content-display: white;" text="Already have an account?" textFill="#f8f8f8" underline="true" />
