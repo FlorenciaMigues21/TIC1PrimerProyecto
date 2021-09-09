@@ -10,12 +10,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 
 @Component
@@ -43,7 +46,7 @@ public class MenuInicial {
     }
 
     @FXML
-    void SignIn(ActionEvent event) {
+    void btnNext(ActionEvent event) {
 
         if (password.getText() == null || password.getText().equals("") ||
                 username.getText() == null || username.getText().equals("")) {
@@ -91,7 +94,14 @@ public class MenuInicial {
     }
 
     @FXML
-    void signUp(ActionEvent event){
+    void btnSignUp(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
 
+        Parent root = fxmlLoader.load(signUpMenu.class.getResourceAsStream("LogIn.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }
+
