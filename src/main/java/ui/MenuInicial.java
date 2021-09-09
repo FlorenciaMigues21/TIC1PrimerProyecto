@@ -96,7 +96,7 @@ public class MenuInicial {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
 
-        Parent root = fxmlLoader.load(signUpMenu.class.getResourceAsStream("LogIn.fxml"));
+        Parent root = fxmlLoader.load(signUpMenu.class.getResource("LogIn.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
