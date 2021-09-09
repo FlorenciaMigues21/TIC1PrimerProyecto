@@ -24,8 +24,6 @@ import java.io.IOException;
 @Component
 public class MenuInicial {
 
-    @Autowired
-    private User userSignIn;
     @FXML
     private Button btnNext;
 
@@ -64,7 +62,7 @@ public class MenuInicial {
 
                 try {
 
-                    userSignIn.loginUser(name,UserPassword);
+                    User userSignIn = new User(name,UserPassword).loginUser();
 
                     showAlert("Login successful!" , "You have successfully signed into your count. You can close this window and continue using the product");
 

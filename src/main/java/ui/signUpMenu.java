@@ -2,6 +2,8 @@ package ui;
 
 
 import business.entities.User;
+import business.exceptions.InvalidUserInformation;
+import business.exceptions.UserAlreadyExist;
 import business.exceptions.UserNotFound;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,8 +18,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class signUpMenu {
 
-    @Autowired
-    private User userSignUp;
 
     @FXML
     private TextField email;
@@ -62,10 +62,13 @@ public class signUpMenu {
                 String ConfirmPassword = confirmPassword.getText();
                 String mail = email.getText();
 
-                userSignUp = new User(mail,name,passwordUser);
-                //userSignUp.singupUser();
-
-                showAlert("Your account was created!" , "Please login to access");
+                boolean pronto= User.singupUser(mail,passwordUser,name,ConfirmPassword);
+                if(pronto){
+                    showAlert("Your account was created!" , "Please login to access");
+                }
+                else{
+                    showAlert("Your account already exists" , "Please login to access");
+                }
 
                 close(event);
 
@@ -75,6 +78,8 @@ public class signUpMenu {
                         "Invalid Information",
                         "Please try again");
 
+            } catch (InvalidUserInformation | UserAlreadyExist invalidUserInformation) {
+                invalidUserInformation.printStackTrace();
             }
         }
     }

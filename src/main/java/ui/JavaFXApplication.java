@@ -16,28 +16,18 @@ import java.io.IOException;
 
 
 @Component
-public class JavaFXApplication extends Application {
+public class JavaFXApplication extends Application  {
 
-    private static ConfigurableApplicationContext applicationContext;
-
-    static Stage primaryStage;
     private Parent root;
-    /*@Autowired
-    /*private PersonController personController; //Conexion con la base de datos*/
 
     @Override
-    public void init() throws Exception{
-        /*String[] args = getParameters().getRaw().toArray(new String[0]);
+    public void init() throws Exception {
 
-        /*this.applicationContext = new SpringApplicationBuilder()
-                .sources(EjemploTICGui.class)
-                .run(args);*/
     }
 
 
     @Override //Falta main
     public void start(Stage primaryStage) throws Exception {
-        JavaFXApplication.primaryStage = primaryStage;
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         root = fxmlLoader.load(MenuInicial.class.getResourceAsStream("principalPage.fxml"));
