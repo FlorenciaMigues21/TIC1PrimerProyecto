@@ -1,4 +1,4 @@
-package business.exceptions;
+package proyecto.business.exceptions;
 
 public class InvalidUserInformation extends Exception{
     String message;

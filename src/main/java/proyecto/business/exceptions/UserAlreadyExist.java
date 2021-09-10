@@ -1,4 +1,4 @@
-package business.exceptions;
+package proyecto.business.exceptions;
 
 public class UserAlreadyExist extends Exception{
     String message;

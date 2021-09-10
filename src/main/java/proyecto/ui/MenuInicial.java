@@ -1,10 +1,9 @@
-package ui;
+package proyecto.ui;
 
 
-import business.entities.User;
-import business.exceptions.InvalidUserInformation;
-import business.exceptions.UserNotFound;
-import javafx.application.Platform;
+import proyecto.Main;
+import proyecto.business.entities.User;
+import proyecto.business.exceptions.UserNotFound;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +14,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;

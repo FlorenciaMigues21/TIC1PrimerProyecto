@@ -1,12 +1,8 @@
-package business.entities;
+package proyecto.business.entities;
 
-import business.exceptions.InvalidUserInformation;
-import business.exceptions.UserAlreadyExist;
-import business.exceptions.UserNotFound;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import proyecto.business.exceptions.InvalidUserInformation;
+import proyecto.business.exceptions.UserAlreadyExist;
+import proyecto.business.exceptions.UserNotFound;
 
 import javax.persistence.*;
 
@@ -107,7 +103,7 @@ public class User {
                 try {
                     transaction.begin();
 
-                     usuario = new User(mail, password, username);
+                    usuario = new User(mail, password, username);
                     entityManager.persist(usuario);
 
                     transaction.commit();

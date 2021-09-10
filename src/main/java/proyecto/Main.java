@@ -1,10 +1,10 @@
-package ui;
+package proyecto;
 
 import javafx.application.Application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-
+import proyecto.ui.JavaFXApplication;
 
 @SpringBootApplication
 public class Main {

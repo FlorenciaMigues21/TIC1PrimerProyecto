@@ -1,4 +1,4 @@
-package business.exceptions;
+package proyecto.business.exceptions;
 
 public class UserNotFound extends Exception{
     String message;
