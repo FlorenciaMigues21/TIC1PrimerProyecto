@@ -9,11 +9,11 @@ import proyecto.ui.JavaFXApplication;
 @SpringBootApplication
 public class Main {
 
+
     private static ConfigurableApplicationContext context;
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Main.context = SpringApplication.run(JavaFXApplication.class);
-
         Application.launch(JavaFXApplication.class, args);
     }
 

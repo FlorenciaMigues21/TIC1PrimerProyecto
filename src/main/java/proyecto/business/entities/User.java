@@ -1,5 +1,6 @@
 package proyecto.business.entities;
 
+import com.sun.istack.NotNull;
 import proyecto.business.exceptions.InvalidUserInformation;
 import proyecto.business.exceptions.UserAlreadyExist;
 import proyecto.business.exceptions.UserNotFound;
@@ -7,6 +8,7 @@ import proyecto.business.exceptions.UserNotFound;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "user")
 @NamedQuery(name = "User.login",query = "SELECT u FROM User u WHERE u.mail = ?1 AND u.password = ?2")
 @NamedQuery(name = "User.search", query = "SELECT count(u) FROM User u WHERE u.mail = ?1")
 public class User {
@@ -30,7 +32,8 @@ public class User {
     }
 
     @Id
-    @Column(name = "mail")
+    @NotNull
+    @Column(name = "mail", unique = true)
     public String getMail() {
         return mail;
     }
@@ -39,7 +42,7 @@ public class User {
         this.mail = mail;
     }
 
-    @Basic
+    @NotNull
     @Column(name = "password")
     public String getPassword() {
         return password;
@@ -49,7 +52,7 @@ public class User {
         this.password = password;
     }
 
-    @Basic
+    @NotNull
     @Column(name = "username")
     public String getUsername() {
         return username;

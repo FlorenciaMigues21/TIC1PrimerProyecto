@@ -1,8 +1,10 @@
 package proyecto.ui;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import proyecto.Main;
 import proyecto.business.entities.User;
+import proyecto.business.entities_managers.UserController;
 import proyecto.business.exceptions.UserNotFound;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +23,9 @@ import java.io.IOException;
 
 @Component
 public class MenuInicial {
+
+    @Autowired
+    public UserController controlador;
 
     @FXML
     private Button btnNext;
@@ -93,6 +98,10 @@ public class MenuInicial {
     void btnSignUp(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+
+        User usuario = controlador.getUser("agustincaf13@gmail.com");
+        System.out.println(usuario.getUsername());
+
 
         Parent root = fxmlLoader.load(signUpMenu.class.getResource("LogIn.fxml"));
         Stage stage = new Stage();
