@@ -12,7 +12,7 @@
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.ui.MenuInicial">
    <ImageView fitHeight="213.0" fitWidth="332.0" layoutX="34.0" layoutY="96.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@../Images/wp9142497-black-tech-wallpapers.jpg" />
+         <Image url="Images/wp9142497-black-tech-wallpapers.jpg" />
       </image>
    </ImageView>
    <Label layoutX="67.0" layoutY="96.0" style="-fx-content-display: white;" text="Welcome to " textFill="#f2eeee">
