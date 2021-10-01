@@ -10,10 +10,7 @@ import javax.transaction.Transactional;
 @Repository
 public interface UserDAO extends CrudRepository<User,String>{
 
-        /**
-         * Retorna un usuario por mail si encuentra mas de una lanza una excepcion
-         * @param mail
-         * @return
-         * * */
+        User findByMailAndPassword(String mail,String password);
+
         User findByMail(String mail);
 }
