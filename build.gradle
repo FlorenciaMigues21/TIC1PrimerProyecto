@@ -9,6 +9,7 @@ plugins {
 
 group = 'grupo6'
 version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
 
 repositories {
     mavenCentral()
@@ -16,13 +17,7 @@ repositories {
 
 javafx {
     version = "15.0.1"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
-    }
+    modules = [ 'javafx.controls', 'javafx.fxml' , 'javafx.graphics']
 }
 
 dependencies {

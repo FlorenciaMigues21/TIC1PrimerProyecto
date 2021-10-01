@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import proyecto.Main;
 import proyecto.business.entities.User;
 import proyecto.business.entities_managers.UserController;
+import proyecto.business.entities_managers.UserManager;
 import proyecto.business.exceptions.UserNotFound;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +26,7 @@ import java.io.IOException;
 public class MenuInicial {
 
     @Autowired
-    public UserController controlador;
+    public UserManager controlador;
 
     @FXML
     private Button btnNext;
@@ -65,12 +66,13 @@ public class MenuInicial {
 
                 try {
 
-                    User userSignIn = new User(name,UserPassword).loginUser();
+                    User userSignIn = controlador.getUserByMail(name);
 
-                    showAlert("Login successful!" , "You have successfully signed into your count. You can close this window and continue using the product");
+                    if (userSignIn.getPassword().equals(UserPassword))
+                        showAlert("Login successful!" , "You have successfully signed into your count. You can close this window and continue using the product");
 
                     close(event);
-                } catch (UserNotFound userNotFound) {
+                } catch (Exception userNotFound) {
                     userNotFound.printStackTrace();
                     showAlert(
                             "Invalid Email or password",
@@ -99,10 +101,7 @@ public class MenuInicial {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
 
-        User usuario = controlador.getUser("agustincaf13@gmail.com");
-        System.out.println(usuario.getUsername());
-
-
+        
         Parent root = fxmlLoader.load(signUpMenu.class.getResourceAsStream("LogIn.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));

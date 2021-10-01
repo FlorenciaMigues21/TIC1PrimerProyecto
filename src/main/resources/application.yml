@@ -8,10 +8,8 @@
     password: admin
   jpa:
     show-sql: true
-    generate-ddl: true
     hibernate:
       ddl-auto: update
-    database: mysql
   logging:
     level:
       ROOT: INFO

@@ -1,7 +1,9 @@
 package proyecto.ui;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import proyecto.business.entities.User;
+import proyecto.business.entities_managers.UserManager;
 import proyecto.business.exceptions.InvalidUserInformation;
 import proyecto.business.exceptions.UserAlreadyExist;
 import javafx.event.ActionEvent;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class signUpMenu {
 
+    @Autowired
+    private UserManager controlador;
 
     @FXML
     private TextField email;
@@ -59,17 +63,14 @@ public class signUpMenu {
                 String passwordUser = password.getText();
                 String ConfirmPassword = confirmPassword.getText();
                 String mail = email.getText();
-
-                boolean pronto= User.singupUser(mail,passwordUser,name,ConfirmPassword);
-                if(pronto){
-                    showAlert("Your account was created!" , "Please login to access");
+                if (passwordUser.equals(ConfirmPassword)) {
+                    User usuario = new User(mail, passwordUser, name);
+                    controlador.addUser(usuario);
+                    showAlert("Your account was created!", "Please login to access");
+                    close(event);
+                }else{
+                    showAlert("Incorrect passwords","Incorrect passwords");
                 }
-                else{
-                    showAlert("Your account already exists" , "Please login to access");
-                }
-
-                close(event);
-
             } catch (NumberFormatException e) {
 
                 showAlert(
