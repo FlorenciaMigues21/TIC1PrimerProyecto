@@ -1,8 +1,8 @@
 package proyecto.business.entities.persistence;
 
 import org.springframework.stereotype.Repository;
-import proyecto.business.entities.User;
 import org.springframework.data.repository.CrudRepository;
+import proyecto.business.entities.User;
 
 import javax.transaction.Transactional;
 

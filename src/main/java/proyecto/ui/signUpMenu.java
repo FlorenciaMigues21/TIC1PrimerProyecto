@@ -43,31 +43,10 @@ public class signUpMenu {
     private Button btnSignUp;
 
     @FXML
-    private TextField pais;
-
-    @FXML
-    private TextField telefono;
-
-    @FXML
-    private Button atras;
-
-    @FXML
     void close(ActionEvent actionEvent) {
         Node source = (Node)  actionEvent.getSource();
         Stage stage  = (Stage) source.getScene().getWindow();
         stage.close();
-    }
-
-    @FXML
-    void Back(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
-
-
-        Parent root = fxmlLoader.load(MenuInicial.class.getResourceAsStream("principalPage.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
     }
 
     @FXML
@@ -90,10 +69,6 @@ public class signUpMenu {
                 String passwordUser = password.getText();
                 String ConfirmPassword = confirmPassword.getText();
                 String mail = email.getText();
-                String tel = telefono.getText();
-                String pais_recidente = pais.getText();
-
-
                 if (passwordUser.equals(ConfirmPassword)) {
                     controlador.addUser(mail, passwordUser,ConfirmPassword, name);
                     showAlert("Your account was created!", "Please login to access");
