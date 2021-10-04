@@ -71,8 +71,7 @@ public class signUpMenu {
                 String mail = email.getText();
                 String tel = telefono.getText();
                 if (passwordUser.equals(ConfirmPassword)) {
-                    User usuario = new User(mail, passwordUser, name);
-                    controlador.addUser(usuario);
+                    controlador.addUser(mail, passwordUser,ConfirmPassword, name);
                     showAlert("Your account was created!", "Please login to access");
                     close(event);
                 }else{

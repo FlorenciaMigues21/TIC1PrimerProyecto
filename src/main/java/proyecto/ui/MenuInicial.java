@@ -4,9 +4,7 @@ package proyecto.ui;
 import org.springframework.beans.factory.annotation.Autowired;
 import proyecto.Main;
 import proyecto.business.entities.User;
-import proyecto.business.entities_managers.UserController;
 import proyecto.business.entities_managers.UserManager;
-import proyecto.business.exceptions.UserNotFound;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +16,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
+import proyecto.business.exceptions.InvalidUserInformation;
+import proyecto.business.exceptions.UserNotFound;
 
 import java.io.IOException;
 
@@ -61,21 +61,21 @@ public class MenuInicial {
 
             try {
 
-                String name = username.getText();
-                String UserPassword = password.getText();
+                String mail = username.getText();
+                String passowrd = password.getText();
 
                 try {
 
-                    User userSignIn = controlador.getUserByMail(name);
+                    User userSignIn = controlador.logInUser(mail,passowrd);
 
-                    if (userSignIn.getPassword().equals(UserPassword))
+                    if (userSignIn.getPassword().equals(passowrd))
                         showAlert("Login successful!" , "You have successfully signed into your count. You can close this window and continue using the product");
 
                     close(event);
-                } catch (Exception userNotFound) {
-                    userNotFound.printStackTrace();
+                } catch (InvalidUserInformation | UserNotFound error) {
+                    error.printStackTrace();
                     showAlert(
-                            "Invalid Email or password",
+                            error.getMessage(),
                             "Please try again");
                 }
 
@@ -101,7 +101,7 @@ public class MenuInicial {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
 
-        
+
         Parent root = fxmlLoader.load(signUpMenu.class.getResourceAsStream("LogIn.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));

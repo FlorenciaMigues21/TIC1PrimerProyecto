@@ -1,15 +1,13 @@
 package proyecto.business.entities;
 
 import com.sun.istack.NotNull;
-import proyecto.business.exceptions.InvalidUserInformation;
-import proyecto.business.exceptions.UserAlreadyExist;
-import proyecto.business.exceptions.UserNotFound;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
 public class User {
+
     private String mail;
     private String password;
     private String username;
