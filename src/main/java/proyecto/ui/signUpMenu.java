@@ -37,6 +37,12 @@ public class signUpMenu {
     private Button btnSignUp;
 
     @FXML
+    private TextField pais;
+
+    @FXML
+    private TextField telefono;
+
+    @FXML
     void close(ActionEvent actionEvent) {
         Node source = (Node)  actionEvent.getSource();
         Stage stage  = (Stage) source.getScene().getWindow();
@@ -63,6 +69,7 @@ public class signUpMenu {
                 String passwordUser = password.getText();
                 String ConfirmPassword = confirmPassword.getText();
                 String mail = email.getText();
+                String tel = telefono.getText();
                 if (passwordUser.equals(ConfirmPassword)) {
                     User usuario = new User(mail, passwordUser, name);
                     controlador.addUser(usuario);
