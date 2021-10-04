@@ -1,7 +1,11 @@
 package proyecto.ui;
 
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import org.springframework.beans.factory.annotation.Autowired;
+import proyecto.Main;
 import proyecto.business.entities.User;
 import proyecto.business.entities_managers.UserManager;
 import proyecto.business.exceptions.InvalidUserInformation;
@@ -14,6 +18,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 @Component
 public class signUpMenu {
@@ -43,10 +49,25 @@ public class signUpMenu {
     private TextField telefono;
 
     @FXML
+    private Button atras;
+
+    @FXML
     void close(ActionEvent actionEvent) {
         Node source = (Node)  actionEvent.getSource();
         Stage stage  = (Stage) source.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    void Back(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+
+
+        Parent root = fxmlLoader.load(MenuInicial.class.getResourceAsStream("principalPage.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
@@ -70,6 +91,9 @@ public class signUpMenu {
                 String ConfirmPassword = confirmPassword.getText();
                 String mail = email.getText();
                 String tel = telefono.getText();
+                String pais_recidente = pais.getText();
+
+
                 if (passwordUser.equals(ConfirmPassword)) {
                     controlador.addUser(mail, passwordUser,ConfirmPassword, name);
                     showAlert("Your account was created!", "Please login to access");
