@@ -1,86 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.collections.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="anchor" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.ui.signUpMenu">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: white;" styleClass="anchor" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.ui.signUpMenu">
    <children>
-      <AnchorPane layoutX="45.0" layoutY="66.0" prefHeight="507.0" prefWidth="810.0" style="-fx-border-color: #d5dbdb;">
+      <AnchorPane layoutX="45.0" layoutY="66.0" prefHeight="507.0" prefWidth="810.0" style="-fx-border-color: #d5dbdb; -fx-background-color: white;">
          <children>
-            <Text layoutX="300.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrarse" textAlignment="CENTER" wrappingWidth="210.0">
+            <ImageView fitHeight="531.0" fitWidth="531.0" layoutX="140.0" layoutY="-30.0" opacity="0.05">
+               <image>
+                  <Image url="/Images/Search Me(4).png" />
+               </image>
+            </ImageView>
+            <Text layoutX="300.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Optima;" text="Registrarse" textAlignment="CENTER" wrappingWidth="210.0">
                <font>
                   <Font name="Arial Bold" size="35.0" />
                </font>
             </Text>
-            <TextField fx:id="username" layoutX="54.0" layoutY="91.0" prefHeight="30.0" prefWidth="304.0" style="-fx-background-color: #f2f3f4; -fx-border-color: #d7dbdd; -fx-background-radius: 5;">
+            <TextField fx:id="username" layoutX="113.0" layoutY="89.0" prefHeight="46.0" prefWidth="274.0" promptText="Username" style="-fx-background-color: white; -fx-border-color: #d5dbdb; -fx-background-radius: 5;">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
-            <Text layoutX="54.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de usuario:">
-               <font>
-                  <Font name="Calibri" size="20.0" />
-               </font>
-            </Text>
-            <TextField fx:id="email" layoutX="54.0" layoutY="154.0" prefHeight="30.0" prefWidth="304.0" style="-fx-background-color: #f2f3f4; -fx-border-color: #d7dbdd; -fx-background-radius: 5;">
+            <TextField fx:id="email" layoutX="114.0" layoutY="162.0" prefHeight="46.0" prefWidth="587.0" promptText="Email" style="-fx-background-color: white; -fx-border-color: #d5dbdb;">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
-            <TextField fx:id="password" layoutX="55.0" layoutY="217.0" prefHeight="30.0" prefWidth="304.0" style="-fx-border-radius: 5; -fx-background-color: #f2f3f4; -fx-border-color: #d7dbdd;">
+            <TextField fx:id="password" accessibleRole="PASSWORD_FIELD" layoutX="113.0" layoutY="307.0" prefHeight="46.0" prefWidth="274.0" promptText="Contraseña" style="-fx-background-color: white; -fx-border-color: #d5dbdb;">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
-            <TextField fx:id="confirmPassword" layoutX="55.0" layoutY="280.0" prefHeight="30.0" prefWidth="304.0" style="-fx-background-color: #f2f3f4; -fx-border-color: #d7dbdd; -fx-background-radius: 5;">
+            <TextField fx:id="confirmPassword" accessibleRole="PASSWORD_FIELD" layoutX="425.0" layoutY="307.0" prefHeight="46.0" prefWidth="274.0" promptText="Confirmar contraseña" style="-fx-background-color: white; -fx-border-color: #d5dbdb;">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
-            <Button fx:id="btnSignUp" alignment="CENTER" layoutX="493.0" layoutY="216.0" mnemonicParsing="false" onAction="#SignUp" prefHeight="46.0" prefWidth="228.0" style="-fx-background-color: #0c59cf; -fx-font-size: 22; -fx-font-family: Arial; -fx-background-radius: 5;" text="Registrarme" textAlignment="CENTER" textFill="WHITE" />
-            <Text layoutX="54.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
-               <font>
-                  <Font name="Calibri" size="20.0" />
-               </font>
-            </Text>
-            <Text layoutX="54.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña:">
-               <font>
-                  <Font name="Calibri" size="20.0" />
-               </font>
-            </Text>
-            <Text layoutX="54.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmación de contraseña:">
-               <font>
-                  <Font name="Calibri" size="20.0" />
-               </font>
-            </Text>
-            <Text layoutX="54.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de teléfono:">
-               <font>
-                  <Font name="Calibri" size="20.0" />
-               </font>
-            </Text>
-            <TextField fx:id="telefono" layoutX="54.0" layoutY="343.0" prefHeight="30.0" prefWidth="304.0" style="-fx-background-color: #f2f3f4; -fx-border-color: #d7dbdd; -fx-background-radius: 5;">
+            <Button fx:id="btnSignUp" alignment="CENTER" layoutX="115.0" layoutY="406.0" mnemonicParsing="false" onAction="#SignUp" prefHeight="46.0" prefWidth="587.0" style="-fx-background-color: #004aad; -fx-font-size: 15; -fx-font-family: Optima; -fx-font-weight: 900;" text="Registrarme" textAlignment="CENTER" textFill="WHITE" />
+            <TextField fx:id="telefono" layoutX="115.0" layoutY="235.0" prefHeight="46.0" prefWidth="587.0" promptText="Teléfono" style="-fx-background-color: white; -fx-border-color: #d5dbdb;">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
-            <Text layoutX="54.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="País de origen:">
-               <font>
-                  <Font name="Calibri" size="20.0" />
-               </font>
-            </Text>
-            <TextField fx:id="pais" layoutX="54.0" layoutY="406.0" prefHeight="30.0" prefWidth="304.0" style="-fx-background-color: #f2f3f4; -fx-border-color: #d7dbdd; -fx-background-radius: 5;">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </TextField>
+            <ComboBox fx:id="pais" layoutX="425.0" layoutY="92.0" opacity="0.6" prefHeight="40.0" prefWidth="274.0" promptText="País de residencia" style="-fx-border-color: #d5dbdb; -fx-background-color: white;" visibleRowCount="5"/>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="46.0" prefWidth="900.0" style="-fx-background-color: #0c59cf;">
+      <AnchorPane prefHeight="46.0" prefWidth="900.0" style="-fx-background-color: #004aad;">
          <children>
-            <Button fx:id="atras" onAction="#Back" layoutX="25.0" layoutY="8.0" mnemonicParsing="false" style="-fx-background-color: #5dade2; -fx-background-radius: 5;" text="Atrás" />
+            <Button fx:id="atras" layoutX="25.0" layoutY="8.0" mnemonicParsing="false" onAction="#Back" style="-fx-background-color: #5dade2; -fx-background-radius: 5; -fx-font-family: Optima;" text="Atrás" />
+            <ImageView fitHeight="46.0" fitWidth="46.0" layoutX="803.0" layoutY="-1.0">
+               <image>
+                  <Image url="/Images/Search Me(5).png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

@@ -98,10 +98,10 @@ public class MenuInicial {
 
     @FXML
     void btnSignUp(ActionEvent event) throws IOException {
+        Stage stage2 = (Stage) this.btnSignUp.getScene().getWindow();
+        stage2.close();
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
-
-
         Parent root = fxmlLoader.load(signUpMenu.class.getResourceAsStream("LogIn.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
