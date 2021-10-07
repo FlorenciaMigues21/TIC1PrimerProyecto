@@ -1,10 +1,8 @@
 package proyecto.business.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -22,11 +20,17 @@ public class User {
     public User() {
     }
 
-
     public User(String password, String username, String mail) {
         this.password = password;
         this.username = username;
         this.mail = mail;
+    }
+
+    public User(String password, String username, String mail, int phone) {
+        this.password = password;
+        this.username = username;
+        this.mail = mail;
+        this.phone = phone;
     }
 
     public User(String password, String username, String mail, Byte blocked, int phone) {
@@ -34,13 +38,6 @@ public class User {
         this.username = username;
         this.mail = mail;
         this.blocked = blocked;
-        this.phone = phone;
-    }
-
-    public User(String password, String username, String mail, int phone) {
-        this.password = password;
-        this.username = username;
-        this.mail = mail;
         this.phone = phone;
     }
 
@@ -54,6 +51,19 @@ public class User {
         this.country = country;
         this.birthDate = birthDate;
         this.vaccinated = vaccinated;
+    }
+
+    public User(String password, String username, String mail, Byte blocked, int phone, int type, String country, Date birthDate, Byte vaccinated, List<Typeofactivities> intereces) {
+        this.password = password;
+        this.username = username;
+        this.mail = mail;
+        this.blocked = blocked;
+        this.phone = phone;
+        this.type = type;
+        this.country = country;
+        this.birthDate = birthDate;
+        this.vaccinated = vaccinated;
+        this.Intereses = intereces;
     }
 
     @Basic
@@ -142,6 +152,15 @@ public class User {
         this.country = country;
     }
 
+    private Collection<Typeofactivities> Intereses;
+
+    @ManyToMany
+    public Collection<Typeofactivities> getIntereses() {
+        return Intereses;
+    }public void setIntereses(Collection<Typeofactivities> intereses) {
+        Intereses = intereses;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -154,4 +173,5 @@ public class User {
     public int hashCode() {
         return Objects.hash(password, username, mail, blocked, phone);
     }
+
 }

@@ -9,6 +9,13 @@ import java.util.Objects;
 public class Typeofactivities {
     private String name;
 
+    public Typeofactivities() {
+    }
+
+    public Typeofactivities(String name) {
+        this.name = name;
+    }
+
     @Id
     @Column(name = "name")
     public String getName() {

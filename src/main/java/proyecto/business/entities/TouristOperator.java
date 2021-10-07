@@ -10,6 +10,11 @@ public class TouristOperator {
     private Byte validated;
     private Integer calification;
 
+    public TouristOperator() {
+    }
+
+
+
     @Id
     @Column(name = "User_mail")
     public String getUserMail() {
