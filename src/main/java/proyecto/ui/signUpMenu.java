@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.sql.Date;
 
 @Component
 public class signUpMenu {
@@ -118,8 +119,12 @@ public class signUpMenu {
                 String mail = email.getText();
                 String tel = telefono.getText();
                 String pais_residente = pais.getValue();
+                Date fecha = Date.valueOf("2000-03-08");
                 if (passwordUser.equals(ConfirmPassword)) {
-                    controlador.addUser(mail, passwordUser,ConfirmPassword, name);
+                    controlador.addUser(mail, passwordUser,ConfirmPassword,
+                            name,(byte) 0,(byte) 0,
+                            Integer.parseInt(tel),2
+                            ,pais_residente, fecha);
                     showAlert("Tu cuenta fue creada!");
                     Next();
 

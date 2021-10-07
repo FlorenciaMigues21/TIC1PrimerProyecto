@@ -2,11 +2,14 @@ package proyecto.business.entities_managers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import proyecto.business.entities.Country;
 import proyecto.business.entities.User;
 import proyecto.business.entities.persistence.UserDAO;
 import proyecto.business.exceptions.InvalidUserInformation;
 import proyecto.business.exceptions.UserAlreadyExist;
 import proyecto.business.exceptions.UserNotFound;
+
+import java.sql.Date;
 
 @Service
 public class UserManager {
@@ -18,7 +21,10 @@ public class UserManager {
         return iUser.findByMail(mail);
     }
 
-    public void addUser(String mail,String password,String confirmPassword,String userName) throws UserAlreadyExist, InvalidUserInformation{
+    public void addUser(String mail, String password,
+                        String confirmPassword, String userName,
+                        byte vaccinated,byte blocked,int phone,
+                        int userType, String country, Date birthDate) throws UserAlreadyExist, InvalidUserInformation{
         if(mail == null || mail.equals("") || password == null || password.equals("") || confirmPassword == null || confirmPassword.equals("") || userName == null || userName.equals("")){
             throw new InvalidUserInformation("Información del usuario invalida");
         }
@@ -28,7 +34,7 @@ public class UserManager {
         if(iUser.findByMail(mail) != null)
             throw new UserAlreadyExist("Usuario ya existente");
         else {
-            User user = new User(mail,password,userName);
+            User user = new User(password,userName,mail,blocked,phone,userType,country,birthDate,vaccinated);
             iUser.save(user);
         }
     }

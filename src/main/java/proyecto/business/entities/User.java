@@ -4,6 +4,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
@@ -13,7 +14,10 @@ public class User {
     private String mail;
     private Byte blocked;
     private int phone;
-
+    private int type;
+    private String country;
+    private Date birthDate;
+    private Byte vaccinated;
 
     public User() {
     }
@@ -38,6 +42,18 @@ public class User {
         this.username = username;
         this.mail = mail;
         this.phone = phone;
+    }
+
+    public User(String password, String username, String mail, Byte blocked, int phone, int type, String country, Date birthDate, Byte vaccinated) {
+        this.password = password;
+        this.username = username;
+        this.mail = mail;
+        this.blocked = blocked;
+        this.phone = phone;
+        this.type = type;
+        this.country = country;
+        this.birthDate = birthDate;
+        this.vaccinated = vaccinated;
     }
 
     @Basic
@@ -88,6 +104,42 @@ public class User {
 
     public void setPhone(int phone) {
         this.phone = phone;
+    }
+
+    @Basic
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    @Basic
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    @Basic
+    public Byte getVaccinated() {
+        return vaccinated;
+    }
+
+    public void setVaccinated(Byte vaccinated) {
+        this.vaccinated = vaccinated;
+    }
+
+    @Basic
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     @Override

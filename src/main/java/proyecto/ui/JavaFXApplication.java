@@ -27,7 +27,7 @@ public class JavaFXApplication extends Application  {
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         root = fxmlLoader.load(MenuInicial.class.getResourceAsStream("principalPage.fxml"));
         Scene scene = new Scene(root,700,400);
-        scene.getStylesheets().add(getClass().getResource("LogInStyle.css").toExternalForm());
+        //scene.getStylesheets().add(getClass().getResource("LogInStyle.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
 
