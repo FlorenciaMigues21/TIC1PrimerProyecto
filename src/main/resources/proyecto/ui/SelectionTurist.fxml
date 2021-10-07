@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="709.0" style="-fx-background-color: #e5e7e9;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.ui.selectionTurist">
+   <children>
+      <AnchorPane prefHeight="46.0" prefWidth="709.0" style="-fx-background-color: #004aad;">
+         <children>
+            <Button fx:id="siguiente" layoutX="618.0" layoutY="11.0" mnemonicParsing="false" style="-fx-background-color: #5dade2; -fx-background-radius: 5; -fx-font-family: Optima;" text="Siguiente" textFill="#fffefe" />
+            <ImageView fitHeight="46.0" fitWidth="46.0" layoutX="29.0" layoutY="3.0">
+               <image>
+                  <Image url="/Images/Search Me(5).png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="47.0" layoutY="148.0" prefHeight="244.0" prefWidth="294.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+         <children>
+            <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Optima;" text="Qué tipo de viaje planeas hacer?" wrappingWidth="240.0">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Text>
+            <CheckBox fx:id="familiar" layoutX="14.0" layoutY="49.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" style="-fx-font-family: Optima;" text="Familiar" />
+            <CheckBox fx:id="escapadasrurales" layoutX="14.0" layoutY="74.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="131.0" style="-fx-font-family: Optima;" text="Escapadas rurales" />
+            <CheckBox fx:id="lunademiel" layoutX="14.0" layoutY="99.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-font-family: Optima;" text="Luna de miel" />
+            <CheckBox fx:id="turismoaventura" layoutX="14.0" layoutY="123.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="131.0" style="-fx-font-family: Optima;" text="Turismo aventura" />
+            <CheckBox fx:id="cultural" layoutX="14.0" layoutY="148.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="131.0" style="-fx-font-family: Optima;" text="Cultural" />
+            <CheckBox fx:id="descanso" layoutX="14.0" layoutY="173.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" style="-fx-font-family: Optima;" text="Descanso" />
+            <CheckBox fx:id="mochilero" layoutX="14.0" layoutY="198.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-font-family: Optima;" text="De mochilero" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="377.0" layoutY="148.0" prefHeight="131.0" prefWidth="284.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+         <children>
+            <Text layoutX="4.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Optima;" text="En qué estación del año deseas viajar?" wrappingWidth="277.0">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Text>
+            <CheckBox fx:id="invierno" layoutX="12.0" layoutY="30.0" mnemonicParsing="false" text="Invierno" />
+            <CheckBox fx:id="verano" layoutX="12.0" layoutY="54.0" mnemonicParsing="false" text="Verano" />
+            <CheckBox fx:id="otono" layoutX="12.0" layoutY="78.0" mnemonicParsing="false" text="Otoño" />
+            <CheckBox fx:id="primavera" layoutX="12.0" layoutY="102.0" mnemonicParsing="false" text="Primavera" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="377.0" layoutY="306.0" prefHeight="86.0" prefWidth="284.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+         <children>
+            <Text layoutX="7.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Optima;" text="Cómo te gusta viajar?" wrappingWidth="277.0">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Text>
+            <ChoiceBox fx:id="gustoViaje" layoutX="7.0" layoutY="46.0" prefWidth="150.0" />
+         </children>
+      </AnchorPane>
+      <Text layoutX="50.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Optima;" text="Para poder ofrecerte mejores resultados, te pedimos que respondas las siguientes preguntas. Cada vez que desees cambiar las elecciones, podrás hacerlo. " wrappingWidth="610.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
