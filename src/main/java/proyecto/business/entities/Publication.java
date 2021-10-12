@@ -1,79 +1,96 @@
 package proyecto.business.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
+import com.sun.istack.NotNull;
+import org.springframework.lang.NonNull;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.sql.Timestamp;
-import java.util.Objects;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import java.sql.Date;
+import java.util.Collection;
 
 @Entity
 public class Publication {
-    private int idPublication;
-    private Timestamp dateFrom;
-    private Timestamp dateTo;
-    private byte validated;
-    private String paragraph;
+    private Date Datefrom;
+    private Date Dateto;
+    private boolean validated;
     private String title;
+    private String description;
     private String ubication;
-    private Integer calification;
-    private byte needVaccination;
-    private Integer aforo;
-    private Integer participants;
-    private Integer price;
+    //private float calification;
+    private boolean needVaccination;
+    private int aforo;
+    private int idEvent;
+    private int participants;
+    private Divisa divisa;
+    private float cantidad;
+    private Collection<Typeofactivities> listaActividadades;
 
-    @Id
-    @Column(name = "id_publication")
-    public int getIdPublication() {
-        return idPublication;
+    public Publication() {
     }
 
-    public void setIdPublication(int idPublication) {
-        this.idPublication = idPublication;
+    public Publication(Date Datefrom, Date Dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades) {
+        this.Datefrom = Datefrom;
+        this.Dateto = Dateto;
+        this.validated = validated;
+        this.title = title;
+        this.description = description;
+        this.ubication = ubication;
+        this.needVaccination = needVaccination;
+        this.aforo = aforo;
+        this.idEvent = idEvent;
+        this.participants = participants;
+        this.divisa = divisa;
+        this.cantidad = cantidad;
+        this.listaActividadades = listaActividadades;
     }
 
-    @Basic
-    @Column(name = "DateFrom")
-    public Timestamp getDateFrom() {
-        return dateFrom;
+    /*public Publication(Date from, Date to, boolean validated, String title, String description, String ubication, float calification, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades) {
+        this.from = from;
+        this.to = to;
+        this.validated = validated;
+        this.title = title;
+        this.description = description;
+        this.ubication = ubication;
+        this.calification = calification;
+        this.needVaccination = needVaccination;
+        this.aforo = aforo;
+        this.idEvent = idEvent;
+        this.participants = participants;
+        this.divisa = divisa;
+        this.cantidad = cantidad;
+        this.listaActividadades = listaActividadades;
+    }*/
+
+    @NonNull
+    public Date getDatefrom() {
+        return Datefrom;
     }
 
-    public void setDateFrom(Timestamp dateFrom) {
-        this.dateFrom = dateFrom;
+    public void setDatefrom(Date from) {
+        this.Datefrom = from;
     }
 
-    @Basic
-    @Column(name = "DateTo")
-    public Timestamp getDateTo() {
-        return dateTo;
+    @NotNull
+    public Date getDateto() {
+        return Dateto;
     }
 
-    public void setDateTo(Timestamp dateTo) {
-        this.dateTo = dateTo;
+    public void setDateto(Date to) {
+        this.Dateto = to;
     }
 
-    @Basic
-    @Column(name = "Validated")
-    public byte getValidated() {
+    @NotNull
+    public boolean isValidated() {
         return validated;
     }
 
-    public void setValidated(byte validated) {
+    public void setValidated(boolean validated) {
         this.validated = validated;
     }
 
-    @Basic
-    @Column(name = "Paragraph")
-    public String getParagraph() {
-        return paragraph;
-    }
-
-    public void setParagraph(String paragraph) {
-        this.paragraph = paragraph;
-    }
-
-    @Basic
-    @Column(name = "Title")
+    @NotNull
     public String getTitle() {
         return title;
     }
@@ -82,8 +99,16 @@ public class Publication {
         this.title = title;
     }
 
-    @Basic
-    @Column(name = "Ubication")
+    @NotNull
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @NotNull
     public String getUbication() {
         return ubication;
     }
@@ -92,66 +117,91 @@ public class Publication {
         this.ubication = ubication;
     }
 
-    @Basic
-    @Column(name = "Calification")
-    public Integer getCalification() {
+    /* TODO ESTE ES UN DATO DERIVADO
+     * FALTA PONER LA FORMULA PARA SACAR EL VALOR DENTRO DE LA BASE DE DATOS
+     *
+    @Formula("")
+    public float getCalification() {
         return calification;
     }
 
-    public void setCalification(Integer calification) {
+    public void setCalification(float calification) {
         this.calification = calification;
-    }
+    }*/
 
-    @Basic
-    @Column(name = "NeedVaccination")
-    public byte getNeedVaccination() {
+    @NotNull
+    public boolean isNeedVaccination() {
         return needVaccination;
     }
 
-    public void setNeedVaccination(byte needVaccination) {
+    public void setNeedVaccination(boolean needVaccination) {
         this.needVaccination = needVaccination;
     }
 
-    @Basic
-    @Column(name = "Aforo")
-    public Integer getAforo() {
+    @NotNull
+    public int getAforo() {
         return aforo;
     }
 
-    public void setAforo(Integer aforo) {
+    public void setAforo(int aforo) {
         this.aforo = aforo;
     }
 
-    @Basic
-    @Column(name = "Participants")
-    public Integer getParticipants() {
+    @Id
+    @NotNull
+    public int getIdEvent() {
+        return idEvent;
+    }
+
+    public void setIdEvent(int idEvent) {
+        this.idEvent = idEvent;
+    }
+
+    @NotNull
+    public int getParticipants() {
         return participants;
     }
 
-    public void setParticipants(Integer participants) {
+    public void setParticipants(int participants) {
         this.participants = participants;
     }
 
-    @Basic
-    @Column(name = "Price")
-    public Integer getPrice() {
-        return price;
+    @ManyToOne
+    @NotNull
+    public Divisa getDivisa() {
+        return divisa;
     }
 
-    public void setPrice(Integer price) {
-        this.price = price;
+    public void setDivisa(Divisa divisa) {
+        this.divisa = divisa;
+    }
+
+    @NotNull
+    public float getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(float cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    @ManyToMany
+    @NotNull
+    public Collection<Typeofactivities> getListaActividadades() {
+        return listaActividadades;
+    }
+
+    public void setListaActividadades(Collection<Typeofactivities> listaActividadades) {
+        this.listaActividadades = listaActividadades;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Publication that = (Publication) o;
-        return idPublication == that.idPublication && validated == that.validated && needVaccination == that.needVaccination && Objects.equals(dateFrom, that.dateFrom) && Objects.equals(dateTo, that.dateTo) && Objects.equals(paragraph, that.paragraph) && Objects.equals(title, that.title) && Objects.equals(ubication, that.ubication) && Objects.equals(calification, that.calification) && Objects.equals(aforo, that.aforo) && Objects.equals(participants, that.participants) && Objects.equals(price, that.price);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idPublication, dateFrom, dateTo, validated, paragraph, title, ubication, calification, needVaccination, aforo, participants, price);
+    public String toString() {
+        return "Publications{" +
+                "from=" + Datefrom +
+                ", to=" + Dateto +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
