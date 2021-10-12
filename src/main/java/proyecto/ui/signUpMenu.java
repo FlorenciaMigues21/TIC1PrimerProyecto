@@ -13,6 +13,7 @@ import proyecto.business.entities.Country;
 import proyecto.business.entities.Tourist;
 import proyecto.business.entities.Typeofactivities;
 import proyecto.business.entities_managers.TouristManager;
+import proyecto.business.entities_managers.UserManager;
 import proyecto.business.exceptions.InvalidUserInformation;
 import proyecto.business.exceptions.UserAlreadyExist;
 import javafx.event.ActionEvent;
@@ -30,7 +31,7 @@ import java.util.Collection;
 public class signUpMenu {
 
     @Autowired
-    private TouristManager controlador;
+    private UserManager<Tourist> controlador;
 
     @FXML
     private TextField email;
@@ -127,7 +128,7 @@ public class signUpMenu {
                 Collection<Typeofactivities> actividades = new ArrayList<>();
                 actividades.add(new Typeofactivities("Sky"));
                 if (passwordUser.equals(ConfirmPassword)) {
-                    controlador.addTourist(new Tourist(passwordUser,name,mail,false,95684021,new Country("Uruguay"),true,fecha,actividades));
+                    controlador.addUser(new Tourist(passwordUser,name,mail,false,95684021,new Country("Uruguay"),true,fecha,actividades));
                     showAlert("Tu cuenta fue creada!");
                     Next();
 

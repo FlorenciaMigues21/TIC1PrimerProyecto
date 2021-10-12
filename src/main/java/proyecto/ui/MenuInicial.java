@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
+import proyecto.business.entities_managers.UserManager;
 import proyecto.business.exceptions.InvalidUserInformation;
 import proyecto.business.exceptions.UserNotFound;
 
@@ -26,7 +27,7 @@ import java.io.IOException;
 public class MenuInicial {
 
     @Autowired
-    public TouristManager controlador;
+    public UserManager<Tourist> controlador;
 
     @FXML
     private Button btnNext;
@@ -66,7 +67,7 @@ public class MenuInicial {
 
                 try {
 
-                    Tourist userSignIn = controlador.logInTourist(new Tourist(passowrdUser,mail));
+                    Tourist userSignIn = controlador.logIn(new Tourist(passowrdUser,mail));
 
                     if (userSignIn.getPassword().equals(passowrdUser))
                         showAlert("Login successful!" , "You have successfully signed into your count. You can close this window and continue using the product");

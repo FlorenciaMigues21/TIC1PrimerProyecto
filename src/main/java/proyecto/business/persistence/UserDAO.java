@@ -9,7 +9,6 @@ import proyecto.business.entities.User;
 import javax.persistence.Entity;
 import javax.transaction.Transactional;
 
-@NoRepositoryBean
 public interface UserDAO<T> extends CrudRepository<T,String>{
 
         T findByMailAndPassword(String mail,String password);
