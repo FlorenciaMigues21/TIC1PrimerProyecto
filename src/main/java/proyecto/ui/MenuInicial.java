@@ -3,8 +3,8 @@ package proyecto.ui;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import proyecto.Main;
-import proyecto.business.entities.User;
-import proyecto.business.entities_managers.UserManager;
+import proyecto.business.entities.Tourist;
+import proyecto.business.entities_managers.TouristManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +26,7 @@ import java.io.IOException;
 public class MenuInicial {
 
     @Autowired
-    public UserManager controlador;
+    public TouristManager controlador;
 
     @FXML
     private Button btnNext;
@@ -62,13 +62,13 @@ public class MenuInicial {
             try {
 
                 String mail = username.getText();
-                String passowrd = password.getText();
+                String passowrdUser = password.getText();
 
                 try {
 
-                    User userSignIn = controlador.logInUser(mail,passowrd);
+                    Tourist userSignIn = controlador.logInTourist(new Tourist(passowrdUser,mail));
 
-                    if (userSignIn.getPassword().equals(passowrd))
+                    if (userSignIn.getPassword().equals(passowrdUser))
                         showAlert("Login successful!" , "You have successfully signed into your count. You can close this window and continue using the product");
 
                     close(event);
