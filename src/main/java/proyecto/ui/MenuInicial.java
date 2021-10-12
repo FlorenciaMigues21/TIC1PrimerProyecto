@@ -4,7 +4,6 @@ package proyecto.ui;
 import org.springframework.beans.factory.annotation.Autowired;
 import proyecto.Main;
 import proyecto.business.entities.Tourist;
-import proyecto.business.entities_managers.TouristManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

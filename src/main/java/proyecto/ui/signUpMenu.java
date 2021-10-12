@@ -12,7 +12,6 @@ import proyecto.Main;
 import proyecto.business.entities.Country;
 import proyecto.business.entities.Tourist;
 import proyecto.business.entities.Typeofactivities;
-import proyecto.business.entities_managers.TouristManager;
 import proyecto.business.entities_managers.UserManager;
 import proyecto.business.exceptions.InvalidUserInformation;
 import proyecto.business.exceptions.UserAlreadyExist;
