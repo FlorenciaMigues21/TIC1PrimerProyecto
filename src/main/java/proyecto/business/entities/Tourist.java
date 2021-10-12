@@ -1,30 +1,47 @@
 package proyecto.business.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.sun.istack.NotNull;
+import org.springframework.lang.NonNull;
+
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-public class Tourist {
-    private Byte vaccinated;
+public class Tourist extends User{
+    private boolean vaccinated;
     private Date birthdate;
-    private String userMail;
+    private Collection<Typeofactivities> intereses;
 
-    @Basic
-    @Column(name = "vaccinated")
-    public Byte getVaccinated() {
+    public Tourist() {
+    }
+
+    public Tourist(String password, String username) {
+        super(password, username);
+    }
+
+    public Tourist(String password, String username, String mail, boolean blocked, int phone, Country country) {
+        super(password, username, mail, blocked, phone, country);
+    }
+
+    public Tourist(String password, String username, String mail, boolean blocked, int phone, Country country, boolean vaccinated, Date birthdate, Collection<Typeofactivities> intereses) {
+        super(password, username, mail, blocked, phone, country);
+        this.vaccinated = vaccinated;
+        this.birthdate = birthdate;
+        this.intereses = intereses;
+    }
+
+    @NotNull
+    public boolean isVaccinated() {
         return vaccinated;
     }
 
-    public void setVaccinated(Byte vaccinated) {
+    public void setVaccinated(boolean vaccinated) {
         this.vaccinated = vaccinated;
     }
 
-    @Basic
-    @Column(name = "birthdate")
+    @NotNull
     public Date getBirthdate() {
         return birthdate;
     }
@@ -33,26 +50,32 @@ public class Tourist {
         this.birthdate = birthdate;
     }
 
-    @Id
-    @Column(name = "User_mail")
-    public String getUserMail() {
-        return userMail;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @NotNull
+    public Collection<Typeofactivities> getIntereses() {
+        return intereses;
     }
 
-    public void setUserMail(String userMail) {
-        this.userMail = userMail;
+    public void setIntereses(Collection<Typeofactivities> intereses) {
+        this.intereses = intereses;
+    }
+
+    @Override
+    public String toString() {
+        return "Tourist{"+ super.getMail() +"}";
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         Tourist tourist = (Tourist) o;
-        return Objects.equals(vaccinated, tourist.vaccinated) && Objects.equals(birthdate, tourist.birthdate) && Objects.equals(userMail, tourist.userMail);
+        return vaccinated == tourist.vaccinated && birthdate.equals(tourist.birthdate) && intereses.equals(tourist.intereses);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(vaccinated, birthdate, userMail);
+        return Objects.hash(super.hashCode(), vaccinated, birthdate, intereses);
     }
 }

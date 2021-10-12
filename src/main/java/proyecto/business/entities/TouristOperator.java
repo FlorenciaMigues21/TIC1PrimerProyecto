@@ -1,60 +1,42 @@
 package proyecto.business.entities;
 
-import javax.persistence.*;
-import java.util.Objects;
+import com.sun.istack.NotNull;
+
+import javax.persistence.Entity;
 
 @Entity
-@Table(name = "tourist_operator", schema = "pruebas", catalog = "")
-public class TouristOperator {
-    private String userMail;
-    private Byte validated;
-    private Integer calification;
+public class TouristOperator extends User{
+    private boolean validated;
+    private float calification;
 
     public TouristOperator() {
     }
 
-
-
-    @Id
-    @Column(name = "User_mail")
-    public String getUserMail() {
-        return userMail;
+    public TouristOperator(String password, String username, String mail, boolean blocked, int phone, Country country) {
+        super(password, username, mail, blocked, phone, country);
     }
 
-    public void setUserMail(String userMail) {
-        this.userMail = userMail;
-    }
-
-    @Basic
-    @Column(name = "validated")
-    public Byte getValidated() {
-        return validated;
-    }
-
-    public void setValidated(Byte validated) {
+    public TouristOperator(String password, String username, String mail, boolean blocked, int phone, Country country, boolean validated, float calification) {
+        super(password, username, mail, blocked, phone, country);
         this.validated = validated;
-    }
-
-    @Basic
-    @Column(name = "calification")
-    public Integer getCalification() {
-        return calification;
-    }
-
-    public void setCalification(Integer calification) {
         this.calification = calification;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TouristOperator that = (TouristOperator) o;
-        return Objects.equals(userMail, that.userMail) && Objects.equals(validated, that.validated) && Objects.equals(calification, that.calification);
+    @NotNull
+    public boolean isValidated() {
+        return validated;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(userMail, validated, calification);
+    public void setValidated(boolean validated) {
+        this.validated = validated;
+    }
+
+    @NotNull
+    public float getCalification() {
+        return calification;
+    }
+
+    public void setCalification(float calification) {
+        this.calification = calification;
     }
 }

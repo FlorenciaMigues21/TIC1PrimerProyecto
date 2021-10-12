@@ -1,73 +1,40 @@
 package proyecto.business.entities;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;import java.util.List;
 import java.util.Objects;
 
-@Entity
+@MappedSuperclass
+@DiscriminatorColumn(name="mail", discriminatorType = DiscriminatorType.STRING)
 public class User {
     private String password;
     private String username;
     private String mail;
-    private Byte blocked;
+    private boolean blocked;
     private int phone;
-    private int type;
-    private String country;
-    private Date birthDate;
-    private Byte vaccinated;
+    private Country country;
 
     public User() {
     }
 
-    public User(String password, String username, String mail) {
+    public User(String password, String mail) {
         this.password = password;
-        this.username = username;
         this.mail = mail;
     }
 
-    public User(String password, String username, String mail, int phone) {
-        this.password = password;
-        this.username = username;
-        this.mail = mail;
-        this.phone = phone;
-    }
-
-    public User(String password, String username, String mail, Byte blocked, int phone) {
+    public User(String password, String username, String mail, boolean blocked, int phone, Country country) {
         this.password = password;
         this.username = username;
         this.mail = mail;
         this.blocked = blocked;
         this.phone = phone;
-    }
-
-    public User(String password, String username, String mail, Byte blocked, int phone, int type, String country, Date birthDate, Byte vaccinated) {
-        this.password = password;
-        this.username = username;
-        this.mail = mail;
-        this.blocked = blocked;
-        this.phone = phone;
-        this.type = type;
         this.country = country;
-        this.birthDate = birthDate;
-        this.vaccinated = vaccinated;
     }
 
-    public User(String password, String username, String mail, Byte blocked, int phone, int type, String country, Date birthDate, Byte vaccinated, List<Typeofactivities> intereces) {
-        this.password = password;
-        this.username = username;
-        this.mail = mail;
-        this.blocked = blocked;
-        this.phone = phone;
-        this.type = type;
-        this.country = country;
-        this.birthDate = birthDate;
-        this.vaccinated = vaccinated;
-        this.Intereses = intereces;
-    }
-
-    @Basic
-    @Column(name = "password")
+    @NotNull
     public String getPassword() {
         return password;
     }
@@ -76,8 +43,7 @@ public class User {
         this.password = password;
     }
 
-    @Basic
-    @Column(name = "username")
+    @NotNull
     public String getUsername() {
         return username;
     }
@@ -87,7 +53,7 @@ public class User {
     }
 
     @Id
-    @Column(name = "mail")
+    @NotNull
     public String getMail() {
         return mail;
     }
@@ -96,18 +62,16 @@ public class User {
         this.mail = mail;
     }
 
-    @Basic
-    @Column(name = "Blocked")
-    public Byte getBlocked() {
+    @NotNull
+    public boolean isBlocked() {
         return blocked;
     }
 
-    public void setBlocked(Byte blocked) {
+    public void setBlocked(boolean blocked) {
         this.blocked = blocked;
     }
 
-    @Basic
-    @Column(name = "phone")
+    @NotNull
     public int getPhone() {
         return phone;
     }
@@ -116,49 +80,21 @@ public class User {
         this.phone = phone;
     }
 
-    @Basic
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    @Basic
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    @Basic
-    public Byte getVaccinated() {
-        return vaccinated;
-    }
-
-    public void setVaccinated(Byte vaccinated) {
-        this.vaccinated = vaccinated;
-    }
-
-    @Basic
-    public String getCountry() {
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @NotNull
+    public Country getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(Country country) {
         this.country = country;
     }
 
-    private Collection<Typeofactivities> Intereses;
-
-    @ManyToMany
-    public Collection<Typeofactivities> getIntereses() {
-        return Intereses;
-    }public void setIntereses(Collection<Typeofactivities> intereses) {
-        Intereses = intereses;
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                '}';
     }
 
     @Override
@@ -166,12 +102,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return phone == user.phone && Objects.equals(password, user.password) && Objects.equals(username, user.username) && Objects.equals(mail, user.mail) && Objects.equals(blocked, user.blocked);
+        return blocked == user.blocked && phone == user.phone && password.equals(user.password) && username.equals(user.username) && mail.equals(user.mail) && country.equals(user.country);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(password, username, mail, blocked, phone);
+        return Objects.hash(password, username, mail, blocked, phone, country);
     }
-
 }

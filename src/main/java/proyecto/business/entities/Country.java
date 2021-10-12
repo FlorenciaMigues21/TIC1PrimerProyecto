@@ -9,6 +9,13 @@ import java.util.Objects;
 public class Country {
     private String name;
 
+    public Country() {
+    }
+
+    public Country(String name) {
+        this.name = name;
+    }
+
     @Id
     @Column(name = "name")
     public String getName() {
