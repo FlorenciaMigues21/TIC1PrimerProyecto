@@ -30,7 +30,7 @@ import java.util.Collection;
 public class signUpMenu {
 
     @Autowired
-    private UserManager<Tourist> controlador;
+    private UserManager controlador;
 
     @FXML
     private TextField email;

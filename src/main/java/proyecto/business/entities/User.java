@@ -109,4 +109,8 @@ public class User {
     public int hashCode() {
         return Objects.hash(password, username, mail, blocked, phone, country);
     }
+
+    public boolean verifyObjectIncomplete(){
+        return this.mail == null ? true : this.mail.equals("") ? true : this.password == null ? true : this.password.equals("") ? true : this.country == null ? true : this.username == null ? true : this.username.equals("") ? true : false;
+    }
 }

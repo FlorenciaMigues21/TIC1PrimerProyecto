@@ -26,13 +26,14 @@ public class Publication {
     private Divisa divisa;
     private float cantidad;
     private Collection<Typeofactivities> listaActividadades;
+    private TouristOperator operador;
 
     public Publication() {
     }
 
-    public Publication(Date Datefrom, Date Dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades) {
-        this.Datefrom = Datefrom;
-        this.Dateto = Dateto;
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador) {
+        Datefrom = datefrom;
+        Dateto = dateto;
         this.validated = validated;
         this.title = title;
         this.description = description;
@@ -44,24 +45,8 @@ public class Publication {
         this.divisa = divisa;
         this.cantidad = cantidad;
         this.listaActividadades = listaActividadades;
+        this.operador = operador;
     }
-
-    /*public Publication(Date from, Date to, boolean validated, String title, String description, String ubication, float calification, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades) {
-        this.from = from;
-        this.to = to;
-        this.validated = validated;
-        this.title = title;
-        this.description = description;
-        this.ubication = ubication;
-        this.calification = calification;
-        this.needVaccination = needVaccination;
-        this.aforo = aforo;
-        this.idEvent = idEvent;
-        this.participants = participants;
-        this.divisa = divisa;
-        this.cantidad = cantidad;
-        this.listaActividadades = listaActividadades;
-    }*/
 
     @NonNull
     public Date getDatefrom() {
@@ -195,6 +180,16 @@ public class Publication {
         this.listaActividadades = listaActividadades;
     }
 
+    @ManyToOne
+    @NotNull
+    public TouristOperator getOperador() {
+        return operador;
+    }
+
+    public void setOperador(TouristOperator operador) {
+        this.operador = operador;
+    }
+
     @Override
     public String toString() {
         return "Publications{" +
@@ -204,4 +199,9 @@ public class Publication {
                 ", description='" + description + '\'' +
                 '}';
     }
+
+    public boolean verifyObjectIncomplete(){
+        return this.ubication == null || this.ubication.equals("") ? true : this.title == null || this.title.equals("") ? true : this.listaActividadades == null ? true : this.Datefrom == null ? true : this.Dateto == null ? true : this.description == null ? true : this.description.equals("") ? true : this.divisa == null ? true : false;
+    }
+
 }

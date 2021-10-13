@@ -39,4 +39,8 @@ public class TouristOperator extends User{
     public void setCalification(float calification) {
         this.calification = calification;
     }
+
+    public boolean verifyObjectIncomplete(){
+        return super.verifyObjectIncomplete();
+    }
 }
