@@ -1,6 +1,10 @@
 package proyecto.business.persistence;
 
 import org.springframework.data.repository.CrudRepository;
+import proyecto.business.entities.PublicationInteraction;
 
-public interface PublicationInteractionDAO extends CrudRepository {
+import java.util.Collection;
+
+public interface PublicationInteractionDAO extends CrudRepository<PublicationInteraction,Integer> {
+    Collection<PublicationInteraction> findAll();
 }
