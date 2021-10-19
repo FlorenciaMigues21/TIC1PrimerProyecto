@@ -28,7 +28,7 @@ import java.sql.Date;
 public class signUpMenu {
 
     @Autowired
-    private UserManager controlador;
+    private UserManager<Tourist> controlador;
 
     @FXML
     private TextField email;

@@ -26,7 +26,7 @@ public class selectionTurist {
     ObservableList<String> gusto = FXCollections.observableArrayList("Viaje Confort","Viaje alternativo","Viaje de Lujo");
 
     @Autowired
-    private UserManager controlador;
+    private UserManager<Tourist> controlador;
 
     static Tourist userActual;
 
