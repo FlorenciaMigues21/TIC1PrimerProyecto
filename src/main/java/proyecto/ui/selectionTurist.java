@@ -11,9 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import proyecto.Main;
 import proyecto.business.entities.User;
+import proyecto.business.entities_managers.UserManager;
 
 import java.io.IOException;
 
@@ -21,6 +23,10 @@ import java.io.IOException;
 public class selectionTurist {
     ObservableList<String> gusto = FXCollections.observableArrayList("Viaje Confort","Viaje alternativo","Viaje de Lujo");
 
+    @Autowired
+    private UserManager controlador;
+
+    static User userActual;
 
     @FXML
     Button siguiente;
@@ -62,15 +68,16 @@ public class selectionTurist {
     CheckBox verano;
 
 
-    public void initialize(User usuario) {
+    public void initialize() {
         loadEstacion();
     }
 
 
-
     private void handleOptions(CheckBox fam,CheckBox escap,CheckBox luna,CheckBox turism,CheckBox cult,CheckBox desc,CheckBox mochi){
+
+
         if(fam.isSelected()){
-            //ARREGLAR
+
         }
         else if(escap.isSelected()){
             //ARREGLAR

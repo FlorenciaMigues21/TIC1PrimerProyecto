@@ -9,9 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import proyecto.Main;
-import proyecto.business.entities.Country;
-import proyecto.business.entities.Tourist;
-import proyecto.business.entities.Typeofactivities;
+import proyecto.business.entities.User;
 import proyecto.business.entities_managers.UserManager;
 import proyecto.business.exceptions.InvalidUserInformation;
 import proyecto.business.exceptions.UserAlreadyExist;
@@ -23,8 +21,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Collection;
 
 @Component
 public class signUpMenu {
@@ -124,10 +120,11 @@ public class signUpMenu {
                 String tel = telefono.getText();
                 String pais_residente = pais.getValue();
                 Date fecha = Date.valueOf("2000-03-08");
-                Collection<Typeofactivities> actividades = new ArrayList<>();
-                actividades.add(new Typeofactivities("Sky"));
                 if (passwordUser.equals(ConfirmPassword)) {
-                    controlador.addUser(new Tourist(passwordUser,name,mail,false,95684021,new Country("Uruguay"),true,fecha,actividades));
+                    /*controlador.addUser(mail, passwordUser,ConfirmPassword,
+                            name,(byte) 0,(byte) 0,
+                            Integer.parseInt(tel),2
+                            ,pais_residente, fecha);*/
                     showAlert("Tu cuenta fue creada!");
                     Next();
 
@@ -140,7 +137,7 @@ public class signUpMenu {
                         "Invalid Information",
                         "Please try again");
 
-            } catch (InvalidUserInformation | UserAlreadyExist | IOException invalidUserInformation) {
+            } catch (IOException invalidUserInformation) {
                 invalidUserInformation.printStackTrace();
             }
         }
