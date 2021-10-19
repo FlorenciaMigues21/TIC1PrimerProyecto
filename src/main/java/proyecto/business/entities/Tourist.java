@@ -25,6 +25,12 @@ public class Tourist extends User{
         super(password, username, mail, blocked, phone, country);
     }
 
+    public Tourist(String password, String username, String mail, boolean blocked, int phone, Country country, boolean vaccinated, Date birthdate) {
+        super(password, username, mail, blocked, phone, country);
+        this.vaccinated = vaccinated;
+        this.birthdate = birthdate;
+    }
+
     public Tourist(String password, String username, String mail, boolean blocked, int phone, Country country, boolean vaccinated, Date birthdate, Collection<Typeofactivities> intereses) {
         super(password, username, mail, blocked, phone, country);
         this.vaccinated = vaccinated;

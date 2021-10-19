@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import proyecto.Main;
+import proyecto.business.entities.Tourist;
+import proyecto.business.entities.TouristOperator;
 import proyecto.business.entities.User;
 import proyecto.business.entities_managers.UserManager;
 
@@ -26,7 +28,7 @@ public class selectionTurist {
     @Autowired
     private UserManager controlador;
 
-    static User userActual;
+    static Tourist userActual;
 
     @FXML
     Button siguiente;
@@ -67,6 +69,9 @@ public class selectionTurist {
     @FXML
     CheckBox verano;
 
+    public static void setUserActual(Tourist userActual) {
+        selectionTurist.userActual = userActual;
+    }
 
     public void initialize() {
         loadEstacion();
