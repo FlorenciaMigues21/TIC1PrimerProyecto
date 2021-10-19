@@ -69,10 +69,6 @@ public class selectionTurist {
     @FXML
     CheckBox verano;
 
-    public static void setUserActual(Tourist userActual) {
-        selectionTurist.userActual = userActual;
-    }
-
     public void initialize() {
         loadEstacion();
     }

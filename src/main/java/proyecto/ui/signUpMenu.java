@@ -96,7 +96,7 @@ public class signUpMenu {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
-        selectionTurist.setUserActual(turista);
+        selectionTurist.userActual = turista;
     }
 
 
