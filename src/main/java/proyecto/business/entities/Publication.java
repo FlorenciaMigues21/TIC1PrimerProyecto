@@ -27,6 +27,7 @@ public class Publication {
     private float cantidad;
     private Collection<Typeofactivities> listaActividadades;
     private TouristOperator operador;
+    private Collection<Photo> photoList;
 
     public Publication() {
     }
@@ -46,6 +47,24 @@ public class Publication {
         this.cantidad = cantidad;
         this.listaActividadades = listaActividadades;
         this.operador = operador;
+    }
+
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList) {
+        Datefrom = datefrom;
+        Dateto = dateto;
+        this.validated = validated;
+        this.title = title;
+        this.description = description;
+        this.ubication = ubication;
+        this.needVaccination = needVaccination;
+        this.aforo = aforo;
+        this.idEvent = idEvent;
+        this.participants = participants;
+        this.divisa = divisa;
+        this.cantidad = cantidad;
+        this.listaActividadades = listaActividadades;
+        this.operador = operador;
+        this.photoList = photoList;
     }
 
     @NonNull
@@ -188,6 +207,20 @@ public class Publication {
 
     public void setOperador(TouristOperator operador) {
         this.operador = operador;
+    }
+
+    @ManyToMany
+    @NotNull
+    public Collection<Photo> getPhotoList() {
+        return photoList;
+    }
+
+    public void setPhotoList(Collection<Photo> photoList) {
+        this.photoList = photoList;
+    }
+
+    public void addPhotoToList(Photo photo) {
+        this.photoList.add(photo);
     }
 
     @Override
