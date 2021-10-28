@@ -18,12 +18,11 @@ public class Comentary {
     public Comentary() {
     }
 
-    public Comentary(Tourist turista, Publication publication, int calification, String comantary, int idComentary) {
+    public Comentary(Tourist turista, Publication publication, int calification, String comantary) {
         this.turista = turista;
         this.publication = publication;
         this.calification = calification;
         this.comantary = comantary;
-        this.idComentary = idComentary;
     }
 
     @ManyToOne
