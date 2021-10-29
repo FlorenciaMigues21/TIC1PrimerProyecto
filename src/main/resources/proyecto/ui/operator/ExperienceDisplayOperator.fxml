@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.ui.operator.ExperienceDisplayOperator">
+   <children>
+      <TextField fx:id="titulo" layoutX="76.0" layoutY="345.0" prefHeight="46.0" prefWidth="412.0" promptText=" Titulo de la experiencia" />
+      <AnchorPane prefHeight="58.0" prefWidth="1280.0" style="-fx-background-color: #004aad;">
+         <children>
+            <ImageView fitHeight="46.0" fitWidth="46.0" layoutX="803.0" layoutY="-1.0">
+               <image>
+                  <Image url="@/Images/Search Me(5).png" />
+               </image>
+            </ImageView>
+            <Button fx:id="back" layoutX="14.0" layoutY="7.0" onAction="#goBack" style="-fx-background-color: white;">
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="32.0">
+                     <Image url="@/Images/hacia-atras.png" />
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="save" layoutX="1081.0" layoutY="10.0" mnemonicParsing="false" onAction="#saveExperience" style="-fx-background-color: white; -fx-background-radius: 10px;" text="Guardar experiencia" textFill="#004aad">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Button fx:id="cargaImagenes" layoutX="194.0" layoutY="173.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="132.0" style="-fx-background-color: #004aad; -fx-background-radius: 10px;" text="Cargar imágenes" textFill="WHITE" />
+      <TextField fx:id="precio" layoutX="564.0" layoutY="210.0" prefHeight="40.0" prefWidth="181.0" promptText="Precio por persona" />
+      <Text layoutX="31.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Agregar experiencia">
+         <font>
+            <Font name="Corbel Bold" size="29.0" />
+         </font>
+      </Text>
+      <Text layoutX="175.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Debe insertar 5 imágenes, sino la experiencia no será validada." wrappingWidth="170.82421875" />
+      <TextArea fx:id="descripcion" layoutX="564.0" layoutY="262.0" prefHeight="58.0" prefWidth="412.0" promptText="Descripción de la experiencia" />
+      <Text layoutX="564.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aspectos incluídos en el precio:">
+         <font>
+            <Font name="Corbel Bold" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="564.0" layoutY="458.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Medidas de higiene y seguridad" wrappingWidth="207.73828125">
+         <font>
+            <Font name="Corbel Bold" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="117.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="La primera imagen que inserte será la portada de la publicación." wrappingWidth="285.33329772949224">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Text>
+      <Button fx:id="agregarAsp" layoutX="729.0" layoutY="408.0" mnemonicParsing="false" onAction="#aspectosIncluidos" style="-fx-background-color: #004aad;" text="Agregar item" textFill="WHITE" />
+      <Button fx:id="agregarMedida" layoutX="734.0" layoutY="502.0" mnemonicParsing="false" onAction="#medidasIncluidas" style="-fx-background-color: #004aad;" text="Agregar item" textFill="WHITE" />
+      <Text layoutX="564.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horarios disponibles" wrappingWidth="132.0">
+         <font>
+            <Font name="Corbel Bold" size="15.0" />
+         </font>
+      </Text>
+      <Button fx:id="agregarHorario" layoutX="725.0" layoutY="591.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: #004aad;" text="Agregar horario" textFill="WHITE" />
+      <TextField fx:id="Horario" layoutX="566.0" layoutY="591.0" prefHeight="25.0" prefWidth="46.0" />
+      <TextField fx:id="itemInc" layoutX="566.0" layoutY="403.0" promptText="Item" />
+      <TextField fx:id="itemMed" layoutX="566.0" layoutY="502.0" promptText="Item" />
+      <Text layoutX="619.0" layoutY="608.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
+      <TextField fx:id="horarioMins" layoutX="632.0" layoutY="591.0" prefHeight="25.0" prefWidth="46.0" />
+      <AnchorPane layoutX="1000.0" layoutY="88.0" prefHeight="244.0" prefWidth="192.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+         <children>
+            <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Optima;" text="Tipo de actividad" wrappingWidth="240.0">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Text>
+            <CheckBox fx:id="familiar" layoutX="14.0" layoutY="49.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" style="-fx-font-family: Optima;" text="Familiar" />
+            <CheckBox fx:id="escapadasrurales" layoutX="14.0" layoutY="74.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="131.0" style="-fx-font-family: Optima;" text="Escapadas rurales" />
+            <CheckBox fx:id="lunademiel" layoutX="14.0" layoutY="99.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-font-family: Optima;" text="Luna de miel" />
+            <CheckBox fx:id="turismoaventura" layoutX="14.0" layoutY="123.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="131.0" style="-fx-font-family: Optima;" text="Turismo aventura" />
+            <CheckBox fx:id="cultural" layoutX="14.0" layoutY="148.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="131.0" style="-fx-font-family: Optima;" text="Cultural" />
+            <CheckBox fx:id="descanso" layoutX="14.0" layoutY="173.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" style="-fx-font-family: Optima;" text="Descanso" />
+            <CheckBox fx:id="mochilero" layoutX="14.0" layoutY="198.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-font-family: Optima;" text="De mochilero" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="1007.0" layoutY="332.0" prefHeight="178.0" prefWidth="221.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+         <children>
+            <Text layoutX="1.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Optima;" text="Estaciones donde se va a hacer la experiencia" wrappingWidth="240.0">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Text>
+            <CheckBox fx:id="invierno" layoutX="10.0" layoutY="59.0" mnemonicParsing="false" text="Invierno" />
+            <CheckBox fx:id="verano" layoutX="10.0" layoutY="87.0" mnemonicParsing="false" text="Verano" />
+            <CheckBox fx:id="otono" layoutX="10.0" layoutY="115.0" mnemonicParsing="false" text="Otoño" />
+            <CheckBox fx:id="primavera" layoutX="10.0" layoutY="143.0" mnemonicParsing="false" text="Primavera" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="1007.0" layoutY="526.0" prefHeight="86.0" prefWidth="214.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+         <children>
+            <Text layoutX="7.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Optima;" text="Tipo de viaje" wrappingWidth="181.0">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Text>
+            <ChoiceBox fx:id="gustoViaje" layoutX="7.0" layoutY="46.0" prefWidth="150.0" />
+         </children>
+      </AnchorPane>
+      <DatePicker fx:id="fechaIni" layoutX="568.0" layoutY="663.0" />
+      <Text layoutX="564.0" layoutY="655.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de inicio de la experiencia" wrappingWidth="207.73828125">
+         <font>
+            <Font name="Corbel Bold" size="15.0" />
+         </font>
+      </Text>
+      <DatePicker fx:id="fechaFin" layoutX="815.0" layoutY="663.0" />
+      <Text layoutX="815.0" layoutY="655.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de inicio de finalización" wrappingWidth="207.73828125">
+         <font>
+            <Font name="Corbel" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="725.0" layoutY="573.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Si no hay horarios, no seleccione)" />
+      <Text layoutX="81.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Habilitar reservas:" />
+      <RadioButton fx:id="si" layoutX="220.0" layoutY="303.0" mnemonicParsing="false" text="Sí" />
+      <RadioButton fx:id="no" layoutX="282.0" layoutY="303.0" mnemonicParsing="false" text="No" />
+      <SplitMenuButton fx:id="aspIncluidos" layoutX="565.0" layoutY="368.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </SplitMenuButton>
+      <SplitMenuButton fx:id="aspHigiene" layoutX="565.0" layoutY="469.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0">
+         <items>
+            <MenuItem mnemonicParsing="false" text="Action 1" />
+            <MenuItem mnemonicParsing="false" text="Action 2" />
+         </items>
+      </SplitMenuButton>
+      <SplitMenuButton fx:id="horariosDisp" layoutX="565.0" layoutY="556.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0">
+         <items>
+            <MenuItem mnemonicParsing="false" text="Action 1" />
+            <MenuItem mnemonicParsing="false" text="Action 2" />
+         </items>
+      </SplitMenuButton>
+      <Text layoutX="756.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="El monto debe ser en Dólares." />
+      <TextField fx:id="aforo" layoutX="1023.0" layoutY="639.0" prefHeight="25.0" prefWidth="46.0" />
+      <Text layoutX="1023.0" layoutY="630.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aforo" wrappingWidth="38.0">
+         <font>
+            <Font name="Corbel Bold" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="1023.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Si no hay aforo, no complete)" />
+      <TextField fx:id="direccion" layoutX="564.0" layoutY="88.0" prefHeight="46.0" prefWidth="412.0" promptText="Dirección" />
+      <TextField fx:id="telefono" layoutX="564.0" layoutY="150.0" prefHeight="46.0" prefWidth="181.0" promptText="Teléfono" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1280.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.ui.experiencePage">
+   <children>
+      <AnchorPane prefHeight="58.0" prefWidth="1280.0" style="-fx-background-color: #004aad;">
+         <children>
+            <ImageView fitHeight="46.0" fitWidth="46.0" layoutX="803.0" layoutY="-1.0">
+               <image>
+                  <Image url="@/Images/Search Me(5).png" />
+               </image>
+            </ImageView>
+            <Button fx:id="buttonMenu" layoutX="1215.0" layoutY="12.0" onAction="#closeMenu" style="-fx-background-color: white; -fx-background-radius: 10px;">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="32.0">
+                     <image>
+                        <Image url="@../../../Images/menu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="backButton" layoutX="18.0" layoutY="9.0" onAction="#goBack" style="-fx-background-color: white;">
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="32.0">
+                     <image>
+                        <Image url="@../../../Images/hacia-atras.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+      <StackPane layoutX="128.0" layoutY="73.0" prefHeight="51.0" prefWidth="352.0">
+         <children>
+            <Label fx:id="NombreAtraccion" text="Name">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+      <Label fx:id="telefono" layoutX="128.0" layoutY="172.0" prefHeight="17.0" prefWidth="129.0" text="Telefono" />
+      <ImageView fx:id="imagen1" fitHeight="214.0" fitWidth="276.0" layoutX="128.0" layoutY="215.0">
+         <image>
+            <Image url="@../../../Images/no_image.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imagen2" fitHeight="100.0" fitWidth="142.0" layoutX="428.0" layoutY="215.0">
+         <image>
+            <Image url="@../../../Images/no_image.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imagen4" fitHeight="100.0" fitWidth="142.0" layoutX="428.0" layoutY="329.0">
+         <image>
+            <Image url="@../../../Images/no_image.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imagen3" fitHeight="100.0" fitWidth="142.0" layoutX="590.0" layoutY="215.0">
+         <image>
+            <Image url="@../../../Images/no_image.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imagen5" fitHeight="100.0" fitWidth="142.0" layoutX="590.0" layoutY="329.0">
+         <image>
+            <Image url="@../../../Images/no_image.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="781.0" layoutY="73.0" prefHeight="30.0" prefWidth="218.0" text="Descubre la experiencia" textFill="#004aad">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="781.0" layoutY="215.0" prefHeight="30.0" prefWidth="218.0" text="Qué incluye?" textFill="#004aad">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="781.0" layoutY="414.0" prefHeight="30.0" prefWidth="293.0" text="Medidas de higiene y seguridad" textFill="#004aad">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <VBox fx:id="itemsInc" layoutX="781.0" layoutY="240.0" prefHeight="153.0" prefWidth="253.0">
+         <children>
+            <Label text="Label" />
+            <Label text="Label" />
+            <Label text="Label" />
+         </children>
+      </VBox>
+      <VBox fx:id="higiene" layoutX="781.0" layoutY="444.0" prefHeight="153.0" prefWidth="253.0">
+         <children>
+            <Label text="Label" />
+            <Label text="Label" />
+            <Label text="Label" />
+         </children>
+      </VBox>
+      <VBox fx:id="comentarios" layoutX="128.0" layoutY="473.0" prefHeight="171.0" prefWidth="276.0">
+         <children>
+            <VBox fx:id="boxComentary" prefHeight="200.0" prefWidth="276.0" />
+         </children>
+      </VBox>
+      <Label layoutX="128.0" layoutY="436.0" prefHeight="30.0" prefWidth="293.0" text="Comentarios" textFill="#004aad">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Line endX="-99.99996948242188" endY="214.0" layoutX="521.0" layoutY="445.0" opacity="0.21" startX="-100.0" />
+      <Label layoutX="128.0" layoutY="644.0" text="Ya nos visitaste?" />
+      <Hyperlink layoutX="245.0" layoutY="641.0" />
+      <Button fx:id="opinion" layoutX="214.0" layoutY="640.0" mnemonicParsing="false" onAction="#hacerComentario" prefHeight="25.0" prefWidth="148.0" style="-fx-background-color: white;" text="Haznos llegar tu opinión" textFill="#0b04e9" />
+      <Label layoutX="447.0" layoutY="436.0" prefHeight="30.0" prefWidth="186.0" text="Dónde vas a estar" textFill="#004aad">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="100.0" fitWidth="142.0" layoutX="447.0" layoutY="471.0">
+         <image>
+            <Image url="@../../../Images/no_image.jpg" />
+         </image>
+      </ImageView>
+      <Text fx:id="direccion" layoutX="447.0" layoutY="602.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="142.0" />
+      <Text fx:id="infoExp" layoutX="781.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="128.0" layoutY="137.0">
+         <image>
+            <Image url="@../../../Images/star.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="puntaje" layoutX="157.0" layoutY="140.0" text="Puntaje" />
+      <ChoiceBox fx:id="horario" layoutX="1091.0" layoutY="125.0" prefWidth="150.0" />
+      <Label layoutX="1137.0" layoutY="90.0" prefHeight="26.0" prefWidth="58.0" text="Horarios" textFill="#004aad">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Text fx:id="precio" layoutX="1158.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="47.4700927734375">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="1137.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Label layoutX="1142.0" layoutY="189.0" prefHeight="26.0" prefWidth="48.0" text="Precios" textFill="#004aad">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

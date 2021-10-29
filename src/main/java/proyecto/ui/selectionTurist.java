@@ -73,6 +73,11 @@ public class selectionTurist {
         loadEstacion();
     }
 
+    @FXML
+    public void saveSelect(ActionEvent actionEvent){
+
+    }
+
 
     private void handleOptions(CheckBox fam,CheckBox escap,CheckBox luna,CheckBox turism,CheckBox cult,CheckBox desc,CheckBox mochi){
 
