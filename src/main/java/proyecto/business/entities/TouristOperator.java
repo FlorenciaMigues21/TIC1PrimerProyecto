@@ -16,12 +16,12 @@ public class TouristOperator extends User{
         super(password, mail);
     }
 
-    public TouristOperator(String password, String username, String mail, boolean blocked, int phone, Country country) {
-        super(password, username, mail, blocked, phone, country);
+    public TouristOperator(String password, String username, String mail, boolean blocked, int phone, Country country, String id) {
+        super(password, username, mail, blocked, phone, country, id);
     }
 
-    public TouristOperator(String password, String username, String mail, boolean blocked, int phone, Country country, boolean validated, float calification) {
-        super(password, username, mail, blocked, phone, country);
+    public TouristOperator(String password, String username, String mail, boolean blocked, int phone, Country country, String id, boolean validated, float calification) {
+        super(password, username, mail, blocked, phone, country, id);
         this.validated = validated;
         this.calification = calification;
     }
