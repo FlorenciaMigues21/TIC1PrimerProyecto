@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,7 +11,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.PasswordField?>
 <AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: white;" styleClass="anchor" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.ui.signUpMenu">
    <children>
       <AnchorPane layoutX="45.0" layoutY="66.0" prefHeight="507.0" prefWidth="810.0" style="-fx-border-color: #d5dbdb; -fx-background-color: white;">
@@ -51,13 +51,18 @@
             </TextField>
             <ComboBox fx:id="pais" layoutX="425.0" layoutY="92.0" opacity="0.6" prefHeight="40.0" prefWidth="274.0" promptText="País de residencia" style="-fx-border-color: #d5dbdb; -fx-background-color: white;" visibleRowCount="5" />
             <DatePicker fx:id="fecha_nacimiento" layoutX="113.0" layoutY="373.0" prefHeight="40.0" prefWidth="210.0" promptText="Fecha de nacimiento" style="-fx-border-color: #d5dbdb; -fx-background-color: white;" />
+            <TextField fx:id="docIdentidad" layoutX="425.0" layoutY="370.0" prefHeight="46.0" prefWidth="274.0" promptText="Documento de identidad" style="-fx-background-color: white; -fx-border-color: #d5dbdb; -fx-background-radius: 5;">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="46.0" prefWidth="900.0" style="-fx-background-color: #004aad;">
          <children>
             <Button fx:id="atras" layoutX="25.0" layoutY="8.0" mnemonicParsing="false" onAction="#Back" style="-fx-background-color: #5dade2; -fx-background-radius: 5; -fx-font-family: Optima;" text="Atrás" />
             <ImageView fitHeight="46.0" fitWidth="46.0" layoutX="803.0" layoutY="-1.0">
-               <Image url="@/Images/Search Me(5).png"/>
+               <Image url="@/Images/Search Me(5).png" />
             </ImageView>
          </children>
       </AnchorPane>
