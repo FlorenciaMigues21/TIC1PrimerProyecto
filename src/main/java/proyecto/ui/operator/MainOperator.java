@@ -40,9 +40,11 @@ public class MainOperator {
     @Autowired
     private ReservationManager reservManager;
 
+    @Autowired
+    private UserManager<TouristOperator> usuario;
+
     public static TouristOperator operador;
 
-    //static UserManager<TouristOperator> usuario;
 
     @FXML
     private Button back;
@@ -65,7 +67,11 @@ public class MainOperator {
             Text titulo = new Text(publicList.get(i).getTitle());
             tabla.add(titulo,0,i+1);
             tabla.setHalignment(titulo, HPos.CENTER);
-            //Text estado = new Text(publicList.get(i).get) FALTA AGREGAR EL ESTADO
+            if (publicList.get(i).isValidated()){
+                Text estado = new Text("Validada");
+            }else{
+                Text estado = new Text("No validada");
+            }
             Collection<Reservation> reservas = reservManager.getAllReservationFromPublication(publicList.get(i));
             ArrayList<Reservation> reservasList = new ArrayList<>(reservas);
             Text cantidadReservas = new Text(Integer.toString(reservas.size()));
