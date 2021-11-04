@@ -16,6 +16,7 @@ public class User {
     private boolean blocked;
     private int phone;
     private Country country;
+    private String id;
 
     public User() {
     }
@@ -25,13 +26,14 @@ public class User {
         this.mail = mail;
     }
 
-    public User(String password, String username, String mail, boolean blocked, int phone, Country country) {
+    public User(String password, String username, String mail, boolean blocked, int phone, Country country, String id) {
         this.password = password;
         this.username = username;
         this.mail = mail;
         this.blocked = blocked;
         this.phone = phone;
         this.country = country;
+        this.id = id;
     }
 
     @NotNull
@@ -88,6 +90,15 @@ public class User {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    @NotNull
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
