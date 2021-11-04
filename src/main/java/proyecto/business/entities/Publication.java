@@ -28,11 +28,12 @@ public class Publication {
     private Collection<Typeofactivities> listaActividadades;
     private TouristOperator operador;
     private Collection<Photo> photoList;
+    private String phone;
 
     public Publication() {
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -47,9 +48,10 @@ public class Publication {
         this.cantidad = cantidad;
         this.listaActividadades = listaActividadades;
         this.operador = operador;
+        this.phone = phone;
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -65,7 +67,9 @@ public class Publication {
         this.listaActividadades = listaActividadades;
         this.operador = operador;
         this.photoList = photoList;
+        this.phone = phone;
     }
+
 
     @NonNull
     public Date getDatefrom() {
@@ -221,6 +225,15 @@ public class Publication {
 
     public void addPhotoToList(Photo photo) {
         this.photoList.add(photo);
+    }
+
+    @NotNull
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Override

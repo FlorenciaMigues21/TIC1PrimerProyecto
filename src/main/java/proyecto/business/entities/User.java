@@ -14,7 +14,7 @@ public class User {
     private String username;
     private String mail;
     private boolean blocked;
-    private int phone;
+    private String phone;
     private Country country;
     private String id;
 
@@ -26,7 +26,7 @@ public class User {
         this.mail = mail;
     }
 
-    public User(String password, String username, String mail, boolean blocked, int phone, Country country, String id) {
+    public User(String password, String username, String mail, boolean blocked, String phone, Country country, String id) {
         this.password = password;
         this.username = username;
         this.mail = mail;
@@ -74,11 +74,11 @@ public class User {
     }
 
     @NotNull
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
