@@ -181,12 +181,12 @@ public class ExperienceDisplayOperator {
                 }
             }
             boolean esPrecioInt = integerInvalido(precio.getText());
-            boolean esTelefonoInt = integerInvalido(telefono.getText());
-            if(esPrecioInt & esTelefonoInt){
+            /*boolean esTelefonoInt = integerInvalido(telefono.getText());*/
+            if(esPrecioInt){
                 newPublication.setCantidad(Float.parseFloat(precio.getText()));
-                //falta telefono
             }
-            //falta direccion
+            newPublication.setPhone(telefono.getText());
+            newPublication.setUbication(direccion.getText());
             newPublication.setDescription(descripcion.getText());
             newPublication.setDatefrom(convertToDateViaSqlDate(fechaIni.getValue()));
             newPublication.setDateto(convertToDateViaSqlDate(fechaFin.getValue()));

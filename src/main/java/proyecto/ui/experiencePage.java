@@ -144,6 +144,7 @@ public class experiencePage {
         NombreAtraccion.setText(publicacionActual.getTitle());
         direccion.setText(publicacionActual.getUbication());
         infoExp.setText(publicacionActual.getDescription());
+        telefono.setText(publicacionActual.getPhone());
         /*float calificacion = Calificacion();*/
         /*puntaje.setText(Float.toString(calificacion));
         AgregarComentarios();*/
