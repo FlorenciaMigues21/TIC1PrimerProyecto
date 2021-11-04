@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -29,11 +30,13 @@ public class Publication {
     private TouristOperator operador;
     private Collection<Photo> photoList;
     private String phone;
+    private ArrayList<Hygiene> medidas_de_higiene;
+    private ArrayList<IncludedInPublication> incluido;
 
     public Publication() {
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -49,9 +52,11 @@ public class Publication {
         this.listaActividadades = listaActividadades;
         this.operador = operador;
         this.phone = phone;
+        this.medidas_de_higiene = medidas_de_higiene;
+        this.incluido = incluido;
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -68,8 +73,9 @@ public class Publication {
         this.operador = operador;
         this.photoList = photoList;
         this.phone = phone;
+        this.medidas_de_higiene = medidas_de_higiene;
+        this.incluido = incluido;
     }
-
 
     @NonNull
     public Date getDatefrom() {
@@ -234,6 +240,26 @@ public class Publication {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @NotNull
+    @ManyToMany
+    public ArrayList<Hygiene> getMedidas_de_higiene() {
+        return medidas_de_higiene;
+    }
+
+    public void setMedidas_de_higiene(ArrayList<Hygiene> medidas_de_higiene) {
+        this.medidas_de_higiene = medidas_de_higiene;
+    }
+
+    @NotNull
+    @ManyToMany
+    public ArrayList<IncludedInPublication> getIncluido() {
+        return incluido;
+    }
+
+    public void setIncluido(ArrayList<IncludedInPublication> incluido) {
+        this.incluido = incluido;
     }
 
     @Override
