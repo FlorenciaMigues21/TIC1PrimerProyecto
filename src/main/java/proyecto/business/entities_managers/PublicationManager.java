@@ -40,5 +40,13 @@ public class PublicationManager {
         }
     }
 
+    public Collection<Publication> getPublicationByValidated(boolean validated) throws PublicationsLoadError {
+        try{
+            return controller.findAllByValidated(validated);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new PublicationsLoadError("Error al cargar las publicaciones que tienen validado como: " + validated);
+        }
+    }
 
 }

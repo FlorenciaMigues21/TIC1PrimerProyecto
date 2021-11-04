@@ -12,4 +12,6 @@ public interface PublicationDAO extends CrudRepository<Publication,Integer > {
     Collection<Publication> findAll();
 
     Collection<Publication> findAllByOperador(TouristOperator operador);
+
+    Collection<Publication> findAllByValidated(boolean validated);
 }
