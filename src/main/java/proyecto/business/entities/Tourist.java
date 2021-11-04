@@ -21,17 +21,17 @@ public class Tourist extends User{
         super(password, username);
     }
 
-    public Tourist(String password, String username, String mail, boolean blocked, int phone, Country country, String id) {
+    public Tourist(String password, String username, String mail, boolean blocked, String phone, Country country, String id) {
         super(password, username, mail, blocked, phone, country, id);
     }
 
-    public Tourist(String password, String username, String mail, boolean blocked, int phone, Country country, String id, boolean vaccinated, Date birthdate) {
+    public Tourist(String password, String username, String mail, boolean blocked, String phone, Country country, String id, boolean vaccinated, Date birthdate) {
         super(password, username, mail, blocked, phone, country, id);
         this.vaccinated = vaccinated;
         this.birthdate = birthdate;
     }
 
-    public Tourist(String password, String username, String mail, boolean blocked, int phone, Country country, String id, boolean vaccinated, Date birthdate, Collection<Typeofactivities> intereses) {
+    public Tourist(String password, String username, String mail, boolean blocked, String phone, Country country, String id, boolean vaccinated, Date birthdate, Collection<Typeofactivities> intereses) {
         super(password, username, mail, blocked, phone, country, id);
         this.vaccinated = vaccinated;
         this.birthdate = birthdate;
