@@ -19,11 +19,10 @@ public class Cambio implements Serializable {
     public Cambio() {
     }
 
-    public Cambio(Divisa divisaOrigen, Divisa divisaCambio, float cantidad, int idCambio) {
+    public Cambio(Divisa divisaOrigen, Divisa divisaCambio, float cantidad) {
         this.divisaOrigen = divisaOrigen;
         this.divisaCambio = divisaCambio;
         this.cantidad = cantidad;
-        this.idCambio = idCambio;
     }
 
 

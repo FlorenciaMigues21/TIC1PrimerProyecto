@@ -17,7 +17,7 @@ public class PublicationManager {
     @Autowired
     private PublicationDAO controller;
 
-    public void createPublication(Publication publication) throws PublicationCreationError {
+    public void createAndUpdatePublication(Publication publication) throws PublicationCreationError {
         if(publication.verifyObjectIncomplete())
             throw new PublicationCreationError("Publicacion con datos incompletos");
         try{

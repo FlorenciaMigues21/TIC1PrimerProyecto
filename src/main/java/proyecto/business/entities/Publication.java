@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -32,11 +33,13 @@ public class Publication {
     private String phone;
     private ArrayList<Hygiene> medidas_de_higiene;
     private ArrayList<IncludedInPublication> incluido;
+    private Time hourStart;
+    private Time hourFinish;
 
     public Publication() {
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -54,9 +57,11 @@ public class Publication {
         this.phone = phone;
         this.medidas_de_higiene = medidas_de_higiene;
         this.incluido = incluido;
+        this.hourStart = hourStart;
+        this.hourFinish = hourFinish;
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -75,6 +80,8 @@ public class Publication {
         this.phone = phone;
         this.medidas_de_higiene = medidas_de_higiene;
         this.incluido = incluido;
+        this.hourStart = hourStart;
+        this.hourFinish = hourFinish;
     }
 
     @NonNull
@@ -260,6 +267,24 @@ public class Publication {
 
     public void setIncluido(ArrayList<IncludedInPublication> incluido) {
         this.incluido = incluido;
+    }
+
+    @NonNull
+    public Time getHourStart() {
+        return hourStart;
+    }
+
+    public void setHourStart(Time hourStart) {
+        this.hourStart = hourStart;
+    }
+
+    @NotNull
+    public Time getHourFinish() {
+        return hourFinish;
+    }
+
+    public void setHourFinish(Time hourFinish) {
+        this.hourFinish = hourFinish;
     }
 
     @Override
