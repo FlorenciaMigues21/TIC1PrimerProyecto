@@ -15,8 +15,6 @@ public class User {
     private String mail;
     private boolean blocked;
     private String phone;
-    private Country country;
-    private String id;
 
     public User() {
     }
@@ -32,8 +30,6 @@ public class User {
         this.mail = mail;
         this.blocked = blocked;
         this.phone = phone;
-        this.country = country;
-        this.id = id;
     }
 
     @NotNull
@@ -82,24 +78,6 @@ public class User {
         this.phone = phone;
     }
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @NotNull
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    @NotNull
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     @Override
     public String toString() {
@@ -113,15 +91,15 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return blocked == user.blocked && phone == user.phone && password.equals(user.password) && username.equals(user.username) && mail.equals(user.mail) && country.equals(user.country);
+        return blocked == user.blocked && phone == user.phone && password.equals(user.password) && username.equals(user.username) && mail.equals(user.mail);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(password, username, mail, blocked, phone, country);
+        return Objects.hash(password, username, mail, blocked, phone);
     }
 
     public boolean verifyObjectIncomplete(){
-        return this.mail == null ? true : this.mail.equals("") ? true : this.password == null ? true : this.password.equals("") ? true : this.country == null ? true : this.username == null ? true : this.username.equals("") ? true : false;
+        return this.mail == null ? true : this.mail.equals("") ? true : this.password == null ? true : this.password.equals("") ? true : this.username == null ? true : this.username.equals("") ? true : false;
     }
 }

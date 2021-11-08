@@ -13,6 +13,8 @@ public class Tourist extends User{
     private boolean vaccinated;
     private Date birthdate;
     private Collection<Typeofactivities> intereses;
+    private String id;
+    private Country country;
 
     public Tourist() {
     }
@@ -64,6 +66,27 @@ public class Tourist extends User{
 
     public void setIntereses(Collection<Typeofactivities> intereses) {
         this.intereses = intereses;
+    }
+
+
+    @NotNull
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @NotNull
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     @Override
