@@ -23,21 +23,25 @@ public class Tourist extends User{
         super(password, username);
     }
 
-    public Tourist(String password, String username, String mail, boolean blocked, String phone, Country country, String id) {
-        super(password, username, mail, blocked, phone, country, id);
+    public Tourist(String password, String username, String mail, boolean blocked, String phone) {
+        super(password, username, mail, blocked, phone);
     }
 
-    public Tourist(String password, String username, String mail, boolean blocked, String phone, Country country, String id, boolean vaccinated, Date birthdate) {
-        super(password, username, mail, blocked, phone, country, id);
+    public Tourist(String password, String username, String mail, boolean blocked, String phone, boolean vaccinated, Date birthdate, String id, Country country) {
+        super(password, username, mail, blocked, phone);
         this.vaccinated = vaccinated;
         this.birthdate = birthdate;
+        this.id = id;
+        this.country = country;
     }
 
-    public Tourist(String password, String username, String mail, boolean blocked, String phone, Country country, String id, boolean vaccinated, Date birthdate, Collection<Typeofactivities> intereses) {
-        super(password, username, mail, blocked, phone, country, id);
+    public Tourist(String password, String username, String mail, boolean blocked, String phone, boolean vaccinated, Date birthdate, Collection<Typeofactivities> intereses, String id, Country country) {
+        super(password, username, mail, blocked, phone);
         this.vaccinated = vaccinated;
         this.birthdate = birthdate;
         this.intereses = intereses;
+        this.id = id;
+        this.country = country;
     }
 
     @NotNull

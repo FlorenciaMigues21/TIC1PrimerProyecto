@@ -24,7 +24,7 @@ public class User {
         this.mail = mail;
     }
 
-    public User(String password, String username, String mail, boolean blocked, String phone, Country country, String id) {
+    public User(String password, String username, String mail, boolean blocked, String phone) {
         this.password = password;
         this.username = username;
         this.mail = mail;
