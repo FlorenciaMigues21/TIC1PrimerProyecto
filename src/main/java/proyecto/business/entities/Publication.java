@@ -1,26 +1,55 @@
 package proyecto.business.entities;
 
 import com.sun.istack.NotNull;
+import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
+import org.hibernate.search.annotations.*;
 import org.springframework.lang.NonNull;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import org.springframework.stereotype.Indexed;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.FullTextQuery;
+import org.hibernate.search.jpa.Search;
+import org.hibernate.search.query.dsl.QueryBuilder;
+import javax.persistence.*;
 import java.sql.Date;
-import java.sql.Time;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
+@Indexed // (index = "idx_publication")
+@NormalizerDef(name="lowercase",
+    filters = @TokenFilterDef(factory = LowerCaseFilterFactory.class))
+
 public class Publication {
     private Date Datefrom;
     private Date Dateto;
     private boolean validated;
+
+    @Field (name = "title")
+    @Field(name = "titleFiltered",
+            analyzer = @Analyzer(definition = "stop"))
+    @Field(normalizer = @Normalizer(definition = "lowercase"))
+    @Enumerated(EnumType.STRING)
     private String title;
+
+    @Field (name = "description")
+    @Field(name = "descriptionFiltered",
+            analyzer = @Analyzer(definition = "stop"))
+    @Field(normalizer = @Normalizer(definition = "lowercase"))
+    @Enumerated(EnumType.STRING)
     private String description;
+
+    @Field (name = "ubication")
+    @Field(name = "ubicationFiltered",
+            analyzer = @Analyzer(definition = "stop"))
+    @Field(normalizer = @Normalizer(definition = "lowercase"))
+    @Enumerated(EnumType.STRING)
+    @IndexedEmbedded
     private String ubication;
-    //private float calification;
+    /*
+    @Field
+    @SortableField  ¿¿¿???
+    private float calification;
+    */
     private boolean needVaccination;
     private int aforo;
     private int idEvent;
@@ -30,16 +59,21 @@ public class Publication {
     private Collection<Typeofactivities> listaActividadades;
     private TouristOperator operador;
     private Collection<Photo> photoList;
-    private String phone;
-    private ArrayList<Hygiene> medidas_de_higiene;
-    private ArrayList<IncludedInPublication> incluido;
-    private Time hourStart;
-    private Time hourFinish;
+
+ /* @Field(name = "body")
+    @Field(name = "bodyFiltered",
+            analyzer = @Analyzer(definition = "stop"))
+    private String body;  */
+
+    @ContainedIn
+    @OneToMany(mappedBy = "operador")
+    private List<Publication> publication;
+
 
     public Publication() {
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -54,14 +88,9 @@ public class Publication {
         this.cantidad = cantidad;
         this.listaActividadades = listaActividadades;
         this.operador = operador;
-        this.phone = phone;
-        this.medidas_de_higiene = medidas_de_higiene;
-        this.incluido = incluido;
-        this.hourStart = hourStart;
-        this.hourFinish = hourFinish;
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -77,11 +106,6 @@ public class Publication {
         this.listaActividadades = listaActividadades;
         this.operador = operador;
         this.photoList = photoList;
-        this.phone = phone;
-        this.medidas_de_higiene = medidas_de_higiene;
-        this.incluido = incluido;
-        this.hourStart = hourStart;
-        this.hourFinish = hourFinish;
     }
 
     @NonNull
@@ -238,53 +262,6 @@ public class Publication {
 
     public void addPhotoToList(Photo photo) {
         this.photoList.add(photo);
-    }
-
-    @NotNull
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    @NotNull
-    @ManyToMany
-    public ArrayList<Hygiene> getMedidas_de_higiene() {
-        return medidas_de_higiene;
-    }
-
-    public void setMedidas_de_higiene(ArrayList<Hygiene> medidas_de_higiene) {
-        this.medidas_de_higiene = medidas_de_higiene;
-    }
-
-    @NotNull
-    @ManyToMany
-    public ArrayList<IncludedInPublication> getIncluido() {
-        return incluido;
-    }
-
-    public void setIncluido(ArrayList<IncludedInPublication> incluido) {
-        this.incluido = incluido;
-    }
-
-    @NonNull
-    public Time getHourStart() {
-        return hourStart;
-    }
-
-    public void setHourStart(Time hourStart) {
-        this.hourStart = hourStart;
-    }
-
-    @NotNull
-    public Time getHourFinish() {
-        return hourFinish;
-    }
-
-    public void setHourFinish(Time hourFinish) {
-        this.hourFinish = hourFinish;
     }
 
     @Override
