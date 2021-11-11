@@ -17,7 +17,7 @@ public class PublicationManager {
     @Autowired
     private PublicationDAO controller;
 
-    public void createAndUpdatePublication(Publication publication) throws PublicationCreationError {
+    public void createPublication(Publication publication) throws PublicationCreationError {
         if(publication.verifyObjectIncomplete())
             throw new PublicationCreationError("Publicacion con datos incompletos");
         try{
@@ -39,14 +39,50 @@ public class PublicationManager {
             throw new PublicationsLoadError("Error al cargar las publicaciones del operador turistico " + operator.getUsername());
         }
     }
+  /*@Service
+    @RequiredArgsConstructor
+    @Slf4j
+    class IndexingService {
 
-    public Collection<Publication> getPublicationByValidated(boolean validated) throws PublicationsLoadError {
-        try{
-            return controller.findAllByValidated(validated);
-        }catch (Exception e){
-            e.printStackTrace();
-            throw new PublicationsLoadError("Error al cargar las publicaciones que tienen validado como: " + validated);
+        private final EntityManager em;
+
+        @Transactional
+        public void initiateIndexing() throws InterruptedException {
+            log.info("Initiating indexing...");
+            FullTextEntityManager fullTextEntityManager =
+                    Search.getFullTextEntityManager(em);
+            fullTextEntityManager.createIndexer().startAndWait();
+            log.info("All entities indexed");
         }
     }
 
+    @Component
+    @Slf4j
+    @RequiredArgsConstructor
+    public class SearchService {
+
+        private final EntityManager entityManager;
+
+        public List<Publication> getPublicationBasedOnWord(String word){
+            FullTextEntityManager fullTextEntityManager =
+                    Search.getFullTextEntityManager(entityManager);
+
+            QueryBuilder qb = fullTextEntityManager
+                    .getSearchFactory()
+                    .buildQueryBuilder()
+                    .forEntity(Publication.class)
+                    .get();
+
+            Query PublicationQuery = (Query) qb.keyword()
+                    .onFields("body","hashTags")
+                    .matching(word)
+                    .createQuery();
+
+            FullTextQuery fullTextQuery = fullTextEntityManager
+                    .createFullTextQuery((org.apache.lucene.search.Query) PublicationQuery, Publication.class);
+            return (List<Publication>) fullTextQuery.getResultList();
+        }
+
+
+    } */
 }
