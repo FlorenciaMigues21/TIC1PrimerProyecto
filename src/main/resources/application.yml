@@ -5,7 +5,7 @@
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/pruebas
     username: root
-    password: Jm185251051449
+    password: admin
   jpa:
     show-sql: true
       database-platform: org.hibernate.dialect.MySQLDialect
