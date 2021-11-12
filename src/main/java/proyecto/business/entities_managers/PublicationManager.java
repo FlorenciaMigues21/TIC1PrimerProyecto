@@ -14,10 +14,15 @@ import java.util.Collection;
 @Service
 public class PublicationManager {
 
+
+
     @Autowired
+
+
     private PublicationDAO controller;
 
-    public void createPublication(Publication publication) throws PublicationCreationError {
+
+    public void createAndUpdatePublication(Publication publication) throws PublicationCreationError {
         if(publication.verifyObjectIncomplete())
             throw new PublicationCreationError("Publicacion con datos incompletos");
         try{
@@ -38,7 +43,15 @@ public class PublicationManager {
             e.printStackTrace();
             throw new PublicationsLoadError("Error al cargar las publicaciones del operador turistico " + operator.getUsername());
         }
+
     }
+    public Collection<Publication> getPublicationByValidated(boolean validated) throws PublicationsLoadError {
+        try{
+            return controller.findAllByValidated(validated);
+        }catch (Exception e) {
+            e.printStackTrace();
+            throw new PublicationsLoadError("Error al cargar las publicaciones que tienen validado como: " + validated);
+        }}
   /*@Service
     @RequiredArgsConstructor
     @Slf4j
