@@ -53,14 +53,14 @@ public class Publication {
     private int aforo;
     private int idEvent;
     private int participants;
-    private Divisa divisa;
+    private int precio;
     private float cantidad;
     private Collection<Typeofactivities> listaActividadades;
     private TouristOperator operador;
     private Collection<Photo> photoList;
     private String phone;
-    private ArrayList<Hygiene> medidas_de_higiene;
-    private ArrayList<IncludedInPublication> incluido;
+    private Collection<Hygiene> medidas_de_higiene;
+    private Collection<IncludedInPublication> incluido;
     private Time hourStart;
     private Time hourFinish;
 
@@ -77,7 +77,7 @@ public class Publication {
     public Publication() {
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, int precio, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -88,7 +88,7 @@ public class Publication {
         this.aforo = aforo;
         this.idEvent = idEvent;
         this.participants = participants;
-        this.divisa = divisa;
+        this.precio = precio;
         this.cantidad = cantidad;
         this.listaActividadades = listaActividadades;
         this.operador = operador;
@@ -99,7 +99,7 @@ public class Publication {
         this.hourFinish = hourFinish;
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, int precio, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -110,7 +110,7 @@ public class Publication {
         this.aforo = aforo;
         this.idEvent = idEvent;
         this.participants = participants;
-        this.divisa = divisa;
+        this.precio = precio;
         this.cantidad = cantidad;
         this.listaActividadades = listaActividadades;
         this.operador = operador;
@@ -225,14 +225,13 @@ public class Publication {
         this.participants = participants;
     }
 
-    @ManyToOne
     @NotNull
-    public Divisa getDivisa() {
-        return divisa;
+    public int getDivisa() {
+        return precio;
     }
 
-    public void setDivisa(Divisa divisa) {
-        this.divisa = divisa;
+    public void setDivisa(int precio) {
+        this.precio = precio;
     }
 
     @NotNull
@@ -289,21 +288,21 @@ public class Publication {
 
     @NotNull
     @ManyToMany
-    public ArrayList<Hygiene> getMedidas_de_higiene() {
+    public Collection<Hygiene> getMedidas_de_higiene() {
         return medidas_de_higiene;
     }
 
-    public void setMedidas_de_higiene(ArrayList<Hygiene> medidas_de_higiene) {
+    public void setMedidas_de_higiene(Collection<Hygiene> medidas_de_higiene) {
         this.medidas_de_higiene = medidas_de_higiene;
     }
 
     @NotNull
     @ManyToMany
-    public ArrayList<IncludedInPublication> getIncluido() {
+    public Collection<IncludedInPublication> getIncluido() {
         return incluido;
     }
 
-    public void setIncluido(ArrayList<IncludedInPublication> incluido) {
+    public void setIncluido(Collection<IncludedInPublication> incluido) {
         this.incluido = incluido;
     }
 
@@ -336,7 +335,7 @@ public class Publication {
     }
 
     public boolean verifyObjectIncomplete(){
-        return this.ubication == null || this.ubication.equals("") || (this.title == null || this.title.equals("") || (this.listaActividadades == null || (this.Datefrom == null || (this.Dateto == null || (this.description == null ? true : this.description.equals("") ? true : this.divisa == null ? true : false)))));
+        return this.ubication == null || this.ubication.equals("") || (this.title == null || this.title.equals("") || (this.listaActividadades == null || (this.Datefrom == null || (this.Dateto == null || (this.description == null ? true : this.description.equals("") ? true : false)))));
     }
 
 }

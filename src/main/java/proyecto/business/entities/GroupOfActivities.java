@@ -7,11 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-public class GroupOfActivities {
+public class GroupOfActivities implements Serializable {
     private Typeofactivities group;
     private Collection<Typeofactivities> listaDeActividades;
 
