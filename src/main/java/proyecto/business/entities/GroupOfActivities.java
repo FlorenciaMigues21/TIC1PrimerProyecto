@@ -8,16 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 public class GroupOfActivities {
     private Typeofactivities group;
-    private ArrayList<Typeofactivities> listaDeActividades;
+    private Collection<Typeofactivities> listaDeActividades;
 
     public GroupOfActivities() {
     }
 
-    public GroupOfActivities(Typeofactivities group, ArrayList<Typeofactivities> listaDeActividades) {
+    public GroupOfActivities(Typeofactivities group, Collection<Typeofactivities> listaDeActividades) {
         this.group = group;
         this.listaDeActividades = listaDeActividades;
     }
@@ -35,11 +36,11 @@ public class GroupOfActivities {
 
     @NotNull
     @ManyToMany
-    public ArrayList<Typeofactivities> getListaDeActividades() {
+    public Collection<Typeofactivities> getListaDeActividades() {
         return listaDeActividades;
     }
 
-    public void setListaDeActividades(ArrayList<Typeofactivities> listaDeActividades) {
+    public void setListaDeActividades(Collection<Typeofactivities> listaDeActividades) {
         this.listaDeActividades = listaDeActividades;
     }
 }
