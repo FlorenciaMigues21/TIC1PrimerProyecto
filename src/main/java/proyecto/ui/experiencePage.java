@@ -15,10 +15,7 @@ import javafx.stage.Window;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import proyecto.Main;
-import proyecto.business.entities.Comentary;
-import proyecto.business.entities.Publication;
-import proyecto.business.entities.Reservation;
-import proyecto.business.entities.Tourist;
+import proyecto.business.entities.*;
 import proyecto.business.entities_managers.ComentaryManager;
 import proyecto.business.entities_managers.PublicationManager;
 import proyecto.business.entities_managers.ReservationManager;
@@ -253,13 +250,14 @@ public class experiencePage {
 
     //Subir elementos
     private void UpElements(){
-
+        ArrayList<IncludedInPublication> listInclud = new ArrayList<>(publicacionActual.getIncluido());
+        ArrayList<Hygiene> listHigiene = new ArrayList<>(publicacionActual.getMedidas_de_higiene());
         for(int i=0;i<publicacionActual.getIncluido().size();i++){
-            Label newItem = new Label(publicacionActual.getIncluido().get(i).getIncluido());
+            Label newItem = new Label(listInclud.get(i).getIncluido());
             itemsInc.getChildren().add(newItem);
         }
         for (int i=0;i<publicacionActual.getMedidas_de_higiene().size();i++){
-            Label newItem = new Label(publicacionActual.getMedidas_de_higiene().get(i).getMedidas());
+            Label newItem = new Label(listHigiene.get(i).getMedidas());
             higiene.getChildren().add(newItem);
         }
 
