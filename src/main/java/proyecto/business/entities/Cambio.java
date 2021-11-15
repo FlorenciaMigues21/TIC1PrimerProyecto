@@ -13,7 +13,6 @@ public class Cambio implements Serializable {
     private Divisa divisaOrigen;
     private Divisa divisaCambio;
     private float cantidad;
-    private int idCambio;
 
 
     public Cambio() {
@@ -25,17 +24,7 @@ public class Cambio implements Serializable {
         this.cantidad = cantidad;
     }
 
-
     @Id
-    @GeneratedValue
-    public int getIdCambio() {
-        return idCambio;
-    }
-
-    public void setIdCambio(int idCambio) {
-        this.idCambio = idCambio;
-    }
-
     @NotNull
     @ManyToOne
     public Divisa getDivisaOrigen() {

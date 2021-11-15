@@ -1,6 +1,7 @@
 package proyecto.business.entities;
 
 import com.sun.istack.NotNull;
+import org.hibernate.annotations.Formula;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.Entity;
@@ -20,7 +21,8 @@ public class Publication {
     private String title;
     private String description;
     private String ubication;
-    //private float calification;
+    @Formula("(select AVG(c.calification) from comentary c where c.publication_id_event == id")
+    private float calification;
     private boolean needVaccination;
     private int aforo;
     private int idEvent;
