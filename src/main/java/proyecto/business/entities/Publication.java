@@ -46,7 +46,6 @@ public class Publication {
     @Field (name = "ubication")
     @Field(name = "ubicationFiltered",
             analyzer = @Analyzer(definition = "stop"))
-
     @Field(normalizer = @Normalizer(definition = "lowercase"))
     @Enumerated(EnumType.STRING)
     @IndexedEmbedded
