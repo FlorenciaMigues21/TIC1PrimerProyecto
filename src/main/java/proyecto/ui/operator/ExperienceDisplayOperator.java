@@ -37,8 +37,6 @@ public class ExperienceDisplayOperator {
     @Autowired
     PhotoManager photoMan;
 
-    @Autowired
-    TypeofactivitiesManager typeManager;
 
     public static TouristOperator operador;
 
@@ -152,7 +150,7 @@ public class ExperienceDisplayOperator {
         System.out.println("Hi");
     }
 
-    Collection<Typeofactivities> tiposActividad = typeManager.getAllActivityTypes();
+    Collection<Typeofactivities> tiposActividad = typeActMan.getAllActivityTypes();
     ArrayList<Typeofactivities> tiposActividadList = new ArrayList<>(tiposActividad);
     ArrayList<Hygiene> listasHigiene = new ArrayList<>();
     ArrayList<IncludedInPublication> listasIncluidos = new ArrayList<>();
