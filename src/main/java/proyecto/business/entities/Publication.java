@@ -336,7 +336,7 @@ public class Publication {
     }
 
     public boolean verifyObjectIncomplete(){
-        return this.ubication == null || this.ubication.equals("") ? true : this.title == null || this.title.equals("") ? true : this.listaActividadades == null ? true : this.Datefrom == null ? true : this.Dateto == null ? true : this.description == null ? true : this.description.equals("") ? true : this.divisa == null ? true : false;
+        return this.ubication == null || this.ubication.equals("") || (this.title == null || this.title.equals("") || (this.listaActividadades == null || (this.Datefrom == null || (this.Dateto == null || (this.description == null ? true : this.description.equals("") ? true : this.divisa == null ? true : false)))));
     }
 
 }

@@ -22,6 +22,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 
 @Component
@@ -336,12 +337,16 @@ public class ExperienceDisplayOperator {
     }
 
 
-
-
-    /* FALTA CARGAR LAS IMAGENES @FIXME
     @FXML
-    private void cargarImagenes(Stage stage){
-        FileChooser fileChooser = new FileChooser();*/
+    private void cargarImagenes(ActionEvent event){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files","*.pdf"));
+        List<File> lista = fileChooser.showOpenMultipleDialog(null);
+        for (File file : lista){
+            System.out.println(file.getAbsolutePath());
+        }
+    }
+
 
 
 }

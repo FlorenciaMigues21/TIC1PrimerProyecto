@@ -131,7 +131,7 @@ public class signUpMenu {
                 Date fecha = Date.valueOf(fecha_nacimiento.getValue());
                 String id = docIdentidad.getText();
                 if (passwordUser.equals(ConfirmPassword)) {
-                    Tourist turista = new Tourist(passwordUser,name,mail,false,tel,new Country(pais_residente),id,true,fecha);
+                    Tourist turista = new Tourist(passwordUser,name,mail,false,tel,false,fecha,id,new Country(pais_residente));
                     showAlert("Tu cuenta fue creada!");
                     Next(turista);
 

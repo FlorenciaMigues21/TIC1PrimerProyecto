@@ -56,7 +56,7 @@ public class reservationView {
             //Text fecha = new Text(reservasList.get(i).) @FIXME ARREGLAR FECHA
             Text cantPersonas = new Text(Integer.toString(reservasList.get(i).getCantidad()));
             tablaReserva.add(cantPersonas,2,i+1);
-            Text telefono = new Text(Integer.toString(reservasList.get(i).getTurista().getPhone()));
+            Text telefono = new Text(reservasList.get(i).getTurista().getPhone());
             tablaReserva.add(telefono,3,i+1);
         }
     }
