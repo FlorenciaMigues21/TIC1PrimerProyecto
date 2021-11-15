@@ -3,7 +3,10 @@ package proyecto.ui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import org.springframework.stereotype.Component;
 
+
+@Component
 public class Inicio {
     @FXML
     private Button backButton;

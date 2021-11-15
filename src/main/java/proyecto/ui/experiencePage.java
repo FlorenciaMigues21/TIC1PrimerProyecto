@@ -29,6 +29,8 @@ import proyecto.business.exceptions.ReservationCreationError;
 import proyecto.ui.component.Comentario;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -69,7 +71,7 @@ public class experiencePage {
     private DatePicker fechaReserva;
 
     @FXML
-    private ChoiceBox<String> horario;
+    private ChoiceBox<Time> horario;
 
     @FXML
     private Pane paneCal;
@@ -145,6 +147,7 @@ public class experiencePage {
         direccion.setText(publicacionActual.getUbication());
         infoExp.setText(publicacionActual.getDescription());
         telefono.setText(publicacionActual.getPhone());
+        horario.getItems().addAll(publicacionActual.getHourStart());
         /*float calificacion = Calificacion();*/
         /*puntaje.setText(Float.toString(calificacion));
         AgregarComentarios();*/
@@ -180,7 +183,7 @@ public class experiencePage {
            showAlert("Ya reservó!","Usted ya reservó, si desea cambiar su reserva, vaya a su itinerario.");
        }
        else{
-           Reservation nuevaReserva = new Reservation(userActual,publicacionActual,cantPersonas);
+           Reservation nuevaReserva = new Reservation(userActual,publicacionActual,cantPersonas,horario.getValue());
            resManager.addReservation(nuevaReserva);
            showAlert("Su reserva fue guardada","Puede ver el estado de la reserva en su itinerario");
        }
@@ -243,6 +246,24 @@ public class experiencePage {
             }
         }
     }*/
+    //CONVERSION DEL HORARIO
+    private Date convertToDateViaSqlDate(LocalDate dateToConvert) {
+        return java.sql.Date.valueOf(dateToConvert);
+    }
+
+    //Subir elementos
+    private void UpElements(){
+
+        for(int i=0;i<publicacionActual.getIncluido().size();i++){
+            Label newItem = new Label(publicacionActual.getIncluido().get(i).getIncluido());
+            itemsInc.getChildren().add(newItem);
+        }
+        for (int i=0;i<publicacionActual.getMedidas_de_higiene().size();i++){
+            Label newItem = new Label(publicacionActual.getMedidas_de_higiene().get(i).getMedidas());
+            higiene.getChildren().add(newItem);
+        }
+
+    }
 
     //Hacer comentario
     @FXML
