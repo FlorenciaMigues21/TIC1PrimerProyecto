@@ -3,17 +3,24 @@ package proyecto.business.entities;
 import com.sun.istack.NotNull;
 import org.springframework.lang.NonNull;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
 public class GroupOfActivities implements Serializable {
+    @Id
+    @GeneratedValue
+    private int groupId;
+
+    @NonNull
+    @ManyToOne
     private Typeofactivities group;
+
+
+    @NotNull
+    @ManyToMany
     private Collection<Typeofactivities> listaDeActividades;
 
     public GroupOfActivities() {
@@ -24,9 +31,7 @@ public class GroupOfActivities implements Serializable {
         this.listaDeActividades = listaDeActividades;
     }
 
-    @Id
-    @NonNull
-    @ManyToOne
+
     public Typeofactivities getGroup() {
         return group;
     }
@@ -35,8 +40,6 @@ public class GroupOfActivities implements Serializable {
         this.group = group;
     }
 
-    @NotNull
-    @ManyToMany
     public Collection<Typeofactivities> getListaDeActividades() {
         return listaDeActividades;
     }
