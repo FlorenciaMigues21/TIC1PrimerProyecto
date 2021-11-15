@@ -1,7 +1,9 @@
 package proyecto.business.entities;
 
 import com.sun.istack.NotNull;
+import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
 import org.hibernate.annotations.Formula;
+import org.hibernate.search.annotations.*;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Indexed;
 import org.hibernate.search.jpa.FullTextEntityManager;
@@ -31,7 +33,7 @@ public class Publication {
     private Date Dateto;
     private boolean validated;
 
-    @Field (name = "title")
+    @Field(name = "title")
     @Field(name = "titleFiltered",
             analyzer = @Analyzer(definition = "stop"))
     @Field(normalizer = @Normalizer(definition = "lowercase"))
@@ -45,7 +47,7 @@ public class Publication {
     @Enumerated(EnumType.STRING)
     private String description;
     private String ubication;
-    @Formula("(select AVG(c.calification) from comentary c where c.publication_id_event == id")
+    @Formula("(select AVG(c.calification) from comentary c where c.publication_id_event == id)")
     private float calification;
     private boolean needVaccination;
     private int aforo;
