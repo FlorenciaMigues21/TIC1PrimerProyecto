@@ -8,7 +8,9 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import proyecto.business.entities.*;
+import proyecto.business.entities.Publication;
+import proyecto.business.entities.TouristOperator;
+import proyecto.business.entities.Typeofactivities;
 import proyecto.business.entities_managers.PhotoManager;
 import proyecto.business.entities_managers.PublicationManager;
 import proyecto.business.entities_managers.TypeofactivitiesManager;
@@ -153,8 +155,6 @@ public class ExperienceDisplayOperator {
 
     Collection<Typeofactivities> tiposActividad = typeManager.getAllActivityTypes();
     ArrayList<Typeofactivities> tiposActividadList = new ArrayList<>(tiposActividad);
-    ArrayList<Hygiene> listasHigiene = new ArrayList<>();
-    ArrayList<IncludedInPublication> listasIncluidos = new ArrayList<>();
 
     public void initialize() {}
 
@@ -181,17 +181,15 @@ public class ExperienceDisplayOperator {
                 }
             }
             boolean esPrecioInt = integerInvalido(precio.getText());
-            /*boolean esTelefonoInt = integerInvalido(telefono.getText());*/
-            if(esPrecioInt){
+            boolean esTelefonoInt = integerInvalido(telefono.getText());
+            if(esPrecioInt & esTelefonoInt){
                 newPublication.setCantidad(Float.parseFloat(precio.getText()));
+                //falta telefono
             }
-            newPublication.setPhone(telefono.getText());
-            newPublication.setUbication(direccion.getText());
+            //falta direccion
             newPublication.setDescription(descripcion.getText());
             newPublication.setDatefrom(convertToDateViaSqlDate(fechaIni.getValue()));
             newPublication.setDateto(convertToDateViaSqlDate(fechaFin.getValue()));
-            newPublication.setMedidas_de_higiene(listasHigiene);
-            newPublication.setIncluido(listasIncluidos);
             //FALTA TEMA HORARIOS
 
 
@@ -300,9 +298,6 @@ public class ExperienceDisplayOperator {
     private void aspectosIncluidos(ActionEvent actionEvent){
         MenuItem itemIncAg = new MenuItem();
         itemIncAg.setText(itemInc.getText());
-        IncludedInPublication newItem = new IncludedInPublication();
-        newItem.setIncluido(itemIncAg.getText());
-        listasIncluidos.add(newItem);
         aspIncluidos.getItems().add(itemIncAg);
     }
     //Agregar aspecto incluido, falta agregar a la publicacion
@@ -310,9 +305,6 @@ public class ExperienceDisplayOperator {
     public void medidasIncluidas(ActionEvent actionEvent) {
         MenuItem itemMedAg = new MenuItem();
         itemMedAg.setText(itemMed.getText());
-        Hygiene medida = new Hygiene();
-        medida.setMedidas(itemMed.getText());
-        listasHigiene.add(medida);
         aspHigiene.getItems().add(itemMedAg);
     }
 
@@ -334,10 +326,6 @@ public class ExperienceDisplayOperator {
     private Date convertToDateViaSqlDate(LocalDate dateToConvert) {
         return java.sql.Date.valueOf(dateToConvert);
     }
-
-
-
-
     /* FALTA CARGAR LAS IMAGENES @FIXME
     @FXML
     private void cargarImagenes(Stage stage){

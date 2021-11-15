@@ -2,9 +2,10 @@ package proyecto.business.entities;
 
 import com.sun.istack.NotNull;
 
-import javax.persistence.*;
-import java.sql.Date;
-import java.util.Collection;import java.util.List;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.util.Objects;
 
 @MappedSuperclass

@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import proyecto.business.entities.Publication;
 import proyecto.business.entities.Tourist;
 import proyecto.business.entities_managers.ComentaryManager;
-import proyecto.business.persistence.ComentaryDAO;
 
 public class Comentario {
 
