@@ -3,7 +3,15 @@ package proyecto.business.entities;
 import com.sun.istack.NotNull;
 import org.hibernate.annotations.Formula;
 import org.springframework.lang.NonNull;
-
+import org.springframework.stereotype.Indexed;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.FullTextQuery;
+import org.hibernate.search.jpa.Search;
+import org.hibernate.search.query.dsl.QueryBuilder;
+import javax.persistence.*;
+import java.sql.Date;
+import java.util.Collection;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -14,11 +22,27 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
+@Indexed // (index = "idx_publication")
+@NormalizerDef(name="lowercase",
+    filters = @TokenFilterDef(factory = LowerCaseFilterFactory.class))
+
 public class Publication {
     private Date Datefrom;
     private Date Dateto;
     private boolean validated;
+
+    @Field (name = "title")
+    @Field(name = "titleFiltered",
+            analyzer = @Analyzer(definition = "stop"))
+    @Field(normalizer = @Normalizer(definition = "lowercase"))
+    @Enumerated(EnumType.STRING)
     private String title;
+
+    @Field (name = "description")
+    @Field(name = "descriptionFiltered",
+            analyzer = @Analyzer(definition = "stop"))
+    @Field(normalizer = @Normalizer(definition = "lowercase"))
+    @Enumerated(EnumType.STRING)
     private String description;
     private String ubication;
     @Formula("(select AVG(c.calification) from comentary c where c.publication_id_event == id")
@@ -37,6 +61,16 @@ public class Publication {
     private ArrayList<IncludedInPublication> incluido;
     private Time hourStart;
     private Time hourFinish;
+
+ /* @Field(name = "body")
+    @Field(name = "bodyFiltered",
+            analyzer = @Analyzer(definition = "stop"))
+    private String body;  */
+
+    @ContainedIn
+    @OneToMany(mappedBy = "operador")
+    private List<Publication> publication;
+
 
     public Publication() {
     }
