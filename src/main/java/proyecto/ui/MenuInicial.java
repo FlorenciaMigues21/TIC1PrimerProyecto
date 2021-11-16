@@ -21,6 +21,7 @@ import proyecto.business.entities.TouristOperator;
 import proyecto.business.entities_managers.UserManager;
 import proyecto.business.exceptions.InvalidUserInformation;
 import proyecto.business.exceptions.UserNotFound;
+import proyecto.ui.admin.Admin_init;
 import proyecto.ui.operator.MainOperator;
 
 import java.io.IOException;
@@ -92,19 +93,17 @@ public class MenuInicial {
         stage.show();
         MainOperator.operador = operador;
     }
-    /*@FXML@FIXME
-    void NextAdmin(Admin administrador) throws IOException {
+    @FXML
+    void NextAdmin() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
-        Parent root = fxmlLoader.load(MainOperator.class.getResourceAsStream("ReservationView.fxml"));
+        Parent root = fxmlLoader.load(Admin_init.class.getResourceAsStream("mainAdmin.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
-        MainOperator.operador = operador;
     }
-    */
     @FXML
-    void btnNext(ActionEvent event) {
+    void btnNext(ActionEvent event) throws IOException {
 
         if (password.getText() == null || password.getText().equals("") ||
                 username.getText() == null || username.getText().equals("") || tipoUsuario.getValue() == null) {
@@ -163,6 +162,7 @@ public class MenuInicial {
 
                         showAlert("Acceso correcto!");
                         close(event);
+                        NextAdmin();
 
                     }else {
                         showAlert("Datos incorrectos", "Verifique el mail y la contraseña");

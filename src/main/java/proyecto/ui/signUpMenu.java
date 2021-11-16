@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import proyecto.Main;
 import proyecto.business.entities.Country;
 import proyecto.business.entities.Tourist;
+import proyecto.business.entities.Typeofactivities;
 import proyecto.business.entities.User;
+import proyecto.business.entities_managers.CountryManager;
+import proyecto.business.entities_managers.TypeofactivitiesManager;
 import proyecto.business.entities_managers.UserManager;
 import proyecto.business.exceptions.InvalidUserInformation;
 import proyecto.business.exceptions.UserAlreadyExist;
@@ -23,6 +26,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 
 @Component
 public class signUpMenu {
@@ -30,6 +34,10 @@ public class signUpMenu {
     @Autowired
     private UserManager<Tourist> controlador;
 
+    @Autowired
+    private CountryManager countryMan;
+    @Autowired
+    private TypeofactivitiesManager typeMan;
     @FXML
     private TextField email;
 
@@ -52,7 +60,7 @@ public class signUpMenu {
     private Button atras;
 
     @FXML
-    private ComboBox<String> pais;
+    private ComboBox<Country> pais;
 
     @FXML
     private TextField docIdentidad;
@@ -68,7 +76,12 @@ public class signUpMenu {
     }
 
     private void addCountries(){
-        pais.getItems().addAll(countries);
+        ArrayList<Country> paises = new ArrayList<>(countryMan.getAllCountries());
+        pais.getItems().addAll(paises);
+        ArrayList<Typeofactivities> tipo = new ArrayList<>(typeMan.getAllActivityTypes());
+        /*for(int i = 0; i<paises.size();i++) {
+            pais.getItems().add(paises.get(i));
+        }*/
     }
 
     @FXML
@@ -127,11 +140,11 @@ public class signUpMenu {
                 String ConfirmPassword = confirmPassword.getText();
                 String mail = email.getText();
                 String tel = telefono.getText();
-                String pais_residente = pais.getValue();
+                Country pais_residente = pais.getValue();
                 Date fecha = Date.valueOf(fecha_nacimiento.getValue());
                 String id = docIdentidad.getText();
                 if (passwordUser.equals(ConfirmPassword)) {
-                    Tourist turista = new Tourist(passwordUser,name,mail,false,tel,false,fecha,id,new Country(pais_residente));
+                    Tourist turista = new Tourist(passwordUser,name,mail,false,tel,false,fecha,id,pais_residente);
                     showAlert("Tu cuenta fue creada!");
                     Next(turista);
 

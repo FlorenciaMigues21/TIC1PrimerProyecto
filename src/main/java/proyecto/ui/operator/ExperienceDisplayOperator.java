@@ -29,13 +29,13 @@ import java.util.List;
 public class ExperienceDisplayOperator {
 
     @Autowired
-    PublicationManager publicMan;
+    private PublicationManager publicMan;
+
+    //@Autowired
+    //private TypeofactivitiesManager typeActMan;
 
     @Autowired
-    TypeofactivitiesManager typeActMan;
-
-    @Autowired
-    PhotoManager photoMan;
+    private PhotoManager photoMan;
 
 
     public static TouristOperator operador;
@@ -150,14 +150,14 @@ public class ExperienceDisplayOperator {
         System.out.println("Hi");
     }
 
-    Collection<Typeofactivities> tiposActividad = typeActMan.getAllActivityTypes();
-    ArrayList<Typeofactivities> tiposActividadList = new ArrayList<>(tiposActividad);
+    //Collection<Typeofactivities> tiposActividad = typeActMan.getAllActivityTypes();
+    //rrayList<Typeofactivities> tiposActividadList = new ArrayList<>(tiposActividad);
     ArrayList<Hygiene> listasHigiene = new ArrayList<>();
     ArrayList<IncludedInPublication> listasIncluidos = new ArrayList<>();
 
     public void initialize() {}
 
-
+/*
     public void saveExperience(ActionEvent actionEvent){
         if (titulo.getText() == null || precio.getText().equals("") ||
                 descripcion.getText() == null || aspHigiene.getItems() == null || aspIncluidos.getItems() == null ||
@@ -180,7 +180,7 @@ public class ExperienceDisplayOperator {
                 }
             }
             boolean esPrecioInt = integerInvalido(precio.getText());
-            /*boolean esTelefonoInt = integerInvalido(telefono.getText());*/
+            /*boolean esTelefonoInt = integerInvalido(telefono.getText());*//*
             if(esPrecioInt){
                 newPublication.setCantidad(Float.parseFloat(precio.getText()));
             }
@@ -345,6 +345,6 @@ public class ExperienceDisplayOperator {
         }
     }
 
-
+*/
 
 }
