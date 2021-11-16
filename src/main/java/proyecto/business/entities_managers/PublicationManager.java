@@ -66,7 +66,7 @@ public class PublicationManager {
     @Service
     @RequiredArgsConstructor
     @Slf4j
-    class IndexingService {
+    private static class IndexingService {
 
         private final EntityManager em;
 
@@ -83,7 +83,7 @@ public class PublicationManager {
     @Component
     @Slf4j
     @RequiredArgsConstructor
-    public class SearchService {
+    private static class SearchService {
 
         private final EntityManager entityManager;
 

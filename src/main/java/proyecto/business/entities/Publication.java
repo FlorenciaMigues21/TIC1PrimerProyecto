@@ -59,7 +59,6 @@ public class Publication {
     private int aforo;
     private int idEvent;
     private int participants;
-    private Divisa divisa;
     private float cantidad;
     private Collection<Typeofactivities> listaActividadades;
     private TouristOperator operador;
@@ -83,7 +82,7 @@ public class Publication {
     public Publication() {
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -94,7 +93,6 @@ public class Publication {
         this.aforo = aforo;
         this.idEvent = idEvent;
         this.participants = participants;
-        this.divisa = divisa;
         this.cantidad = cantidad;
         this.listaActividadades = listaActividadades;
         this.operador = operador;
@@ -105,7 +103,7 @@ public class Publication {
         this.hourFinish = hourFinish;
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, Divisa divisa, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -116,7 +114,6 @@ public class Publication {
         this.aforo = aforo;
         this.idEvent = idEvent;
         this.participants = participants;
-        this.divisa = divisa;
         this.cantidad = cantidad;
         this.listaActividadades = listaActividadades;
         this.operador = operador;
@@ -230,17 +227,6 @@ public class Publication {
     public void setParticipants(int participants) {
         this.participants = participants;
     }
-
-    @ManyToOne
-    @NotNull
-    public Divisa getDivisa() {
-        return divisa;
-    }
-
-    public void setDivisa(Divisa divisa) {
-        this.divisa = divisa;
-    }
-
     @NotNull
     public float getCantidad() {
         return cantidad;
@@ -341,7 +327,7 @@ public class Publication {
     }
 
     public boolean verifyObjectIncomplete(){
-        return this.ubication == null || this.ubication.equals("") ? true : this.title == null || this.title.equals("") ? true : this.listaActividadades == null ? true : this.Datefrom == null ? true : this.Dateto == null ? true : this.description == null ? true : this.description.equals("") ? true : this.divisa == null ? true : false;
+        return this.ubication == null || this.ubication.equals("") ? true : this.title == null || this.title.equals("") ? true : this.listaActividadades == null ? true : this.Datefrom == null ? true : this.Dateto == null ? true : this.description == null ? true : this.description.equals("") ? true : false;
     }
 
 }
