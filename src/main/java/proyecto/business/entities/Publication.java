@@ -5,6 +5,7 @@ import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
 import org.hibernate.annotations.Formula;
 import org.hibernate.search.annotations.*;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Indexed;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
@@ -26,14 +27,14 @@ import java.util.Collection;
 @Entity
 @Indexed // (index = "idx_publication")
 @NormalizerDef(name="lowercase",
-    filters = @TokenFilterDef(factory = LowerCaseFilterFactory.class))
+        filters = @TokenFilterDef(factory = LowerCaseFilterFactory.class))
 
 public class Publication {
     private Date Datefrom;
     private Date Dateto;
     private boolean validated;
 
-    @Field (name = "title")
+    @Field(name = "title")
     @Field(name = "titleFiltered",
             analyzer = @Analyzer(definition = "stop"))
     @Field(normalizer = @Normalizer(definition = "lowercase"))
@@ -47,12 +48,14 @@ public class Publication {
     @Enumerated(EnumType.STRING)
     private String description;
     private String ubication;
+    @Nullable
     @Formula("(select AVG(c.calification) from comentary c where c.publication_id_event == id)")
     private float calification;
     private boolean needVaccination;
     private int aforo;
     private int idEvent;
     private int participants;
+    private int precio;
     private float cantidad;
     private Collection<Typeofactivities> listaActividadades;
     private TouristOperator operador;
@@ -62,6 +65,7 @@ public class Publication {
     private Collection<IncludedInPublication> incluido;
     private Time hourStart;
     private Time hourFinish;
+    private boolean uniqueReservation;
 
  /* @Field(name = "body")
     @Field(name = "bodyFiltered",
@@ -76,7 +80,7 @@ public class Publication {
     public Publication() {
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, int precio, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, int precio, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish, boolean uniqueReservation) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -96,9 +100,10 @@ public class Publication {
         this.incluido = incluido;
         this.hourStart = hourStart;
         this.hourFinish = hourFinish;
+        this.uniqueReservation = uniqueReservation;
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, int precio, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, int precio, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish, boolean uniqueReservation) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -119,6 +124,7 @@ public class Publication {
         this.incluido = incluido;
         this.hourStart = hourStart;
         this.hourFinish = hourFinish;
+        this.uniqueReservation = uniqueReservation;
     }
 
     @NonNull
@@ -182,7 +188,6 @@ public class Publication {
     public float getCalification() {
         return calification;
     }
-
     public void setCalification(float calification) {
         this.calification = calification;
     }*/
@@ -223,6 +228,16 @@ public class Publication {
     public void setParticipants(int participants) {
         this.participants = participants;
     }
+
+    @NotNull
+    public int getDivisa() {
+        return precio;
+    }
+
+    public void setDivisa(int precio) {
+        this.precio = precio;
+    }
+
     @NotNull
     public float getCantidad() {
         return cantidad;
