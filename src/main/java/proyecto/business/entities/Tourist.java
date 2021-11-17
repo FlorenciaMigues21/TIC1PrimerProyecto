@@ -16,6 +16,8 @@ public class Tourist extends User{
     private String id;
     private Country country;
 
+    //TODO CREAR UN QUERY QUE BUSQUE EN TODOS LOS GROUP OF ACTIVITIES DE LOS CUALES SAQUE PARA RECOMENDAR, LUEGO PARA RECOMENDAR UN TOP DE DATOS FILTRAR POR CALIFICACION Y HACER UN TOP
+
     public Tourist() {
     }
 

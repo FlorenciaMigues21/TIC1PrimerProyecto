@@ -5,6 +5,7 @@ import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
 import org.hibernate.annotations.Formula;
 import org.hibernate.search.annotations.*;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Indexed;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
@@ -47,6 +48,7 @@ public class Publication {
     @Enumerated(EnumType.STRING)
     private String description;
     private String ubication;
+    @Nullable
     @Formula("(select AVG(c.calification) from comentary c where c.publication_id_event == id)")
     private float calification;
     private boolean needVaccination;
@@ -63,6 +65,7 @@ public class Publication {
     private Collection<IncludedInPublication> incluido;
     private Time hourStart;
     private Time hourFinish;
+    private boolean uniqueReservation;
 
  /* @Field(name = "body")
     @Field(name = "bodyFiltered",
@@ -77,7 +80,7 @@ public class Publication {
     public Publication() {
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, int precio, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, int precio, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish, boolean uniqueReservation) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -97,9 +100,10 @@ public class Publication {
         this.incluido = incluido;
         this.hourStart = hourStart;
         this.hourFinish = hourFinish;
+        this.uniqueReservation = uniqueReservation;
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, int precio, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, int precio, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish, boolean uniqueReservation) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -120,6 +124,7 @@ public class Publication {
         this.incluido = incluido;
         this.hourStart = hourStart;
         this.hourFinish = hourFinish;
+        this.uniqueReservation = uniqueReservation;
     }
 
     @NonNull
@@ -322,6 +327,32 @@ public class Publication {
 
     public void setHourFinish(Time hourFinish) {
         this.hourFinish = hourFinish;
+    }
+
+    @NotNull
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
+    @NotNull
+    public boolean isUniqueReservation() {
+        return uniqueReservation;
+    }
+
+    public void setUniqueReservation(boolean uniqueReservation) {
+        this.uniqueReservation = uniqueReservation;
+    }
+
+    public float getCalification() {
+        return calification;
+    }
+
+    public void setCalification(float calification) {
+        this.calification = calification;
     }
 
     @Override
