@@ -21,7 +21,7 @@
             </ImageView>
             <ImageView fx:id="back" accessibleRole="BUTTON" fitHeight="40.0" fitWidth="40.0" layoutX="14.0" layoutY="9.0">
                <image>
-                  <Image url="@../../../Images/hacia-atras.png" />
+                  <Image url="@/Images/hacia-atras.png" />
                </image>
             </ImageView>
          </children>

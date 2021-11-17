@@ -28,13 +28,13 @@ import java.util.Collection;
 public class ExperienceDisplayOperator {
 
     @Autowired
-    PublicationManager publicMan;
+    private PublicationManager publicMan;
 
     @Autowired
-    TypeofactivitiesManager typeActMan;
+    private TypeofactivitiesManager typeActMan;
 
     @Autowired
-    PhotoManager photoMan;
+    private PhotoManager photoMan;
 
 
     public static TouristOperator operador;
@@ -149,12 +149,19 @@ public class ExperienceDisplayOperator {
         System.out.println("Hi");
     }
 
-    Collection<Typeofactivities> tiposActividad = typeActMan.getAllActivityTypes();
-    ArrayList<Typeofactivities> tiposActividadList = new ArrayList<>(tiposActividad);
-    ArrayList<Hygiene> listasHigiene = new ArrayList<>();
-    ArrayList<IncludedInPublication> listasIncluidos = new ArrayList<>();
+    Collection<Typeofactivities> tiposActividad;
+    ArrayList<Typeofactivities> tiposActividadList;
+    ArrayList<Hygiene> listasHigiene;
+    ArrayList<IncludedInPublication> listasIncluidos;
 
-    public void initialize() {}
+    @FXML
+    public void initialize() {
+
+        tiposActividad = typeActMan.getAllActivityTypes();
+        tiposActividadList = new ArrayList<>(tiposActividad);
+        listasHigiene = new ArrayList<>();
+        listasIncluidos = new ArrayList<>();
+    }
 
 
     public void saveExperience(ActionEvent actionEvent){
@@ -180,6 +187,7 @@ public class ExperienceDisplayOperator {
             }
             boolean esPrecioInt = integerInvalido(precio.getText());
             /*boolean esTelefonoInt = integerInvalido(telefono.getText());*/
+
             if(esPrecioInt){
                 newPublication.setCantidad(Float.parseFloat(precio.getText()));
             }

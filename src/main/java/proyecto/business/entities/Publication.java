@@ -2,6 +2,7 @@ package proyecto.business.entities;
 
 import com.sun.istack.NotNull;
 import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
+import org.hibernate.annotations.Formula;
 import org.hibernate.search.annotations.*;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Indexed;
@@ -17,8 +18,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Collection;
+
 @Entity
 @Indexed // (index = "idx_publication")
 @NormalizerDef(name="lowercase",
@@ -42,19 +46,9 @@ public class Publication {
     @Field(normalizer = @Normalizer(definition = "lowercase"))
     @Enumerated(EnumType.STRING)
     private String description;
-
-    @Field (name = "ubication")
-    @Field(name = "ubicationFiltered",
-            analyzer = @Analyzer(definition = "stop"))
-    @Field(normalizer = @Normalizer(definition = "lowercase"))
-    @Enumerated(EnumType.STRING)
-    @IndexedEmbedded
     private String ubication;
-    /*
-    @Field
-    @SortableField  ¿¿¿???
+    @Formula("(select AVG(c.calification) from comentary c where c.publication_id_event == id)")
     private float calification;
-    */
     private boolean needVaccination;
     private int aforo;
     private int idEvent;
@@ -64,8 +58,8 @@ public class Publication {
     private TouristOperator operador;
     private Collection<Photo> photoList;
     private String phone;
-    private ArrayList<Hygiene> medidas_de_higiene;
-    private ArrayList<IncludedInPublication> incluido;
+    private Collection<Hygiene> medidas_de_higiene;
+    private Collection<IncludedInPublication> incluido;
     private Time hourStart;
     private Time hourFinish;
 
@@ -82,7 +76,7 @@ public class Publication {
     public Publication() {
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, int precio, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -93,6 +87,7 @@ public class Publication {
         this.aforo = aforo;
         this.idEvent = idEvent;
         this.participants = participants;
+        this.precio = precio;
         this.cantidad = cantidad;
         this.listaActividadades = listaActividadades;
         this.operador = operador;
@@ -103,7 +98,7 @@ public class Publication {
         this.hourFinish = hourFinish;
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, int precio, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -114,6 +109,7 @@ public class Publication {
         this.aforo = aforo;
         this.idEvent = idEvent;
         this.participants = participants;
+        this.precio = precio;
         this.cantidad = cantidad;
         this.listaActividadades = listaActividadades;
         this.operador = operador;
@@ -269,6 +265,7 @@ public class Publication {
     public void addPhotoToList(Photo photo) {
         this.photoList.add(photo);
     }
+
     @NotNull
     public String getPhone() {
         return phone;
@@ -280,21 +277,21 @@ public class Publication {
 
     @NotNull
     @ManyToMany
-    public ArrayList<Hygiene> getMedidas_de_higiene() {
+    public Collection<Hygiene> getMedidas_de_higiene() {
         return medidas_de_higiene;
     }
 
-    public void setMedidas_de_higiene(ArrayList<Hygiene> medidas_de_higiene) {
+    public void setMedidas_de_higiene(Collection<Hygiene> medidas_de_higiene) {
         this.medidas_de_higiene = medidas_de_higiene;
     }
 
     @NotNull
     @ManyToMany
-    public ArrayList<IncludedInPublication> getIncluido() {
+    public Collection<IncludedInPublication> getIncluido() {
         return incluido;
     }
 
-    public void setIncluido(ArrayList<IncludedInPublication> incluido) {
+    public void setIncluido(Collection<IncludedInPublication> incluido) {
         this.incluido = incluido;
     }
 
@@ -316,6 +313,32 @@ public class Publication {
         this.hourFinish = hourFinish;
     }
 
+    @NotNull
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
+    @NotNull
+    public boolean isUniqueReservation() {
+        return uniqueReservation;
+    }
+
+    public void setUniqueReservation(boolean uniqueReservation) {
+        this.uniqueReservation = uniqueReservation;
+    }
+
+    public float getCalification() {
+        return calification;
+    }
+
+    public void setCalification(float calification) {
+        this.calification = calification;
+    }
+
     @Override
     public String toString() {
         return "Publications{" +
@@ -327,7 +350,7 @@ public class Publication {
     }
 
     public boolean verifyObjectIncomplete(){
-        return this.ubication == null || this.ubication.equals("") ? true : this.title == null || this.title.equals("") ? true : this.listaActividadades == null ? true : this.Datefrom == null ? true : this.Dateto == null ? true : this.description == null ? true : this.description.equals("") ? true : false;
+        return this.ubication == null || this.ubication.equals("") || (this.title == null || this.title.equals("") || (this.listaActividadades == null || (this.Datefrom == null || (this.Dateto == null || (this.description == null ? true : this.description.equals("") ? true : false)))));
     }
 
 }
