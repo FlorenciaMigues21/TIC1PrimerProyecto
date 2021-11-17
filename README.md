@@ -9,7 +9,5 @@ Como operar en la app:
 Bugs conocidos:
 
 Grupo:
-Agustín Caamaño
-Florencia Migues
-Juan Manuel Latorre
+Agustín Caamaño, Florencia Migues, Juan Manuel Latorre.
 
