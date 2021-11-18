@@ -46,6 +46,8 @@ public class selectionTurist {
     @FXML
     VBox typeList;
 
+    @FXML
+    CheckBox verano;
 
     public void initialize() {
         loadEstacion();

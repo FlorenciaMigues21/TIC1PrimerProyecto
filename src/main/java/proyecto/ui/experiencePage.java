@@ -42,8 +42,8 @@ public class experiencePage {
     @Autowired
     private ReservationManager resManager;
 
-    @Autowired
-    private ComentaryManager comManager;
+    /*@Autowired
+    private ComentaryManager comManager;*/
 
     static Tourist userActual;
 

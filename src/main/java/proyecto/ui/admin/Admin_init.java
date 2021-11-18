@@ -92,7 +92,6 @@ public class Admin_init {
                 @Override
                 public void handle(ActionEvent event) {
                     publicNoVal.get(finalI).setValidated(true);
-
                     showAlert("La publicación fue aprobada","Ahora estará en la tabla siguiente");
                 }
             });

@@ -2,8 +2,6 @@ package proyecto.business.persistence;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import proyecto.business.entities.User;
 
 @NoRepositoryBean

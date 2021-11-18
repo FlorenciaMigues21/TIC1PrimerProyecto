@@ -3,7 +3,10 @@ package proyecto.business.entities;
 import com.sun.istack.NotNull;
 
 import javax.imageio.ImageIO;
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Lob;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;

@@ -7,7 +7,6 @@ import proyecto.business.exceptions.DataBaseError;
 import proyecto.business.persistence.PhotoDAO;
 
 import java.io.IOException;
-import java.util.Collection;
 
 @Service
 public class PhotoManager {

@@ -1,6 +1,14 @@
 package proyecto.business.entities_managers;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.FullTextQuery;
+import org.hibernate.search.jpa.Search;
+import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import proyecto.business.entities.Publication;
 import proyecto.business.entities.TouristOperator;
@@ -9,18 +17,16 @@ import proyecto.business.exceptions.PublicationCreationError;
 import proyecto.business.exceptions.PublicationsLoadError;
 import proyecto.business.persistence.PublicationDAO;
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class PublicationManager {
 
-
-
     @Autowired
-
-
     private PublicationDAO controller;
-
 
     public void createAndUpdatePublication(Publication publication) throws PublicationCreationError {
         if(publication.verifyObjectIncomplete())
@@ -52,10 +58,10 @@ public class PublicationManager {
             e.printStackTrace();
             throw new PublicationsLoadError("Error al cargar las publicaciones que tienen validado como: " + validated);
         }}
-  /*@Service
+    @Service
     @RequiredArgsConstructor
     @Slf4j
-    class IndexingService {
+    private static class IndexingService {
 
         private final EntityManager em;
 
@@ -72,10 +78,8 @@ public class PublicationManager {
     @Component
     @Slf4j
     @RequiredArgsConstructor
-    public class SearchService {
-
+    private static class SearchService {
         private final EntityManager entityManager;
-
         public List<Publication> getPublicationBasedOnWord(String word){
             FullTextEntityManager fullTextEntityManager =
                     Search.getFullTextEntityManager(entityManager);
@@ -95,7 +99,5 @@ public class PublicationManager {
                     .createFullTextQuery((org.apache.lucene.search.Query) PublicationQuery, Publication.class);
             return (List<Publication>) fullTextQuery.getResultList();
         }
-
-
-    } */
+    }
 }

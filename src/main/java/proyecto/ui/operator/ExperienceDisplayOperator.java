@@ -22,7 +22,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 
 @Component
@@ -31,8 +30,8 @@ public class ExperienceDisplayOperator {
     @Autowired
     private PublicationManager publicMan;
 
-    //@Autowired
-    //private TypeofactivitiesManager typeActMan;
+    @Autowired
+    private TypeofactivitiesManager typeActMan;
 
     @Autowired
     private PhotoManager photoMan;
@@ -150,14 +149,21 @@ public class ExperienceDisplayOperator {
         System.out.println("Hi");
     }
 
-    //Collection<Typeofactivities> tiposActividad = typeActMan.getAllActivityTypes();
-    //rrayList<Typeofactivities> tiposActividadList = new ArrayList<>(tiposActividad);
-    ArrayList<Hygiene> listasHigiene = new ArrayList<>();
-    ArrayList<IncludedInPublication> listasIncluidos = new ArrayList<>();
+    Collection<Typeofactivities> tiposActividad;
+    ArrayList<Typeofactivities> tiposActividadList;
+    ArrayList<Hygiene> listasHigiene;
+    ArrayList<IncludedInPublication> listasIncluidos;
 
-    public void initialize() {}
+    @FXML
+    public void initialize() {
 
-/*
+        tiposActividad = typeActMan.getAllActivityTypes();
+        tiposActividadList = new ArrayList<>(tiposActividad);
+        listasHigiene = new ArrayList<>();
+        listasIncluidos = new ArrayList<>();
+    }
+
+
     public void saveExperience(ActionEvent actionEvent){
         if (titulo.getText() == null || precio.getText().equals("") ||
                 descripcion.getText() == null || aspHigiene.getItems() == null || aspIncluidos.getItems() == null ||
@@ -180,7 +186,8 @@ public class ExperienceDisplayOperator {
                 }
             }
             boolean esPrecioInt = integerInvalido(precio.getText());
-            /*boolean esTelefonoInt = integerInvalido(telefono.getText());*//*
+            /*boolean esTelefonoInt = integerInvalido(telefono.getText());*/
+
             if(esPrecioInt){
                 newPublication.setCantidad(Float.parseFloat(precio.getText()));
             }
@@ -335,16 +342,12 @@ public class ExperienceDisplayOperator {
     }
 
 
-    @FXML
-    private void cargarImagenes(ActionEvent event){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files","*.pdf"));
-        List<File> lista = fileChooser.showOpenMultipleDialog(null);
-        for (File file : lista){
-            System.out.println(file.getAbsolutePath());
-        }
-    }
 
-*/
+
+    /* FALTA CARGAR LAS IMAGENES @FIXME
+    @FXML
+    private void cargarImagenes(Stage stage){
+        FileChooser fileChooser = new FileChooser();*/
+
 
 }

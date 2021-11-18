@@ -15,6 +15,10 @@ repositories {
     mavenCentral()
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 javafx {
     version = "15.0.1"
     modules = [ 'javafx.controls', 'javafx.fxml' , 'javafx.graphics']
@@ -29,4 +33,6 @@ dependencies {
     implementation 'mysql:mysql-connector-java:8.0.25'
     implementation 'org.hibernate:hibernate-search-orm:5.11.5.Final'
     implementation 'org.hibernate:hibernate-search-elasticsearch:5.11.5.Final'
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
 }
