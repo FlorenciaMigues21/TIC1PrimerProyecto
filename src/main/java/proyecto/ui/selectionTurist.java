@@ -16,17 +16,29 @@ import org.springframework.stereotype.Component;
 import proyecto.Main;
 import proyecto.business.entities.Tourist;
 import proyecto.business.entities.TouristOperator;
+import proyecto.business.entities.Typeofactivities;
 import proyecto.business.entities.User;
+import proyecto.business.entities_managers.GroupOfActivitiesManager;
+import proyecto.business.entities_managers.TypeofactivitiesManager;
 import proyecto.business.entities_managers.UserManager;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @Component
 public class selectionTurist {
     ObservableList<String> gusto = FXCollections.observableArrayList("Viaje Confort","Viaje alternativo","Viaje de Lujo");
 
+    private ArrayList<Typeofactivities> activityTypes;
+
     @Autowired
     private UserManager<Tourist> controlador;
+
+    @Autowired
+    private TypeofactivitiesManager typeManager;
+
+    @Autowired
+    private GroupOfActivitiesManager groupManager;
 
     static Tourist userActual;
 
@@ -71,6 +83,8 @@ public class selectionTurist {
 
     public void initialize() {
         loadEstacion();
+        activityTypes = new ArrayList<>(typeManager.getAllActivityTypes());
+        for (Typeofactivities acivity: activityTypes) System.out.println( acivity.getName());
     }
 
     @FXML

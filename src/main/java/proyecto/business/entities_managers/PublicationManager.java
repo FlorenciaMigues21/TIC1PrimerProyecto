@@ -25,13 +25,8 @@ import java.util.List;
 @Service
 public class PublicationManager {
 
-
-
     @Autowired
-
-
     private PublicationDAO controller;
-
 
     public void createAndUpdatePublication(Publication publication) throws PublicationCreationError {
         if(publication.verifyObjectIncomplete())
@@ -84,9 +79,7 @@ public class PublicationManager {
     @Slf4j
     @RequiredArgsConstructor
     private static class SearchService {
-
         private final EntityManager entityManager;
-
         public List<Publication> getPublicationBasedOnWord(String word){
             FullTextEntityManager fullTextEntityManager =
                     Search.getFullTextEntityManager(entityManager);
@@ -106,7 +99,5 @@ public class PublicationManager {
                     .createFullTextQuery((org.apache.lucene.search.Query) PublicationQuery, Publication.class);
             return (List<Publication>) fullTextQuery.getResultList();
         }
-
-
     }
 }

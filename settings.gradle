@@ -1,4 +1,3 @@
-rootProject.name = 'server'
+rootProject.name = 'visual'
 
-
-
+includeBuild '../commons'
