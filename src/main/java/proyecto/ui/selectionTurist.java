@@ -10,16 +10,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import proyecto.Main;
 import proyecto.business.entities.Tourist;
 import proyecto.business.entities.TouristOperator;
+import proyecto.business.entities.Typeofactivities;
 import proyecto.business.entities.User;
+import proyecto.business.entities_managers.TypeofactivitiesManager;
 import proyecto.business.entities_managers.UserManager;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @Component
 public class selectionTurist {
@@ -27,6 +31,9 @@ public class selectionTurist {
 
     @Autowired
     private UserManager<Tourist> controlador;
+
+    @Autowired
+    private TypeofactivitiesManager manType;
 
     static Tourist userActual;
 
@@ -37,37 +44,8 @@ public class selectionTurist {
     ChoiceBox<String> gustoViaje;
 
     @FXML
-    CheckBox familiar;
+    VBox typeList;
 
-    @FXML
-    CheckBox escapadasrurales;
-
-    @FXML
-    CheckBox lunademiel;
-
-    @FXML
-    CheckBox turismoaventura;
-
-    @FXML
-    CheckBox cultural;
-
-    @FXML
-    CheckBox descanso;
-
-    @FXML
-    CheckBox mochilero;
-
-    @FXML
-    CheckBox invierno;
-
-    @FXML
-    CheckBox primavera;
-
-    @FXML
-    CheckBox otono;
-
-    @FXML
-    CheckBox verano;
 
     public void initialize() {
         loadEstacion();
@@ -79,14 +57,14 @@ public class selectionTurist {
     }
 
 
-    private void handleOptions(CheckBox fam,CheckBox escap,CheckBox luna,CheckBox turism,CheckBox cult,CheckBox desc,CheckBox mochi){
-
+    private void handleOptions(){
+        /*ArrayList<Type>
 
         if(fam.isSelected()){
 
         }
         else if(escap.isSelected()){
-            //ARREGLAR
+
         }
         else if(luna.isSelected()){
 
@@ -102,7 +80,7 @@ public class selectionTurist {
         }
         else if(mochi.isSelected()){
 
-        }
+        }*/
     }
     private void choiceBoxOption(ChoiceBox<String> gustoViaje){
         if(gustoViaje.getValue().toString().equals("Viaje Confort") ){
@@ -133,5 +111,12 @@ public class selectionTurist {
 
     private void loadEstacion() {
         gustoViaje.getItems().addAll(gusto);
+        ArrayList<Typeofactivities> listType = new ArrayList<>(manType.getAllActivityTypes());
+        for (Typeofactivities typeofactivities : listType) {
+            CheckBox type = new CheckBox();
+            type.setId(typeofactivities.getName());
+            type.setText(typeofactivities.getName());
+            typeList.getChildren().add(type);
+        }
     }
 }
