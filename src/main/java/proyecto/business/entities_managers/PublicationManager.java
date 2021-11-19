@@ -61,7 +61,7 @@ public class PublicationManager {
     @Service
     @RequiredArgsConstructor
     @Slf4j
-    private static class IndexingService {
+    public static class IndexingService {       //Indexer de las entidades para la ejecucion de querys de busqueda
 
         private final EntityManager em;
 
@@ -78,9 +78,9 @@ public class PublicationManager {
     @Component
     @Slf4j
     @RequiredArgsConstructor
-    private static class SearchService {
+    public static class SearchService {                               //Servicio de busqueda
         private final EntityManager entityManager;
-        public List<Publication> getPublicationBasedOnWord(String word){
+        public List<Publication> getPublicationBasedOnWord(String word){         //Donde se crea la query de busqueda de publicacion por palabra
             FullTextEntityManager fullTextEntityManager =
                     Search.getFullTextEntityManager(entityManager);
 
