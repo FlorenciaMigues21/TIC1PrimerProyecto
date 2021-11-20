@@ -1,15 +1,46 @@
 package proyecto.ui;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import proyecto.Main;
+import proyecto.business.entities.Photo;
+import proyecto.business.entities.Publication;
+import proyecto.business.entities.Tourist;
+import proyecto.business.entities_managers.PhotoManager;
+import proyecto.business.entities_managers.PublicationManager;
+import proyecto.business.entities_managers.TypeofactivitiesManager;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+@Component
 public class Inicio {
-    @FXML
-    private Button backButton;
 
-    @FXML
-    private Button buttonMenu;
+    static Tourist turista;
+
+    @Autowired
+    private TypeofactivitiesManager typeMan;
+
+    @Autowired
+    private PublicationManager pubMan;
+
+    @Autowired
+    private PhotoManager fotoMan;
 
     @FXML
     private Button calendarButton;
@@ -18,17 +49,99 @@ public class Inicio {
     private Button homeButton;
 
     @FXML
+    private HBox gustos1;
+
+    @FXML
+    private HBox gustos2;
+
+    @FXML
+    private Button setting;
+
+    @FXML
+    private Button buscar;
+
+    @FXML
+    private TextField item;
+
+    ArrayList<Publication> list;
+
+    public void initialize() {
+        loadInfo();
+    }
+
+    @FXML
+    private void boton(Publication pub) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(experiencePage.class.getResourceAsStream("ExperienciePage.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        experiencePage.publicacionActual = pub;
+        experiencePage.userActual = turista;
+    }
+
+    private void loadInfo() throws IOException {
+        list = new ArrayList<>();
+        for(int i = 0; i<list.size();i++){
+            VBox newItem = new VBox();
+            newItem.setAlignment(Pos.CENTER);
+            newItem.setPrefHeight(236);
+            newItem.setPrefWidth(251);
+            ArrayList<Photo> listaImage = new ArrayList<>(list.get(i).getPhotoList());
+            Image newImage = listaImage.get(i).getImageFromByteArray(listaImage.get(i).getPhoto());
+            ImageView imagen = new ImageView();
+            imagen.setImage(newImage);
+            imagen.setFitWidth(221);
+            imagen.setFitHeight(150);
+            newItem.getChildren().add(imagen);
+            Text newText = new Text();
+            newText.setText(list.get(i).getTitle());
+            newItem.getChildren().add(newText);
+            Button newButton = new Button();
+            Publication pub = list.get(i);
+            newButton.setText("Ir");
+            newButton.setOnAction(e ->{
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+                Parent root = null;
+                try {
+                    root = fxmlLoader.load(experiencePage.class.getResourceAsStream("ExperienciePage.fxml"));
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+                experiencePage.publicacionActual = pub;
+                experiencePage.userActual = turista;
+            });
+            newItem.getChildren().add(newButton);
+        }
+    }
+    @FXML
     void closeMenu(ActionEvent event) {
 
     }
 
     @FXML
-    void goBack(ActionEvent event) {
-
+    void carrito(ActionEvent event){
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(carrito.class.getResourceAsStream("carrito.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        selectionTurist.userActual = turista;
     }
 
     @FXML
     void goHome(ActionEvent event) {
+
+    }
+
+    @FXML
+    void goSetting(ActionEvent event){
 
     }
 

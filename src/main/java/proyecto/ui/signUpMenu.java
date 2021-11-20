@@ -146,7 +146,7 @@ public class signUpMenu {
                 Date fecha = Date.valueOf(fecha_nacimiento.getValue());
                 String id = docIdentidad.getText();
                 if (passwordUser.equals(ConfirmPassword)) {
-                    Tourist turista = new Tourist(passwordUser,name,mail,false,tel,false,fecha,id,selectCountry(pais_residente));
+                    Tourist turista = new Tourist(passwordUser,name,mail,false,tel,false,fecha,id,new Country(pais_residente));
                     Next(turista);
 
                 }else{
@@ -176,17 +176,6 @@ public class signUpMenu {
         alert.setHeaderText(null);
         alert.showAndWait();
     }
-
-    private Country selectCountry(String pais){
-        Country paisCorresp = null;
-        for (Country paise : paises) {
-            if (paise.getName().equals(pais)) {
-                paisCorresp = paise;
-            }
-        }
-        return paisCorresp;
-    }
-
 
 
 }
