@@ -29,75 +29,35 @@ public class PublicationManager {
     private PublicationDAO controller;
 
     public void createAndUpdatePublication(Publication publication) throws PublicationCreationError {
-        if(publication.verifyObjectIncomplete())
+        if (publication.verifyObjectIncomplete())
             throw new PublicationCreationError("Publicacion con datos incompletos");
-        try{
+        try {
             controller.save(publication);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw new PublicationCreationError("Error al guardar la publicacion, por favor, intentelo otra vez");
         }
     }
 
     public Collection<Publication> getPublicationFromOperator(TouristOperator operator) throws InvalidUserInformation, PublicationsLoadError {
-        if(operator.verifyObjectIncomplete())
+        if (operator.verifyObjectIncomplete())
             throw new InvalidUserInformation("Informacion del operador incompleta");
-        try{
+        try {
             Collection<Publication> publicaciones = controller.findAllByOperador(operator);
             return publicaciones;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw new PublicationsLoadError("Error al cargar las publicaciones del operador turistico " + operator.getUsername());
         }
 
     }
+
     public Collection<Publication> getPublicationByValidated(boolean validated) throws PublicationsLoadError {
-        try{
+        try {
             return controller.findAllByValidated(validated);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new PublicationsLoadError("Error al cargar las publicaciones que tienen validado como: " + validated);
-        }}
-    @Service
-    @RequiredArgsConstructor
-    @Slf4j
-    private static class IndexingService {
-
-        private final EntityManager em;
-
-        @Transactional
-        public void initiateIndexing() throws InterruptedException {
-            log.info("Initiating indexing...");
-            FullTextEntityManager fullTextEntityManager =
-                    Search.getFullTextEntityManager(em);
-            fullTextEntityManager.createIndexer().startAndWait();
-            log.info("All entities indexed");
-        }
-    }
-
-    @Component
-    @Slf4j
-    @RequiredArgsConstructor
-    private static class SearchService {
-        private final EntityManager entityManager;
-        public List<Publication> getPublicationBasedOnWord(String word){
-            FullTextEntityManager fullTextEntityManager =
-                    Search.getFullTextEntityManager(entityManager);
-
-            QueryBuilder qb = fullTextEntityManager
-                    .getSearchFactory()
-                    .buildQueryBuilder()
-                    .forEntity(Publication.class)
-                    .get();
-
-            Query PublicationQuery = (Query) qb.keyword()
-                    .onFields("body","hashTags")
-                    .matching(word)
-                    .createQuery();
-
-            FullTextQuery fullTextQuery = fullTextEntityManager
-                    .createFullTextQuery((org.apache.lucene.search.Query) PublicationQuery, Publication.class);
-            return (List<Publication>) fullTextQuery.getResultList();
         }
     }
 }
