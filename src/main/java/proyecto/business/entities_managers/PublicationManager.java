@@ -58,6 +58,47 @@ public class PublicationManager {
         } catch (Exception e) {
             e.printStackTrace();
             throw new PublicationsLoadError("Error al cargar las publicaciones que tienen validado como: " + validated);
+        }}
+    @Service
+    @RequiredArgsConstructor
+    @Slf4j
+    private static class IndexingService {
+
+        private final EntityManager em;
+
+        @Transactional
+        public void initiateIndexing() throws InterruptedException {
+            log.info("Initiating indexing...");
+            FullTextEntityManager fullTextEntityManager =
+                    Search.getFullTextEntityManager(em);
+            fullTextEntityManager.createIndexer().startAndWait();
+            log.info("All entities indexed");
+        }
+    }
+
+    @Component
+    @Slf4j
+    @RequiredArgsConstructor
+    private static class SearchService {
+        private final EntityManager entityManager;
+        public List<Publication> getPublicationBasedOnWord(String word){
+            FullTextEntityManager fullTextEntityManager =
+                    Search.getFullTextEntityManager(entityManager);
+
+            QueryBuilder qb = fullTextEntityManager
+                    .getSearchFactory()
+                    .buildQueryBuilder()
+                    .forEntity(Publication.class)
+                    .get();
+
+            Query PublicationQuery = (Query) qb.keyword()
+                    .onFields("body","hashTags")
+                    .matching(word)
+                    .createQuery();
+
+            FullTextQuery fullTextQuery = fullTextEntityManager
+                    .createFullTextQuery((org.apache.lucene.search.Query) PublicationQuery, Publication.class);
+            return (List<Publication>) fullTextQuery.getResultList();
         }
     }
 }
