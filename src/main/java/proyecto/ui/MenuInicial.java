@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 import proyecto.business.entities.TouristOperator;
+import proyecto.business.entities_managers.Busqueda.IndexingService;
 import proyecto.business.entities_managers.UserManager;
 import proyecto.business.exceptions.InvalidUserInformation;
 import proyecto.business.exceptions.UserNotFound;
@@ -38,6 +39,8 @@ public class MenuInicial {
 
     @Autowired
     public UserManager<Admin> controladorAdmin;
+    @Autowired
+    private IndexingService indMan;
 
     @FXML
     private Button btnNext;
@@ -55,6 +58,11 @@ public class MenuInicial {
     private ChoiceBox<String> tipoUsuario;
 
     public void initialize() {
+        try {
+            indMan.initiateIndexing();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         loadTipoUsuario();
     }
 

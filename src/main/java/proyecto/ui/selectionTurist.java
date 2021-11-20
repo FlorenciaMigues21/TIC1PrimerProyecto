@@ -67,23 +67,23 @@ public class selectionTurist {
     }
 
     @FXML
-    public void saveSelect(ActionEvent actionEvent){
+    public void saveSelect(ActionEvent actionEvent) throws IOException {
         handleOptions();
         choiceBoxOption();
         estaciones();
         userActual.setIntereses(gustos);
-    }
-
-    //FIXME
-    void Next(Tourist turista) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
-        Parent root = fxmlLoader.load(selectionTurist.class.getResourceAsStream("SelectionTurist.fxml"));
+        Parent root = fxmlLoader.load(Inicio.class.getResourceAsStream("Inicio.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
-        selectionTurist.userActual = turista;
+        Inicio.turista = userActual;
+        Stage stage2 = (Stage) this.siguiente.getScene().getWindow();
+        stage2.close();
     }
+
+
 
 
     private void handleOptions(){
