@@ -2,7 +2,11 @@ package proyecto.ui;
 
 
 import javafx.scene.control.ChoiceBox;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationListener;
 import proyecto.Main;
 import proyecto.business.entities.Admin;
 import proyecto.business.entities.Tourist;
@@ -19,6 +23,7 @@ import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 import proyecto.business.entities.TouristOperator;
 import proyecto.business.entities_managers.Busqueda.IndexingService;
+import proyecto.business.entities_managers.Busqueda.StartUpEvent;
 import proyecto.business.entities_managers.UserManager;
 import proyecto.business.exceptions.InvalidUserInformation;
 import proyecto.business.exceptions.UserNotFound;
@@ -39,8 +44,7 @@ public class MenuInicial {
 
     @Autowired
     public UserManager<Admin> controladorAdmin;
-    @Autowired
-    private IndexingService indMan;
+
 
     @FXML
     private Button btnNext;
@@ -57,14 +61,6 @@ public class MenuInicial {
     @FXML
     private ChoiceBox<String> tipoUsuario;
 
-    public void initialize() {
-        try {
-            indMan.initiateIndexing();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        loadTipoUsuario();
-    }
 
     private void loadTipoUsuario(){
         String turista = "Turista";
@@ -79,6 +75,16 @@ public class MenuInicial {
         Stage stage  = (Stage) source.getScene().getWindow();
         stage.close();
     }
+
+ /*  public void initialize() {                               // acaaaa2
+        StartUpEvent inicio;
+        try {
+            inicio.onApplicationEvent(Main);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        loadTipoUsuario();
+    } */
 
 
     /*@FIXME

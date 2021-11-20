@@ -2,6 +2,7 @@ package proyecto.business.entities_managers.Busqueda;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
 import org.springframework.stereotype.Service;
@@ -19,12 +20,14 @@ public class IndexingService {
 
     @Transactional
     public void initiateIndexing() throws InterruptedException {            //INICIA LA INDEXACION DE LAS ENTIDADES
+
         log.info("Initiating indexing...");
         FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
-        fullTextEntityManager.createIndexer(Publication.class).startAndWait();
+        fullTextEntityManager.createIndexer(Publication.class).startAndWait();                   //o cambio por .typesToIndexInParallel(2).threadsToLoadObjects(5).
         log.info("All entities indexed");
     }
 }
+
 
 
 /*

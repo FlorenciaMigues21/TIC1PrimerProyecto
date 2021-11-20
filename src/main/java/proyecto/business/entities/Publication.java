@@ -4,9 +4,9 @@ import com.sun.istack.NotNull;
 import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
 import org.hibernate.annotations.Formula;
 import org.hibernate.search.annotations.*;
+import org.hibernate.search.annotations.Index;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
-import org.springframework.stereotype.Indexed;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
@@ -25,35 +25,40 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-@Indexed // (index = "idx_publication")
+@Indexed(index = "idEvent")
 @NormalizerDef(name="lowercase",
         filters = @TokenFilterDef(factory = LowerCaseFilterFactory.class))
-
 public class Publication {
+
+    @Id
+    private int idEvent;
+
     private Date Datefrom;
     private Date Dateto;
     private boolean validated;
 
-    @Field(name = "title")
-    @Field(name = "titleFiltered",
-            analyzer = @Analyzer(definition = "stop"))
+    @Field(name = "title",index = Index.YES,analyze=Analyze.YES)
+  //  @Field(name = "titleFiltered", analyzer = @Analyzer(definition = "stop"))
     @Field(normalizer = @Normalizer(definition = "lowercase"))
     @Enumerated(EnumType.STRING)
     private String title;
 
-    @Field (name = "description")
-    @Field(name = "descriptionFiltered",
-            analyzer = @Analyzer(definition = "stop"))
+    @Field (name = "description",index = Index.YES,analyze=Analyze.YES)
+    //@Field(name = "descriptionFiltered",
+    //        analyzer = @Analyzer(definition = "stop"))
     @Field(normalizer = @Normalizer(definition = "lowercase"))
     @Enumerated(EnumType.STRING)
     private String description;
+
     private String ubication;
+
+    @Field (name = "calification",index = Index.YES,analyze=Analyze.YES)
     @Nullable
     @Formula("(select AVG(c.calification) from comentary c where c.publication_id_event == id)")
     private float calification;
+
     private boolean needVaccination;
     private int aforo;
-    private int idEvent;
     private int participants;
     private int precio;
     private float cantidad;

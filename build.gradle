@@ -4,6 +4,7 @@ plugins {
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.9'
+    id "org.hibernate.orm" version "6.0.0.Alpha9"  //ojo
 }
 
 
@@ -31,8 +32,8 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.20'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'mysql:mysql-connector-java:8.0.25'
-    implementation 'org.hibernate:hibernate-search-orm:5.11.5.Final'
-    implementation 'org.hibernate:hibernate-search-elasticsearch:5.11.5.Final'
+    implementation 'org.hibernate:hibernate-search-orm:5.11.6.Final'
+    implementation 'org.hibernate:hibernate-search-elasticsearch:5.11.6.Final'
     compileOnly 'org.projectlombok:lombok:1.18.12'
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
 }
