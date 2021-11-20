@@ -7,12 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import java.awt.*;
+import javafx.scene.image.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+
 
 @Entity
 public class Photo {
@@ -85,6 +86,6 @@ public class Photo {
     public Image getImageFromByteArray(byte[] byteArray) throws IOException {
         ByteArrayInputStream bais = new ByteArrayInputStream(byteArray);
         BufferedImage image = ImageIO.read(bais);
-        return (Image) image;
+        return new Image(bais);
     }
 }
