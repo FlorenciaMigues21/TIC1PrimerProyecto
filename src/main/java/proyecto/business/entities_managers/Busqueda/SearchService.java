@@ -41,6 +41,7 @@ public class SearchService {                    //SERVICIO DE BUSQUEDA
 
 
 
+    //QUERY por calificacion ¿?
   /*  public List<Publication> getBasedOnCalification(Long likeCount, String luegover, String tag){
         FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
         QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder()
