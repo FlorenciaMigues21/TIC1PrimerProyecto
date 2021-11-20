@@ -20,7 +20,7 @@
                </image>
             </ImageView>
             <TextField fx:id="item" layoutX="141.0" layoutY="17.0" prefHeight="25.0" prefWidth="350.0" promptText="Buscar" style="-fx-background-radius: 50;" />
-            <Button fx:id="buscar" layoutX="504.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Buscar" />
+            <Button fx:id="buscar" onAction="#goToSearch" layoutX="504.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Buscar" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="680.0" prefWidth="87.0" style="-fx-border-color: black; -fx-background-color: white;">

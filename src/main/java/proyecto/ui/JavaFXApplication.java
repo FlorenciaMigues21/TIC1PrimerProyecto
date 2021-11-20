@@ -6,7 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 import proyecto.Main;
+import proyecto.business.entities_managers.Busqueda.IndexingService;
 
 import java.awt.*;
 

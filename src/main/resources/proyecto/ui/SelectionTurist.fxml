@@ -15,7 +15,7 @@
    <children>
       <AnchorPane prefHeight="46.0" prefWidth="709.0" style="-fx-background-color: #004aad;">
          <children>
-            <Button fx:id="siguiente" layoutX="618.0" layoutY="11.0" mnemonicParsing="false" style="-fx-background-color: #5dade2; -fx-background-radius: 5; -fx-font-family: Optima;" text="Siguiente" textFill="#fffefe" />
+            <Button fx:id="siguiente" onAction="#saveSelect" layoutX="618.0" layoutY="11.0" mnemonicParsing="false" style="-fx-background-color: #5dade2; -fx-background-radius: 5; -fx-font-family: Optima;" text="Hecho" textFill="#fffefe" />
             <ImageView fitHeight="46.0" fitWidth="46.0" layoutX="29.0" layoutY="3.0">
                <Image url="@/Images/Search Me(5).png" />
             </ImageView>

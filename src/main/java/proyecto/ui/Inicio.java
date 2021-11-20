@@ -65,24 +65,14 @@ public class Inicio {
 
     ArrayList<Publication> list;
 
-    public void initialize() {
+    public void initialize() throws IOException {
         loadInfo();
     }
 
-    @FXML
-    private void boton(Publication pub) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
-        Parent root = fxmlLoader.load(experiencePage.class.getResourceAsStream("ExperienciePage.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
-        experiencePage.publicacionActual = pub;
-        experiencePage.userActual = turista;
-    }
 
     private void loadInfo() throws IOException {
         list = new ArrayList<>();
+        gustos1.getChildren().clear();
         for(int i = 0; i<list.size();i++){
             VBox newItem = new VBox();
             newItem.setAlignment(Pos.CENTER);
@@ -117,32 +107,48 @@ public class Inicio {
                 experiencePage.userActual = turista;
             });
             newItem.getChildren().add(newButton);
+            gustos1.getChildren().add(newItem);
         }
     }
     @FXML
-    void closeMenu(ActionEvent event) {
-
-    }
-
-    @FXML
-    void carrito(ActionEvent event){
+    void carrito(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(carrito.class.getResourceAsStream("carrito.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+        carrito.turista = turista;
+        Stage stage2 = (Stage) this.calendarButton.getScene().getWindow();
+        stage2.close();
+    }
+
+    @FXML
+    void goSetting(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(selectionTurist.class.getResourceAsStream("SelectionTurist.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
         selectionTurist.userActual = turista;
+        Stage stage2 = (Stage) this.setting.getScene().getWindow();
+        stage2.close();
     }
 
     @FXML
-    void goHome(ActionEvent event) {
-
+    void goToSearch(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(search.class.getResourceAsStream("search.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        search.turista = turista;
+        search.itemBus = item.getText();
+        Stage stage2 = (Stage) this.setting.getScene().getWindow();
+        stage2.close();
     }
 
-    @FXML
-    void goSetting(ActionEvent event){
-
-    }
 
 }
