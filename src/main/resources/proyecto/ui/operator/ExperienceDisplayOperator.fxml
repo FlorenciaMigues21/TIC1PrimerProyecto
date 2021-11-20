@@ -65,17 +65,17 @@
       </Text>
       <Button fx:id="agregarAsp" layoutX="729.0" layoutY="408.0" mnemonicParsing="false" onAction="#aspectosIncluidos" style="-fx-background-color: #004aad;" text="Agregar item" textFill="WHITE" />
       <Button fx:id="agregarMedida" layoutX="734.0" layoutY="502.0" mnemonicParsing="false" onAction="#medidasIncluidas" style="-fx-background-color: #004aad;" text="Agregar item" textFill="WHITE" />
-      <Text layoutX="564.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horarios disponibles" wrappingWidth="132.0">
+      <Text layoutX="31.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horarios disponibles" wrappingWidth="132.0">
          <font>
             <Font name="Corbel Bold" size="15.0" />
          </font>
       </Text>
-      <Button fx:id="agregarHorario" layoutX="725.0" layoutY="591.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: #004aad;" text="Agregar horario" textFill="WHITE" />
-      <TextField fx:id="Horario" layoutX="566.0" layoutY="591.0" prefHeight="25.0" prefWidth="46.0" />
+      <Button fx:id="agregarHorario" layoutX="274.0" layoutY="482.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: #004aad;" text="Agregar horario" textFill="WHITE" />
+      <TextField fx:id="Horario" layoutX="134.0" layoutY="482.0" prefHeight="25.0" prefWidth="46.0" />
       <TextField fx:id="itemInc" layoutX="566.0" layoutY="403.0" promptText="Item" />
       <TextField fx:id="itemMed" layoutX="566.0" layoutY="502.0" promptText="Item" />
-      <Text layoutX="619.0" layoutY="608.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-      <TextField fx:id="horarioMins" layoutX="632.0" layoutY="591.0" prefHeight="25.0" prefWidth="46.0" />
+      <Text layoutX="180.0" layoutY="498.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
+      <TextField fx:id="horarioMins" layoutX="213.0" layoutY="482.0" prefHeight="25.0" prefWidth="46.0" />
       <AnchorPane layoutX="1000.0" layoutY="88.0" prefHeight="244.0" prefWidth="192.0" style="-fx-background-color: white; -fx-background-radius: 10;">
          <children>
             <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Optima;" text="Tipo de actividad" wrappingWidth="240.0">
@@ -127,7 +127,6 @@
             <Font name="Corbel" size="15.0" />
          </font>
       </Text>
-      <Text layoutX="725.0" layoutY="573.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Si no hay horarios, no seleccione)" />
       <Text layoutX="81.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Habilitar reservas:" />
       <RadioButton fx:id="si" layoutX="220.0" layoutY="303.0" mnemonicParsing="false" text="Sí" />
       <RadioButton fx:id="no" layoutX="282.0" layoutY="303.0" mnemonicParsing="false" text="No" />
@@ -143,12 +142,6 @@
             <MenuItem mnemonicParsing="false" text="Action 2" />
          </items>
       </SplitMenuButton>
-      <SplitMenuButton fx:id="horariosDisp" layoutX="565.0" layoutY="556.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0">
-         <items>
-            <MenuItem mnemonicParsing="false" text="Action 1" />
-            <MenuItem mnemonicParsing="false" text="Action 2" />
-         </items>
-      </SplitMenuButton>
       <Text layoutX="756.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="El monto debe ser en Dólares." />
       <TextField fx:id="aforo" layoutX="1023.0" layoutY="639.0" prefHeight="25.0" prefWidth="46.0" />
       <Text layoutX="1023.0" layoutY="630.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aforo" wrappingWidth="38.0">
@@ -159,5 +152,8 @@
       <Text layoutX="1023.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Si no hay aforo, no complete)" />
       <TextField fx:id="direccion" layoutX="564.0" layoutY="88.0" prefHeight="46.0" prefWidth="412.0" promptText="Dirección" />
       <TextField fx:id="telefono" layoutX="564.0" layoutY="150.0" prefHeight="46.0" prefWidth="181.0" promptText="Teléfono" />
+      <CheckBox layoutX="31.0" layoutY="446.0" mnemonicParsing="false" text="Reservas por hora" />
+      <Text layoutX="31.0" layoutY="495.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horario de inicio:" />
+      <Text layoutX="31.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horario de inicio:" />
    </children>
 </AnchorPane>

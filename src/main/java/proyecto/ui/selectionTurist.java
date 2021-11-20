@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,27 +19,23 @@ import proyecto.business.entities.Tourist;
 import proyecto.business.entities.TouristOperator;
 import proyecto.business.entities.Typeofactivities;
 import proyecto.business.entities.User;
-import proyecto.business.entities_managers.GroupOfActivitiesManager;
 import proyecto.business.entities_managers.TypeofactivitiesManager;
 import proyecto.business.entities_managers.UserManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 @Component
 public class selectionTurist {
     ObservableList<String> gusto = FXCollections.observableArrayList("Viaje Confort","Viaje alternativo","Viaje de Lujo");
 
-    private ArrayList<Typeofactivities> activityTypes;
-
     @Autowired
     private UserManager<Tourist> controlador;
 
     @Autowired
-    private TypeofactivitiesManager typeManager;
-
-    @Autowired
-    private GroupOfActivitiesManager groupManager;
+    private TypeofactivitiesManager manType;
 
     static Tourist userActual;
 
@@ -49,97 +46,78 @@ public class selectionTurist {
     ChoiceBox<String> gustoViaje;
 
     @FXML
-    CheckBox familiar;
+    VBox typeList;
 
     @FXML
-    CheckBox escapadasrurales;
-
-    @FXML
-    CheckBox lunademiel;
-
-    @FXML
-    CheckBox turismoaventura;
-
-    @FXML
-    CheckBox cultural;
-
-    @FXML
-    CheckBox descanso;
-
-    @FXML
-    CheckBox mochilero;
+    CheckBox verano;
 
     @FXML
     CheckBox invierno;
 
     @FXML
-    CheckBox primavera;
-
-    @FXML
     CheckBox otono;
 
     @FXML
-    CheckBox verano;
+    CheckBox primavera;
+
+    Collection<Typeofactivities> gustos;
 
     public void initialize() {
         loadEstacion();
-        activityTypes = new ArrayList<>(typeManager.getAllActivityTypes());
-        for (Typeofactivities acivity: activityTypes) System.out.println( acivity.getName());
     }
 
     @FXML
     public void saveSelect(ActionEvent actionEvent){
+        handleOptions();
+        choiceBoxOption();
+        estaciones();
+        userActual.setIntereses(gustos);
+    }
 
+    //FIXME
+    void Next(Tourist turista) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(selectionTurist.class.getResourceAsStream("SelectionTurist.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        selectionTurist.userActual = turista;
     }
 
 
-    private void handleOptions(CheckBox fam,CheckBox escap,CheckBox luna,CheckBox turism,CheckBox cult,CheckBox desc,CheckBox mochi){
-
-
-        if(fam.isSelected()){
-
-        }
-        else if(escap.isSelected()){
-            //ARREGLAR
-        }
-        else if(luna.isSelected()){
-
-        }
-        else if(turism.isSelected()){
-
-        }
-        else if(cult.isSelected()){
-
-        }
-        else if(desc.isSelected()){
-
-        }
-        else if(mochi.isSelected()){
-
+    private void handleOptions(){
+        gustos = new ArrayList<>();
+        for (int i = 0; i < typeList.getChildren().size();i++){
+            CheckBox actual = (CheckBox)typeList.getChildren().get(i);
+            if (actual.isSelected()){
+                gustos.add(new Typeofactivities(actual.getId()));
+            }
         }
     }
-    private void choiceBoxOption(ChoiceBox<String> gustoViaje){
+    private void choiceBoxOption(){
         if(gustoViaje.getValue().toString().equals("Viaje Confort") ){
-
+            gustos.add(new Typeofactivities("Viaje Confort"));
         }
         else if(gustoViaje.getValue().toString().equals("Viaje alternativo")){
-
+            gustos.add(new Typeofactivities("Viaje alternativo"));
         }
         else if(gustoViaje.getValue().toString().equals("Viaje de Lujo")) {
+            gustos.add(new Typeofactivities("Viaje de Lujo"));
         }
     }
-    private void estaciones(CheckBox inv,CheckBox ver,CheckBox ot,CheckBox prim){
-        if(inv.isSelected()){
-            //ARREGLAR
+    private void estaciones(){
+        if(invierno.isSelected()){
+            gustos.add(new Typeofactivities("Invierno"));
         }
-        else if(ver.isSelected()){
-            //ARREGLAR
+        else if(verano.isSelected()){
+            gustos.add(new Typeofactivities("Verano"));
         }
-        else if(ot.isSelected()){
-
+        else if(otono.isSelected()){
+            gustos.add(new Typeofactivities("Otoño"));
         }
-        else if(prim.isSelected()){
-
+        else if(primavera.isSelected()){
+            gustos.add(new Typeofactivities("Primavera"));
         }
     }
 
@@ -147,5 +125,12 @@ public class selectionTurist {
 
     private void loadEstacion() {
         gustoViaje.getItems().addAll(gusto);
+        ArrayList<Typeofactivities> listType = new ArrayList<>(manType.getAllActivityTypes());
+        for (Typeofactivities typeofactivities : listType) {
+            CheckBox type = new CheckBox();
+            type.setId(typeofactivities.getName());
+            type.setText(typeofactivities.getName());
+            typeList.getChildren().add(type);
+        }
     }
 }
