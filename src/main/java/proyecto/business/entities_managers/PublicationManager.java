@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import proyecto.business.entities.Publication;
 import proyecto.business.entities.TouristOperator;
+import proyecto.business.exceptions.DataBaseError;
 import proyecto.business.exceptions.InvalidUserInformation;
 import proyecto.business.exceptions.PublicationCreationError;
 import proyecto.business.exceptions.PublicationsLoadError;
@@ -19,6 +20,7 @@ import proyecto.business.persistence.PublicationDAO;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -58,7 +60,22 @@ public class PublicationManager {
         } catch (Exception e) {
             e.printStackTrace();
             throw new PublicationsLoadError("Error al cargar las publicaciones que tienen validado como: " + validated);
-        }}
-    
+        }
+    }
+
+    public ArrayList<Publication> getRecomendedPublications(String mail) throws DataBaseError {
+        try{
+            Collection<Integer> publication_id_list = controller.findRecomendationsForUser(mail);
+            ArrayList<Publication> publications = new ArrayList<>();
+            for(Integer publication_id : publication_id_list){
+                publications.add(controller.findByIdEvent(publication_id));
+            }
+            return publications;
+        }catch(Exception e){
+            e.printStackTrace();
+            throw new DataBaseError("Error al cargar las publicaciones recomendadas",e.getMessage());
+        }
+    }
+
 
 }
