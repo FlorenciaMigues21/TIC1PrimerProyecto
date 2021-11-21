@@ -231,6 +231,7 @@ public class MenuInicial {
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(signUpMenu.class.getResourceAsStream("LogIn.fxml"));
         Stage stage = new Stage();
+
         stage.setScene(new Scene(root));
         stage.show();
     }

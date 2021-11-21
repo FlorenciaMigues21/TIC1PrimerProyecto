@@ -244,10 +244,21 @@ public class ExperienceDisplayOperator{
             estaciones();
             newPublication.setListaActividadades(tipoActividad);
             newPublication.setPhotoList(listaFotos);
-            newPublication.setHourStart(convertTime(Horario.getText(),horarioMins.getText()));
-            newPublication.setHourStart(convertTime(Horario1.getText(),horarioMins1.getText()));
 
-
+            if (si.isSelected()){
+                newPublication.setReservationAvailable(true);
+                if (boolreserv.isSelected()){
+                    newPublication.setUniqueReservation(false);
+                    newPublication.setHourStart(convertTime(Horario.getText(),horarioMins.getText()));
+                    newPublication.setHourStart(convertTime(Horario1.getText(),horarioMins1.getText()));
+                }
+                else{
+                    newPublication.setUniqueReservation(true);
+                }
+            }else{
+                newPublication.setReservationAvailable(false);
+                newPublication.setUniqueReservation(false);
+            }
             goBack(actionEvent);
 
         }

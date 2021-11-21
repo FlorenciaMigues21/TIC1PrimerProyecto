@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import proyecto.Main;
 import proyecto.business.entities.Country;
@@ -38,6 +39,10 @@ public class signUpMenu {
     private CountryManager countryMan;
     @Autowired
     private TypeofactivitiesManager typeMan;
+
+    @FXML
+    private AnchorPane login;
+
     @FXML
     private TextField email;
 
