@@ -360,12 +360,10 @@ public class ExperienceDisplayOperator{
     private Date convertToDateViaSqlDate(LocalDate dateToConvert) {
         return java.sql.Date.valueOf(dateToConvert);
     }
+
     private Time convertTime(String hours,String min) throws ParseException {
         String hourComeplete = hours+":"+min+":00";
-        SimpleDateFormat sdf = new SimpleDateFormat(hourComeplete);
-        long ms = sdf.parse(hourComeplete).getTime();
-        Time t = new Time(ms);
-        return t;
+        return Time.valueOf(hourComeplete);
     }
 
 
