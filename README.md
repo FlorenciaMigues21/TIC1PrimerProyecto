@@ -13,7 +13,6 @@ Inicialmente se presentara una pantalla de inicio en la cual debe registrar su u
 Si opta por registrarse debe apretar en el boton indicado, luego se le mostrara un formulario que debe rellenar.
 
 Cuando entregue el formulario se le pedira que conteste una serie de preguntas de modo que podamos recomendarle y ofrecerle la mejor experiencia
-
 al usuario, para finalizar presione "hecho".
 
 
