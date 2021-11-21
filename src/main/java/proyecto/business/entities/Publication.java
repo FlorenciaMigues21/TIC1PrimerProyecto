@@ -71,6 +71,7 @@ public class Publication {
     private Time hourStart;
     private Time hourFinish;
     private boolean uniqueReservation;
+    private boolean reservationAvailable;
 
  /* @Field(name = "body")
     @Field(name = "bodyFiltered",
@@ -85,7 +86,7 @@ public class Publication {
     public Publication() {
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, int precio, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish, boolean uniqueReservation) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, int precio, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish, boolean uniqueReservation,boolean reservationAvailable) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -106,9 +107,10 @@ public class Publication {
         this.hourStart = hourStart;
         this.hourFinish = hourFinish;
         this.uniqueReservation = uniqueReservation;
+        this.reservationAvailable = reservationAvailable;
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, int precio, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish, boolean uniqueReservation) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, int precio, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish, boolean uniqueReservation, boolean reservationAvailable) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -130,6 +132,7 @@ public class Publication {
         this.hourStart = hourStart;
         this.hourFinish = hourFinish;
         this.uniqueReservation = uniqueReservation;
+        this.reservationAvailable = reservationAvailable;
     }
 
     @NonNull
@@ -357,6 +360,15 @@ public class Publication {
 
     public void setCalification(float calification) {
         this.calification = calification;
+    }
+
+    @NotNull
+    public boolean isReservationAvailable() {
+        return reservationAvailable;
+    }
+
+    public void setReservationAvailable(boolean reservationAvailable) {
+        this.reservationAvailable = reservationAvailable;
     }
 
     @Override
