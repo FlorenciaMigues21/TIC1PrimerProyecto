@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -38,6 +39,8 @@ public class search {
     static Tourist turista;
 
     @FXML
+    private AnchorPane seartching;
+    @FXML
     private VBox boxItems;
 
     @FXML
@@ -53,11 +56,47 @@ public class search {
     private Button homeButton;
 
     @FXML
-    void goHome(ActionEvent event) {
+    void goHome(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(Inicio.class.getResourceAsStream("Inicio.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        stage.setUserData(turista);
+        Stage stage2 = (Stage) this.seartching.getScene().getWindow();
+        stage2.close();
+    }
 
+    @FXML
+    void carrito(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(carrito.class.getResourceAsStream("carrito.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        stage.setUserData(turista);
+        Stage stage2 = (Stage) this.calendarButton.getScene().getWindow();
+        stage2.close();
     }
     public void initialize() {
-        loadInfo();
+        seartching.sceneProperty().addListener(((observable, oldValue, newValue) -> {
+            if (oldValue == null && newValue != null) {
+                newValue.windowProperty().addListener((observable1, oldValue1, newValue1) -> {
+                            if (oldValue1 == null && newValue1 != null) {
+                                Stage stage = (Stage) seartching.getScene().getWindow();
+                                doubleObjet db = (doubleObjet) stage.getUserData();
+                                itemBus = db.getItem();
+                                turista = db.getTurista();
+                                loadInfo();
+                            }
+                        }
+                );
+            }
+        }
+        ));
+
     }
 
     private void loadInfo(){

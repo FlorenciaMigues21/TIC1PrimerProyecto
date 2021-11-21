@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -46,6 +47,9 @@ public class experiencePage {
     static Tourist userActual;
 
     static  Publication publicacionActual;
+
+    @FXML
+    private AnchorPane exper;
 
     @FXML
     private Label NombreAtraccion;
@@ -128,10 +132,35 @@ public class experiencePage {
     boolean panelEstado = true;
 
     public void initialize() throws DataBaseError, IncompleteObjectException, IOException {
+        exper.sceneProperty().addListener(((observable, oldValue, newValue) -> {
+            if (oldValue == null && newValue != null) {
+                newValue.windowProperty().addListener((observable1, oldValue1, newValue1) -> {
+                            if (oldValue1 == null && newValue1 != null) {
+                                Stage stage = (Stage) exper.getScene().getWindow();
+                                doubleObjet db = (doubleObjet) stage.getUserData();
+                                userActual = db.getTurista();
+                                publicacionActual = db.getPublicacion();
+                                try {
+                                    setItems();
+                                } catch (DataBaseError e) {
+                                    e.printStackTrace();
+                                } catch (IncompleteObjectException e) {
+                                    e.printStackTrace();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                panelReserva();
+                                if (!publicacionActual.isReservationAvailable()) {
+                                    panelEstado = false;
+                                }
+                                paneCal.setVisible(panelEstado);
+                            }
+                        }
+                );
+            }
+        }
+        ));
 
-        setItems();
-        panelReserva();
-        paneCal.setVisible(panelEstado);
     }
 
     //Setea los datos del panel de la experiencia correspondiente
@@ -285,13 +314,28 @@ public class experiencePage {
     }
 
     @FXML
-    void goHome(ActionEvent actionEvent){
-
-        //@FIXME
+    void goHome(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(Inicio.class.getResourceAsStream("Inicio.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setUserData(userActual);
+        stage.show();
+        Stage stage2 = (Stage) this.exper.getScene().getWindow();
+        stage2.close();
     }
 
     @FXML
-    void goBack(ActionEvent actionEvent){
-        //@FIXME
+    void goBack(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(Inicio.class.getResourceAsStream("Inicio.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setUserData(userActual);
+        stage.show();
+        Stage stage2 = (Stage) this.exper.getScene().getWindow();
+        stage2.close();
     }
 }

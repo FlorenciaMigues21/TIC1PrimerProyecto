@@ -5,6 +5,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -18,16 +19,16 @@
 
 <!--<?import org.controlsfx.control.Rating?>-->
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1280.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.ui.experiencePage">
+<AnchorPane maxHeight="-Infinity" fx:id="exper" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.ui.experiencePage">
    <children>
-      <AnchorPane prefHeight="58.0" prefWidth="1280.0" style="-fx-background-color: #004aad;">
+      <AnchorPane layoutX="2.0" prefHeight="58.0" prefWidth="1200.0" style="-fx-background-color: #004aad;">
          <children>
             <ImageView fitHeight="46.0" fitWidth="46.0" layoutX="803.0" layoutY="-1.0">
                <image>
                   <Image url="@/Images/Search Me(5).png" />
                </image>
             </ImageView>
-            <Button fx:id="buttonMenu" layoutX="1215.0" layoutY="12.0" onAction="#closeMenu" style="-fx-background-color: white; -fx-background-radius: 10px;">
+            <Button fx:id="buttonMenu" layoutX="1132.0" layoutY="12.0" onAction="#closeMenu" style="-fx-background-color: white; -fx-background-radius: 10px;">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="32.0">
                      <Image url="@../../Images/menu.png" />
@@ -36,7 +37,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="680.0" prefWidth="87.0" style="-fx-border-color: black; -fx-background-color: white;">
+      <AnchorPane prefHeight="600.0" prefWidth="87.0" style="-fx-border-color: black; -fx-background-color: white;">
          <children>
             <Button fx:id="homeButton" layoutX="23.0" layoutY="102.0" onAction="#goHome" style="-fx-background-color: white;">
                <graphic>
@@ -97,37 +98,31 @@
             <Image url="@../../Images/no_image.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="781.0" layoutY="73.0" prefHeight="30.0" prefWidth="218.0" text="Descubre la experiencia" textFill="#004aad">
+      <Label layoutX="732.0" layoutY="73.0" prefHeight="30.0" prefWidth="218.0" text="Descubre la experiencia" textFill="#004aad">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="781.0" layoutY="215.0" prefHeight="30.0" prefWidth="218.0" text="Qué incluye?" textFill="#004aad">
+      <Label layoutX="742.0" layoutY="215.0" prefHeight="30.0" prefWidth="218.0" text="Qué incluye?" textFill="#004aad">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="781.0" layoutY="414.0" prefHeight="30.0" prefWidth="293.0" text="Medidas de higiene y seguridad" textFill="#004aad">
+      <Label layoutX="742.0" layoutY="414.0" prefHeight="30.0" prefWidth="284.0" text="Medidas de higiene y seguridad" textFill="#004aad">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <VBox fx:id="itemsInc" layoutX="781.0" layoutY="240.0" prefHeight="153.0" prefWidth="253.0" />
-      <VBox fx:id="higiene" layoutX="781.0" layoutY="444.0" prefHeight="153.0" prefWidth="253.0" />
-      <VBox fx:id="comentarios" layoutX="128.0" layoutY="473.0" prefHeight="171.0" prefWidth="276.0">
-         <children>
-            <VBox fx:id="boxComentary" prefHeight="200.0" prefWidth="276.0" />
-         </children>
-      </VBox>
+      <VBox fx:id="itemsInc" layoutX="742.0" layoutY="246.0" prefHeight="153.0" prefWidth="253.0" />
+      <VBox fx:id="higiene" layoutX="742.0" layoutY="445.0" prefHeight="153.0" prefWidth="253.0" />
       <Label layoutX="128.0" layoutY="436.0" prefHeight="30.0" prefWidth="293.0" text="Comentarios" textFill="#004aad">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
       <Line endX="-99.99996948242188" endY="214.0" layoutX="521.0" layoutY="445.0" opacity="0.21" startX="-100.0" />
-      <Label layoutX="128.0" layoutY="644.0" text="Ya nos visitaste?" />
       <Hyperlink layoutX="245.0" layoutY="641.0" />
-      <Button fx:id="opinion" layoutX="214.0" layoutY="640.0" mnemonicParsing="false" onAction="#hacerComentario" prefHeight="25.0" prefWidth="148.0" style="-fx-background-color: white;" text="Haznos llegar tu opinión" textFill="#0b04e9" />
+      <Button fx:id="opinion" layoutX="266.0" layoutY="559.0" mnemonicParsing="false" onAction="#hacerComentario" prefHeight="25.0" prefWidth="148.0" style="-fx-background-color: white;" text="Haznos llegar tu opinión" textFill="#0b04e9" />
       <Label layoutX="447.0" layoutY="436.0" prefHeight="30.0" prefWidth="186.0" text="Dónde vas a estar" textFill="#004aad">
          <font>
             <Font size="20.0" />
@@ -138,9 +133,9 @@
             <Image url="@../../Images/no_image.jpg" />
          </image>
       </ImageView>
-      <Text fx:id="direccion" layoutX="447.0" layoutY="602.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="142.0" />
-      <Text fx:id="infoExp" layoutX="781.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Pane fx:id="paneCal" layoutX="1074.0" layoutY="58.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="623.0" prefWidth="208.0">
+      <Text fx:id="direccion" layoutX="600.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="142.0" />
+      <Text fx:id="infoExp" layoutX="753.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Pane fx:id="paneCal" layoutX="1008.0" layoutY="58.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="186.0">
          <children>
             <Label layoutX="35.0" layoutY="207.0" prefHeight="26.0" prefWidth="131.0" text="Seleccione horario" textFill="#004aad">
                <font>
@@ -176,7 +171,7 @@
                   <Font size="10.0" />
                </font>
             </Text>
-            <Text fx:id="total" layoutX="122.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOTAL" textAlignment="RIGHT" wrappingWidth="74.6666259765625">
+            <Text fx:id="total" layoutX="100.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOTAL" textAlignment="RIGHT" wrappingWidth="74.6666259765625">
                <font>
                   <Font size="10.0" />
                </font>
@@ -191,5 +186,11 @@
          </image>
       </ImageView>
       <Label fx:id="pun" layoutX="157.0" layoutY="140.0" text="Puntaje" />
+      <ScrollPane layoutX="107.0" layoutY="466.0" prefHeight="100.0" prefWidth="313.0">
+         <content>
+            <VBox fx:id="boxComentary" prefHeight="200.0" prefWidth="296.0" />
+         </content>
+      </ScrollPane>
+      <Label layoutX="177.0" layoutY="563.0" text="Ya nos visitaste?" />
    </children>
 </AnchorPane>
