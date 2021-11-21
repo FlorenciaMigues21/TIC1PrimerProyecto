@@ -70,7 +70,6 @@
             <Font name="Corbel Bold" size="15.0" />
          </font>
       </Text>
-      <Button fx:id="agregarHorario" layoutX="274.0" layoutY="482.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: #004aad;" text="Agregar horario" textFill="WHITE" />
       <TextField fx:id="Horario" layoutX="134.0" layoutY="482.0" prefHeight="25.0" prefWidth="46.0" />
       <TextField fx:id="itemInc" layoutX="505.0" layoutY="405.0" promptText="Item" />
       <TextField fx:id="itemMed" layoutX="505.0" layoutY="546.0" promptText="Item" />
@@ -140,11 +139,6 @@
       <TextField fx:id="telefono" layoutX="508.0" layoutY="156.0" prefHeight="46.0" prefWidth="181.0" promptText="Teléfono" />
       <CheckBox fx:id="boolreserv" layoutX="31.0" layoutY="446.0" mnemonicParsing="false" text="Reservas por hora" />
       <Text layoutX="31.0" layoutY="495.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horario de inicio:" />
-      <ScrollPane layoutX="37.0" layoutY="527.0" prefHeight="63.0" prefWidth="285.0">
-         <content>
-            <VBox fx:id="horarios" prefHeight="200.0" prefWidth="269.0" />
-         </content>
-      </ScrollPane>
       <ScrollPane layoutX="508.0" layoutY="459.0" prefHeight="86.0" prefWidth="254.0">
          <content>
             <VBox fx:id="higieneInc" prefHeight="200.0" prefWidth="237.0" />
@@ -156,5 +150,9 @@
          </content>
       </ScrollPane>
       <AnchorPane layoutX="-19.0" layoutY="-242.0" prefHeight="200.0" prefWidth="200.0" />
+      <Text layoutX="29.0" layoutY="542.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horario de finalización:" />
+      <TextField fx:id="Horario1" layoutX="158.0" layoutY="524.0" prefHeight="25.0" prefWidth="46.0" />
+      <Text layoutX="217.0" layoutY="541.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
+      <TextField fx:id="horarioMins1" layoutX="226.0" layoutY="524.0" prefHeight="25.0" prefWidth="46.0" />
    </children>
 </AnchorPane>

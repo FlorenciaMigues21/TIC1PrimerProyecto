@@ -10,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -19,6 +20,7 @@ import proyecto.Main;
 import proyecto.business.entities.Admin;
 import proyecto.business.entities.Publication;
 import proyecto.business.entities.Reservation;
+import proyecto.business.entities.TouristOperator;
 import proyecto.business.entities_managers.PublicationManager;
 import proyecto.business.exceptions.PublicationsLoadError;
 import proyecto.ui.carrito;
@@ -36,6 +38,9 @@ public class Admin_init {
     PublicationManager pubManager;
 
     @FXML
+    private AnchorPane ap;
+
+    @FXML
     private ImageView back;
     @FXML
     private GridPane expAValidar;
@@ -49,10 +54,22 @@ public class Admin_init {
     ArrayList<Publication> publicVal;
     ArrayList<Publication> publicNoVal;
     public void initialize(){
-        GetPublication();
-        setScroll();
-        setExperienciasValidadas();
-        setExrencieAValidar();
+        ap.sceneProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                newValue.windowProperty().addListener((observable1, oldValue1, newValue1) -> {
+                            if (newValue1 != null) {
+                                Stage stage = (Stage) ap.getScene().getWindow();
+                                usuario = (Admin) stage.getUserData();
+                                GetPublication();
+                                setScroll();
+                                setExperienciasValidadas();
+                                setExrencieAValidar();
+                            }
+                        }
+                );
+            }
+        }
+        ));
     }
 
     private void GetPublication(){
@@ -105,7 +122,15 @@ public class Admin_init {
                     showAlert("La publicación fue aprobada","Ahora estará en la tabla siguiente");
                 }
             });
-            expAValidar.add(Validar,2,i);
+            /*Button Ver = new Button();
+            Ver.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    publicNoVal.get(finalI).setValidated(true);
+                    showAlert("La publicación fue aprobada","Ahora estará en la tabla siguiente");
+                }
+            });
+            expAValidar.add(Validar,2,i);*/
         }
     }
 

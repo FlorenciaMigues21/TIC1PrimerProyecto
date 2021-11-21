@@ -91,9 +91,9 @@ public class MenuInicial {
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(Inicio.class.getResourceAsStream("Inicio.fxml"));
         Stage stage = new Stage();
+        stage.setUserData(turista);
         stage.setScene(new Scene(root));
         stage.show();
-        Inicio.turista = turista;
     }
     @FXML
     void NextOperator(TouristOperator operadorTur) throws IOException {
@@ -111,10 +111,11 @@ public class MenuInicial {
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(Admin_init.class.getResourceAsStream("mainAdmin.fxml"));
         Stage stage = new Stage();
+        stage.setUserData(user);
         stage.setScene(new Scene(root));
         stage.show();
-        Admin_init.usuario = user;
     }
+
     @FXML
     void btnNext(ActionEvent event) throws IOException {
 

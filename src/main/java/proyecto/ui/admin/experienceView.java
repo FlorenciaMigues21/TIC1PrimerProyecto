@@ -7,6 +7,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -28,6 +29,9 @@ public class experienceView {
 
     @Autowired
     ComentaryManager comentaryMan;
+
+    @FXML
+    private AnchorPane ap;
 
     @FXML
     private Label NombreAtraccion;
@@ -84,10 +88,27 @@ public class experienceView {
     }
 
     public void initialize() throws IOException {
-        loadInfo();
+        ap.sceneProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                newValue.windowProperty().addListener((observable1, oldValue1, newValue1) -> {
+                            if (newValue1 != null) {
+                                Stage stage = (Stage) ap.getScene().getWindow();
+                                publicacion = (Publication) stage.getUserData();
+                                try {
+                                    loadInfo();
+                                } catch (IOException | DataBaseError | IncompleteObjectException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                );
+            }
+        }
+        ));
+
     }
 
-    private void loadInfo() throws IOException {
+    private void loadInfo() throws IOException, DataBaseError, IncompleteObjectException {
         NombreAtraccion.setText(publicacion.getTitle());
         direccion.setText(publicacion.getUbication());
         UpElements();
@@ -96,6 +117,7 @@ public class experienceView {
         horario.getItems().addAll(publicacion.getHourStart());
         precio.setText(String.valueOf(publicacion.getPrecio()));
         UpPhotos();
+        upComentaries();
 
     }
     //Subir elementos

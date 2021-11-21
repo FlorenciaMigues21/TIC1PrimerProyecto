@@ -31,16 +31,21 @@ import proyecto.business.exceptions.InvalidPublicationInformation;
 import proyecto.business.exceptions.InvalidUserInformation;
 import proyecto.business.exceptions.PublicationsLoadError;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Formatter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -156,11 +161,18 @@ public class ExperienceDisplayOperator{
     @FXML
     private VBox higieneInc;
 
+    @FXML
+    private TextField Horario1;
+
+    @FXML
+    private TextField horarioMins1;
+
 
 
     ArrayList<Hygiene> listasHigiene= new ArrayList<>();
     ArrayList<IncludedInPublication> listasIncluidos = new ArrayList<>();
     ArrayList<Typeofactivities> tipoActividad = new ArrayList<>();
+    Collection<Photo> listaFotos;
 
     @FXML
     public void initialize() throws InvalidUserInformation, PublicationsLoadError, InvalidPublicationInformation, DataBaseError {
@@ -193,7 +205,7 @@ public class ExperienceDisplayOperator{
     }
 
     //GUARDA INFORMACION
-    public void saveExperience(ActionEvent actionEvent) throws IOException {
+    public void saveExperience(ActionEvent actionEvent) throws IOException, ParseException {
         if (titulo.getText() == null || precio.getText().equals("") ||
                 descripcion.getText() == null || higieneInc.getChildren().size() == 0 || higieneInc.getChildren().size() == 0 ||
                 fechaIni.getValue() == null || fechaFin.getValue() == null || direccion.getText() == null || direccion.getText().equals("")) {
@@ -231,6 +243,11 @@ public class ExperienceDisplayOperator{
             choiceBoxOption();
             estaciones();
             newPublication.setListaActividadades(tipoActividad);
+            newPublication.setPhotoList(listaFotos);
+            newPublication.setHourStart(convertTime(Horario.getText(),horarioMins.getText()));
+            newPublication.setHourStart(convertTime(Horario1.getText(),horarioMins1.getText()));
+
+
             goBack(actionEvent);
 
         }
@@ -331,31 +348,22 @@ public class ExperienceDisplayOperator{
     }
 
     //Agregar horarios incluido, falta agregar a la publicacion
-    @FXML
-    private void horariosIncluidos(ActionEvent actionEvent) {
-        boolean horarioCorrecto = integerInvalido(Horario.getText());
-        boolean minutosCorrecto = integerInvalido(horarioMins.getText());
 
-        if(!horarioCorrecto || !minutosCorrecto || Integer.parseInt(Horario.getText()) > 24 || Integer.parseInt(Horario.getText()) < 0 || Integer.parseInt(horarioMins.getText()) > 59 || Integer.parseInt(horarioMins.getText()) < 0){
-            showAlert("Error al ingresar el horario","Verifique si las horas y los minutos son adecuados.");
-        }
-        else{
-            Text horario = new Text();
-            horario.setText(Horario.getText() + horarioMins.getText());
-            horarios.getChildren().add(horario);
-
-        }
-    }
     private Date convertToDateViaSqlDate(LocalDate dateToConvert) {
         return java.sql.Date.valueOf(dateToConvert);
     }
-
-
+    private Time convertTime(String hours,String min) throws ParseException {
+        String hourComeplete = hours+":"+min+":00";
+        SimpleDateFormat sdf = new SimpleDateFormat(hourComeplete);
+        long ms = sdf.parse(hourComeplete).getTime();
+        Time t = new Time(ms);
+        return t;
+    }
 
 
 
     @FXML
-    private void cargarImagenes(ActionEvent event){
+    private void cargarImagenes(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Buscar Imagen");
 
@@ -367,9 +375,19 @@ public class ExperienceDisplayOperator{
         );
 
         // Obtener la imagen seleccionada
-        File imgFile = fileChooser.showOpenDialog(null);
+        List<File> imgFile = fileChooser.showOpenMultipleDialog(null);
+        listaFotos = new ArrayList<>();
+        if(imgFile!=null) {
+            for (File file : imgFile) {
+                Photo newPhoto = new Photo();
+                newPhoto.getByteArrayImg(file.getPath());
+                listaFotos.add(newPhoto);
+            }
+        }
+        else{
+            showAlert("Error","Debe subir 5 imágenes");
+        }
 
-        //Photo newPhoto
         /*
         // Mostar la imagen
         if (imgFile != null) {

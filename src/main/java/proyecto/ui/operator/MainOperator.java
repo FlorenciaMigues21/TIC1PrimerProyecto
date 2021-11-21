@@ -65,18 +65,7 @@ public class MainOperator {
                             if (newValue1 != null) {
                                 Stage stage = (Stage) ap.getScene().getWindow();
                                 operadorTurist = (TouristOperator) stage.getUserData();
-                                try {
-                                    System.out.println(operadorTurist);
-                                    addExperiencies();
-                                } catch (InvalidUserInformation e) {
-                                    e.printStackTrace();
-                                } catch (PublicationsLoadError e) {
-                                    e.printStackTrace();
-                                } catch (InvalidPublicationInformation e) {
-                                    e.printStackTrace();
-                                } catch (DataBaseError e) {
-                                    e.printStackTrace();
-                                }
+                                addExperiencies();
                             }
                         }
                 );
@@ -86,8 +75,8 @@ public class MainOperator {
     }
 
 
-    private void addExperiencies() throws InvalidUserInformation, PublicationsLoadError, InvalidPublicationInformation, DataBaseError {
-       if (publiManager.getPublicationFromOperator(operadorTurist) != null) {
+    private void addExperiencies(){
+       try{
            publicList = new ArrayList<>(publiManager.getPublicationFromOperator(operadorTurist));
            for (int i = 0; i < publicList.size(); i++) {
                tabla.addRow(i);
@@ -125,6 +114,15 @@ public class MainOperator {
                });
 
            }
+       }
+       catch (InvalidUserInformation e){
+           System.out.println("No hay publicaciones");
+       } catch (PublicationsLoadError publicationsLoadError) {
+           publicationsLoadError.printStackTrace();
+       } catch (InvalidPublicationInformation invalidPublicationInformation) {
+           invalidPublicationInformation.printStackTrace();
+       } catch (DataBaseError dataBaseError) {
+           dataBaseError.printStackTrace();
        }
     }
 
