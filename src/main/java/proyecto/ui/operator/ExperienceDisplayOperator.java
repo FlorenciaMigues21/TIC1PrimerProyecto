@@ -5,18 +5,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.WindowEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javafx.scene.text.Text;
@@ -30,21 +24,12 @@ import proyecto.business.exceptions.*;
 import proyecto.business.utils.Utilities;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Formatter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.ResourceBundle;
 
 
 @Component
@@ -221,14 +206,14 @@ public class ExperienceDisplayOperator{
             else{
                 boolean esInt = integerInvalido(aforo.getText());
                 if(esInt){
-                    newPublication.setAforo(Integer.parseInt(precio.getText()));
+                    newPublication.setAforo(Integer.parseInt(aforo.getText()));
                 }
             }
             boolean esPrecioInt = integerInvalido(precio.getText());
 
 
             if(esPrecioInt){
-                newPublication.setCantidad(Float.parseFloat(precio.getText()));
+                newPublication.setPrecio(Integer.parseInt(precio.getText()));
             }
             newPublication.setPrecio(Integer.parseInt(precio.getText()));
             newPublication.setTitle(titulo.getText());
@@ -252,8 +237,8 @@ public class ExperienceDisplayOperator{
                 newPublication.setReservationAvailable(true);
                 if (boolreserv.isSelected()){
                     newPublication.setUniqueReservation(false);
-                    newPublication.setHourStart(convertTime(Horario.getText(),horarioMins.getText()));
-                    newPublication.setHourStart(convertTime(Horario1.getText(),horarioMins1.getText()));
+                    newPublication.setHourStart(Utilities.TimeVerification(Integer.parseInt(Horario.getText()))?Integer.parseInt(Horario.getText()) : 0 );
+                    newPublication.setHourFinish(Utilities.TimeVerification(Integer.parseInt(Horario1.getText()))?Integer.parseInt(Horario1.getText()) : 0);
                 }
                 else{
                     newPublication.setUniqueReservation(true);
@@ -262,8 +247,9 @@ public class ExperienceDisplayOperator{
                 newPublication.setReservationAvailable(false);
                 newPublication.setUniqueReservation(false);
             }
-            goBack(actionEvent);
             publicMan.createAndUpdatePublication(newPublication);
+            goBack(actionEvent);
+
         }
     }
 
@@ -363,7 +349,7 @@ public class ExperienceDisplayOperator{
 
     private Time convertTime(String hours,String min) throws ParseException {
         String hourComeplete = hours+":"+min+":00";
-        return Time.valueOf(hourComeplete);
+        return new Time(Integer.valueOf(hours),Integer.valueOf(min),0);
     }
 
 

@@ -20,12 +20,12 @@ public class Reservation {
     @GeneratedValue
     private int IdReservation;
     private int cantidad;
-    private Time hourStart;
+    private int hourStart;
 
     public Reservation() {
     }
 
-    public Reservation(Tourist turista, Publication publication, int cantidad, Time hourStart) {
+    public Reservation(Tourist turista, Publication publication, int cantidad, int hourStart) {
         this.turista = turista;
         this.publication = publication;
         this.cantidad = cantidad;
@@ -59,11 +59,11 @@ public class Reservation {
     }
 
     @NotNull
-    public Time getHourStart() {
+    public int getHourStart() {
         return hourStart;
     }
 
-    public void setHourStart(Time hourStart) {
+    public void setHourStart(int hourStart) {
         this.hourStart = hourStart;
     }
 }

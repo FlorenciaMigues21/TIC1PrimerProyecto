@@ -15,4 +15,8 @@ public class Utilities {
         return new Date(anio-1900,mes,dia);
     }
 
+    public static boolean TimeVerification(int hora){
+        return hora > -1 && hora < 24 ? true : false;
+    }
+
 }

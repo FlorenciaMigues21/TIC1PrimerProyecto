@@ -165,11 +165,11 @@ public class experiencePage {
 
     //Setea los datos del panel de la experiencia correspondiente
     public void panelReserva(){
-        String precioString = String.valueOf(publicacionActual.getCantidad());
+        String precioString = String.valueOf(publicacionActual.getPrecio());
         precio.setText(precioString);
         if(cantPer.getText() != null){
             int cantPerInt = Integer.parseInt(cantPer.getText());
-            int precioInt = (int) publicacionActual.getCantidad();
+            int precioInt = (int) publicacionActual.getPrecio();
             total.setText("$" + String.valueOf(cantPerInt * precioInt));
         }
         else{

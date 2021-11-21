@@ -53,17 +53,15 @@ public class Publication {
 
     private boolean needVaccination;
     private int aforo;
-    private int participants;
     private int precio;
-    private float cantidad;
     private Collection<Typeofactivities> listaActividadades;
     private TouristOperator operador;
     private Collection<Photo> photoList;
     private String phone;
     private Collection<Hygiene> medidas_de_higiene;
     private Collection<IncludedInPublication> incluido;
-    private Time hourStart;
-    private Time hourFinish;
+    private int hourStart;
+    private int hourFinish;
     private boolean uniqueReservation;
     private boolean reservationAvailable;
 
@@ -80,7 +78,7 @@ public class Publication {
     public Publication() {
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, int precio, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish, boolean uniqueReservation,boolean reservationAvailable) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int precio, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, int hourStart, int hourFinish, boolean uniqueReservation,boolean reservationAvailable) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -90,9 +88,7 @@ public class Publication {
         this.needVaccination = needVaccination;
         this.aforo = aforo;
         this.idEvent = idEvent;
-        this.participants = participants;
         this.precio = precio;
-        this.cantidad = cantidad;
         this.listaActividadades = listaActividadades;
         this.operador = operador;
         this.phone = phone;
@@ -104,7 +100,7 @@ public class Publication {
         this.reservationAvailable = reservationAvailable;
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int participants, int precio, float cantidad, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, Time hourStart, Time hourFinish, boolean uniqueReservation, boolean reservationAvailable) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int precio, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, int hourStart, int hourFinish, boolean uniqueReservation, boolean reservationAvailable) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -114,9 +110,7 @@ public class Publication {
         this.needVaccination = needVaccination;
         this.aforo = aforo;
         this.idEvent = idEvent;
-        this.participants = participants;
         this.precio = precio;
-        this.cantidad = cantidad;
         this.listaActividadades = listaActividadades;
         this.operador = operador;
         this.photoList = photoList;
@@ -225,30 +219,12 @@ public class Publication {
     }
 
     @NotNull
-    public int getParticipants() {
-        return participants;
-    }
-
-    public void setParticipants(int participants) {
-        this.participants = participants;
-    }
-
-    @NotNull
     public int getDivisa() {
         return precio;
     }
 
     public void setDivisa(int precio) {
         this.precio = precio;
-    }
-
-    @NotNull
-    public float getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(float cantidad) {
-        this.cantidad = cantidad;
     }
 
     @ManyToMany
@@ -315,22 +291,20 @@ public class Publication {
     }
 
     @Nullable
-    @Temporal(TemporalType.TIME)
-    public Time getHourStart() {
+    public int getHourStart() {
         return hourStart;
     }
 
-    public void setHourStart(Time hourStart) {
+    public void setHourStart(int hourStart) {
         this.hourStart = hourStart;
     }
 
     @Nullable
-    @Temporal(TemporalType.TIME)
-    public Time getHourFinish() {
+    public int getHourFinish() {
         return hourFinish;
     }
 
-    public void setHourFinish(Time hourFinish) {
+    public void setHourFinish(int hourFinish) {
         this.hourFinish = hourFinish;
     }
 
@@ -368,6 +342,8 @@ public class Publication {
     public void setReservationAvailable(boolean reservationAvailable) {
         this.reservationAvailable = reservationAvailable;
     }
+
+
 
     @Override
     public String toString() {
