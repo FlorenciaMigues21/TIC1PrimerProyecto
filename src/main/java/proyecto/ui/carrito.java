@@ -48,7 +48,7 @@ public class carrito {
         for(int i=0;i<reservaciones.size();i++){
             if (i==0){
                 Text name = new Text(reservaciones.get(0).getPublication().getTitle());
-                String start = reservaciones.get(0).getHourStart().toString();
+                String start = reservaciones.get(0).getHourStart() + ":00";
                 Text hora = new Text(start);
                 Text telefono = new Text(reservaciones.get(0).getPublication().getPhone());
                 GridPane.setRowIndex(name,0);
@@ -60,7 +60,7 @@ public class carrito {
             }
             else{
                 Text name = new Text(reservaciones.get(i).getPublication().getTitle());
-                String start = reservaciones.get(i).getHourStart().toString();
+                String start = reservaciones.get(i).getHourStart() + ":00";
                 Text hora = new Text(start);
                 Text telefono = new Text(reservaciones.get(i).getPublication().getPhone());
                 GridPane.setColumnIndex(name,0);

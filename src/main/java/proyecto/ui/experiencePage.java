@@ -22,6 +22,7 @@ import proyecto.business.entities_managers.ComentaryManager;
 import proyecto.business.entities_managers.PublicationManager;
 import proyecto.business.entities_managers.ReservationManager;
 import proyecto.business.exceptions.*;
+import proyecto.business.utils.Utilities;
 import proyecto.ui.component.Comentario;
 
 import java.io.IOException;
@@ -88,7 +89,7 @@ public class experiencePage {
     private Button homeButton;
 
     @FXML
-    private ChoiceBox<Time> horario;
+    private ChoiceBox<String> horario;
 
     @FXML
     private ImageView imagen1;
@@ -154,6 +155,7 @@ public class experiencePage {
                                     panelEstado = false;
                                 }
                                 paneCal.setVisible(panelEstado);
+
                             }
                         }
                 );
@@ -170,12 +172,13 @@ public class experiencePage {
         if(cantPer.getText() != null){
             int cantPerInt = Integer.parseInt(cantPer.getText());
             int precioInt = (int) publicacionActual.getPrecio();
-            total.setText("$" + String.valueOf(cantPerInt * precioInt));
+            total.setText("$" + cantPerInt * precioInt);
         }
         else{
             total.setText("0");
         }
-        //Horarios
+
+        subirHorarios();
 
     }
 
@@ -186,7 +189,7 @@ public class experiencePage {
         direccion.setText(publicacionActual.getUbication());
         infoExp.setText(publicacionActual.getDescription());
         telefono.setText(publicacionActual.getPhone());
-        horario.getItems().addAll(publicacionActual.getHourStart());
+        subirHorarios();
         pun.setText(String.valueOf(publicacionActual.getCalification()));
         AgregarComentarios();
         UpPhotos();
@@ -211,6 +214,8 @@ public class experiencePage {
     @FXML
     void Reserv(ActionEvent actionEvent) throws InvalidPublicationInformation, DataBaseError, ReservationCreationError, InvalidUserInformation {
         LocalDate datePick = fechaReserva.getValue();
+        java.util.Date newDate = Utilities.createDate(datePick.getYear(), datePick.getMonthValue(),datePick.getDayOfMonth());
+        Integer hora = horarioSelect();
         //ARREGLAR TEMA FECHA @FIXME
         //ARREGLAR TEMA HORARIO
        Collection<Reservation> reser = resManager.getAllReservationFromPublication(publicacionActual);
@@ -225,8 +230,8 @@ public class experiencePage {
            showAlert("Ya reservó!","Usted ya reservó, si desea cambiar su reserva, vaya a su itinerario.");
        }
        else{
-           Reservation nuevaReserva = new Reservation(userActual,publicacionActual,cantPersonas,horario.getValue());
-           resManager.addReservation(nuevaReserva);
+           //Reservation nuevaReserva = new Reservation(userActual,publicacionActual,cantPersonas,horario.getValue());
+           //resManager.addReservation(nuevaReserva);
            showAlert("Su reserva fue guardada","Puede ver el estado de la reserva en su itinerario");
        }
     }
@@ -338,4 +343,16 @@ public class experiencePage {
         Stage stage2 = (Stage) this.exper.getScene().getWindow();
         stage2.close();
     }
+
+    private void subirHorarios(){
+        for(int i = publicacionActual.getHourStart(); i<publicacionActual.getHourFinish();i++){
+            horario.getItems().add(i+":00");
+        }
+    }
+
+    private Integer horarioSelect(){
+        return Integer.parseInt(horario.getValue().substring(0,2));
+    }
+
+
 }

@@ -49,7 +49,7 @@ public class experienceView {
     private VBox higiene;
 
     @FXML
-    private ChoiceBox<Time> horario;
+    private ChoiceBox<String> horario;
 
     @FXML
     private ImageView imagen1;
@@ -114,11 +114,17 @@ public class experienceView {
         UpElements();
         infoExp.setText(publicacion.getDescription());
         telefono.setText(publicacion.getPhone());
-        horario.getItems().addAll(publicacion.getHourStart());
+        subirHorarios();
         precio.setText(String.valueOf(publicacion.getPrecio()));
         UpPhotos();
         upComentaries();
 
+    }
+
+    private void subirHorarios(){
+        for(int i = publicacion.getHourStart(); i<publicacion.getHourFinish();i++){
+            horario.getItems().add(i+":00");
+        }
     }
     //Subir elementos
     private void UpElements(){

@@ -19,7 +19,7 @@
 
 <!--<?import org.controlsfx.control.Rating?>-->
 
-<AnchorPane maxHeight="-Infinity" fx:id="exper" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.ui.experiencePage">
+<AnchorPane fx:id="exper" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.ui.experiencePage">
    <children>
       <AnchorPane layoutX="2.0" prefHeight="58.0" prefWidth="1200.0" style="-fx-background-color: #004aad;">
          <children>
@@ -128,12 +128,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <ImageView fitHeight="100.0" fitWidth="142.0" layoutX="447.0" layoutY="471.0">
-         <image>
-            <Image url="@../../Images/no_image.jpg" />
-         </image>
-      </ImageView>
-      <Text fx:id="direccion" layoutX="600.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="142.0" />
+      <Text fx:id="direccion" layoutX="447.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="142.0" />
       <Text fx:id="infoExp" layoutX="753.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Pane fx:id="paneCal" layoutX="1008.0" layoutY="58.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="186.0">
          <children>

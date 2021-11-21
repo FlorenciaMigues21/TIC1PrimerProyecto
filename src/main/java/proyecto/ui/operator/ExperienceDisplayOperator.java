@@ -60,8 +60,6 @@ public class ExperienceDisplayOperator{
     @FXML
     private Button agregarAsp;
 
-    @FXML
-    private Button agregarHorario;
 
     @FXML
     private Button agregarMedida;
@@ -90,11 +88,6 @@ public class ExperienceDisplayOperator{
     @FXML
     private ChoiceBox<String> gustoViaje;
 
-    @FXML
-    private TextField horarioMins;
-
-    @FXML
-    private VBox horarios;
 
     @FXML
     private CheckBox invierno;
@@ -147,8 +140,6 @@ public class ExperienceDisplayOperator{
     @FXML
     private TextField Horario1;
 
-    @FXML
-    private TextField horarioMins1;
 
 
 

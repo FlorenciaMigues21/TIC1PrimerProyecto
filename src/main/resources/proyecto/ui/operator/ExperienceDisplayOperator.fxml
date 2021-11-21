@@ -74,7 +74,6 @@
       <TextField fx:id="itemInc" layoutX="505.0" layoutY="405.0" promptText="Item" />
       <TextField fx:id="itemMed" layoutX="505.0" layoutY="546.0" promptText="Item" />
       <Text layoutX="193.0" layoutY="499.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-      <TextField fx:id="horarioMins" layoutX="213.0" layoutY="482.0" prefHeight="25.0" prefWidth="46.0" />
       <AnchorPane layoutX="942.0" layoutY="67.0" prefHeight="244.0" prefWidth="192.0" style="-fx-background-color: white; -fx-background-radius: 10;">
          <children>
             <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Optima;" text="Tipo de actividad" wrappingWidth="240.0">
@@ -153,6 +152,15 @@
       <Text layoutX="29.0" layoutY="542.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horario de finalización:" />
       <TextField fx:id="Horario1" layoutX="158.0" layoutY="524.0" prefHeight="25.0" prefWidth="46.0" />
       <Text layoutX="217.0" layoutY="541.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-      <TextField fx:id="horarioMins1" layoutX="226.0" layoutY="524.0" prefHeight="25.0" prefWidth="46.0" />
+      <Text layoutX="203.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="231.0" layoutY="543.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
