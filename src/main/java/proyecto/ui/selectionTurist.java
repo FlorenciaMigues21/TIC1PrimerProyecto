@@ -65,11 +65,14 @@ public class selectionTurist {
     Collection<Typeofactivities> gustos;
 
     public void initialize() {
+
+        System.out.println(userActual);
         loadEstacion();
     }
 
     @FXML
     public void saveSelect(ActionEvent actionEvent) throws IOException, InvalidUserInformation, UserAlreadyExist {
+        System.out.println(userActual);
         handleOptions();
         choiceBoxOption();
         estaciones();
@@ -88,7 +91,7 @@ public class selectionTurist {
 
 
 
-
+    //GUARDA GUSTOS
     private void handleOptions(){
         gustos = new ArrayList<>();
         for (int i = 0; i < typeList.getChildren().size();i++){

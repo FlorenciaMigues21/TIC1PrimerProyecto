@@ -96,14 +96,14 @@ public class MenuInicial {
         Inicio.turista = turista;
     }
     @FXML
-    void NextOperator(TouristOperator operador) throws IOException {
+    void NextOperator(TouristOperator operadorTur) throws IOException {
+        MainOperator.operadorTurist = operadorTur;
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(MainOperator.class.getResourceAsStream("ReservationView.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
-        MainOperator.operador = operador;
     }
     @FXML
     void NextAdmin(Admin user) throws IOException {
@@ -151,12 +151,12 @@ public class MenuInicial {
                 } else if (tipoUsuario.getValue().equals("Operador Turistico")) {
                     try {
                         TouristOperator userSignIn = controladorOp.logIn(new TouristOperator(passowrdUser, mail));
+                        System.out.println(userSignIn);
                         if (userSignIn.getPassword().equals(passowrdUser)) {
 
                             showAlert("Acceso correcto!");
                             NextOperator(userSignIn);
                             close(event);
-
                         }else {
                             showAlert("Datos incorrectos", "Verifique el mail y la contraseña");
                         }

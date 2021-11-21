@@ -1,37 +1,53 @@
 package proyecto.ui.operator;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.WindowEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import javafx.scene.text.Text;
 import proyecto.business.entities.*;
 import proyecto.business.entities_managers.PhotoManager;
 import proyecto.business.entities_managers.PublicationManager;
 import proyecto.business.entities_managers.TypeofactivitiesManager;
 import javafx.stage.Stage;
+import proyecto.business.exceptions.DataBaseError;
+import proyecto.business.exceptions.InvalidPublicationInformation;
+import proyecto.business.exceptions.InvalidUserInformation;
+import proyecto.business.exceptions.PublicationsLoadError;
 
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.ResourceBundle;
 
 
 @Component
-public class ExperienceDisplayOperator {
+public class ExperienceDisplayOperator{
+    ObservableList<String> gusto = FXCollections.observableArrayList("Viaje Confort","Viaje alternativo","Viaje de Lujo");
 
     @Autowired
     private PublicationManager publicMan;
 
     @Autowired
-    private TypeofactivitiesManager typeActMan;
+    private TypeofactivitiesManager manType;
 
     @Autowired
     private PhotoManager photoMan;
@@ -40,13 +56,10 @@ public class ExperienceDisplayOperator {
     public static TouristOperator operador;
 
     @FXML
-    private TextField telefono;
-
-    @FXML
-    private TextField direccion;
-
-    @FXML
     private TextField Horario;
+
+    @FXML
+    private TextField aforo;
 
     @FXML
     private Button agregarAsp;
@@ -58,31 +71,19 @@ public class ExperienceDisplayOperator {
     private Button agregarMedida;
 
     @FXML
-    private SplitMenuButton aspHigiene;
-
-    @FXML
-    private SplitMenuButton aspIncluidos;
-
-    @FXML
     private Button back;
+
+    @FXML
+    private CheckBox boolreserv;
 
     @FXML
     private Button cargaImagenes;
 
     @FXML
-    private CheckBox cultural;
-
-    @FXML
-    private CheckBox descanso;
-
-    @FXML
     private TextArea descripcion;
 
     @FXML
-    private CheckBox escapadasrurales;
-
-    @FXML
-    private CheckBox familiar;
+    private TextField direccion;
 
     @FXML
     private DatePicker fechaFin;
@@ -91,13 +92,13 @@ public class ExperienceDisplayOperator {
     private DatePicker fechaIni;
 
     @FXML
-    private ChoiceBox<?> gustoViaje;
+    private ChoiceBox<String> gustoViaje;
 
     @FXML
     private TextField horarioMins;
 
     @FXML
-    private SplitMenuButton horariosDisp;
+    private VBox horarios;
 
     @FXML
     private CheckBox invierno;
@@ -107,12 +108,6 @@ public class ExperienceDisplayOperator {
 
     @FXML
     private TextField itemMed;
-
-    @FXML
-    private CheckBox lunademiel;
-
-    @FXML
-    private CheckBox mochilero;
 
     @FXML
     private RadioButton no;
@@ -133,40 +128,49 @@ public class ExperienceDisplayOperator {
     private RadioButton si;
 
     @FXML
+    private TextField telefono;
+
+    @FXML
     private TextField titulo;
 
     @FXML
-    private CheckBox turismoaventura;
+    private VBox typeList;
+
+    @FXML
+    private ScrollPane typeScroll;
 
     @FXML
     private CheckBox verano;
 
     @FXML
-    private TextField aforo;
+    private VBox aspIncluidos;
+
+    @FXML
+    private VBox higieneInc;
 
     @FXML
     void goBack(ActionEvent event) {
         System.out.println("Hi");
     }
 
-    Collection<Typeofactivities> tiposActividad;
-    ArrayList<Typeofactivities> tiposActividadList;
-    ArrayList<Hygiene> listasHigiene;
-    ArrayList<IncludedInPublication> listasIncluidos;
+    ArrayList<Hygiene> listasHigiene= new ArrayList<>();
+    ArrayList<IncludedInPublication> listasIncluidos = new ArrayList<>();
+    ArrayList<Typeofactivities> tipoActividad = new ArrayList<>();
 
     @FXML
-    public void initialize() {
+    public void initialize() throws InvalidUserInformation, PublicationsLoadError, InvalidPublicationInformation, DataBaseError {
+        /*System.out.println("Hola");
 
-        tiposActividad = typeActMan.getAllActivityTypes();
-        tiposActividadList = new ArrayList<>(tiposActividad);
-        listasHigiene = new ArrayList<>();
-        listasIncluidos = new ArrayList<>();
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        operador = (TouristOperator) stage.getUserData();*/
+        loadEstacion();
     }
 
-
+    //GUARDA INFORMACION
     public void saveExperience(ActionEvent actionEvent){
         if (titulo.getText() == null || precio.getText().equals("") ||
-                descripcion.getText() == null || aspHigiene.getItems() == null || aspIncluidos.getItems() == null ||
+                descripcion.getText() == null || higieneInc.getChildren().size() == 0 || higieneInc.getChildren().size() == 0 ||
                 fechaIni.getValue() == null || fechaFin.getValue() == null || direccion.getText() == null || direccion.getText().equals("")) {
             showAlert(
                     "Error",
@@ -198,86 +202,65 @@ public class ExperienceDisplayOperator {
             newPublication.setDateto(convertToDateViaSqlDate(fechaFin.getValue()));
             newPublication.setMedidas_de_higiene(listasHigiene);
             newPublication.setIncluido(listasIncluidos);
-            //FALTA TEMA HORARIOS
+            subaTipoAct();
+            choiceBoxOption();
+            estaciones();
+            newPublication.setListaActividadades(tipoActividad);
 
 
         }
     }
 
-    private ArrayList<Typeofactivities> handleOptions(CheckBox fam,CheckBox escap,CheckBox luna,CheckBox turism,CheckBox cult,CheckBox desc,CheckBox mochi){
-        ArrayList<Typeofactivities> tipoDeActividad = new ArrayList<>();
 
-        if(fam.isSelected()){
-            Typeofactivities familiaAct = tipoDeActividad("Familiar");
-            tipoDeActividad.add(familiaAct);
-        }
-        else if(escap.isSelected()){
-            Typeofactivities escapadaAct = tipoDeActividad("Escapadas rurales");
-            tipoDeActividad.add(escapadaAct);
-        }
-        else if(luna.isSelected()){
-            Typeofactivities LunaAct = tipoDeActividad("Luna de miel");
-            tipoDeActividad.add(LunaAct);
-        }
-        else if(turism.isSelected()){
-            Typeofactivities aventAct = tipoDeActividad("Turismo aventura");
-            tipoDeActividad.add(aventAct);
-        }
-        else if(cult.isSelected()){
-            Typeofactivities cultAct = tipoDeActividad("Cultural");
-            tipoDeActividad.add(cultAct);
-        }
-        else if(desc.isSelected()){
-            Typeofactivities descAct = tipoDeActividad("Descanso");
-            tipoDeActividad.add(descAct);
-        }
-        else if(mochi.isSelected()){
-            Typeofactivities mochiAct = tipoDeActividad("De mochilero");
-            tipoDeActividad.add(mochiAct);
-        }
-
-        return tipoDeActividad;
-
-    }
-
-    //@FIXME
-    private void choiceBoxOption(ChoiceBox<String> gustoViaje){
-        if(gustoViaje.getValue().toString().equals("Viaje Confort") ){
-
-        }
-        else if(gustoViaje.getValue().toString().equals("Viaje alternativo")){
-
-        }
-        else if(gustoViaje.getValue().toString().equals("Viaje de Lujo")) {
-        }
-    }
-
-    //@FIXME
-    private void estaciones(CheckBox inv,CheckBox ver,CheckBox ot,CheckBox prim){
-        if(inv.isSelected()){
-            //ARREGLAR
-        }
-        else if(ver.isSelected()){
-            //ARREGLAR
-        }
-        else if(ot.isSelected()){
-
-        }
-        else if(prim.isSelected()){
-
-        }
-    }
-
-    //RETORNA EL TIPO DE ACTIVIDAD
-    private Typeofactivities tipoDeActividad(String nombre){
-        Typeofactivities tipo = null;
-        for(int i=0; i<tiposActividadList.size(); i++){
-            if (tiposActividadList.get(i).getName().equals(nombre)){
-                tipo = tiposActividadList.get(i);
+    private void loadEstacion() {
+        gustoViaje.getItems().addAll(gusto);
+        ArrayList<Typeofactivities> listType = new ArrayList<>(manType.getAllActivityTypes());
+        for (Typeofactivities typeofactivities : listType) {
+            if (!typeofactivities.getName().equals("Verano") && !typeofactivities.getName().equals("Invierno") && !typeofactivities.getName().equals("Otoño") && !typeofactivities.getName().equals("Primavera")
+                    && !typeofactivities.getName().equals("Confort") && !typeofactivities.getName().equals("Alternativo") && !typeofactivities.getName().equals("Lujo")){
+                CheckBox type = new CheckBox();
+                type.setId(typeofactivities.getName());
+                type.setText(typeofactivities.getName());
+                typeList.getChildren().add(type);
             }
         }
-        return tipo;
     }
+    private void subaTipoAct(){
+        for (int i = 0; i < typeList.getChildren().size();i++){
+            CheckBox actual = (CheckBox)typeList.getChildren().get(i);
+            if (actual.isSelected()){
+                tipoActividad.add(new Typeofactivities(actual.getId()));
+            }
+        }
+    }
+
+    private void choiceBoxOption(){
+        if(gustoViaje.getValue().toString().equals("Viaje Confort") ){
+            tipoActividad.add(new Typeofactivities("Viaje Confort"));
+        }
+        else if(gustoViaje.getValue().toString().equals("Viaje alternativo")){
+            tipoActividad.add(new Typeofactivities("Viaje alternativo"));
+        }
+        else if(gustoViaje.getValue().toString().equals("Viaje de Lujo")) {
+            tipoActividad.add(new Typeofactivities("Viaje de Lujo"));
+        }
+    }
+    private void estaciones(){
+        if(invierno.isSelected()){
+            tipoActividad.add(new Typeofactivities("Invierno"));
+        }
+        else if(verano.isSelected()){
+            tipoActividad.add(new Typeofactivities("Verano"));
+        }
+        else if(otono.isSelected()){
+            tipoActividad.add(new Typeofactivities("Otoño"));
+        }
+        else if(primavera.isSelected()){
+            tipoActividad.add(new Typeofactivities("Primavera"));
+        }
+    }
+
+
 
 
     private void showAlert(String title, String contextText) {
@@ -304,28 +287,27 @@ public class ExperienceDisplayOperator {
     //Agregar aspecto incluido, falta agregar a la publicacion
     @FXML
     private void aspectosIncluidos(ActionEvent actionEvent){
-        MenuItem itemIncAg = new MenuItem();
-        itemIncAg.setText(itemInc.getText());
+        Text incluido = new Text();
         IncludedInPublication newItem = new IncludedInPublication();
-        newItem.setIncluido(itemIncAg.getText());
+        newItem.setIncluido(itemInc.getText());
+        incluido.setText(itemInc.getText());
         listasIncluidos.add(newItem);
-        aspIncluidos.getItems().add(itemIncAg);
+        aspIncluidos.getChildren().add(incluido);
     }
     //Agregar aspecto incluido, falta agregar a la publicacion
     @FXML
     public void medidasIncluidas(ActionEvent actionEvent) {
-        MenuItem itemMedAg = new MenuItem();
-        itemMedAg.setText(itemMed.getText());
-        Hygiene medida = new Hygiene();
-        medida.setMedidas(itemMed.getText());
-        listasHigiene.add(medida);
-        aspHigiene.getItems().add(itemMedAg);
+        Text medida = new Text();
+        Hygiene newItem = new Hygiene();
+        newItem.setMedidas(itemInc.getText());
+        medida.setText(itemInc.getText());
+        listasHigiene.add(newItem);
+        higieneInc.getChildren().add(medida);
     }
 
     //Agregar horarios incluido, falta agregar a la publicacion
     @FXML
     private void horariosIncluidos(ActionEvent actionEvent) {
-        MenuItem itemHorAg = new MenuItem();
         boolean horarioCorrecto = integerInvalido(Horario.getText());
         boolean minutosCorrecto = integerInvalido(horarioMins.getText());
 
@@ -333,8 +315,10 @@ public class ExperienceDisplayOperator {
             showAlert("Error al ingresar el horario","Verifique si las horas y los minutos son adecuados.");
         }
         else{
-            itemHorAg.setText(Horario.getText() + horarioMins.getText());
-            horariosDisp.getItems().add(itemHorAg);
+            Text horario = new Text();
+            horario.setText(Horario.getText() + horarioMins.getText());
+            horarios.getChildren().add(horario);
+
         }
     }
     private Date convertToDateViaSqlDate(LocalDate dateToConvert) {
@@ -344,10 +328,31 @@ public class ExperienceDisplayOperator {
 
 
 
-    /* FALTA CARGAR LAS IMAGENES @FIXME
+
     @FXML
-    private void cargarImagenes(Stage stage){
-        FileChooser fileChooser = new FileChooser();*/
+    private void cargarImagenes(ActionEvent event){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Buscar Imagen");
+
+        // Agregar filtros para facilitar la busqueda
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+
+        // Obtener la imagen seleccionada
+        File imgFile = fileChooser.showOpenDialog(null);
+        /*
+        // Mostar la imagen
+        if (imgFile != null) {
+            Image image = new Image("file:" + imgFile.getAbsolutePath());
+            ivImagen.setImage(image);
+        }*/
+    }
 
 
 }
+
+
+

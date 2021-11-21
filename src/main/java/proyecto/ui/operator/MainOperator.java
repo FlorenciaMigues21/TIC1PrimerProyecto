@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,6 +28,7 @@ import proyecto.business.exceptions.InvalidUserInformation;
 import proyecto.business.exceptions.PublicationsLoadError;
 import proyecto.ui.selectionTurist;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,15 +36,13 @@ import java.util.Collection;
 @Component
 public class MainOperator {
 
+    public static TouristOperator operadorTurist;
+
     @Autowired
     private PublicationManager publiManager;
 
     @Autowired
     private ReservationManager reservManager;
-
-    public static TouristOperator operador;
-
-    //static UserManager<TouristOperator> usuario;
 
     @FXML
     private Button back;
@@ -53,24 +53,37 @@ public class MainOperator {
     @FXML
     private GridPane tabla;
 
+    ArrayList<Publication> publicList;
+
     public void initialize() throws InvalidUserInformation, PublicationsLoadError, InvalidPublicationInformation, DataBaseError {
         addExperiencies();
     }
 
+
     private void addExperiencies() throws InvalidUserInformation, PublicationsLoadError, InvalidPublicationInformation, DataBaseError {
-        Collection<Publication> publicaciones = publiManager.getPublicationFromOperator(operador);
-        ArrayList<Publication> publicList = new ArrayList<>(publicaciones);
+        publicList = new ArrayList<>(publiManager.getPublicationFromOperator(operadorTurist));
         for(int i=0; i < publicList.size() ; i++){
-            tabla.addRow(i+1);
+            tabla.addRow(i);
             Text titulo = new Text(publicList.get(i).getTitle());
-            tabla.add(titulo,0,i+1);
+            tabla.add(titulo,0,i);
             GridPane.setHalignment(titulo, HPos.CENTER);
-            //Text estado = new Text(publicList.get(i).get) FALTA AGREGAR EL ESTADO
-            Collection<Reservation> reservas = reservManager.getAllReservationFromPublication(publicList.get(i));
-            ArrayList<Reservation> reservasList = new ArrayList<>(reservas);
-            Text cantidadReservas = new Text(Integer.toString(reservas.size()));
-            tabla.add(cantidadReservas,2,i+1);
+            if(publicList.get(i).isValidated()) {
+                Text validado = new Text("Validada");
+                tabla.add(validado,1,i);
+                Text calificacion = new Text(String.valueOf(publicList.get(i).getCalification()));
+                tabla.add(calificacion,3,i);
+            }
+            else{
+                Text novalidado = new Text("No validada");
+                tabla.add(novalidado,1,i);
+                Text calificacion = new Text("-");
+                tabla.add(calificacion,3,i);
+            }
+            ArrayList<Reservation> reservasList = new ArrayList<>(reservManager.getAllReservationFromPublication(publicList.get(i)));
+            Text cantidadReservas = new Text(Integer.toString(reservasList.size()));
+            tabla.add(cantidadReservas,2,i);
             GridPane.setHalignment(cantidadReservas, HPos.CENTER);
+
             Button botonReserva = new Button();
             GridPane.setHalignment(botonReserva, HPos.CENTER);
             int finalI = i;
@@ -78,7 +91,7 @@ public class MainOperator {
                 @Override
                 public void handle(ActionEvent event) {
                     try {
-                        Next(publicList.get(finalI));
+                        Next(event,publicList.get(finalI));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -88,18 +101,33 @@ public class MainOperator {
         }
     }
 
-    void Next(Publication publicacion) throws IOException {
+    void Next(ActionEvent event,Publication publicacion) throws IOException {
+        Node node = (Node) event.getSource();
+        // Step 3
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.close();
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(reservationView.class.getResourceAsStream("ReservationUsersView.fxml"));
-        Stage stage = new Stage();
+        stage.setUserData(publicacion);
         stage.setScene(new Scene(root));
         stage.show();
-        reservationView.publicActual = publicacion;
     }
 
-    //AGREGAR CALIFICACION
 
+    @FXML
+    public void AddExperience(ActionEvent event) throws IOException {
+        Node node = (Node) event.getSource();
+        // Step 3
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.close();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(ExperienceDisplayOperator.class.getResourceAsStream("ExperienceDisplayOperator.fxml"));
+        stage.setUserData(operadorTurist);
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 
 
 

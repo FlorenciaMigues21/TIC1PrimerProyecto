@@ -20,7 +20,7 @@
                </image>
             </ImageView>
             <TextField fx:id="item" layoutX="141.0" layoutY="17.0" prefHeight="25.0" prefWidth="350.0" promptText="Buscar" style="-fx-background-radius: 50;" />
-            <Button fx:id="buscar" onAction="#goToSearch" layoutX="504.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Buscar" />
+            <Button fx:id="buscar" layoutX="504.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Buscar" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="680.0" prefWidth="87.0" style="-fx-border-color: black; -fx-background-color: white;">
@@ -29,25 +29,25 @@
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="32.0">
                      <image>
-                        <Image url="@/Images/icons8-home-24.png" />
+                        <Image url="@../../Images/icons8-home-24.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="calendarButton" onAction="#carrito" layoutX="23.0" layoutY="180.0" style="-fx-background-color: white;">
+            <Button fx:id="calendarButton" layoutX="23.0" layoutY="180.0" onAction="#carrito" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="32.0">
                      <image>
-                        <Image url="@/Images/calendar.png" />
+                        <Image url="@../../Images/calendar.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="setting" onAction="#goSetting" layoutX="18.0" layoutY="628.0" mnemonicParsing="false" style="-fx-background-color: white;">
+            <Button fx:id="setting" layoutX="18.0" layoutY="628.0" mnemonicParsing="false" onAction="#goSetting" style="-fx-background-color: white;">
                <graphic>
                   <ImageView>
                      <image>
-                        <Image url="@/Images/icons8-settings-24.png" />
+                        <Image url="@../../Images/icons8-settings-24.png" />
                      </image>
                   </ImageView>
                </graphic>
