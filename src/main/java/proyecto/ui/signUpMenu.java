@@ -160,10 +160,9 @@ public class signUpMenu {
                 String mail = email.getText();
                 String tel = telefono.getText();
                 String pais_residente = pais.getValue();
-                java.sql.Date fecha = java.sql.Date.valueOf(fecha_nacimiento.getValue());
                 String id = docIdentidad.getText();
                 if (passwordUser.equals(ConfirmPassword)) {
-                    Tourist turista = new Tourist(passwordUser,name,mail,false,tel,false,fecha,id,new Country(pais_residente));
+                    Tourist turista = new Tourist(passwordUser,name,mail,false,tel,false,java.sql.Date.valueOf(fecha_nacimiento.getValue()),id,new Country(pais_residente));
                     Next(turista);
 
                 }else{
