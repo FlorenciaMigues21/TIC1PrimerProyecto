@@ -1,5 +1,5 @@
 
-/*
+
 INSERT INTO country(name) VALUES('Afghanistan');
 INSERT INTO country(name) VALUES('Albania');
 INSERT INTO country(name) VALUES('Algeria');
