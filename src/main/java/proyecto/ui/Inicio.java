@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -21,6 +22,7 @@ import proyecto.Main;
 import proyecto.business.entities.Photo;
 import proyecto.business.entities.Publication;
 import proyecto.business.entities.Tourist;
+import proyecto.business.entities.TouristOperator;
 import proyecto.business.entities_managers.PhotoManager;
 import proyecto.business.entities_managers.PublicationManager;
 import proyecto.business.entities_managers.TypeofactivitiesManager;
@@ -33,6 +35,7 @@ public class Inicio {
 
     static Tourist turista;
 
+
     @Autowired
     private TypeofactivitiesManager typeMan;
 
@@ -41,6 +44,9 @@ public class Inicio {
 
     @Autowired
     private PhotoManager fotoMan;
+
+    @FXML
+    private AnchorPane inicio;
 
     @FXML
     private Button calendarButton;
@@ -66,7 +72,24 @@ public class Inicio {
     ArrayList<Publication> list;
 
     public void initialize() throws IOException {
-        loadInfo();
+        inicio.sceneProperty().addListener(((observable, oldValue, newValue) -> {
+            if (oldValue == null && newValue != null) {
+                newValue.windowProperty().addListener((observable1, oldValue1, newValue1) -> {
+                            if (oldValue1 == null && newValue1 != null) {
+                                Stage stage = (Stage) inicio.getScene().getWindow();
+                                turista = (Tourist) stage.getUserData();
+                                try {
+                                    loadInfo();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                );
+            }
+        }
+        ));
+
     }
 
 
@@ -102,9 +125,12 @@ public class Inicio {
                 }
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
+                doubleObjet db = new doubleObjet();
+                db.setPublicacion(pub);
+                db.setTurista(turista);
+                stage.setUserData(db);
                 stage.show();
-                experiencePage.publicacionActual = pub;
-                experiencePage.userActual = turista;
+
             });
             newItem.getChildren().add(newButton);
             gustos1.getChildren().add(newItem);
@@ -118,7 +144,7 @@ public class Inicio {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
-        carrito.turista = turista;
+        stage.setUserData(turista);
         Stage stage2 = (Stage) this.calendarButton.getScene().getWindow();
         stage2.close();
     }
@@ -131,7 +157,7 @@ public class Inicio {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
-        selectionTurist.userActual = turista;
+        stage.setUserData(turista);
         Stage stage2 = (Stage) this.setting.getScene().getWindow();
         stage2.close();
     }
@@ -144,8 +170,10 @@ public class Inicio {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
-        search.turista = turista;
-        search.itemBus = item.getText();
+        doubleObjet newDouble = new doubleObjet();
+        newDouble.setTurista(turista);
+        newDouble.setItem(item.getText());
+        stage.setUserData(newDouble);
         Stage stage2 = (Stage) this.setting.getScene().getWindow();
         stage2.close();
     }
