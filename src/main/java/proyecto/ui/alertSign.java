@@ -9,8 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 import proyecto.Main;
-import proyecto.business.entities.TouristOperator;
-import proyecto.ui.operator.MainOperator;
+import proyecto.ui.admin.logInOperador;
 
 import java.io.IOException;
 

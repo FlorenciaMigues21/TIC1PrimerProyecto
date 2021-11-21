@@ -23,7 +23,6 @@ import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 import proyecto.business.entities.TouristOperator;
 import proyecto.business.entities_managers.Busqueda.IndexingService;
-import proyecto.business.entities_managers.Busqueda.StartUpEvent;
 import proyecto.business.entities_managers.UserManager;
 import proyecto.business.exceptions.InvalidUserInformation;
 import proyecto.business.exceptions.UserNotFound;
@@ -44,7 +43,8 @@ public class MenuInicial {
 
     @Autowired
     public UserManager<Admin> controladorAdmin;
-
+    @Autowired
+    private IndexingService indMan;
 
     @FXML
     private Button btnNext;
@@ -61,6 +61,14 @@ public class MenuInicial {
     @FXML
     private ChoiceBox<String> tipoUsuario;
 
+    public void initialize() {
+        try {
+            indMan.initiateIndexing();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        loadTipoUsuario();
+    }
 
     private void loadTipoUsuario(){
         String turista = "Turista";
@@ -76,27 +84,17 @@ public class MenuInicial {
         stage.close();
     }
 
- /*  public void initialize() {                               // acaaaa2
-        StartUpEvent inicio;
-        try {
-            inicio.onApplicationEvent(Main);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        loadTipoUsuario();
-    } */
 
-
-    /*@FIXME
+    @FXML
     void NextTourist(Tourist turista) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
-        Parent root = fxmlLoader.load(selectionTurist.class.getResourceAsStream("SelectionTurist.fxml"));
+        Parent root = fxmlLoader.load(Inicio.class.getResourceAsStream("Inicio.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
-        selectionTurist.userActual = turista;
-    }*/
+        Inicio.turista = turista;
+    }
     @FXML
     void NextOperator(TouristOperator operador) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -108,13 +106,14 @@ public class MenuInicial {
         MainOperator.operador = operador;
     }
     @FXML
-    void NextAdmin() throws IOException {
+    void NextAdmin(Admin user) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(Admin_init.class.getResourceAsStream("mainAdmin.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+        Admin_init.usuario = user;
     }
     @FXML
     void btnNext(ActionEvent event) throws IOException {
@@ -136,6 +135,7 @@ public class MenuInicial {
                     if (userSignIn.getPassword().equals(passowrdUser)) {
 
                         showAlert("Acceso correcto!");
+                        NextTourist(userSignIn);
                         close(event);
 
                     }else {
@@ -176,7 +176,7 @@ public class MenuInicial {
 
                         showAlert("Acceso correcto!");
                         close(event);
-                        NextAdmin();
+                        NextAdmin(userSignIn);
 
                     }else {
                         showAlert("Datos incorrectos", "Verifique el mail y la contraseña");

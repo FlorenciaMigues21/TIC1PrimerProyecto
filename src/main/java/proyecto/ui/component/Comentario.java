@@ -9,6 +9,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
+import proyecto.business.entities.Comentary;
 import proyecto.business.entities.Publication;
 import proyecto.business.entities.Tourist;
 import proyecto.business.entities_managers.ComentaryManager;
@@ -47,8 +48,8 @@ public class Comentario {
             showAlert("Por favor, complete todos los campos.");
         }
         else{
-            //Comentario newComentario = new Comentario(turistaActual,publiActual,calificationNumber.getValue(),comentarioText.getText(),);
-            //comManager.addComentary();
+            Comentary newComentario = new Comentary(turistaActual,publiActual,calificationNumber.getValue(),comentarioText.getText());
+
             showAlert("Gracias por calificarnos y darnos tu opinión!");
             close(actionEvent);
         }

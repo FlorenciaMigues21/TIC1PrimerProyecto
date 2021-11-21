@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -19,10 +20,7 @@ import proyecto.business.entities.*;
 import proyecto.business.entities_managers.ComentaryManager;
 import proyecto.business.entities_managers.PublicationManager;
 import proyecto.business.entities_managers.ReservationManager;
-import proyecto.business.exceptions.DataBaseError;
-import proyecto.business.exceptions.InvalidPublicationInformation;
-import proyecto.business.exceptions.InvalidUserInformation;
-import proyecto.business.exceptions.ReservationCreationError;
+import proyecto.business.exceptions.*;
 import proyecto.ui.component.Comentario;
 
 import java.io.IOException;
@@ -42,45 +40,33 @@ public class experiencePage {
     @Autowired
     private ReservationManager resManager;
 
-    /*@Autowired
-    private ComentaryManager comManager;*/
+    @Autowired
+    private ComentaryManager comManager;
 
     static Tourist userActual;
 
     static  Publication publicacionActual;
 
     @FXML
+    private Label NombreAtraccion;
+
+    @FXML
     private Button backButton;
+
+    @FXML
+    private VBox boxComentary;
 
     @FXML
     private Button buttonMenu;
 
     @FXML
-    private Button calendarButton;
-
-    @FXML
     private Button buttonReserva;
 
     @FXML
+    private Button calendarButton;
+
+    @FXML
     private TextField cantPer;
-
-    @FXML
-    private DatePicker fechaReserva;
-
-    @FXML
-    private ChoiceBox<Time> horario;
-
-    @FXML
-    private Pane paneCal;
-
-    @FXML
-    private Text precio;
-
-    @FXML
-    private Text total;
-
-    @FXML
-    private Label NombreAtraccion;
 
     @FXML
     private VBox comentarios;
@@ -89,7 +75,31 @@ public class experiencePage {
     private Text direccion;
 
     @FXML
+    private DatePicker fechaReserva;
+
+    @FXML
     private VBox higiene;
+
+    @FXML
+    private Button homeButton;
+
+    @FXML
+    private ChoiceBox<Time> horario;
+
+    @FXML
+    private ImageView imagen1;
+
+    @FXML
+    private ImageView imagen2;
+
+    @FXML
+    private ImageView imagen3;
+
+    @FXML
+    private ImageView imagen4;
+
+    @FXML
+    private ImageView imagen5;
 
     @FXML
     private Text infoExp;
@@ -101,20 +111,23 @@ public class experiencePage {
     private Button opinion;
 
     @FXML
-    private Label telefono;
+    private Pane paneCal;
+
+    @FXML
+    private Text precio;
 
     @FXML
     private Label pun;
 
     @FXML
-    private VBox boxComentary;
+    private Label telefono;
 
-    private Boolean panelEstado = false;
+    @FXML
+    private Text total;
 
-    /*Collection<Comentary> comentariosCol = comManager.getComentaryOfPublication(publicacionActual);
-    ArrayList<Comentary> comentariosList = new ArrayList<>(comentariosCol);*/
+    boolean panelEstado = true;
 
-    public void initialize() {
+    public void initialize() throws DataBaseError, IncompleteObjectException, IOException {
 
         setItems();
         panelReserva();
@@ -138,28 +151,31 @@ public class experiencePage {
     }
 
     //Setea los datos de la experiencia correspondiente
-    public void setItems(){
+    public void setItems() throws DataBaseError, IncompleteObjectException, IOException {
         ArrayList<String> arrayPrueba = new ArrayList<String>();
         NombreAtraccion.setText(publicacionActual.getTitle());
         direccion.setText(publicacionActual.getUbication());
         infoExp.setText(publicacionActual.getDescription());
         telefono.setText(publicacionActual.getPhone());
         horario.getItems().addAll(publicacionActual.getHourStart());
-        /*float calificacion = Calificacion();*/
-        /*puntaje.setText(Float.toString(calificacion));
-        AgregarComentarios();*/
-        //telefono.setText(publicacionActual.get);
-        /*for(int i=0;i<arrayPrueba.size();i++){
-            Label userName = new Label();
-            userName.setText();
-            Text comentario = new Text();
-            comentario.setText();
-            comentarios.getChildren().add(userName + comentario);
-            Label itemHigiene = new Label();
-            itemHigiene.setText();
-            higiene.getChildren().add(itemHigiene);
-            Label itemInc = new Label();
-            itemsInc.getChildren().add(itemInc);*/
+        pun.setText(String.valueOf(publicacionActual.getCalification()));
+        AgregarComentarios();
+        UpPhotos();
+    }
+
+    //Subir fotos
+    private void UpPhotos() throws IOException {
+        ArrayList<Photo> fotos = new ArrayList<>(publicacionActual.getPhotoList());
+        Image newImage1 = fotos.get(0).getImageFromByteArray(fotos.get(0).getPhoto());
+        imagen1.setImage(newImage1);
+        Image newImage2 = fotos.get(1).getImageFromByteArray(fotos.get(1).getPhoto());
+        imagen2.setImage(newImage2);
+        Image newImage3 = fotos.get(2).getImageFromByteArray(fotos.get(2).getPhoto());
+        imagen3.setImage(newImage3);
+        Image newImage4 = fotos.get(3).getImageFromByteArray(fotos.get(3).getPhoto());
+        imagen4.setImage(newImage4);
+        Image newImage5 = fotos.get(4).getImageFromByteArray(fotos.get(4).getPhoto());
+        imagen5.setImage(newImage5);
     }
 
     //Crea la reserva
@@ -216,33 +232,20 @@ public class experiencePage {
         alert.setContentText(contextText);
         alert.showAndWait();
     }
-    /*
-    //Calificación
-    private float Calificacion(){
-        int suma = 0;
-        float resultado = 0;
-        if(comentariosCol.size()>0) {
-            for (int i = 0; i < comentariosCol.size(); i++) {
-                suma += comentariosList.get(i).getCalification();
-            }
-            resultado = suma / comentariosList.size();
-        }
-        return resultado;
-    }*/
-/*
     //Agregar comentarios
-    private void AgregarComentarios(){
-        if(comentariosCol.size()>0) {
-            for (int i = 0; i < comentariosCol.size(); i++) {
-                Label usuarioNombre = new Label(comentariosList.get(i).getTurista().getUsername());
-                Text comentarioText = new Text((comentariosList.get(i).getComantary()));
+    private void AgregarComentarios() throws DataBaseError, IncompleteObjectException {
+        ArrayList<Comentary> comentarios = new ArrayList<>(comManager.getComentaryOfPublication(publicacionActual));
+        if(comentarios.size()>0) {
+            for (int i = 0; i < comentarios.size(); i++) {
+                Label usuarioNombre = new Label(comentarios.get(i).getTurista().getUsername());
+                Text comentarioText = new Text((comentarios.get(i).getComantary()));
                 VBox section = new VBox();
                 section.getChildren().add(usuarioNombre);
                 section.getChildren().add(comentarioText);
                 boxComentary.getChildren().add(section);
             }
         }
-    }*/
+    }
     //CONVERSION DEL HORARIO
     private Date convertToDateViaSqlDate(LocalDate dateToConvert) {
         return java.sql.Date.valueOf(dateToConvert);

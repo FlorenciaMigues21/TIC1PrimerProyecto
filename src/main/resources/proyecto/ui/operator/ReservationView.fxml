@@ -22,7 +22,7 @@
             <Button fx:id="back" layoutX="12.0" layoutY="13.0" style="-fx-background-color: white;">
                 <graphic>
                     <ImageView fitHeight="26.0" fitWidth="32.0">
-                        <Image url="@../../../Images/hacia-atras.png" />
+                        <Image url="@/Images/hacia-atras.png" />
                     </ImageView>
                 </graphic>
             </Button>

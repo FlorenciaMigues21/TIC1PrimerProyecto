@@ -186,7 +186,7 @@ public class ExperienceDisplayOperator {
                 }
             }
             boolean esPrecioInt = integerInvalido(precio.getText());
-            /*boolean esTelefonoInt = integerInvalido(telefono.getText());*/
+
 
             if(esPrecioInt){
                 newPublication.setCantidad(Float.parseFloat(precio.getText()));

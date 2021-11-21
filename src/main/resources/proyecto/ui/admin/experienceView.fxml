@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1280.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.ui.experiencePage">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1280.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.ui.admin.experienceView">
    <children>
       <AnchorPane prefHeight="58.0" prefWidth="1280.0" style="-fx-background-color: #004aad;">
          <children>
@@ -22,15 +23,6 @@
                   <Image url="@/Images/Search Me(5).png" />
                </image>
             </ImageView>
-            <Button fx:id="buttonMenu" layoutX="1215.0" layoutY="12.0" onAction="#closeMenu" style="-fx-background-color: white; -fx-background-radius: 10px;">
-               <graphic>
-                  <ImageView fitHeight="26.0" fitWidth="32.0">
-                     <image>
-                        <Image url="@../../../Images/menu.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
             <Button fx:id="backButton" layoutX="18.0" layoutY="9.0" onAction="#goBack" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="32.0">
@@ -106,31 +98,19 @@
             <Label text="Label" />
          </children>
       </VBox>
-      <VBox fx:id="comentarios" layoutX="128.0" layoutY="473.0" prefHeight="171.0" prefWidth="276.0">
-         <children>
-            <VBox fx:id="boxComentary" prefHeight="200.0" prefWidth="276.0" />
-         </children>
-      </VBox>
       <Label layoutX="128.0" layoutY="436.0" prefHeight="30.0" prefWidth="293.0" text="Comentarios" textFill="#004aad">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
       <Line endX="-99.99996948242188" endY="214.0" layoutX="521.0" layoutY="445.0" opacity="0.21" startX="-100.0" />
-      <Label layoutX="128.0" layoutY="644.0" text="Ya nos visitaste?" />
       <Hyperlink layoutX="245.0" layoutY="641.0" />
-      <Button fx:id="opinion" layoutX="214.0" layoutY="640.0" mnemonicParsing="false" onAction="#hacerComentario" prefHeight="25.0" prefWidth="148.0" style="-fx-background-color: white;" text="Haznos llegar tu opinión" textFill="#0b04e9" />
       <Label layoutX="447.0" layoutY="436.0" prefHeight="30.0" prefWidth="186.0" text="Dónde vas a estar" textFill="#004aad">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <ImageView fitHeight="100.0" fitWidth="142.0" layoutX="447.0" layoutY="471.0">
-         <image>
-            <Image url="@../../../Images/no_image.jpg" />
-         </image>
-      </ImageView>
-      <Text fx:id="direccion" layoutX="447.0" layoutY="602.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="142.0" />
+      <Text fx:id="direccion" layoutX="447.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="142.0" />
       <Text fx:id="infoExp" layoutX="781.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="128.0" layoutY="137.0">
          <image>
@@ -159,5 +139,10 @@
             <Font size="15.0" />
          </font>
       </Label>
+      <ScrollPane layoutX="127.0" layoutY="471.0" prefHeight="200.0" prefWidth="287.0">
+         <content>
+            <VBox fx:id="comBox" prefHeight="617.0" prefWidth="269.0" />
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

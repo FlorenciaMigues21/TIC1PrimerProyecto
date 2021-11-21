@@ -64,15 +64,15 @@ public class MainOperator {
             tabla.addRow(i+1);
             Text titulo = new Text(publicList.get(i).getTitle());
             tabla.add(titulo,0,i+1);
-            tabla.setHalignment(titulo, HPos.CENTER);
+            GridPane.setHalignment(titulo, HPos.CENTER);
             //Text estado = new Text(publicList.get(i).get) FALTA AGREGAR EL ESTADO
             Collection<Reservation> reservas = reservManager.getAllReservationFromPublication(publicList.get(i));
             ArrayList<Reservation> reservasList = new ArrayList<>(reservas);
             Text cantidadReservas = new Text(Integer.toString(reservas.size()));
             tabla.add(cantidadReservas,2,i+1);
-            tabla.setHalignment(cantidadReservas, HPos.CENTER);
+            GridPane.setHalignment(cantidadReservas, HPos.CENTER);
             Button botonReserva = new Button();
-            tabla.setHalignment(botonReserva, HPos.CENTER);
+            GridPane.setHalignment(botonReserva, HPos.CENTER);
             int finalI = i;
             botonReserva.setOnAction(new EventHandler<ActionEvent>() {
                 @Override

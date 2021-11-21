@@ -2,19 +2,26 @@ package proyecto.ui.admin;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import proyecto.Main;
+import proyecto.business.entities.Admin;
 import proyecto.business.entities.Publication;
 import proyecto.business.entities.Reservation;
 import proyecto.business.entities_managers.PublicationManager;
 import proyecto.business.exceptions.PublicationsLoadError;
+import proyecto.ui.carrito;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,6 +29,8 @@ import java.util.Collection;
 
 @Component
 public class Admin_init {
+
+    public static Admin usuario;
 
     @Autowired
     PublicationManager pubManager;
@@ -33,6 +42,9 @@ public class Admin_init {
 
     @FXML
     private GridPane expValidadas;
+
+    @FXML
+    private Button crearOp;
 
     ArrayList<Publication> publicVal;
     ArrayList<Publication> publicNoVal;
@@ -77,16 +89,14 @@ public class Admin_init {
 
 
     private void setExrencieAValidar(){
+        removeRow(false);
         for(int i=0; i < publicNoVal.size() ; i++){
-            expAValidar.addRow(i+1);
+            expAValidar.addRow(i);
             Text titulo = new Text(publicNoVal.get(i).getTitle());
-            expAValidar.add(titulo,0,i+1);
-            expAValidar.setHalignment(titulo, HPos.CENTER);
+            expAValidar.add(titulo,0,i);
             Text operador = new Text(publicNoVal.get(i).getOperador().getUsername());
-            expAValidar.add(operador,1,i+1);
-            expAValidar.setHalignment(operador, HPos.CENTER);
+            expAValidar.add(operador,1,i);
             Button Validar = new Button();
-            expAValidar.setHalignment(Validar, HPos.CENTER);
             int finalI = i;
             Validar.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -95,19 +105,20 @@ public class Admin_init {
                     showAlert("La publicación fue aprobada","Ahora estará en la tabla siguiente");
                 }
             });
+            expAValidar.add(Validar,2,i);
         }
     }
 
     private void setExperienciasValidadas(){
+        removeRow(true);
         for(int i=0; i < publicVal.size() ; i++){
-            expValidadas.addRow(i+1);
+            expValidadas.addRow(i);
             Text titulo = new Text(publicVal.get(i).getTitle());
-            expValidadas.add(titulo,0,i+1);
-            expValidadas.setHalignment(titulo, HPos.CENTER);
+            expValidadas.add(titulo,0,i);
             Text operador = new Text(publicVal.get(i).getOperador().getUsername());
-            expValidadas.add(operador,1,i+1);
-            expValidadas.setHalignment(operador, HPos.CENTER);
-            //AGREGAR CALIFICACION
+            expValidadas.add(operador,1,i);
+            Text calificacion = new Text(String.valueOf(publicVal.get(i).getCalification()));
+            expValidadas.add(calificacion,2,i);
         }
     }
     private void showAlert(String title, String contextText) {
@@ -116,6 +127,29 @@ public class Admin_init {
         alert.setHeaderText(null);
         alert.setContentText(contextText);
         alert.showAndWait();
+    }
+
+    @FXML
+    void AgregarOp(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(logInOperador.class.getResourceAsStream("LogInOperador.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    private void removeRow(boolean choose){
+        if (choose) {
+            while (expValidadas.getRowConstraints().size() > 0) {
+                expValidadas.getRowConstraints().remove(0);
+            }
+        }
+        else{
+            while (expAValidar.getRowConstraints().size() > 0) {
+                expAValidar.getRowConstraints().remove(0);
+            }
+        }
     }
 }
 

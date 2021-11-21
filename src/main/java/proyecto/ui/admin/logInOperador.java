@@ -1,4 +1,4 @@
-package proyecto.ui;
+package proyecto.ui.admin;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +17,8 @@ import proyecto.business.entities.Country;
 import proyecto.business.entities.Tourist;
 import proyecto.business.entities.TouristOperator;
 import proyecto.business.entities_managers.UserManager;
+import proyecto.business.exceptions.InvalidUserInformation;
+import proyecto.business.exceptions.UserAlreadyExist;
 import proyecto.ui.operator.MainOperator;
 
 import java.io.IOException;
@@ -52,16 +54,9 @@ public class logInOperador {
     @FXML
     private TextField username;
 
-    void Next(TouristOperator operador) throws IOException {
+    void Next() throws IOException {
         Stage stage2 = (Stage) this.btnSignUp.getScene().getWindow();
         stage2.close();
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
-        Parent root = fxmlLoader.load(MainOperator.class.getResourceAsStream("ReservationView.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
-        MainOperator.operador = operador;
     }
 
     @FXML
@@ -74,7 +69,7 @@ public class logInOperador {
 
             showAlert(
                     "Error",
-                    "Please, complete all the fields");
+                    "Por favor, complete todos los espacios");
 
         } else {
 
@@ -87,14 +82,14 @@ public class logInOperador {
                 String tel = telefono.getText();
                 String nombre = nombreOp.getText();
                 if (passwordUser.equals(ConfirmPassword)) {
-                    TouristOperator operador = new TouristOperator(passwordUser,name,mail,false,tel,false,1,nombre);
-                    showAlert("Tu cuenta fue creada!");
-                    Next(operador);
+                    TouristOperator operador = new TouristOperator(passwordUser,name,mail,false,tel,false,0,nombre);
+                    userMan.addUser(operador);
+                    Next();
 
                 }else{
                     showAlert("Incorrect passwords","Incorrect passwords");
                 }
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException | InvalidUserInformation | UserAlreadyExist e) {
 
                 showAlert(
                         "Invalid Information",

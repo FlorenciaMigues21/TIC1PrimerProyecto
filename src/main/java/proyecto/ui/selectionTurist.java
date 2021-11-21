@@ -21,6 +21,8 @@ import proyecto.business.entities.Typeofactivities;
 import proyecto.business.entities.User;
 import proyecto.business.entities_managers.TypeofactivitiesManager;
 import proyecto.business.entities_managers.UserManager;
+import proyecto.business.exceptions.InvalidUserInformation;
+import proyecto.business.exceptions.UserAlreadyExist;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,10 +69,11 @@ public class selectionTurist {
     }
 
     @FXML
-    public void saveSelect(ActionEvent actionEvent) throws IOException {
+    public void saveSelect(ActionEvent actionEvent) throws IOException, InvalidUserInformation, UserAlreadyExist {
         handleOptions();
         choiceBoxOption();
         estaciones();
+        controlador.addUser(userActual);
         userActual.setIntereses(gustos);
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
@@ -127,10 +130,13 @@ public class selectionTurist {
         gustoViaje.getItems().addAll(gusto);
         ArrayList<Typeofactivities> listType = new ArrayList<>(manType.getAllActivityTypes());
         for (Typeofactivities typeofactivities : listType) {
-            CheckBox type = new CheckBox();
-            type.setId(typeofactivities.getName());
-            type.setText(typeofactivities.getName());
-            typeList.getChildren().add(type);
+            if (!typeofactivities.getName().equals("Verano") && !typeofactivities.getName().equals("Invierno") && !typeofactivities.getName().equals("Otoño") && !typeofactivities.getName().equals("Primavera")
+                && !typeofactivities.getName().equals("Confort") && !typeofactivities.getName().equals("Alternativo") && !typeofactivities.getName().equals("Lujo")){
+                CheckBox type = new CheckBox();
+                type.setId(typeofactivities.getName());
+                type.setText(typeofactivities.getName());
+                typeList.getChildren().add(type);
+            }
         }
     }
 }
