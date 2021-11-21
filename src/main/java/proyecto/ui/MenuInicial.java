@@ -2,6 +2,7 @@ package proyecto.ui;
 
 
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.AnchorPane;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,9 @@ public class MenuInicial {
     private IndexingService indMan;
 
     @FXML
+    private AnchorPane inicio;
+
+    @FXML
     private Button btnNext;
 
     @FXML
@@ -62,12 +66,24 @@ public class MenuInicial {
     private ChoiceBox<String> tipoUsuario;
 
     public void initialize() {
-        try {
-            indMan.initiateIndexing();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        inicio.sceneProperty().addListener(((observable, oldValue, newValue) -> {
+            if (oldValue == null && newValue != null) {
+                newValue.windowProperty().addListener((observable1, oldValue1, newValue1) -> {
+                            if (oldValue1 == null && newValue1 != null) {
+                                Stage stage = (Stage) inicio.getScene().getWindow();
+                                try {
+                                    indMan.initiateIndexing();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                loadTipoUsuario();
+                            }
+                        }
+                );
+            }
         }
-        loadTipoUsuario();
+        ));
+
     }
 
     private void loadTipoUsuario(){

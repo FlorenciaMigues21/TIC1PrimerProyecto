@@ -341,8 +341,8 @@ public class ExperienceDisplayOperator{
     public void medidasIncluidas(ActionEvent actionEvent) {
         Text medida = new Text();
         Hygiene newItem = new Hygiene();
-        newItem.setMedidas(itemInc.getText());
-        medida.setText(itemInc.getText());
+        newItem.setMedidas(itemMed.getText());
+        medida.setText(itemMed.getText());
         listasHigiene.add(newItem);
         higieneInc.getChildren().add(medida);
     }
