@@ -318,7 +318,7 @@ public class Publication {
         this.incluido = incluido;
     }
 
-    @NonNull
+    @Nullable
     public Time getHourStart() {
         return hourStart;
     }
@@ -327,7 +327,7 @@ public class Publication {
         this.hourStart = hourStart;
     }
 
-    @NotNull
+    @Nullable
     public Time getHourFinish() {
         return hourFinish;
     }
