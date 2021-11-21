@@ -1,4 +1,4 @@
-# TIC1 PrimerProyecto (Search It)
+# TIC1 PrimerProyecto (Search Me!)
 Documento en el que se indican los pasos para la correcta instalación
 y ejecución del progama.
 
