@@ -229,6 +229,9 @@ public class ExperienceDisplayOperator{
             if(esPrecioInt){
                 newPublication.setCantidad(Float.parseFloat(precio.getText()));
             }
+            newPublication.setPrecio(Integer.parseInt(precio.getText()));
+            newPublication.setTitle(titulo.getText());
+            newPublication.setOperador(operador);
             newPublication.setPhone(telefono.getText());
             newPublication.setUbication(direccion.getText());
             newPublication.setDescription(descripcion.getText());
@@ -381,18 +384,12 @@ public class ExperienceDisplayOperator{
         );
 
         // Obtener la imagen seleccionada
-        List<File> imgFile = fileChooser.showOpenMultipleDialog(null);
+        File imgFile = fileChooser.showOpenDialog(null);
         listaFotos = new ArrayList<>();
-        if(imgFile!=null) {
-            for (File file : imgFile) {
-                Photo newPhoto = new Photo();
-                newPhoto.getByteArrayImg(file.getPath());
-                listaFotos.add(newPhoto);
-            }
-        }
-        else{
-            showAlert("Error","Debe subir 5 imágenes");
-        }
+        Photo newPhoto = new Photo();
+        newPhoto.getByteArrayImg(imgFile.getPath());
+        listaFotos.add(newPhoto);
+
 
         /*
         // Mostar la imagen
