@@ -13,6 +13,8 @@ import proyecto.business.entities.Comentary;
 import proyecto.business.entities.Publication;
 import proyecto.business.entities.Tourist;
 import proyecto.business.entities_managers.ComentaryManager;
+import proyecto.business.exceptions.ComentaryCreationError;
+import proyecto.business.exceptions.DataBaseError;
 
 public class Comentario {
 
@@ -43,13 +45,13 @@ public class Comentario {
     }
 
     @FXML
-    public void CrearComentario(ActionEvent actionEvent) {
+    public void CrearComentario(ActionEvent actionEvent) throws ComentaryCreationError, DataBaseError {
         if(comentarioText.getText()==null || calificationNumber.getValue() == null){
             showAlert("Por favor, complete todos los campos.");
         }
         else{
             Comentary newComentario = new Comentary(turistaActual,publiActual,calificationNumber.getValue(),comentarioText.getText());
-
+            comManager.addComentary(newComentario);
             showAlert("Gracias por calificarnos y darnos tu opinión!");
             close(actionEvent);
         }

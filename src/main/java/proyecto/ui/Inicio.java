@@ -169,11 +169,11 @@ public class Inicio {
         Parent root = fxmlLoader.load(search.class.getResourceAsStream("search.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
-        stage.show();
         doubleObjet newDouble = new doubleObjet();
         newDouble.setTurista(turista);
         newDouble.setItem(item.getText());
         stage.setUserData(newDouble);
+        stage.show();
         Stage stage2 = (Stage) this.setting.getScene().getWindow();
         stage2.close();
     }
