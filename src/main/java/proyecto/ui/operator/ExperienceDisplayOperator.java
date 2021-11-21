@@ -27,6 +27,7 @@ import proyecto.business.entities_managers.PublicationManager;
 import proyecto.business.entities_managers.TypeofactivitiesManager;
 import javafx.stage.Stage;
 import proyecto.business.exceptions.*;
+import proyecto.business.utils.Utilities;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -235,8 +236,10 @@ public class ExperienceDisplayOperator{
             newPublication.setPhone(telefono.getText());
             newPublication.setUbication(direccion.getText());
             newPublication.setDescription(descripcion.getText());
-            newPublication.setDatefrom(convertToDateViaSqlDate(fechaIni.getValue()));
-            newPublication.setDateto(convertToDateViaSqlDate(fechaFin.getValue()));
+            LocalDate ldi = fechaIni.getValue();
+            newPublication.setDatefrom(Utilities.createDate(Integer.valueOf(ldi.getYear()),Integer.valueOf(ldi.getMonthValue()),Integer.valueOf(ldi.getDayOfMonth())));
+            LocalDate ldf = fechaIni.getValue();
+            newPublication.setDateto(Utilities.createDate(Integer.valueOf(ldf.getYear()),Integer.valueOf(ldf.getMonthValue()),Integer.valueOf(ldf.getDayOfMonth())));
             newPublication.setMedidas_de_higiene(listasHigiene);
             newPublication.setIncluido(listasIncluidos);
             subaTipoAct();
@@ -356,12 +359,6 @@ public class ExperienceDisplayOperator{
         medida.setText(itemMed.getText());
         listasHigiene.add(newItem);
         higieneInc.getChildren().add(medida);
-    }
-
-    //Agregar horarios incluido, falta agregar a la publicacion
-
-    private Date convertToDateViaSqlDate(LocalDate dateToConvert) {
-        return java.sql.Date.valueOf(dateToConvert);
     }
 
     private Time convertTime(String hours,String min) throws ParseException {

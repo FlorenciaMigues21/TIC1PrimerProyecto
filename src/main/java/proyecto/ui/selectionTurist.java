@@ -90,8 +90,8 @@ public class selectionTurist {
         handleOptions();
         choiceBoxOption();
         estaciones();
-        controlador.addUser(userActual);
         userActual.setIntereses(gustos);
+        controlador.addUser(userActual);
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(Inicio.class.getResourceAsStream("Inicio.fxml"));

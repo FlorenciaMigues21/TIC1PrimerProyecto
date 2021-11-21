@@ -24,10 +24,12 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
+import proyecto.business.utils.Utilities;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Component
 public class signUpMenu {
@@ -162,7 +164,8 @@ public class signUpMenu {
                 String pais_residente = pais.getValue();
                 String id = docIdentidad.getText();
                 if (passwordUser.equals(ConfirmPassword)) {
-                    Tourist turista = new Tourist(passwordUser,name,mail,false,tel,false,java.sql.Date.valueOf(fecha_nacimiento.getValue()),id,new Country(pais_residente));
+                    LocalDate ld= fecha_nacimiento.getValue();
+                    Tourist turista = new Tourist(passwordUser,name,mail,false,tel,false, Utilities.createDate(Integer.valueOf(ld.getYear()),Integer.valueOf(ld.getMonthValue()),Integer.valueOf(ld.getDayOfMonth())),id,new Country(pais_residente));
                     Next(turista);
 
                 }else{

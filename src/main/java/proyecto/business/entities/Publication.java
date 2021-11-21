@@ -7,22 +7,16 @@ import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Index;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
-import org.hibernate.search.jpa.FullTextEntityManager;
-import org.hibernate.search.jpa.FullTextQuery;
-import org.hibernate.search.jpa.Search;
-import org.hibernate.search.query.dsl.QueryBuilder;
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Time;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Collection;
 
 @Entity
 @Indexed(index = "idEvent")
@@ -136,6 +130,7 @@ public class Publication {
     }
 
     @NonNull
+    @Temporal(TemporalType.DATE)
     public Date getDatefrom() {
         return Datefrom;
     }
@@ -145,6 +140,7 @@ public class Publication {
     }
 
     @NotNull
+    @Temporal(TemporalType.DATE)
     public Date getDateto() {
         return Dateto;
     }
@@ -319,6 +315,7 @@ public class Publication {
     }
 
     @Nullable
+    @Temporal(TemporalType.TIME)
     public Time getHourStart() {
         return hourStart;
     }
@@ -328,6 +325,7 @@ public class Publication {
     }
 
     @Nullable
+    @Temporal(TemporalType.TIME)
     public Time getHourFinish() {
         return hourFinish;
     }

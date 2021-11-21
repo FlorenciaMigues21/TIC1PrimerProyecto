@@ -3,8 +3,8 @@ package proyecto.business.entities;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -55,6 +55,7 @@ public class Tourist extends User{
     }
 
     @NotNull
+    @Temporal(TemporalType.DATE)
     public Date getBirthdate() {
         return birthdate;
     }
