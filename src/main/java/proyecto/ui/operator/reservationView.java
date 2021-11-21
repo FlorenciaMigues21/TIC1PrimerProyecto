@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -20,6 +21,8 @@ import proyecto.business.entities.TouristOperator;
 import proyecto.business.entities_managers.ReservationManager;
 import proyecto.business.exceptions.DataBaseError;
 import proyecto.business.exceptions.InvalidPublicationInformation;
+import proyecto.business.exceptions.InvalidUserInformation;
+import proyecto.business.exceptions.PublicationsLoadError;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,6 +36,8 @@ public class reservationView {
     public static Publication publicActual;
 
     @FXML
+    private AnchorPane ap;
+    @FXML
     private Button back;
 
     @FXML
@@ -42,9 +47,28 @@ public class reservationView {
     private GridPane tablaReserva;
 
     public void initialize() throws InvalidPublicationInformation, DataBaseError {
-        agregarDatosReserva();
-        NombreExperiencia();
+        ap.sceneProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                newValue.windowProperty().addListener((observable1, oldValue1, newValue1) -> {
+                            if (newValue1 != null) {
+                                Stage stage = (Stage) ap.getScene().getWindow();
+                                publicActual = (Publication) stage.getUserData();
+                                try {
+                                    agregarDatosReserva();
+                                    NombreExperiencia();
+                                } catch (InvalidPublicationInformation invalidPublicationInformation) {
+                                    invalidPublicationInformation.printStackTrace();
+                                } catch (DataBaseError dataBaseError) {
+                                    dataBaseError.printStackTrace();
+                                }
+                            }
+                        }
+                );
+            }
+        }
+        ));
     }
+
     //FALTA ID @FIXME
     private void agregarDatosReserva() throws InvalidPublicationInformation, DataBaseError {
         Collection<Reservation> reservas = reserManager.getAllReservationFromPublication(publicActual);
@@ -67,12 +91,6 @@ public class reservationView {
 
     @FXML
     public void goBack(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
-        Parent root = fxmlLoader.load(MainOperator.class.getResourceAsStream("ReservationView.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
         Node source = (Node)  actionEvent.getSource();
         Stage stage1  = (Stage) source.getScene().getWindow();
         stage1.close();

@@ -97,11 +97,11 @@ public class MenuInicial {
     }
     @FXML
     void NextOperator(TouristOperator operadorTur) throws IOException {
-        MainOperator.operadorTurist = operadorTur;
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(MainOperator.class.getResourceAsStream("ReservationView.fxml"));
         Stage stage = new Stage();
+        stage.setUserData(operadorTur);
         stage.setScene(new Scene(root));
         stage.show();
     }

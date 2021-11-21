@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.ui.operator.ExperienceDisplayOperator">
+<AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.ui.operator.ExperienceDisplayOperator">
    <children>
       <TextField fx:id="titulo" layoutX="54.0" layoutY="288.0" prefHeight="46.0" prefWidth="412.0" promptText=" Titulo de la experiencia" />
       <AnchorPane prefHeight="58.0" prefWidth="1200.0" style="-fx-background-color: #004aad;">

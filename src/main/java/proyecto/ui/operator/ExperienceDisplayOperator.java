@@ -4,11 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -16,6 +20,7 @@ import javafx.stage.WindowEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javafx.scene.text.Text;
+import proyecto.Main;
 import proyecto.business.entities.*;
 import proyecto.business.entities_managers.PhotoManager;
 import proyecto.business.entities_managers.PublicationManager;
@@ -54,6 +59,9 @@ public class ExperienceDisplayOperator{
 
 
     public static TouristOperator operador;
+
+    @FXML
+    private AnchorPane ap;
 
     @FXML
     private TextField Horario;
@@ -148,10 +156,7 @@ public class ExperienceDisplayOperator{
     @FXML
     private VBox higieneInc;
 
-    @FXML
-    void goBack(ActionEvent event) {
-        System.out.println("Hi");
-    }
+
 
     ArrayList<Hygiene> listasHigiene= new ArrayList<>();
     ArrayList<IncludedInPublication> listasIncluidos = new ArrayList<>();
@@ -159,16 +164,36 @@ public class ExperienceDisplayOperator{
 
     @FXML
     public void initialize() throws InvalidUserInformation, PublicationsLoadError, InvalidPublicationInformation, DataBaseError {
-        /*System.out.println("Hola");
+        ap.sceneProperty().addListener(((observable, oldValue, newValue) -> {
+                    if (oldValue == null && newValue != null) {
+                        newValue.windowProperty().addListener((observable1, oldValue1, newValue1) -> {
+                                    if (oldValue1 == null && newValue1 != null) {
+                                        Stage stage = (Stage) ap.getScene().getWindow();
+                                        operador = (TouristOperator) stage.getUserData();
+                                        loadEstacion();
+                                    }
+                                }
+                        );
+                    }
+                }
+                ));
+    }
 
-        Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-        operador = (TouristOperator) stage.getUserData();*/
-        loadEstacion();
+    @FXML
+    void goBack(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(MainOperator.class.getResourceAsStream("ReservationView.fxml"));
+        Stage stage = new Stage();
+        stage.setUserData(operador);
+        stage.setScene(new Scene(root));
+        stage.show();
+        Stage stage2 = (Stage) this.ap.getScene().getWindow();
+        stage2.close();
     }
 
     //GUARDA INFORMACION
-    public void saveExperience(ActionEvent actionEvent){
+    public void saveExperience(ActionEvent actionEvent) throws IOException {
         if (titulo.getText() == null || precio.getText().equals("") ||
                 descripcion.getText() == null || higieneInc.getChildren().size() == 0 || higieneInc.getChildren().size() == 0 ||
                 fechaIni.getValue() == null || fechaFin.getValue() == null || direccion.getText() == null || direccion.getText().equals("")) {
@@ -206,7 +231,7 @@ public class ExperienceDisplayOperator{
             choiceBoxOption();
             estaciones();
             newPublication.setListaActividadades(tipoActividad);
-
+            goBack(actionEvent);
 
         }
     }
@@ -343,6 +368,8 @@ public class ExperienceDisplayOperator{
 
         // Obtener la imagen seleccionada
         File imgFile = fileChooser.showOpenDialog(null);
+
+        //Photo newPhoto
         /*
         // Mostar la imagen
         if (imgFile != null) {
