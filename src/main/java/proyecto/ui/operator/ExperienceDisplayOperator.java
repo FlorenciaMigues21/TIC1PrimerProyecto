@@ -26,10 +26,7 @@ import proyecto.business.entities_managers.PhotoManager;
 import proyecto.business.entities_managers.PublicationManager;
 import proyecto.business.entities_managers.TypeofactivitiesManager;
 import javafx.stage.Stage;
-import proyecto.business.exceptions.DataBaseError;
-import proyecto.business.exceptions.InvalidPublicationInformation;
-import proyecto.business.exceptions.InvalidUserInformation;
-import proyecto.business.exceptions.PublicationsLoadError;
+import proyecto.business.exceptions.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -205,7 +202,7 @@ public class ExperienceDisplayOperator{
     }
 
     //GUARDA INFORMACION
-    public void saveExperience(ActionEvent actionEvent) throws IOException, ParseException {
+    public void saveExperience(ActionEvent actionEvent) throws IOException, ParseException, PublicationCreationError {
         if (titulo.getText() == null || precio.getText().equals("") ||
                 descripcion.getText() == null || higieneInc.getChildren().size() == 0 || higieneInc.getChildren().size() == 0 ||
                 fechaIni.getValue() == null || fechaFin.getValue() == null || direccion.getText() == null || direccion.getText().equals("")) {
@@ -260,7 +257,7 @@ public class ExperienceDisplayOperator{
                 newPublication.setUniqueReservation(false);
             }
             goBack(actionEvent);
-
+            publicMan.createAndUpdatePublication(newPublication);
         }
     }
 

@@ -77,7 +77,18 @@ public class signUpMenu {
     ArrayList<Country> paises;
 
     public void initialize() {
-        addCountries();
+        login.sceneProperty().addListener(((observable, oldValue, newValue) -> {
+            if (oldValue == null && newValue != null) {
+                newValue.windowProperty().addListener((observable1, oldValue1, newValue1) -> {
+                            if (oldValue1 == null && newValue1 != null) {
+                                Stage stage = (Stage) login.getScene().getWindow();
+                                addCountries();
+                            }
+                        }
+                );
+            }
+        }
+        ));
     }
 
     private void addCountries(){
@@ -120,9 +131,10 @@ public class signUpMenu {
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(selectionTurist.class.getResourceAsStream("SelectionTurist.fxml"));
         Stage stage = new Stage();
+        stage.setUserData(turista);
         stage.setScene(new Scene(root));
         stage.show();
-        selectionTurist.userActual = turista;
+
     }
 
 

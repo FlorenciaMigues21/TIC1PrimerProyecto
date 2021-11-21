@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,9 @@ public class selectionTurist {
     static Tourist userActual;
 
     @FXML
+    private AnchorPane selection;
+
+    @FXML
     Button siguiente;
 
     @FXML
@@ -65,9 +69,19 @@ public class selectionTurist {
     Collection<Typeofactivities> gustos;
 
     public void initialize() {
-
-        System.out.println(userActual);
-        loadEstacion();
+        selection.sceneProperty().addListener(((observable, oldValue, newValue) -> {
+            if (oldValue == null && newValue != null) {
+                newValue.windowProperty().addListener((observable1, oldValue1, newValue1) -> {
+                            if (oldValue1 == null && newValue1 != null) {
+                                Stage stage = (Stage) selection.getScene().getWindow();
+                                userActual = (Tourist) stage.getUserData();
+                                loadEstacion();
+                            }
+                        }
+                );
+            }
+        }
+        ));
     }
 
     @FXML
