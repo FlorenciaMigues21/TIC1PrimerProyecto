@@ -22,6 +22,8 @@ import proyecto.business.exceptions.InvalidUserInformation;
 
 import java.io.IOException;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 
 @Component
@@ -76,7 +78,7 @@ public class carrito {
             if (i==0){
                 Text name = new Text(reservaciones.get(0).getPublication().getTitle());
                 String start = reservaciones.get(0).getHourStart() + ":00";
-                Text hora = new Text(start+reservaciones.get(0).getDate_reservation());
+                Text hora = new Text(start+" "+ LocalDate.ofInstant(reservaciones.get(0).getDate_reservation().toInstant(), ZoneId.systemDefault()));
                 Text telefono = new Text(reservaciones.get(0).getPublication().getPhone());
                 Text estado;
                 if(reservaciones.get(0).isValidated_reservation()){

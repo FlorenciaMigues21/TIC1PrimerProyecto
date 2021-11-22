@@ -79,7 +79,7 @@
          </children>
       </GridPane>
       <Button fx:id="newExperience" layoutX="360.0" layoutY="74.0" mnemonicParsing="false" onAction="#AddExperience" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #004aad; -fx-background-radius: 10px;" text="Agregar una nueva experiencia" textFill="WHITE" />
-      <GridPane fx:id="tabla" layoutX="31.0" layoutY="250.0" prefHeight="329.0" prefWidth="1070.0">
+      <GridPane fx:id="tabla" layoutX="42.0" layoutY="247.0" prefHeight="329.0" prefWidth="1070.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="282.0" minWidth="10.0" prefWidth="219.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="167.0" />
