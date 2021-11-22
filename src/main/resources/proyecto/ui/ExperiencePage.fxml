@@ -168,7 +168,7 @@
             </Text>
             <Button fx:id="buttonReserva" layoutX="49.0" layoutY="466.0" mnemonicParsing="false" onAction="#Reserv" prefHeight="27.0" prefWidth="104.0" style="-fx-background-color: #004aad;" text="Reservar" textFill="WHITE" />
             <TextField fx:id="cantPer" layoutX="58.0" layoutY="312.0" prefHeight="25.0" prefWidth="86.0" />
-            <Button fx:id="calcular" onAction="#calcularTotal" layoutX="50.0" layoutY="361.0" mnemonicParsing="false" style="-fx-background-color: #004aad;" text="Calcular total" textFill="WHITE" />
+            <Button fx:id="calcular" layoutX="50.0" layoutY="361.0" mnemonicParsing="false" onAction="#calcularTotal" style="-fx-background-color: #004aad;" text="Calcular total" textFill="WHITE" />
          </children>
       </Pane>
       <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="128.0" layoutY="137.0">
@@ -183,6 +183,5 @@
          </content>
       </ScrollPane>
       <Label layoutX="177.0" layoutY="563.0" text="Ya nos visitaste?" />
-      <Button mnemonicParsing="false" text="Button" />
    </children>
 </AnchorPane>
