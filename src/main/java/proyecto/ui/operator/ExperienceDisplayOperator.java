@@ -146,7 +146,7 @@ public class ExperienceDisplayOperator{
     ArrayList<Hygiene> listasHigiene= new ArrayList<>();
     ArrayList<IncludedInPublication> listasIncluidos = new ArrayList<>();
     ArrayList<Typeofactivities> tipoActividad = new ArrayList<>();
-    Collection<Photo> listaFotos;
+    Collection<Photo> listaFotos = new ArrayList<>();;
 
     @FXML
     public void initialize() throws InvalidUserInformation, PublicationsLoadError, InvalidPublicationInformation, DataBaseError {
@@ -359,7 +359,6 @@ public class ExperienceDisplayOperator{
 
         // Obtener la imagen seleccionada
         File imgFile = fileChooser.showOpenDialog(null);
-        listaFotos = new ArrayList<>();
         Photo newPhoto = new Photo();
         newPhoto.getByteArrayImg(imgFile.getPath());
         listaFotos.add(newPhoto);
