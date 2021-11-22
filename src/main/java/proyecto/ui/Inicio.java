@@ -83,8 +83,12 @@ public class Inicio {
                                 System.out.println(turista);
                                 try {
                                     loadInfo();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                try{
                                     loadInfo1();
-                                } catch (IOException | DataBaseError e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                             }
@@ -97,7 +101,8 @@ public class Inicio {
     }
 
 
-    private void loadInfo() throws IOException, DataBaseError {
+    private void loadInfo() {
+        try{
         list = new ArrayList<>(pubMan.getRecomendedPublications(turista.getMail()));
         gustos1.getChildren().clear();
         for(int i = 0; i<list.size();i++){
@@ -140,8 +145,12 @@ public class Inicio {
             newItem.getChildren().add(newButton);
             gustos1.getChildren().add(newItem);
         }
+        } catch (IOException | DataBaseError e) {
+            e.printStackTrace();
+        }
     }
-    private void loadInfo1() throws IOException, DataBaseError {
+    private void loadInfo1()  {
+        try{
         ArrayList<Publication> publicaciones = new ArrayList<>();
         ArrayList<String> estaciones = returnType();
         for(int j=0;j<estaciones.size();j++){
@@ -187,6 +196,9 @@ public class Inicio {
             });
             newItem.getChildren().add(newButton);
             gustos2.getChildren().add(newItem);
+        }
+        } catch (IOException | DataBaseError e) {
+            e.printStackTrace();
         }
     }
     @FXML

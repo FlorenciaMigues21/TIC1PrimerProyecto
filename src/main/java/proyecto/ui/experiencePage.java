@@ -304,7 +304,7 @@ public class experiencePage {
         boxComentary.getChildren().clear();
 
         ArrayList<Comentary> comentarios = new ArrayList<>(comManager.getComentaryOfPublication(publicacionActual));
-        int calificaciones = 0;
+        float calificaciones = 0.f;
         if(comentarios.size()>0) {
             for (int i = 0; i < comentarios.size(); i++) {
                 Label usuarioNombre = new Label(comentarios.get(i).getTurista().getUsername());
