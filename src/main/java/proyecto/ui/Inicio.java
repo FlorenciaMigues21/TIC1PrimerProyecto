@@ -83,6 +83,7 @@ public class Inicio {
                                 System.out.println(turista);
                                 try {
                                     loadInfo();
+                                    loadInfo1();
                                 } catch (IOException | DataBaseError e) {
                                     e.printStackTrace();
                                 }
