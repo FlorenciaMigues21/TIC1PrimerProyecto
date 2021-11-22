@@ -15,14 +15,13 @@ JDK
 COMO OPERAR EN LA APLICACIÓN:
 
 Inicialmente se presentara una pantalla de inicio en la cual debe registrar su usuario o si este esta creado iniciar sesión.
-
+Email: Admin
+Contraseña: admin
 
 ADMIN:
 
-Debe ingresar un usuario administrador en la base de datos mysql de la siguiente forma:
+Por defecto viene creado un usuario administrador, debe ingresar los siguientes datos:
 
-ej:  INSERT INTO admin(mail,blocked,password,phone,username) VALUES ("admin@gmail.com",0,"admin",1,"admin")
-en este caso iniciara sesion con "admin@gmail.com" y "admin"
 
 Cuando ingrese en la app podra validar experiencias a su vez que visualizarlas.
 
