@@ -25,6 +25,7 @@ import proyecto.business.entities_managers.PublicationManager;
 import proyecto.business.exceptions.PublicationCreationError;
 import proyecto.business.exceptions.PublicationsLoadError;
 import proyecto.ui.carrito;
+import proyecto.ui.operator.reservationView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -131,18 +132,31 @@ public class Admin_init {
             Validar.setPrefSize(58,27);
             Validar.setText("Validar");
             expAValidar.add(Validar,2,i);
-            /*Button Ver = new Button();
+            Button Ver = new Button();
+            Ver.setText("Ver");
+            Ver.setPrefSize(58,27);
             Ver.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    publicNoVal.get(finalI).setValidated(true);
-                    showAlert("La publicación fue aprobada","Ahora estará en la tabla siguiente");
+                    try {
+                        Next(event,publicNoVal.get(finalI));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
-            expAValidar.add(Validar,2,i);*/
+            expAValidar.add(Ver,3,i);
         }
     }
-
+    void Next(ActionEvent event,Publication publicacion) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(experienceView.class.getResourceAsStream("experienceView.fxml"));
+        Stage stage = new Stage();
+        stage.setUserData(publicacion);
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
     private void setExperienciasValidadas(){
         removeRow(true);
         for(int i=0; i < publicVal.size() ; i++){

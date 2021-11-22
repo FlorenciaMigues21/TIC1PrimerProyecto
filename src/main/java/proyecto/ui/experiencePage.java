@@ -154,7 +154,7 @@ public class experiencePage {
                                 }
                                 panelReserva();
                                 if (!publicacionActual.isReservationAvailable()) {
-                                    panelEstado = false;
+                                    buttonReserva.setVisible(false);
                                 }
                                 paneCal.setVisible(panelEstado);
 
