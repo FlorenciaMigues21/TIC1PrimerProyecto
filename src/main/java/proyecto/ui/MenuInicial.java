@@ -146,7 +146,6 @@ public class MenuInicial {
                     Tourist userSignIn = controlador.logIn(new Tourist(passowrdUser, mail));
                     if (userSignIn.getPassword().equals(passowrdUser)) {
 
-                        showAlert("Acceso correcto!");
                         NextTourist(userSignIn);
                         close(event);
 
@@ -166,7 +165,6 @@ public class MenuInicial {
                         System.out.println(userSignIn);
                         if (userSignIn.getPassword().equals(passowrdUser)) {
 
-                            showAlert("Acceso correcto!");
                             NextOperator(userSignIn);
                             close(event);
                         }else {
@@ -186,7 +184,6 @@ public class MenuInicial {
                     Admin userSignIn = controladorAdmin.logIn(new Admin(passowrdUser, mail));
                     if (userSignIn.getPassword().equals(passowrdUser)) {
 
-                        showAlert("Acceso correcto!");
                         close(event);
                         NextAdmin(userSignIn);
 
