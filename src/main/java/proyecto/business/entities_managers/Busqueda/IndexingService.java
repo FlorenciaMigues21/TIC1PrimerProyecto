@@ -23,7 +23,10 @@ public class IndexingService {
 
         log.info("Initiating indexing...");
         FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
-        fullTextEntityManager.createIndexer(Publication.class).startAndWait();                   //o cambio por .typesToIndexInParallel(2).threadsToLoadObjects(5).
+        try {fullTextEntityManager.createIndexer(Publication.class).startAndWait();}
+        catch (Exception NoIndexo){
+            System.out.println("NO INDEXO UN CARAJO");
+        };                                                                               //o cambio por .typesToIndexInParallel(2).threadsToLoadObjects(5).
         log.info("All entities indexed");
     }
 }

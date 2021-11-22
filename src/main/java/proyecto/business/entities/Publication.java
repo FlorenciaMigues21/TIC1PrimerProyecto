@@ -1,6 +1,9 @@
 package proyecto.business.entities;
 
 import com.sun.istack.NotNull;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
 import org.hibernate.annotations.Formula;
 import org.hibernate.search.annotations.*;
@@ -18,8 +21,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import java.util.ArrayList;
 
+@Getter
+@Setter
+@Data
 @Entity
-@Indexed(index = "idEvent")
+@Indexed(index = "idx_Event")
 @NormalizerDef(name="lowercase",
         filters = @TokenFilterDef(factory = LowerCaseFilterFactory.class))
 public class Publication {
@@ -34,12 +40,10 @@ public class Publication {
 
     @Field(name = "title",index = Index.YES,analyze=Analyze.YES)
     @Field(normalizer = @Normalizer(definition = "lowercase"))
-    //@Enumerated(EnumType.STRING)
     private String title;
 
     @Field (name = "description",index = Index.YES,analyze=Analyze.YES)
     @Field(normalizer = @Normalizer(definition = "lowercase"))
-    //@Enumerated(EnumType.STRING)
     @NotNull
     private String description;
 
