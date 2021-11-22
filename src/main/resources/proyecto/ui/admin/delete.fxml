@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.ui.admin.delete">
+   <children>
+      <Text layoutX="29.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email del operador:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="mail" layoutX="192.0" layoutY="62.0" prefHeight="32.0" prefWidth="336.0" promptText="Email" />
+      <Button fx:id="eliminar" layoutX="233.0" layoutY="154.0" mnemonicParsing="false" onAction="#eliminar" prefHeight="46.0" prefWidth="134.0" style="-fx-background-color: #004aad;" text="Eliminar" textFill="WHITE" />
+   </children>
+</AnchorPane>
