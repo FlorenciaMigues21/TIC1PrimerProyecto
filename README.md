@@ -15,6 +15,7 @@ JDK
 COMO OPERAR EN LA APLICACIÓN:
 
 Inicialmente se presentara una pantalla de inicio en la cual debe registrar su usuario o si este esta creado iniciar sesión.
+
 Email: Admin
 Contraseña: admin
 
