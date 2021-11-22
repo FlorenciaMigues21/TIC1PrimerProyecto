@@ -93,6 +93,8 @@ public class experienceView {
     private Text initDate1;
 
     @FXML
+    private Text operator;
+    @FXML
     void goBack(ActionEvent event) {
         Stage stage2 = (Stage) this.backButton.getScene().getWindow();
         stage2.close();
@@ -124,6 +126,7 @@ public class experienceView {
         direccion.setText(publicacion.getUbication());
         infoExp.setText(publicacion.getDescription());
         telefono.setText(publicacion.getPhone());
+        operator.setText(publicacion.getOperador().getUsername());
         puntaje.setText(String.valueOf(publicacion.getCalification()));
         initDate1.setText(String.valueOf(LocalDate.ofInstant(publicacion.getDateto().toInstant(), ZoneId.systemDefault())));
         initDate.setText(String.valueOf(LocalDate.ofInstant(publicacion.getDatefrom().toInstant(), ZoneId.systemDefault())));
