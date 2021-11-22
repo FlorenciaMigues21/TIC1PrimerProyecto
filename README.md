@@ -5,6 +5,9 @@ y ejecución del progama.
 PRESENTACIÓN: https://www.beautiful.ai/player/-Mp3QnSRkHzg2BJga8zW
 
 CONFIGURACIÓN:
+Java version 
+MySql version
+JDK
 
 COMO OPERAR EN LA APLICACIÓN:
 
