@@ -130,6 +130,9 @@ public class MainOperator {
                         publiManager.deletePublication(publicList.get(finalI));
                    }
                });
+               eliminar.setPrefSize(58,27);
+               eliminar.setText("Eliminar");
+               tabla.add(eliminar,5,i);
            }
        }
        catch (InvalidUserInformation e){

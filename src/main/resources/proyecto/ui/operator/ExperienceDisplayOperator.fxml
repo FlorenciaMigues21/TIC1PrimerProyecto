@@ -20,11 +20,6 @@
       <TextField fx:id="titulo" layoutX="54.0" layoutY="288.0" prefHeight="46.0" prefWidth="412.0" promptText=" Titulo de la experiencia" />
       <AnchorPane prefHeight="58.0" prefWidth="1200.0" style="-fx-background-color: #004aad;">
          <children>
-            <ImageView fitHeight="46.0" fitWidth="46.0" layoutX="803.0" layoutY="-1.0">
-               <image>
-                  <Image url="@/Images/Search Me(5).png" />
-               </image>
-            </ImageView>
             <Button fx:id="back" layoutX="14.0" layoutY="7.0" onAction="#goBack" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="32.0">

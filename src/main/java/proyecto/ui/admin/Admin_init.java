@@ -57,6 +57,9 @@ public class Admin_init {
     @FXML
     private Button exit;
 
+    @FXML
+    private Button eliminar;
+
     ArrayList<Publication> publicVal;
     ArrayList<Publication> publicNoVal;
     public void initialize(){
@@ -215,6 +218,16 @@ public class Admin_init {
         stage.show();
         Stage stage2 = (Stage) this.ap.getScene().getWindow();
         stage2.close();
+    }
+
+    @FXML
+    void eliminarOp(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(delete.class.getResourceAsStream("delete.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }
 
