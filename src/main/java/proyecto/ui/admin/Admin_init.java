@@ -22,6 +22,7 @@ import proyecto.business.entities.Publication;
 import proyecto.business.entities.Reservation;
 import proyecto.business.entities.TouristOperator;
 import proyecto.business.entities_managers.PublicationManager;
+import proyecto.business.exceptions.PublicationCreationError;
 import proyecto.business.exceptions.PublicationsLoadError;
 import proyecto.ui.carrito;
 
@@ -119,6 +120,11 @@ public class Admin_init {
                 @Override
                 public void handle(ActionEvent event) {
                     publicNoVal.get(finalI).setValidated(true);
+                    try {
+                        pubManager.createAndUpdatePublication(publicNoVal.get(finalI));
+                    } catch (PublicationCreationError e) {
+                        e.printStackTrace();
+                    }
                     showAlert("La publicación fue aprobada","Ahora estará en la tabla siguiente");
                 }
             });
