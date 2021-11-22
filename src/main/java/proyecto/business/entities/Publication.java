@@ -25,7 +25,6 @@ import java.util.ArrayList;
 public class Publication {
 
     @Id
-    @GeneratedValue
     private int idEvent;
 
     private Date Datefrom;
