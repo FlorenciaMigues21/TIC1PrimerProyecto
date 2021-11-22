@@ -3,9 +3,9 @@
     name: server
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    username: test
-    password: 1234
-    url: jdbc:mysql://localhost:3306/tic1
+    url: jdbc:mysql://localhost:3306/pruebas
+    username: root
+    password: admin
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL57Dialect

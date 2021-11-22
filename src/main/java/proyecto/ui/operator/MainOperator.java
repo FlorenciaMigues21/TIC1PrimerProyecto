@@ -125,20 +125,7 @@ public class MainOperator {
                eliminar.setOnAction(new EventHandler<ActionEvent>() {
                    @Override
                    public void handle(ActionEvent event) {
-                       try {
-                            Collection<Reservation> reservas = reservManager.getAllReservationFromPublication(publicList.get(finalI));
-                            for (Reservation reserva : reservas){
-                                try {
-                                    reservManager.deleteReservation(reserva);
-                                } catch (ReservationCreationError e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                       } catch (InvalidPublicationInformation e) {
-                           e.printStackTrace();
-                       } catch (DataBaseError e) {
-                           e.printStackTrace();
-                       }
+
                        publiManager.deletePublication(publicList.get(finalI));
                         showAlert("Publicación eliminada","Cuando vuelva a entrar, la publicación ya no se verá.");
                    }
