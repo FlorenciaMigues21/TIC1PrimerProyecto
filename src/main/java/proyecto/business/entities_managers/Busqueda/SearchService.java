@@ -17,9 +17,9 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class SearchService {                    //SERVICIO DE BUSQUEDA
-    //private final EntityManager entityManager;
+    private final EntityManager entityManager;
 
-    /*public List<Publication> getPublicationBasedOnWord(String word){              //QUERY DE BUSCAR PUBLICACION POR PALABRA
+    public List<Publication> getPublicationBasedOnWord(String word){              //QUERY DE BUSCAR PUBLICACION POR PALABRA
         FullTextEntityManager fullTextEntityManager =
                 Search.getFullTextEntityManager(entityManager);
 
@@ -37,7 +37,7 @@ public class SearchService {                    //SERVICIO DE BUSQUEDA
         FullTextQuery fullTextQuery = fullTextEntityManager
                 .createFullTextQuery((org.apache.lucene.search.Query) PublicationQuery, Publication.class);
         return (List<Publication>) fullTextQuery.getResultList();
-    }*/
+    }
 
 
 
