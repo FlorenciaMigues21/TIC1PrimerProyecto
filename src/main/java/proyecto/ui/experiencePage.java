@@ -209,36 +209,41 @@ public class experiencePage {
 
     //Setea los datos de la experiencia correspondiente
     public void setItems() throws IncompleteObjectException, IOException {
-        ArrayList<String> arrayPrueba = new ArrayList<>();
-        NombreAtraccion.setText(publicacionActual.getTitle());
-        direccion.setText(publicacionActual.getUbication());
-        infoExp.setText(publicacionActual.getDescription());
-        telefono.setText(publicacionActual.getPhone());
-        subirHorarios();
-        pun.setText(String.valueOf(publicacionActual.getCalification()));
         try {
+            ArrayList<String> arrayPrueba = new ArrayList<>();
+            NombreAtraccion.setText(publicacionActual.getTitle());
+            direccion.setText(publicacionActual.getUbication());
+            infoExp.setText(publicacionActual.getDescription());
+            telefono.setText(publicacionActual.getPhone());
+            pun.setText(String.valueOf(publicacionActual.getCalification()));
             AgregarComentarios();
         } catch (DataBaseError e) {
             e.printStackTrace();
         }
+        subirHorarios();
         UpPhotos();
         UpElements();
+
     }
 
     //Subir fotos
     private void UpPhotos() throws IOException {
-        Set<Photo> fotos = publicacionActual.getPhotoList();
-        Iterator<Photo> it = fotos.iterator();
-        Image newImage1 = it.next().getImageFromByteArray(276,214);
-        imagen1.setImage(newImage1);
-        Image newImage2 = it.next().getImageFromByteArray(142,100);
-        imagen2.setImage(newImage2);
-        Image newImage3 = it.next().getImageFromByteArray(142,100);
-        imagen3.setImage(newImage3);
-        Image newImage4 = it.next().getImageFromByteArray(142,100);
-        imagen4.setImage(newImage4);
-        Image newImage5 = it.next().getImageFromByteArray(142,100);
-        imagen5.setImage(newImage5);
+        try {
+            Set<Photo> fotos = publicacionActual.getPhotoList();
+            Iterator<Photo> it = fotos.iterator();
+            Image newImage1 = it.next().getImageFromByteArray(276, 214);
+            imagen1.setImage(newImage1);
+            Image newImage2 = it.next().getImageFromByteArray(142, 100);
+            imagen2.setImage(newImage2);
+            Image newImage3 = it.next().getImageFromByteArray(142, 100);
+            imagen3.setImage(newImage3);
+            Image newImage4 = it.next().getImageFromByteArray(142, 100);
+            imagen4.setImage(newImage4);
+            Image newImage5 = it.next().getImageFromByteArray(142, 100);
+            imagen5.setImage(newImage5);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     //Crea la reserva

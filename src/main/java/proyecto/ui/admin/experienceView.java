@@ -175,18 +175,22 @@ public class experienceView {
 
     //Subir fotos
     private void UpPhotos() throws IOException {
-        Set<Photo> fotos = publicacion.getPhotoList();
-        Iterator<Photo> it = fotos.iterator();
-        Image newImage1 = it.next().getImageFromByteArray(276,214);
-        imagen1.setImage(newImage1);
-        Image newImage2 = it.next().getImageFromByteArray(142,100);
-        imagen2.setImage(newImage2);
-        Image newImage3 = it.next().getImageFromByteArray(142,100);
-        imagen3.setImage(newImage3);
-        Image newImage4 = it.next().getImageFromByteArray(142,100);
-        imagen4.setImage(newImage4);
-        Image newImage5 = it.next().getImageFromByteArray(142,100);
-        imagen5.setImage(newImage5);
+        try {
+            Set<Photo> fotos = publicacion.getPhotoList();
+            Iterator<Photo> it = fotos.iterator();
+            Image newImage1 = it.next().getImageFromByteArray(276, 214);
+            imagen1.setImage(newImage1);
+            Image newImage2 = it.next().getImageFromByteArray(142, 100);
+            imagen2.setImage(newImage2);
+            Image newImage3 = it.next().getImageFromByteArray(142, 100);
+            imagen3.setImage(newImage3);
+            Image newImage4 = it.next().getImageFromByteArray(142, 100);
+            imagen4.setImage(newImage4);
+            Image newImage5 = it.next().getImageFromByteArray(142, 100);
+            imagen5.setImage(newImage5);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     //Subir comentarios
