@@ -78,6 +78,7 @@ public class Inicio {
                             if (oldValue1 == null && newValue1 != null) {
                                 Stage stage = (Stage) inicio.getScene().getWindow();
                                 turista = (Tourist) stage.getUserData();
+                                System.out.println(turista);
                                 try {
                                     loadInfo();
                                 } catch (IOException e) {
@@ -142,9 +143,9 @@ public class Inicio {
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(carrito.class.getResourceAsStream("carrito.fxml"));
         Stage stage = new Stage();
+        stage.setUserData(turista);
         stage.setScene(new Scene(root));
         stage.show();
-        stage.setUserData(turista);
         Stage stage2 = (Stage) this.calendarButton.getScene().getWindow();
         stage2.close();
     }
@@ -155,9 +156,9 @@ public class Inicio {
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(selectionTurist.class.getResourceAsStream("SelectionTurist.fxml"));
         Stage stage = new Stage();
+        stage.setUserData(turista);
         stage.setScene(new Scene(root));
         stage.show();
-        stage.setUserData(turista);
         Stage stage2 = (Stage) this.setting.getScene().getWindow();
         stage2.close();
     }
@@ -168,11 +169,11 @@ public class Inicio {
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(search.class.getResourceAsStream("search.fxml"));
         Stage stage = new Stage();
-        stage.setScene(new Scene(root));
         doubleObjet newDouble = new doubleObjet();
         newDouble.setTurista(turista);
         newDouble.setItem(item.getText());
         stage.setUserData(newDouble);
+        stage.setScene(new Scene(root));
         stage.show();
         Stage stage2 = (Stage) this.setting.getScene().getWindow();
         stage2.close();

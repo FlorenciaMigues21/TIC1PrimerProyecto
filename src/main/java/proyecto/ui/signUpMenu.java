@@ -25,6 +25,7 @@ import javafx.scene.Node;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 import proyecto.business.utils.Utilities;
+import proyecto.ui.operator.MainOperator;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -116,14 +117,12 @@ public class signUpMenu {
     void Back(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
-        Stage stage2 = (Stage) this.btnSignUp.getScene().getWindow();
-        stage2.close();
         Parent root = fxmlLoader.load(MenuInicial.class.getResourceAsStream("principalPage.fxml"));
-        Scene scene = new Scene(root,700,400);
-        scene.getStylesheets().add(getClass().getResource("LogInStyle.css").toExternalForm());
         Stage stage = new Stage();
-        stage.setScene(scene);
+        stage.setScene(new Scene(root));
         stage.show();
+        Stage stage2 = (Stage) this.login.getScene().getWindow();
+        stage2.close();
 
     }
 
@@ -136,7 +135,8 @@ public class signUpMenu {
         stage.setUserData(turista);
         stage.setScene(new Scene(root));
         stage.show();
-
+        Stage stage2 =(Stage) this.login.getScene().getWindow();
+        stage2.close();
     }
 
 

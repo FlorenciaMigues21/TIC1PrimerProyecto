@@ -2,18 +2,25 @@ package proyecto.ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Cell;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import proyecto.Main;
 import proyecto.business.entities.Reservation;
 import proyecto.business.entities.Tourist;
 import proyecto.business.entities_managers.ReservationManager;
 import proyecto.business.exceptions.DataBaseError;
 import proyecto.business.exceptions.InvalidUserInformation;
 
+import java.io.IOException;
 import java.sql.Time;
 import java.util.ArrayList;
 
@@ -26,10 +33,9 @@ public class carrito {
     static Tourist turista;
 
     @FXML
-    private Button backButton;
-
+    private AnchorPane carr;
     @FXML
-    private Button calendarButton;
+    private Button backButton;
 
     @FXML
     private Button homeButton;
@@ -40,7 +46,26 @@ public class carrito {
     ArrayList<Reservation> reservaciones;
 
     public void initialize() throws InvalidUserInformation, DataBaseError {
-        loadInfo();
+        carr.sceneProperty().addListener(((observable, oldValue, newValue) -> {
+            if (oldValue == null && newValue != null) {
+                newValue.windowProperty().addListener((observable1, oldValue1, newValue1) -> {
+                            if (oldValue1 == null && newValue1 != null) {
+                                Stage stage = (Stage) carr.getScene().getWindow();
+                                turista = (Tourist) stage.getUserData();
+                                try {
+                                    loadInfo();
+                                } catch (InvalidUserInformation e) {
+                                    e.printStackTrace();
+                                } catch (DataBaseError e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                );
+            }
+        }
+        ));
+
     }
 
     private void loadInfo() throws InvalidUserInformation, DataBaseError {
@@ -74,12 +99,30 @@ public class carrito {
     }
 
     @FXML
-    void goBack(ActionEvent event) {
+    void goBack(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(Inicio.class.getResourceAsStream("Inicio.fxml"));
+        Stage stage = new Stage();
+        stage.setUserData(turista);
+        stage.setScene(new Scene(root));
 
+        stage.show();
+        Stage stage2 = (Stage) this.carr.getScene().getWindow();
+        stage2.close();
     }
 
     @FXML
-    void goHome(ActionEvent event) {
+    void goHome(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(Inicio.class.getResourceAsStream("Inicio.fxml"));
+        Stage stage = new Stage();
+        stage.setUserData(turista);
+        stage.setScene(new Scene(root));
 
+        stage.show();
+        Stage stage2 = (Stage) this.carr.getScene().getWindow();
+        stage2.close();
     }
 }

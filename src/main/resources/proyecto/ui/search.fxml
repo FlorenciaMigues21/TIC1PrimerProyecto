@@ -27,7 +27,7 @@
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="32.0">
                      <image>
-                        <Image url="@../../Images/icons8-home-24.png" />
+                        <Image url="@/Images/icons8-home-24.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -36,7 +36,7 @@
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="32.0">
                      <image>
-                        <Image url="@../../Images/calendar.png" />
+                        <Image url="@/Images/calendar.png" />
                      </image>
                   </ImageView>
                </graphic>
