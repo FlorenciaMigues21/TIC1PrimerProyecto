@@ -238,7 +238,7 @@ public class ExperienceDisplayOperator{
                 newPublication.setReservationAvailable(false);
                 newPublication.setUniqueReservation(false);
             }
-            publicMan.createAndUpdatePublication(newPublication);
+            publicMan.createPublication(newPublication);
             goBack(actionEvent);
 
         }
