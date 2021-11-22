@@ -31,7 +31,7 @@
             <Button fx:id="buttonMenu" layoutX="1132.0" layoutY="12.0" onAction="#closeMenu" style="-fx-background-color: white; -fx-background-radius: 10px;">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="32.0">
-                     <Image url="@../../Images/menu.png" />
+                     <Image url="@/Images/menu.png" />
                   </ImageView>
                </graphic>
             </Button>
@@ -42,21 +42,21 @@
             <Button fx:id="homeButton" layoutX="23.0" layoutY="102.0" onAction="#goHome" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="32.0">
-                     <Image url="@../../Images/icons8-home-24.png" />
+                     <Image url="@/Images/icons8-home-24.png" />
                   </ImageView>
                </graphic>
             </Button>
             <Button fx:id="backButton" layoutX="22.0" layoutY="17.0" onAction="#goBack" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="32.0">
-                     <Image url="@../../Images/hacia-atras.png" />
+                     <Image url="@/Images/hacia-atras.png" />
                   </ImageView>
                </graphic>
             </Button>
             <Button fx:id="calendarButton" layoutX="23.0" layoutY="180.0" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="32.0">
-                     <Image url="@../../Images/calendar.png" />
+                     <Image url="@/Images/calendar.png" />
                   </ImageView>
                </graphic>
             </Button>
@@ -75,27 +75,27 @@
       <Label fx:id="telefono" layoutX="128.0" layoutY="172.0" prefHeight="17.0" prefWidth="129.0" text="Telefono" />
       <ImageView fx:id="imagen1" fitHeight="214.0" fitWidth="276.0" layoutX="128.0" layoutY="215.0">
          <image>
-            <Image url="@../../Images/no_image.jpg" />
+            <Image url="@/Images/no_image.jpg" />
          </image>
       </ImageView>
       <ImageView fx:id="imagen2" fitHeight="100.0" fitWidth="142.0" layoutX="428.0" layoutY="215.0">
          <image>
-            <Image url="@../../Images/no_image.jpg" />
+            <Image url="@/Images/no_image.jpg" />
          </image>
       </ImageView>
       <ImageView fx:id="imagen4" fitHeight="100.0" fitWidth="142.0" layoutX="428.0" layoutY="329.0">
          <image>
-            <Image url="@../../Images/no_image.jpg" />
+            <Image url="@/Images/no_image.jpg" />
          </image>
       </ImageView>
       <ImageView fx:id="imagen3" fitHeight="100.0" fitWidth="142.0" layoutX="590.0" layoutY="215.0">
          <image>
-            <Image url="@../../Images/no_image.jpg" />
+            <Image url="@/Images/no_image.jpg" />
          </image>
       </ImageView>
       <ImageView fx:id="imagen5" fitHeight="100.0" fitWidth="142.0" layoutX="590.0" layoutY="329.0">
          <image>
-            <Image url="@../../Images/no_image.jpg" />
+            <Image url="@/Images/no_image.jpg" />
          </image>
       </ImageView>
       <Label layoutX="732.0" layoutY="73.0" prefHeight="30.0" prefWidth="218.0" text="Descubre la experiencia" textFill="#004aad">
@@ -138,11 +138,6 @@
                </font>
             </Label>
             <DatePicker fx:id="fechaReserva" layoutX="26.0" layoutY="165.0" prefHeight="25.0" prefWidth="150.0" />
-            <ImageView fitHeight="24.0" fitWidth="25.0" layoutX="13.0" layoutY="30.0">
-               <image>
-                  <Image url="@component/user.png" />
-               </image>
-            </ImageView>
             <Text fx:id="precio" layoutX="60.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="47.4700927734375">
                <font>
                   <Font size="18.0" />
@@ -173,11 +168,12 @@
             </Text>
             <Button fx:id="buttonReserva" layoutX="49.0" layoutY="466.0" mnemonicParsing="false" onAction="#Reserv" prefHeight="27.0" prefWidth="104.0" style="-fx-background-color: #004aad;" text="Reservar" textFill="WHITE" />
             <TextField fx:id="cantPer" layoutX="58.0" layoutY="312.0" prefHeight="25.0" prefWidth="86.0" />
+            <Button fx:id="calcular" onAction="#calcularTotal" layoutX="50.0" layoutY="361.0" mnemonicParsing="false" style="-fx-background-color: #004aad;" text="Calcular total" textFill="WHITE" />
          </children>
       </Pane>
       <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="128.0" layoutY="137.0">
          <image>
-            <Image url="@../../Images/star.png" />
+            <Image url="@/Images/star.png" />
          </image>
       </ImageView>
       <Label fx:id="pun" layoutX="157.0" layoutY="140.0" text="Puntaje" />
@@ -187,5 +183,6 @@
          </content>
       </ScrollPane>
       <Label layoutX="177.0" layoutY="563.0" text="Ya nos visitaste?" />
+      <Button mnemonicParsing="false" text="Button" />
    </children>
 </AnchorPane>

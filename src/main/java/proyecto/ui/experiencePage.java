@@ -33,6 +33,8 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.Set;
 
 @Component
 public class experiencePage {
@@ -132,6 +134,8 @@ public class experiencePage {
     @FXML
     private Text total;
 
+    @FXML
+    Button calcular;
     boolean panelEstado = true;
 
     public void initialize() throws DataBaseError, IncompleteObjectException, IOException {
@@ -143,16 +147,14 @@ public class experiencePage {
                                 doubleObjet db = (doubleObjet) stage.getUserData();
                                 userActual = db.getTurista();
                                 publicacionActual = db.getPublicacion();
+                                panelReserva();
                                 try {
                                     setItems();
-                                } catch (DataBaseError e) {
-                                    e.printStackTrace();
                                 } catch (IncompleteObjectException e) {
                                     e.printStackTrace();
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
-                                panelReserva();
                                 if (!publicacionActual.isReservationAvailable()) {
                                     buttonReserva.setVisible(false);
                                 }
@@ -166,20 +168,17 @@ public class experiencePage {
         ));
 
     }
-
+    public void calcularTotal(ActionEvent event){
+        int cantPerInt = Integer.parseInt(cantPer.getText());
+        int precioInt = (int) publicacionActual.getPrecio();
+        total.setText("$" + cantPerInt * precioInt);
+    }
     //Setea los datos del panel de la experiencia correspondiente
     public void panelReserva(){
         String precioString = String.valueOf(publicacionActual.getPrecio());
         precio.setText(precioString);
-        if(cantPer.getText() != null){
-            int cantPerInt = Integer.parseInt(cantPer.getText());
-            int precioInt = (int) publicacionActual.getPrecio();
-            total.setText("$" + cantPerInt * precioInt);
-        }
-        else{
-            total.setText("0");
-        }
 
+        arreglarDate();
         subirHorarios();
 
     }
@@ -202,31 +201,37 @@ public class experiencePage {
     }
 
     //Setea los datos de la experiencia correspondiente
-    public void setItems() throws DataBaseError, IncompleteObjectException, IOException {
-        ArrayList<String> arrayPrueba = new ArrayList<String>();
+    public void setItems() throws IncompleteObjectException, IOException {
+        ArrayList<String> arrayPrueba = new ArrayList<>();
         NombreAtraccion.setText(publicacionActual.getTitle());
         direccion.setText(publicacionActual.getUbication());
         infoExp.setText(publicacionActual.getDescription());
         telefono.setText(publicacionActual.getPhone());
         subirHorarios();
         pun.setText(String.valueOf(publicacionActual.getCalification()));
-        AgregarComentarios();
+        /*try {
+            AgregarComentarios();
+        } catch (DataBaseError e) {
+            e.printStackTrace();
+        }*/
         UpPhotos();
+        UpElements();
     }
 
     //Subir fotos
     private void UpPhotos() throws IOException {
-        ArrayList<Photo> fotos = new ArrayList<>(publicacionActual.getPhotoList());
-        Image newImage1 = fotos.get(0).getImageFromByteArray(fotos.get(0).getPhoto());
+        Set<Photo> fotos = publicacionActual.getPhotoList();
+        Iterator<Photo> it = fotos.iterator();
+        Image newImage1 = it.next().getImageFromByteArray(276,214);
         imagen1.setImage(newImage1);
-        Image newImage2 = fotos.get(1).getImageFromByteArray(fotos.get(1).getPhoto());
+        /*Image newImage2 = it.next().getImageFromByteArray(142,100);
         imagen2.setImage(newImage2);
-        Image newImage3 = fotos.get(2).getImageFromByteArray(fotos.get(2).getPhoto());
+        Image newImage3 = it.next().getImageFromByteArray(142,100);
         imagen3.setImage(newImage3);
-        Image newImage4 = fotos.get(3).getImageFromByteArray(fotos.get(3).getPhoto());
+        Image newImage4 = it.next().getImageFromByteArray(142,100);
         imagen4.setImage(newImage4);
-        Image newImage5 = fotos.get(4).getImageFromByteArray(fotos.get(4).getPhoto());
-        imagen5.setImage(newImage5);
+        Image newImage5 = it.next().getImageFromByteArray(142,100);
+        imagen5.setImage(newImage5);*/
     }
 
     //Crea la reserva
@@ -235,14 +240,14 @@ public class experiencePage {
         LocalDate datePick = fechaReserva.getValue();
         java.util.Date newDate = Utilities.createDate(datePick.getYear(), datePick.getMonthValue(),datePick.getDayOfMonth());
         Integer hora = horarioSelect();
-       if(VerificReservation(hora)){
+       /*if(VerificReservation(hora)){*/
            Reservation newReser = new Reservation(userActual,publicacionActual,Integer.parseInt(cantPer.getText()),hora);
            showAlert("Su reserva fue guardada","Puede ver el estado de la reserva en su itinerario");
            resManager.addReservation(newReser);
-       }
-        else if(!turistaReservaDisp()){
+
+        /*else if(!turistaReservaDisp()){
            showAlert("Ya reservó!","Usted ya reservó, si desea cambiar su reserva, vaya a su itinerario.");
-       }
+       }*/
 
     }
 
@@ -277,7 +282,7 @@ public class experiencePage {
         alert.showAndWait();
     }
     //Agregar comentarios
-    private void AgregarComentarios() throws DataBaseError, IncompleteObjectException {
+    /*private void AgregarComentarios() throws DataBaseError, IncompleteObjectException {
         ArrayList<Comentary> comentarios = new ArrayList<>(comManager.getComentaryOfPublication(publicacionActual));
         if(comentarios.size()>0) {
             for (int i = 0; i < comentarios.size(); i++) {
@@ -289,7 +294,7 @@ public class experiencePage {
                 boxComentary.getChildren().add(section);
             }
         }
-    }
+    }*/
     //CONVERSION DEL HORARIO
     private Date convertToDateViaSqlDate(LocalDate dateToConvert) {
         return java.sql.Date.valueOf(dateToConvert);
@@ -297,14 +302,14 @@ public class experiencePage {
 
     //Subir elementos
     private void UpElements(){
-        ArrayList<IncludedInPublication> listInclud = new ArrayList<>(publicacionActual.getIncluido());
-        ArrayList<Hygiene> listHigiene = new ArrayList<>(publicacionActual.getMedidas_de_higiene());
-        for(int i=0;i<publicacionActual.getIncluido().size();i++){
-            Label newItem = new Label(listInclud.get(i).getIncluido());
+        Set<IncludedInPublication> listInclud = publicacionActual.getIncluido();
+        Set<Hygiene> listHigiene = publicacionActual.getMedidas_de_higiene();
+        for(IncludedInPublication inc: listInclud){
+            Label newItem = new Label(inc.getIncluido());
             itemsInc.getChildren().add(newItem);
         }
-        for (int i=0;i<publicacionActual.getMedidas_de_higiene().size();i++){
-            Label newItem = new Label(listHigiene.get(i).getMedidas());
+        for (Hygiene hig: listHigiene){
+            Label newItem = new Label(hig.getMedidas());
             higiene.getChildren().add(newItem);
         }
 
@@ -347,8 +352,8 @@ public class experiencePage {
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(Inicio.class.getResourceAsStream("Inicio.fxml"));
         Stage stage = new Stage();
-        stage.setScene(new Scene(root));
         stage.setUserData(userActual);
+        stage.setScene(new Scene(root));
         stage.show();
         Stage stage2 = (Stage) this.exper.getScene().getWindow();
         stage2.close();
@@ -363,7 +368,7 @@ public class experiencePage {
     private Integer horarioSelect(){
         return Integer.parseInt(horario.getValue().substring(0,2));
     }
-
+    /*
     private boolean VerificReservation(Integer hora) throws InvalidPublicationInformation, DataBaseError {
         Collection<Reservation> reser = resManager.getAllReservationFromPublication(publicacionActual);
         ArrayList<Reservation> reservasList = new ArrayList<>(reser);
@@ -379,7 +384,7 @@ public class experiencePage {
         else{
             return false;
         }
-    }
+    }*/
 
 
 }

@@ -26,9 +26,11 @@ import proyecto.business.entities.TouristOperator;
 import proyecto.business.entities_managers.PhotoManager;
 import proyecto.business.entities_managers.PublicationManager;
 import proyecto.business.entities_managers.TypeofactivitiesManager;
+import proyecto.business.exceptions.DataBaseError;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 
 @Component
 public class Inicio {
@@ -84,7 +86,7 @@ public class Inicio {
                                 System.out.println(turista);
                                 try {
                                     loadInfo();
-                                } catch (IOException e) {
+                                } catch (IOException | DataBaseError e) {
                                     e.printStackTrace();
                                 }
                             }
@@ -97,18 +99,19 @@ public class Inicio {
     }
 
 
-    private void loadInfo() throws IOException {
-        list = new ArrayList<>();
+    private void loadInfo() throws IOException, DataBaseError {
+        list = new ArrayList<>(pubMan.getRecomendedPublications(turista.getMail()));
         gustos1.getChildren().clear();
         for(int i = 0; i<list.size();i++){
             VBox newItem = new VBox();
             newItem.setAlignment(Pos.CENTER);
             newItem.setPrefHeight(236);
             newItem.setPrefWidth(251);
-            ArrayList<Photo> listaImage = new ArrayList<>(list.get(i).getPhotoList());
-            Image newImage = listaImage.get(i).getImageFromByteArray(listaImage.get(i).getPhoto());
+            Set<Photo> fotos = list.get(i).getPhotoList();
+            Photo aux = fotos.iterator().next();
+            Image newIm = aux.getImageFromByteArray(200,150);
             ImageView imagen = new ImageView();
-            imagen.setImage(newImage);
+            imagen.setImage(newIm);
             imagen.setFitWidth(221);
             imagen.setFitHeight(150);
             newItem.getChildren().add(imagen);

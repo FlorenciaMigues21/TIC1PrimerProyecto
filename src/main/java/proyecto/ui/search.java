@@ -22,11 +22,13 @@ import proyecto.business.entities.Publication;
 import proyecto.business.entities.Tourist;
 import proyecto.business.entities_managers.Busqueda.SearchService;
 import proyecto.business.entities_managers.PublicationManager;
+import proyecto.ui.admin.experienceView;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class search {
@@ -61,9 +63,10 @@ public class search {
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(Inicio.class.getResourceAsStream("Inicio.fxml"));
         Stage stage = new Stage();
+        stage.setUserData(turista);
         stage.setScene(new Scene(root));
         stage.show();
-        stage.setUserData(turista);
+
         Stage stage2 = (Stage) this.seartching.getScene().getWindow();
         stage2.close();
     }
@@ -74,9 +77,10 @@ public class search {
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(carrito.class.getResourceAsStream("carrito.fxml"));
         Stage stage = new Stage();
+        stage.setUserData(turista);
         stage.setScene(new Scene(root));
         stage.show();
-        stage.setUserData(turista);
+
         Stage stage2 = (Stage) this.calendarButton.getScene().getWindow();
         stage2.close();
     }
@@ -89,7 +93,11 @@ public class search {
                                 doubleObjet db = (doubleObjet) stage.getUserData();
                                 itemBus = db.getItem();
                                 turista = db.getTurista();
-                                loadInfo();
+                                try {
+                                    loadInfo();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
                 );
@@ -99,7 +107,7 @@ public class search {
 
     }
 
-    private void loadInfo(){
+    private void loadInfo() throws IOException {
         boxItems.getChildren().clear();
         List<Publication> listPub = searchMan.getPublicationBasedOnWord(itemBus);
         for(int i = 0; i< listPub.size();i++){
@@ -107,14 +115,17 @@ public class search {
             newHbox.setPrefWidth(200);
             newHbox.setPrefHeight(100);
             //IMAGEN
-            ArrayList<Photo> fotos = new ArrayList<>(listPub.get(i).getPhotoList());
-            Image newIm = new Image(Arrays.toString(fotos.get(i).getPhoto()));
+            Set<Photo> fotos = listPub.get(i).getPhotoList();
+            Photo aux = fotos.iterator().next();
+            Image newIm = aux.getImageFromByteArray(200,150);
             ImageView newImag = new ImageView(newIm);
             newImag.setFitHeight(150);
             newImag.setFitWidth(200);
+            newHbox.getChildren().add(newImag);
             VBox newVBox = new VBox();
             newVBox.prefHeight(150);
             newVBox.prefWidth(761);
+            newHbox.getChildren().add(newVBox);
             Text titulo = new Text(listPub.get(i).getTitle());
             Text descripcion = new Text(listPub.get(i).getDescription());
             newVBox.getChildren().add(titulo);
@@ -122,27 +133,31 @@ public class search {
             Button newButton = new Button();
             Publication pub = listPub.get(i);
             newButton.setOnAction(e ->{
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setControllerFactory(Main.getContext()::getBean);
-                Parent root = null;
                 try {
-                    root = fxmlLoader.load(experiencePage.class.getResourceAsStream("ExperienciePage.fxml"));
+                    Next(e,pub);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                Stage stage = new Stage();
-                doubleObjet db = new doubleObjet();
-                db.setPublicacion(pub);
-                db.setTurista(turista);
-                stage.setScene(new Scene(root));
-                stage.show();
             });
+            newButton.setText("Ver");
+            newButton.setPrefSize(58,27);
             newHbox.getChildren().add(newButton);
             boxItems.getChildren().add(newHbox);
         }
     }
-
-    public void buscar(ActionEvent event){
+    void Next(ActionEvent event,Publication publicacion) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(experiencePage.class.getResourceAsStream("ExperiencePage.fxml"));
+        Stage stage = new Stage();
+        doubleObjet db = new doubleObjet();
+        db.setPublicacion(publicacion);
+        db.setTurista(turista);
+        stage.setUserData(db);
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    public void buscar(ActionEvent event) throws IOException {
         itemBus = elementoBus.getText();
         loadInfo();
     }

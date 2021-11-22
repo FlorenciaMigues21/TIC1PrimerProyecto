@@ -23,6 +23,8 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 
 @Component
 public class experienceView {
@@ -173,16 +175,17 @@ public class experienceView {
 
     //Subir fotos
     private void UpPhotos() throws IOException {
-        ArrayList<Photo> fotos = new ArrayList<>(publicacion.getPhotoList());
-        Image newImage1 = fotos.get(0).getImageFromByteArray(fotos.get(0).getPhoto());
+        Set<Photo> fotos = publicacion.getPhotoList();
+        Iterator<Photo> it = fotos.iterator();
+        Image newImage1 = it.next().getImageFromByteArray(276,214);
         imagen1.setImage(newImage1);
-        Image newImage2 = fotos.get(1).getImageFromByteArray(fotos.get(1).getPhoto());
+        Image newImage2 = it.next().getImageFromByteArray(142,100);
         imagen2.setImage(newImage2);
-        Image newImage3 = fotos.get(2).getImageFromByteArray(fotos.get(2).getPhoto());
+        Image newImage3 = it.next().getImageFromByteArray(142,100);
         imagen3.setImage(newImage3);
-        Image newImage4 = fotos.get(3).getImageFromByteArray(fotos.get(3).getPhoto());
+        Image newImage4 = it.next().getImageFromByteArray(142,100);
         imagen4.setImage(newImage4);
-        Image newImage5 = fotos.get(4).getImageFromByteArray(fotos.get(4).getPhoto());
+        Image newImage5 = it.next().getImageFromByteArray(142,100);
         imagen5.setImage(newImage5);
     }
 
