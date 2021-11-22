@@ -235,19 +235,15 @@ public class experiencePage {
         LocalDate datePick = fechaReserva.getValue();
         java.util.Date newDate = Utilities.createDate(datePick.getYear(), datePick.getMonthValue(),datePick.getDayOfMonth());
         Integer hora = horarioSelect();
-        //ARREGLAR TEMA FECHA @FIXME
-        //ARREGLAR TEMA HORARIO
        if(VerificReservation(hora)){
-           Reservation newReser = new Reservation();
+           Reservation newReser = new Reservation(userActual,publicacionActual,Integer.parseInt(cantPer.getText()),hora);
+           showAlert("Su reserva fue guardada","Puede ver el estado de la reserva en su itinerario");
+           resManager.addReservation(newReser);
        }
         else if(!turistaReservaDisp()){
            showAlert("Ya reservó!","Usted ya reservó, si desea cambiar su reserva, vaya a su itinerario.");
        }
-       else{
-           //Reservation nuevaReserva = new Reservation(userActual,publicacionActual,cantPersonas,horario.getValue());
-           //resManager.addReservation(nuevaReserva);
-           showAlert("Su reserva fue guardada","Puede ver el estado de la reserva en su itinerario");
-       }
+
     }
 
     //Devuelve la cantidad
