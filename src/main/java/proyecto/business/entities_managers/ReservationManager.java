@@ -48,4 +48,14 @@ public class ReservationManager {
             throw new DataBaseError("Error a la hora de cargar las reservas de la publicacion " + publication.getTitle() , e.getMessage());
         }
     }
+
+    public void deleteReservation(Reservation reservation) throws ReservationCreationError, DataBaseError {
+        if(reservation == null)
+            throw new ReservationCreationError("Error, los datos de la reserva estan vacios");
+        try{
+            controller.delete(reservation);
+        }catch(Exception e){
+            throw new DataBaseError("Error a la hora de crear la reserva", e.getMessage());
+        }
+    }
 }

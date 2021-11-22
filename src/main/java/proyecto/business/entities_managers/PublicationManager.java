@@ -139,7 +139,7 @@ public class PublicationManager {
 
     public void deletePublication(Publication publication){
         try{
-            controller.deleteByIdEvent(publication.getIdEvent());
+            controller.delete(publication);
         }catch(Exception e){
             e.printStackTrace();
         }
