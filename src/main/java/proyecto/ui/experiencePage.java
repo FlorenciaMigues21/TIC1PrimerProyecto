@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.util.Callback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import proyecto.Main;
@@ -29,6 +30,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -180,6 +182,23 @@ public class experiencePage {
 
         subirHorarios();
 
+    }
+
+    private void arreglarDate(){
+        Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate item, boolean empty) {
+
+                // deshabilitar las fechas futuras
+                if (item.isAfter(LocalDate.ofInstant(publicacionActual.getDateto().toInstant(), ZoneId.systemDefault()))){
+                    this.setDisable(true);
+                }
+                if (item.isBefore(LocalDate.ofInstant(publicacionActual.getDatefrom().toInstant(), ZoneId.systemDefault()))){
+                    this.setDisable(true);
+                }
+            }
+        };
+        fechaReserva.setDayCellFactory(dayCellFactory);
     }
 
     //Setea los datos de la experiencia correspondiente

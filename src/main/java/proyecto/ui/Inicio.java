@@ -49,6 +49,9 @@ public class Inicio {
     private AnchorPane inicio;
 
     @FXML
+    private Button exit;
+
+    @FXML
     private Button calendarButton;
 
     @FXML
@@ -178,6 +181,19 @@ public class Inicio {
         Stage stage2 = (Stage) this.setting.getScene().getWindow();
         stage2.close();
     }
+
+    @FXML
+    void salir(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(MenuInicial.class.getResourceAsStream("principalPage.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        Stage stage2 = (Stage) this.setting.getScene().getWindow();
+        stage2.close();
+    }
+
 
 
 }
