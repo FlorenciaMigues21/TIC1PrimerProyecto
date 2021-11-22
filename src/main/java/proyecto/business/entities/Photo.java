@@ -27,6 +27,7 @@ public class Photo {
 
     @Id
     @GeneratedValue
+    @Column(name = "id_photo")
     private int idPhoto;
 
     public Photo() {

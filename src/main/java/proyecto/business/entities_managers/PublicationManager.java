@@ -38,24 +38,32 @@ public class PublicationManager {
     @Autowired
     private PhotoManager photoManager;
 
-    public void createAndUpdatePublication(Publication publication) throws PublicationCreationError {
+    public void createPublication(Publication publication) throws PublicationCreationError {
         /*if (publication.verifyObjectIncomplete())
             throw new PublicationCreationError("Publicacion con datos incompletos");*/
         try {
-            for (Hygiene hygene: publication.getMedidas_de_higiene())
+            for (Hygiene hygene: publication.getMedidas_de_higiene()) {
                 try {
-                    if (hygieneManager.searchHygiene(hygene.getMedidas()) == null)
+                    Hygiene aux = hygieneManager.searchHygiene(hygene.getMedidas());
+                    if (aux == null)
                         hygieneManager.createHygiene(hygene);
-                }catch(Exception e){
+                    else
+                        hygene = aux;
+                } catch (Exception e) {
                     hygieneManager.createHygiene(hygene);
                 }
-            for (IncludedInPublication included: publication.getIncluido())
+            }
+            for (IncludedInPublication included: publication.getIncluido()){
                 try {
-                    if(includedManager.searchIncluded(included.getIncluido()) == null)
+                    IncludedInPublication aux = includedManager.searchIncluded(included.getIncluido());
+                    if(aux == null)
                         includedManager.createIncluded(included);
+                    else
+                        included = aux;
                 }catch(Exception e){
                     includedManager.createIncluded(included);
                 }
+            }
             for(Photo foto: publication.getPhotoList())
                 photoManager.savePhoto(foto);
             controller.save(publication);
@@ -100,6 +108,15 @@ public class PublicationManager {
             throw new DataBaseError("Error al cargar las publicaciones recomendadas",e.getMessage());
         }
     }
+
+    /*public void updatePublication(Publication publication){
+        try{
+            controller.set(publication.getIdEvent(),publication);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new PublicationCreationError("Error al guardar la publicacion, por favor, intentelo otra vez");
+        }
+    }*/
 
 
 }

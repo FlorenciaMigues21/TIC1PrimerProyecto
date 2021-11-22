@@ -53,16 +53,12 @@ public class UserManager<T extends User> {
         if(user==null)
             throw new InvalidUserInformation("Informacion invalida");
         try{
-            /*if(touristController.findByMail(user.getMail()) != null)
-                throw new UserAlreadyExist("Este mail ya esta registrado");
-            else {*/
-                if (user instanceof Tourist)
-                    touristController.save((Tourist) user);
-                if (user instanceof TouristOperator)
-                    touristOperatorController.save((TouristOperator) user);
-                if (user instanceof Admin)
-                    adminController.save((Admin) user);
-            //}
+            if (user instanceof Tourist)
+                touristController.save((Tourist) user);
+            if (user instanceof TouristOperator)
+                touristOperatorController.save((TouristOperator) user);
+            if (user instanceof Admin)
+                adminController.save((Admin) user);
         }catch(Exception e){
             e.printStackTrace();
             throw new InvalidUserInformation("Error. No se ha podido crear el user");

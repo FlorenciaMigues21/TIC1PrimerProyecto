@@ -121,7 +121,7 @@ public class Admin_init {
                 public void handle(ActionEvent event) {
                     publicNoVal.get(finalI).setValidated(true);
                     try {
-                        pubManager.createAndUpdatePublication(publicNoVal.get(finalI));
+                        pubManager.createPublication(publicNoVal.get(finalI));
                     } catch (PublicationCreationError e) {
                         e.printStackTrace();
                     }

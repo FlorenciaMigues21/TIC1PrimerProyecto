@@ -64,8 +64,10 @@ public class Tourist extends User{
         this.birthdate = birthdate;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Access(AccessType.PROPERTY)
     @NotNull
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Typeofactivities.class )
+    @JoinTable(name = "tourist_intereses", joinColumns = @JoinColumn(name = "tourist_mail",referencedColumnName = "mail"), inverseJoinColumns = @JoinColumn(name = "intereses_name",referencedColumnName = "name"))
     public Collection<Typeofactivities> getIntereses() {
         return intereses;
     }

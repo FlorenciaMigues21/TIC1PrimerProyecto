@@ -29,7 +29,8 @@ import java.io.IOException;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Component
@@ -143,10 +144,10 @@ public class ExperienceDisplayOperator{
 
 
 
-    ArrayList<Hygiene> listasHigiene= new ArrayList<>();
-    ArrayList<IncludedInPublication> listasIncluidos = new ArrayList<>();
-    ArrayList<Typeofactivities> tipoActividad = new ArrayList<>();
-    Collection<Photo> listaFotos = new ArrayList<>();;
+    Set<Hygiene> listasHigiene= new HashSet<>();
+    Set<IncludedInPublication> listasIncluidos = new HashSet<>();
+    Set<Typeofactivities> tipoActividad = new HashSet<>();
+    Set<Photo> listaFotos = new HashSet<>();;
 
     @FXML
     public void initialize() throws InvalidUserInformation, PublicationsLoadError, InvalidPublicationInformation, DataBaseError {
@@ -239,7 +240,7 @@ public class ExperienceDisplayOperator{
                 newPublication.setUniqueReservation(false);
             }
 
-            publicMan.createAndUpdatePublication(newPublication);
+            publicMan.createPublication(newPublication);
             goBack(actionEvent);
 
         }

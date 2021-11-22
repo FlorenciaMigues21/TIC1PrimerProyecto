@@ -2,30 +2,27 @@ package proyecto.business.entities;
 
 import com.sun.istack.NotNull;
 import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
-import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Index;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import javax.persistence.*;
-import java.sql.Time;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import java.util.ArrayList;
 
 @Entity
 @Indexed(index = "idEvent")
-@NormalizerDef(name="lowercase",
-        filters = @TokenFilterDef(factory = LowerCaseFilterFactory.class))
+@NormalizerDef(name="lowercase", filters = @TokenFilterDef(factory = LowerCaseFilterFactory.class))
+@DynamicUpdate
 public class Publication {
 
     @Id
     @GeneratedValue
+    @Column(name = "id_event")
     private int idEvent;
 
     private Date Datefrom;
@@ -52,22 +49,15 @@ public class Publication {
     private boolean needVaccination;
     private int aforo;
     private int precio;
-    @ManyToMany
-    @NotNull
-    private Collection<Typeofactivities> listaActividadades;
+
+    private Set<Typeofactivities> listaActividadades;
     @ManyToOne
     @NotNull
     private TouristOperator operador;
-    @ManyToMany
-    @NotNull
-    private Collection<Photo> photoList;
+    private Set<Photo> photoList;
     private String phone;
-    @NotNull
-    @ManyToMany
-    private Collection<Hygiene> medidas_de_higiene;
-    @NotNull
-    @ManyToMany
-    private Collection<IncludedInPublication> incluido;
+    private Set<Hygiene> medidas_de_higiene;
+    private Set<IncludedInPublication> incluido;
     private int hourStart;
     private int hourFinish;
     private boolean uniqueReservation;
@@ -86,7 +76,7 @@ public class Publication {
     public Publication() {
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int precio, Collection<Typeofactivities> listaActividadades, TouristOperator operador, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, int hourStart, int hourFinish, boolean uniqueReservation,boolean reservationAvailable) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int precio, Set<Typeofactivities> listaActividadades, TouristOperator operador, String phone, Set<Hygiene> medidas_de_higiene, Set<IncludedInPublication> incluido, int hourStart, int hourFinish, boolean uniqueReservation, boolean reservationAvailable) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -108,7 +98,7 @@ public class Publication {
         this.reservationAvailable = reservationAvailable;
     }
 
-    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int precio, Collection<Typeofactivities> listaActividadades, TouristOperator operador, Collection<Photo> photoList, String phone, ArrayList<Hygiene> medidas_de_higiene, ArrayList<IncludedInPublication> incluido, int hourStart, int hourFinish, boolean uniqueReservation, boolean reservationAvailable) {
+    public Publication(Date datefrom, Date dateto, boolean validated, String title, String description, String ubication, boolean needVaccination, int aforo, int idEvent, int precio, Set<Typeofactivities> listaActividadades, TouristOperator operador, Set<Photo> photoList, String phone, Set<Hygiene> medidas_de_higiene, Set<IncludedInPublication> incluido, int hourStart, int hourFinish, boolean uniqueReservation, boolean reservationAvailable) {
         Datefrom = datefrom;
         Dateto = dateto;
         this.validated = validated;
@@ -224,12 +214,16 @@ public class Publication {
         this.idEvent = idEvent;
     }
 
-
-    public Collection<Typeofactivities> getListaActividadades() {
+    @Access(AccessType.PROPERTY)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER,targetEntity = Typeofactivities.class)
+    @NotNull
+    @JoinTable(name = "publication_lista_actividadades",
+            joinColumns = @JoinColumn(name = "publication_id_event", referencedColumnName = "id_event"), inverseJoinColumns = @JoinColumn(name = "lista_actividadades_name",referencedColumnName = "name"))
+    public Set<Typeofactivities> getListaActividadades() {
         return listaActividadades;
     }
 
-    public void setListaActividadades(Collection<Typeofactivities> listaActividadades) {
+    public void setListaActividadades(Set<Typeofactivities> listaActividadades) {
         this.listaActividadades = listaActividadades;
     }
 
@@ -242,12 +236,15 @@ public class Publication {
         this.operador = operador;
     }
 
-
-    public Collection<Photo> getPhotoList() {
+    @Access(AccessType.PROPERTY)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER,targetEntity = Photo.class)
+    @NotNull
+    @JoinTable(name = "publication_photo_list", joinColumns = @JoinColumn(name = "publication_id_event",referencedColumnName = "id_event"), inverseJoinColumns = @JoinColumn(name = "photo_list_id_photo",referencedColumnName = "id_photo"))
+    public Set<Photo> getPhotoList() {
         return photoList;
     }
 
-    public void setPhotoList(Collection<Photo> photoList) {
+    public void setPhotoList(Set<Photo> photoList) {
         this.photoList = photoList;
     }
 
@@ -264,21 +261,26 @@ public class Publication {
         this.phone = phone;
     }
 
-
-    public Collection<Hygiene> getMedidas_de_higiene() {
+    @Access(AccessType.PROPERTY)
+    @NotNull
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, targetEntity = Hygiene.class)
+    @JoinTable(name = "publication_medidas_de_higiene", joinColumns = @JoinColumn(name = "publication_id_event",referencedColumnName = "id_event"), inverseJoinColumns = @JoinColumn(name = "medidas_de_higiene_id",referencedColumnName = "id"))
+    public Set<Hygiene> getMedidas_de_higiene() {
         return medidas_de_higiene;
     }
 
-    public void setMedidas_de_higiene(Collection<Hygiene> medidas_de_higiene) {
+    public void setMedidas_de_higiene(Set<Hygiene> medidas_de_higiene) {
         this.medidas_de_higiene = medidas_de_higiene;
     }
-
-
-    public Collection<IncludedInPublication> getIncluido() {
+    @Access(AccessType.PROPERTY)
+    @NotNull
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, targetEntity = IncludedInPublication.class )
+    @JoinTable(name = "publication_incluido", joinColumns = @JoinColumn(name = "publication_id_event",referencedColumnName = "id_event"), inverseJoinColumns = @JoinColumn(name = "incluido_id",referencedColumnName = "id"))
+    public Set<IncludedInPublication> getIncluido() {
         return incluido;
     }
 
-    public void setIncluido(Collection<IncludedInPublication> incluido) {
+    public void setIncluido(Set<IncludedInPublication> incluido) {
         this.incluido = incluido;
     }
 
