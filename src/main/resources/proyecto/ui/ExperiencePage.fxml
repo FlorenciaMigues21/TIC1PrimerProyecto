@@ -28,13 +28,6 @@
                   <Image url="@/Images/Search Me(5).png" />
                </image>
             </ImageView>
-            <Button fx:id="buttonMenu" layoutX="1132.0" layoutY="12.0" onAction="#closeMenu" style="-fx-background-color: white; -fx-background-radius: 10px;">
-               <graphic>
-                  <ImageView fitHeight="26.0" fitWidth="32.0">
-                     <Image url="@/Images/menu.png" />
-                  </ImageView>
-               </graphic>
-            </Button>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="600.0" prefWidth="87.0" style="-fx-border-color: black; -fx-background-color: white;">
@@ -168,6 +161,7 @@
             <Button fx:id="buttonReserva" layoutX="49.0" layoutY="466.0" mnemonicParsing="false" onAction="#Reserv" prefHeight="27.0" prefWidth="104.0" style="-fx-background-color: #004aad;" text="Reservar" textFill="WHITE" />
             <TextField fx:id="cantPer" layoutX="58.0" layoutY="312.0" prefHeight="25.0" prefWidth="86.0" />
             <Button fx:id="calcular" layoutX="50.0" layoutY="361.0" mnemonicParsing="false" onAction="#calcularTotal" style="-fx-background-color: #004aad;" text="Calcular total" textFill="WHITE" />
+            <Text fx:id="boolreserv" layoutX="3.0" layoutY="514.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
          </children>
       </Pane>
       <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="128.0" layoutY="137.0">

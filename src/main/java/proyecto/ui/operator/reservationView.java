@@ -80,24 +80,30 @@ public class reservationView {
             tablaReserva.add(cantPersonas,2,i);
             Text telefono = new Text(reservasList.get(i).getTurista().getPhone());
             tablaReserva.add(telefono,4,i);
-            /*Button Validar = new Button();
+            Button Validar = new Button();
             int finalI = i;
             Validar.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    //reservasList.get(finalI).; @FIXME
+                    reservasList.get(finalI).setValidated_reservation(true);
                     try {
-                        pubManager.createPublication(publicNoVal.get(finalI));
-                    } catch (PublicationCreationError e) {
+                        reserManager.addReservation(reservasList.get(finalI));
+                    } catch (ReservationCreationError reservationCreationError) {
+                        reservationCreationError.printStackTrace();
+                    } catch (DataBaseError dataBaseError) {
+                        dataBaseError.printStackTrace();
+                    }
+                    try {
+                        agregarDatosReserva();
+                    } catch (InvalidPublicationInformation e) {
+                        e.printStackTrace();
+                    } catch (DataBaseError e) {
                         e.printStackTrace();
                     }
-                    setExperienciasValidadas();
-                    setExrencieAValidar();
-                    showAlert("La publicación fue aprobada","Ahora estará en la tabla siguiente");
                 }
             });
             Validar.setPrefSize(58,27);
-            Validar.setText("Validar");*/
+            Validar.setText("Validar");
         }
     }
 

@@ -35,11 +35,11 @@ public class Publication {
     private Date Dateto;
     private boolean validated;
 
-    @Field(name = "title",index = Index.YES,analyze=Analyze.YES)
+    @Field(name = "title", index = Index.YES, analyze = Analyze.YES)
     @Field(normalizer = @Normalizer(definition = "lowercase"))
     private String title;
 
-    @Field (name = "description",index = Index.YES,analyze=Analyze.YES)
+    @Field(name = "description", index = Index.YES, analyze = Analyze.YES)
     @Field(normalizer = @Normalizer(definition = "lowercase"))
     @NotNull
     private String description;
@@ -219,10 +219,10 @@ public class Publication {
     }
 
     @Access(AccessType.PROPERTY)
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER,targetEntity = Typeofactivities.class)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, targetEntity = Typeofactivities.class)
     @NotNull
     @JoinTable(name = "publication_lista_actividadades",
-            joinColumns = @JoinColumn(name = "publication_id_event", referencedColumnName = "id_event"), inverseJoinColumns = @JoinColumn(name = "lista_actividadades_name",referencedColumnName = "name"))
+            joinColumns = @JoinColumn(name = "publication_id_event", referencedColumnName = "id_event"), inverseJoinColumns = @JoinColumn(name = "lista_actividadades_name", referencedColumnName = "name"))
     public Set<Typeofactivities> getListaActividadades() {
         return listaActividadades;
     }
@@ -241,9 +241,9 @@ public class Publication {
     }
 
     @Access(AccessType.PROPERTY)
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER,targetEntity = Photo.class)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, targetEntity = Photo.class)
     @NotNull
-    @JoinTable(name = "publication_photo_list", joinColumns = @JoinColumn(name = "publication_id_event",referencedColumnName = "id_event"), inverseJoinColumns = @JoinColumn(name = "photo_list_id_photo",referencedColumnName = "id_photo"))
+    @JoinTable(name = "publication_photo_list", joinColumns = @JoinColumn(name = "publication_id_event", referencedColumnName = "id_event"), inverseJoinColumns = @JoinColumn(name = "photo_list_id_photo", referencedColumnName = "id_photo"))
     public Set<Photo> getPhotoList() {
         return photoList;
     }
@@ -268,7 +268,7 @@ public class Publication {
     @Access(AccessType.PROPERTY)
     @NotNull
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, targetEntity = Hygiene.class)
-    @JoinTable(name = "publication_medidas_de_higiene", joinColumns = @JoinColumn(name = "publication_id_event",referencedColumnName = "id_event"), inverseJoinColumns = @JoinColumn(name = "medidas_de_higiene_id",referencedColumnName = "id"))
+    @JoinTable(name = "publication_medidas_de_higiene", joinColumns = @JoinColumn(name = "publication_id_event", referencedColumnName = "id_event"), inverseJoinColumns = @JoinColumn(name = "medidas_de_higiene_id", referencedColumnName = "id"))
     public Set<Hygiene> getMedidas_de_higiene() {
         return medidas_de_higiene;
     }
@@ -276,10 +276,11 @@ public class Publication {
     public void setMedidas_de_higiene(Set<Hygiene> medidas_de_higiene) {
         this.medidas_de_higiene = medidas_de_higiene;
     }
+
     @Access(AccessType.PROPERTY)
     @NotNull
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, targetEntity = IncludedInPublication.class )
-    @JoinTable(name = "publication_incluido", joinColumns = @JoinColumn(name = "publication_id_event",referencedColumnName = "id_event"), inverseJoinColumns = @JoinColumn(name = "incluido_id",referencedColumnName = "id"))
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, targetEntity = IncludedInPublication.class)
+    @JoinTable(name = "publication_incluido", joinColumns = @JoinColumn(name = "publication_id_event", referencedColumnName = "id_event"), inverseJoinColumns = @JoinColumn(name = "incluido_id", referencedColumnName = "id"))
     public Set<IncludedInPublication> getIncluido() {
         return incluido;
     }
@@ -342,7 +343,6 @@ public class Publication {
     }
 
 
-
     @Override
     public String toString() {
         return "Publications{" +
@@ -353,8 +353,9 @@ public class Publication {
                 '}';
     }
 
-    public boolean verifyObjectIncomplete(){
+    public boolean verifyObjectIncomplete() {
         return this.ubication == null || this.ubication.equals("") || (this.title == null || this.title.equals("") || (this.listaActividadades == null || (this.Datefrom == null || (this.Dateto == null || (this.description == null ? true : this.description.equals("") ? true : false)))));
     }
+}
 
 }

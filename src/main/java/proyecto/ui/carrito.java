@@ -76,19 +76,35 @@ public class carrito {
             if (i==0){
                 Text name = new Text(reservaciones.get(0).getPublication().getTitle());
                 String start = reservaciones.get(0).getHourStart() + ":00";
-                Text hora = new Text(start);
+                Text hora = new Text(start+reservaciones.get(0).getDate_reservation());
                 Text telefono = new Text(reservaciones.get(0).getPublication().getPhone());
+                Text estado;
+                if(reservaciones.get(0).isValidated_reservation()){
+                    estado = new Text("Aprobada");
+                }
+                else{
+                    estado = new Text("No aprobada aún");
+                }
                 tabla.add(name,0,0);
                 tabla.add(hora,1,0);
+                tabla.add(estado,2,0);
                 tabla.add(telefono,3,0);
             }
             else{
                 Text name = new Text(reservaciones.get(i).getPublication().getTitle());
                 String start = reservaciones.get(i).getHourStart() + ":00";
-                Text hora = new Text(start);
+                Text hora = new Text(start+reservaciones.get(i).getDate_reservation());
                 Text telefono = new Text(reservaciones.get(i).getPublication().getPhone());
+                Text estado;
+                if(reservaciones.get(i).isValidated_reservation()){
+                    estado = new Text("Aprobada");
+                }
+                else{
+                    estado = new Text("No aprobada aún");
+                }
                 tabla.add(name,0,i);
                 tabla.add(hora,1,i);
+                tabla.add(estado,2,i);
                 tabla.add(telefono,3,i);
             }
         }

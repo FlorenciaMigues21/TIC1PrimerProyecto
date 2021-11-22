@@ -142,6 +142,9 @@ public class experiencePage {
     private Text total;
 
     @FXML
+    private Text boolreserv;
+
+    @FXML
     Button calcular;
     boolean panelEstado = true;
 
@@ -164,8 +167,12 @@ public class experiencePage {
                                 }
                                 if (!publicacionActual.isReservationAvailable()) {
                                     buttonReserva.setVisible(false);
+                                    boolreserv.setText("No hay opción de reserva");
                                 }
-                                paneCal.setVisible(panelEstado);
+                                else {
+                                    boolreserv.setVisible(false);
+                                    paneCal.setVisible(panelEstado);
+                                }
 
                             }
                         }
@@ -253,9 +260,9 @@ public class experiencePage {
         java.util.Date newDate = Utilities.createDate(datePick.getYear(), datePick.getMonthValue(),datePick.getDayOfMonth());
         Integer hora = horarioSelect();
         if(VerificReservation(hora)) {
-            //Reservation newReser = new Reservation(userActual, publicacionActual, Integer.parseInt(cantPer.getText()), hora);
+            Reservation newReser = new Reservation(userActual, publicacionActual, Integer.parseInt(cantPer.getText()),hora,newDate,false);
             showAlert("Su reserva fue guardada", "Puede ver el estado de la reserva en su itinerario");
-            //resManager.addReservation(newReser);
+            resManager.addReservation(newReser);
         }
         else if(!turistaReservaDisp()){
            showAlert("Ya reservó!","Usted ya reservó, si desea cambiar su reserva, vaya a su itinerario.");

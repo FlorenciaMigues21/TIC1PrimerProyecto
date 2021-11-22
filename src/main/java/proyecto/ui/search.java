@@ -114,44 +114,46 @@ public class search {
     private void loadInfo() throws IOException {
         boxItems.getChildren().clear();
         List<Publication> listPub = searchMan.getPublicationBasedOnWord(itemBus);
-        for(int i = 0; i< listPub.size();i++){
-            HBox newHbox = new HBox();
-            newHbox.setPrefWidth(200);
-            newHbox.setPrefHeight(100);
-            //IMAGEN
-            Set<Photo> fotos = listPub.get(i).getPhotoList();
-            Photo aux = fotos.iterator().next();
-            Image newIm = aux.getImageFromByteArray(200,150);
-            ImageView newImag = new ImageView(newIm);
-            newImag.setFitHeight(150);
-            newImag.setFitWidth(200);
-            newHbox.getChildren().add(newImag);
-            VBox newVBox = new VBox();
-            newVBox.prefHeight(150);
-            newVBox.prefWidth(761);
-            newVBox.setAlignment(Pos.CENTER);
-            newHbox.getChildren().add(newVBox);
-            newVBox.setSpacing(25);
-            newHbox.setSpacing(25);
-            Text titulo = new Text(listPub.get(i).getTitle());
-            Text descripcion = new Text(listPub.get(i).getDescription());
-            titulo.setFont(Font.font(null, FontWeight.BOLD, 20));
-            newVBox.getChildren().add(titulo);
-            newVBox.getChildren().add(descripcion);
-            Button newButton = new Button();
-            Publication pub = listPub.get(i);
-            newButton.setOnAction(e ->{
-                try {
-                    Next(e,pub);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            });
-            newButton.setText("Ver");
-            newButton.setPrefSize(58,27);
-            HBox.setMargin(newButton,new Insets(50,0,0,0));
-            newHbox.getChildren().add(newButton);
-            boxItems.getChildren().add(newHbox);
+        for(int i = 0; i< listPub.size();i++) {
+            if (listPub.get(i).isValidated()){
+                HBox newHbox = new HBox();
+                newHbox.setPrefWidth(200);
+                newHbox.setPrefHeight(100);
+                //IMAGEN
+                Set<Photo> fotos = listPub.get(i).getPhotoList();
+                Photo aux = fotos.iterator().next();
+                Image newIm = aux.getImageFromByteArray(200, 150);
+                ImageView newImag = new ImageView(newIm);
+                newImag.setFitHeight(150);
+                newImag.setFitWidth(200);
+                newHbox.getChildren().add(newImag);
+                VBox newVBox = new VBox();
+                newVBox.prefHeight(150);
+                newVBox.prefWidth(761);
+                newVBox.setAlignment(Pos.CENTER);
+                newHbox.getChildren().add(newVBox);
+                newVBox.setSpacing(25);
+                newHbox.setSpacing(25);
+                Text titulo = new Text(listPub.get(i).getTitle());
+                Text descripcion = new Text(listPub.get(i).getDescription());
+                titulo.setFont(Font.font(null, FontWeight.BOLD, 20));
+                newVBox.getChildren().add(titulo);
+                newVBox.getChildren().add(descripcion);
+                Button newButton = new Button();
+                Publication pub = listPub.get(i);
+                newButton.setOnAction(e -> {
+                    try {
+                        Next(e, pub);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                });
+                newButton.setText("Ver");
+                newButton.setPrefSize(58, 27);
+                HBox.setMargin(newButton, new Insets(50, 0, 0, 0));
+                newHbox.getChildren().add(newButton);
+                boxItems.getChildren().add(newHbox);
+            }
         }
         boxItems.setSpacing(50);
     }
