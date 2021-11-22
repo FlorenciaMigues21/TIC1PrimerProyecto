@@ -64,4 +64,20 @@ public class UserManager<T extends User> {
             throw new InvalidUserInformation("Error. No se ha podido crear el user");
         }
     }
+
+    public void deleteUser(T user) throws InvalidUserInformation, UserAlreadyExist {
+        if(user==null)
+            throw new InvalidUserInformation("Informacion invalida");
+        try{
+            if (user instanceof Tourist)
+                touristController.deleteByMail( user.getMail());
+            if (user instanceof TouristOperator)
+                touristOperatorController.deleteByMail(user.getMail());
+            if (user instanceof Admin)
+                adminController.deleteByMail(user.getMail());
+        }catch(Exception e){
+            e.printStackTrace();
+            throw new InvalidUserInformation("Error. No se ha podido crear el user");
+        }
+    }
 }

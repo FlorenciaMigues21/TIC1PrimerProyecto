@@ -137,6 +137,14 @@ public class PublicationManager {
         }
     }
 
+    public void deletePublication(Publication publication){
+        try{
+            controller.deleteByIdEvent(publication.getIdEvent());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     /*public void updatePublication(Publication publication){
         try{
             controller.set(publication.getIdEvent(),publication);

@@ -11,4 +11,6 @@ public interface UserDAO<T extends User> extends CrudRepository<T,String>{
 
         T findByMail(String mail);
 
+        T deleteByMail(String mail);
+
 }
