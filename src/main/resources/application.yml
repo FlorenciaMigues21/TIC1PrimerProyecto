@@ -3,8 +3,8 @@
     name: server
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    username: flor
-    password: 123456
+    username: test
+    password: 1234
     url: jdbc:mysql://localhost:3306/tic1
   jpa:
     show-sql: true
