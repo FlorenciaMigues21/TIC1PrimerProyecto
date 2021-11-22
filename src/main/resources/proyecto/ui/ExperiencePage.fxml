@@ -129,7 +129,6 @@
          </font>
       </Label>
       <Text fx:id="direccion" layoutX="447.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="142.0" />
-      <Text fx:id="infoExp" layoutX="753.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Pane fx:id="paneCal" layoutX="1008.0" layoutY="58.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="186.0">
          <children>
             <Label layoutX="35.0" layoutY="207.0" prefHeight="26.0" prefWidth="131.0" text="Seleccione horario" textFill="#004aad">
@@ -183,5 +182,10 @@
          </content>
       </ScrollPane>
       <Label layoutX="177.0" layoutY="563.0" text="Ya nos visitaste?" />
+      <ScrollPane layoutX="730.0" layoutY="103.0" prefHeight="58.0" prefWidth="243.0">
+         <content>
+            <Text fx:id="infoExp" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="234.13671875" />
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

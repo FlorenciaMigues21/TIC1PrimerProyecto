@@ -252,7 +252,7 @@ public class ExperienceDisplayOperator{
         ArrayList<Typeofactivities> listType = new ArrayList<>(manType.getAllActivityTypes());
         for (Typeofactivities typeofactivities : listType) {
             if (!typeofactivities.getName().equals("Verano") && !typeofactivities.getName().equals("Invierno") && !typeofactivities.getName().equals("Otoño") && !typeofactivities.getName().equals("Primavera")
-                    && !typeofactivities.getName().equals("Viaje Confort") && !typeofactivities.getName().equals("Viaje Alternativo") && !typeofactivities.getName().equals("Viaje de Lujo")){
+                    && !typeofactivities.getName().equals("Viaje Confort") && !typeofactivities.getName().equals("Viaje alternativo") && !typeofactivities.getName().equals("Viaje de Lujo")){
                 CheckBox type = new CheckBox();
                 type.setId(typeofactivities.getName());
                 type.setText(typeofactivities.getName());
@@ -327,6 +327,7 @@ public class ExperienceDisplayOperator{
         newItem.setIncluido(itemInc.getText());
         incluido.setText(itemInc.getText());
         listasIncluidos.add(newItem);
+        itemInc.setText("");
         aspIncluidos.getChildren().add(incluido);
     }
     //Agregar aspecto incluido, falta agregar a la publicacion
@@ -337,6 +338,7 @@ public class ExperienceDisplayOperator{
         newItem.setMedidas(itemMed.getText());
         medida.setText(itemMed.getText());
         listasHigiene.add(newItem);
+        itemMed.setText("");
         higieneInc.getChildren().add(medida);
     }
 

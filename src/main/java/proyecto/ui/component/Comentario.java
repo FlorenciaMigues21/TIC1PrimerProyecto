@@ -9,13 +9,19 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import proyecto.business.entities.Comentary;
 import proyecto.business.entities.Publication;
 import proyecto.business.entities.Tourist;
 import proyecto.business.entities_managers.ComentaryManager;
 import proyecto.business.exceptions.ComentaryCreationError;
 import proyecto.business.exceptions.DataBaseError;
+import proyecto.business.exceptions.IncompleteObjectException;
+import proyecto.ui.doubleObjet;
 
+import java.io.IOException;
+
+@Component
 public class Comentario {
 
     @Autowired
@@ -35,7 +41,23 @@ public class Comentario {
     private Button guardarComentario;
 
     public void initialize() {
-        AgregarCal();
+        guardarComentario.sceneProperty().addListener(((observable, oldValue, newValue) -> {
+            if (oldValue == null && newValue != null) {
+                newValue.windowProperty().addListener((observable1, oldValue1, newValue1) -> {
+                            if (oldValue1 == null && newValue1 != null) {
+                                Stage stage = (Stage) guardarComentario.getScene().getWindow();
+                                doubleObjet db = (doubleObjet) stage.getUserData();
+                                turistaActual = db.getTurista();
+                                publiActual = db.getPublicacion();
+                                AgregarCal();
+
+                            }
+                        }
+                );
+            }
+        }
+        ));
+
     }
 
     private void AgregarCal(){

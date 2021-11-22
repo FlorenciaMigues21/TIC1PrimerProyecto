@@ -3,6 +3,8 @@ package proyecto.ui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,6 +14,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,9 +129,13 @@ public class search {
             VBox newVBox = new VBox();
             newVBox.prefHeight(150);
             newVBox.prefWidth(761);
+            newVBox.setAlignment(Pos.CENTER);
             newHbox.getChildren().add(newVBox);
+            newVBox.setSpacing(25);
+            newHbox.setSpacing(25);
             Text titulo = new Text(listPub.get(i).getTitle());
             Text descripcion = new Text(listPub.get(i).getDescription());
+            titulo.setFont(Font.font(null, FontWeight.BOLD, 20));
             newVBox.getChildren().add(titulo);
             newVBox.getChildren().add(descripcion);
             Button newButton = new Button();
@@ -141,9 +149,11 @@ public class search {
             });
             newButton.setText("Ver");
             newButton.setPrefSize(58,27);
+            HBox.setMargin(newButton,new Insets(50,0,0,0));
             newHbox.getChildren().add(newButton);
             boxItems.getChildren().add(newHbox);
         }
+        boxItems.setSpacing(50);
     }
     void Next(ActionEvent event,Publication publicacion) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -156,6 +166,8 @@ public class search {
         stage.setUserData(db);
         stage.setScene(new Scene(root));
         stage.show();
+        Stage stage2 = (Stage) seartching.getScene().getWindow();
+        stage2.close();
     }
     public void buscar(ActionEvent event) throws IOException {
         itemBus = elementoBus.getText();

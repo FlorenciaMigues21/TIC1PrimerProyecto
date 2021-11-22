@@ -6,11 +6,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -26,6 +32,7 @@ import proyecto.business.exceptions.*;
 import proyecto.business.utils.Utilities;
 import proyecto.ui.component.Comentario;
 
+import java.awt.*;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
@@ -190,10 +197,10 @@ public class experiencePage {
 
                 // deshabilitar las fechas futuras
                 if (item.isAfter(LocalDate.ofInstant(publicacionActual.getDateto().toInstant(), ZoneId.systemDefault()))){
-                    this.setDisable(true);
+                    this.setDisable(false);
                 }
                 if (item.isBefore(LocalDate.ofInstant(publicacionActual.getDatefrom().toInstant(), ZoneId.systemDefault()))){
-                    this.setDisable(true);
+                    this.setDisable(false);
                 }
             }
         };
@@ -209,11 +216,11 @@ public class experiencePage {
         telefono.setText(publicacionActual.getPhone());
         subirHorarios();
         pun.setText(String.valueOf(publicacionActual.getCalification()));
-        /*try {
+        try {
             AgregarComentarios();
         } catch (DataBaseError e) {
             e.printStackTrace();
-        }*/
+        }
         UpPhotos();
         UpElements();
     }
@@ -224,14 +231,14 @@ public class experiencePage {
         Iterator<Photo> it = fotos.iterator();
         Image newImage1 = it.next().getImageFromByteArray(276,214);
         imagen1.setImage(newImage1);
-        /*Image newImage2 = it.next().getImageFromByteArray(142,100);
+        Image newImage2 = it.next().getImageFromByteArray(142,100);
         imagen2.setImage(newImage2);
         Image newImage3 = it.next().getImageFromByteArray(142,100);
         imagen3.setImage(newImage3);
         Image newImage4 = it.next().getImageFromByteArray(142,100);
         imagen4.setImage(newImage4);
         Image newImage5 = it.next().getImageFromByteArray(142,100);
-        imagen5.setImage(newImage5);*/
+        imagen5.setImage(newImage5);
     }
 
     //Crea la reserva
@@ -240,14 +247,14 @@ public class experiencePage {
         LocalDate datePick = fechaReserva.getValue();
         java.util.Date newDate = Utilities.createDate(datePick.getYear(), datePick.getMonthValue(),datePick.getDayOfMonth());
         Integer hora = horarioSelect();
-       /*if(VerificReservation(hora)){*/
-           Reservation newReser = new Reservation(userActual,publicacionActual,Integer.parseInt(cantPer.getText()),hora);
-           showAlert("Su reserva fue guardada","Puede ver el estado de la reserva en su itinerario");
-           resManager.addReservation(newReser);
-
-        /*else if(!turistaReservaDisp()){
+        if(VerificReservation(hora)) {
+            Reservation newReser = new Reservation(userActual, publicacionActual, Integer.parseInt(cantPer.getText()), hora);
+            showAlert("Su reserva fue guardada", "Puede ver el estado de la reserva en su itinerario");
+            resManager.addReservation(newReser);
+        }
+        else if(!turistaReservaDisp()){
            showAlert("Ya reservó!","Usted ya reservó, si desea cambiar su reserva, vaya a su itinerario.");
-       }*/
+       }
 
     }
 
@@ -282,19 +289,27 @@ public class experiencePage {
         alert.showAndWait();
     }
     //Agregar comentarios
-    /*private void AgregarComentarios() throws DataBaseError, IncompleteObjectException {
+    private void AgregarComentarios() throws DataBaseError, IncompleteObjectException {
+        boxComentary.getChildren().clear();
+
         ArrayList<Comentary> comentarios = new ArrayList<>(comManager.getComentaryOfPublication(publicacionActual));
         if(comentarios.size()>0) {
             for (int i = 0; i < comentarios.size(); i++) {
                 Label usuarioNombre = new Label(comentarios.get(i).getTurista().getUsername());
+                usuarioNombre.setFont(Font.font(null, FontWeight.BOLD, 15));
+                usuarioNombre.setTextFill(Color.BLUE);
                 Text comentarioText = new Text((comentarios.get(i).getComantary()));
                 VBox section = new VBox();
+                String cssLayout = "-fx-border-color: black;\n" +
+                        "-fx-border-width: 0.5;\n";
+
+                section.setStyle(cssLayout);
                 section.getChildren().add(usuarioNombre);
                 section.getChildren().add(comentarioText);
                 boxComentary.getChildren().add(section);
             }
         }
-    }*/
+    }
     //CONVERSION DEL HORARIO
     private Date convertToDateViaSqlDate(LocalDate dateToConvert) {
         return java.sql.Date.valueOf(dateToConvert);
@@ -317,15 +332,18 @@ public class experiencePage {
 
     //Hacer comentario
     @FXML
-    void hacerComentario(ActionEvent actionEvent) throws IOException {
+    void hacerComentario(ActionEvent actionEvent) throws IOException, DataBaseError, IncompleteObjectException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(proyecto.ui.component.Comentario.class.getResourceAsStream("Comentario.fxml"));
         Stage stage = new Stage();
+        doubleObjet db = new doubleObjet();
+        db.setPublicacion(publicacionActual);
+        db.setTurista(userActual);
+        stage.setUserData(db);
         stage.setScene(new Scene(root));
         stage.show();
-        Comentario.publiActual = publicacionActual;
-        Comentario.turistaActual = userActual;
+        AgregarComentarios();
     }
 
     @FXML
@@ -368,7 +386,7 @@ public class experiencePage {
     private Integer horarioSelect(){
         return Integer.parseInt(horario.getValue().substring(0,2));
     }
-    /*
+
     private boolean VerificReservation(Integer hora) throws InvalidPublicationInformation, DataBaseError {
         Collection<Reservation> reser = resManager.getAllReservationFromPublication(publicacionActual);
         ArrayList<Reservation> reservasList = new ArrayList<>(reser);
@@ -384,7 +402,7 @@ public class experiencePage {
         else{
             return false;
         }
-    }*/
+    }
 
 
 }

@@ -1,6 +1,7 @@
 package proyecto.ui.operator;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -19,10 +20,7 @@ import proyecto.business.entities.Publication;
 import proyecto.business.entities.Reservation;
 import proyecto.business.entities.TouristOperator;
 import proyecto.business.entities_managers.ReservationManager;
-import proyecto.business.exceptions.DataBaseError;
-import proyecto.business.exceptions.InvalidPublicationInformation;
-import proyecto.business.exceptions.InvalidUserInformation;
-import proyecto.business.exceptions.PublicationsLoadError;
+import proyecto.business.exceptions.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -74,14 +72,32 @@ public class reservationView {
         Collection<Reservation> reservas = reserManager.getAllReservationFromPublication(publicActual);
         ArrayList<Reservation> reservasList = new ArrayList<>(reservas);
         for(int i=0;i < reservas.size(); i++){
-            tablaReserva.addRow(i+1);
+            tablaReserva.addRow(i);
             Text nombre = new Text(reservasList.get(i).getTurista().getUsername());
-            tablaReserva.add(nombre,0,i+1);
+            tablaReserva.add(nombre,0,i);
             //Text fecha = new Text(reservasList.get(i).) @FIXME ARREGLAR FECHA
             Text cantPersonas = new Text(Integer.toString(reservasList.get(i).getCantidad()));
-            tablaReserva.add(cantPersonas,2,i+1);
+            tablaReserva.add(cantPersonas,2,i);
             Text telefono = new Text(reservasList.get(i).getTurista().getPhone());
-            tablaReserva.add(telefono,3,i+1);
+            tablaReserva.add(telefono,4,i);
+            /*Button Validar = new Button();
+            int finalI = i;
+            Validar.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    //reservasList.get(finalI).; @FIXME
+                    try {
+                        pubManager.createPublication(publicNoVal.get(finalI));
+                    } catch (PublicationCreationError e) {
+                        e.printStackTrace();
+                    }
+                    setExperienciasValidadas();
+                    setExrencieAValidar();
+                    showAlert("La publicación fue aprobada","Ahora estará en la tabla siguiente");
+                }
+            });
+            Validar.setPrefSize(58,27);
+            Validar.setText("Validar");*/
         }
     }
 

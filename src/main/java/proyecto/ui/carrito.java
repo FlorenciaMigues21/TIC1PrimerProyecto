@@ -69,30 +69,27 @@ public class carrito {
     }
 
     private void loadInfo() throws InvalidUserInformation, DataBaseError {
+        removeRow();
         reservaciones = new ArrayList<>(reservMan.getAllReservationFromTourist(turista));
+        System.out.println(reservaciones.size());
         for(int i=0;i<reservaciones.size();i++){
             if (i==0){
                 Text name = new Text(reservaciones.get(0).getPublication().getTitle());
                 String start = reservaciones.get(0).getHourStart() + ":00";
                 Text hora = new Text(start);
                 Text telefono = new Text(reservaciones.get(0).getPublication().getPhone());
-                GridPane.setRowIndex(name,0);
-                GridPane.setColumnIndex(name,0);
-                GridPane.setRowIndex(hora,0);
-                GridPane.setColumnIndex(hora,1);
-                GridPane.setRowIndex(telefono,0);
-                GridPane.setColumnIndex(telefono,2);
+                tabla.add(name,0,0);
+                tabla.add(hora,1,0);
+                tabla.add(telefono,3,0);
             }
             else{
                 Text name = new Text(reservaciones.get(i).getPublication().getTitle());
                 String start = reservaciones.get(i).getHourStart() + ":00";
                 Text hora = new Text(start);
                 Text telefono = new Text(reservaciones.get(i).getPublication().getPhone());
-                GridPane.setColumnIndex(name,0);
-                GridPane.setRowIndex(hora,0);
-                GridPane.setColumnIndex(hora,1);
-                GridPane.setRowIndex(telefono,0);
-                GridPane.setColumnIndex(telefono,2);
+                tabla.add(name,0,i);
+                tabla.add(hora,1,i);
+                tabla.add(telefono,3,i);
             }
         }
 
@@ -124,5 +121,13 @@ public class carrito {
         stage.show();
         Stage stage2 = (Stage) this.carr.getScene().getWindow();
         stage2.close();
+    }
+
+    private void removeRow(){
+
+        while (tabla.getRowConstraints().size() > 0) {
+            tabla.getRowConstraints().remove(0);
+        }
+
     }
 }
