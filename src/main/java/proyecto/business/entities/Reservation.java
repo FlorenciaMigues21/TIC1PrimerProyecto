@@ -28,10 +28,9 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(Tourist turista, Publication publication, int idReservation, int cantidad, int hourStart, Date date_reservation, boolean validated_reservation) {
+    public Reservation(Tourist turista, Publication publication, int cantidad, int hourStart, Date date_reservation, boolean validated_reservation) {
         this.turista = turista;
         this.publication = publication;
-        IdReservation = idReservation;
         this.cantidad = cantidad;
         this.hourStart = hourStart;
         this.date_reservation = date_reservation;
