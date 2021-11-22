@@ -8,11 +8,14 @@ import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import proyecto.business.entities.Publication;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
+
+@Transactional
 @Component
 @Slf4j
 @RequiredArgsConstructor
