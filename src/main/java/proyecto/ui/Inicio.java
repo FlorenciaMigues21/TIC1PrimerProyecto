@@ -14,6 +14,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,6 +117,7 @@ public class Inicio {
             newItem.getChildren().add(imagen);
             Text newText = new Text();
             newText.setText(list.get(i).getTitle());
+            newText.setFont(Font.font(null, FontWeight.BOLD, 15));
             newItem.getChildren().add(newText);
             Button newButton = new Button();
             Publication pub = list.get(i);
