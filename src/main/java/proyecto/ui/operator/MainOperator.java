@@ -27,6 +27,7 @@ import proyecto.business.exceptions.DataBaseError;
 import proyecto.business.exceptions.InvalidPublicationInformation;
 import proyecto.business.exceptions.InvalidUserInformation;
 import proyecto.business.exceptions.PublicationsLoadError;
+import proyecto.ui.MenuInicial;
 import proyecto.ui.selectionTurist;
 
 import java.awt.event.MouseEvent;
@@ -55,6 +56,9 @@ public class MainOperator {
 
     @FXML
     private GridPane tabla;
+
+    @FXML
+    private Button exit;
 
     ArrayList<Publication> publicList;
 
@@ -86,13 +90,17 @@ public class MainOperator {
                if (publicList.get(i).isValidated()) {
                    Text validado = new Text("Validada");
                    tabla.add(validado, 1, i);
+                   GridPane.setHalignment(validado, HPos.CENTER);
                    Text calificacion = new Text(String.valueOf(publicList.get(i).getCalification()));
                    tabla.add(calificacion, 4, i);
+                   GridPane.setHalignment(calificacion, HPos.CENTER);
                } else {
                    Text novalidado = new Text("No validada");
                    tabla.add(novalidado, 1, i);
+                   GridPane.setHalignment(novalidado, HPos.CENTER);
                    Text calificacion = new Text("No disponible");
                    tabla.add(calificacion, 4, i);
+                   GridPane.setHalignment(calificacion, HPos.CENTER);
                }
                Button botonReserva = new Button();
                int finalI = i;
@@ -110,6 +118,7 @@ public class MainOperator {
                botonReserva.setPrefSize(58,27);
                botonReserva.setText("Ir");
                tabla.add(botonReserva,3,i);
+               GridPane.setHalignment(botonReserva, HPos.CENTER);
                ArrayList<Reservation> reservasList = new ArrayList<>(reservManager.getAllReservationFromPublication(publicList.get(i)));
                Text cantidadReservas = new Text(Integer.toString(reservasList.size()));
                tabla.add(cantidadReservas, 2, i);
@@ -151,6 +160,17 @@ public class MainOperator {
         stage.setUserData(operadorTurist);
         stage.setScene(new Scene(root));
         stage.show();
+    }
+    @FXML
+    void salir(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(MenuInicial.class.getResourceAsStream("principalPage.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        Stage stage2 = (Stage) this.ap.getScene().getWindow();
+        stage2.close();
     }
 
 

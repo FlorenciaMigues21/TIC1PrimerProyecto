@@ -21,6 +21,15 @@
                </image>
             </ImageView>
             <Button fx:id="crearOp" layoutX="21.0" layoutY="9.0" mnemonicParsing="false" onAction="#AgregarOp" prefHeight="40.0" prefWidth="164.0" style="-fx-background-color: white;" text="Crear operador turístico" />
+            <Button fx:id="exit" onAction="#salir" layoutX="209.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: white;">
+               <graphic>
+                  <ImageView fitHeight="19.0" fitWidth="21.0">
+                     <image>
+                        <Image url="@/Images/logout.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
       <Text layoutX="152.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Experiencias para validar">

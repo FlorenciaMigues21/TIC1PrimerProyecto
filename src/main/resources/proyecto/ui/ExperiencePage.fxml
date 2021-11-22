@@ -46,7 +46,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="calendarButton" layoutX="23.0" layoutY="180.0" style="-fx-background-color: white;">
+            <Button fx:id="calendarButton" onAction="#goToCalendar" layoutX="23.0" layoutY="180.0" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="32.0">
                      <Image url="@/Images/calendar.png" />

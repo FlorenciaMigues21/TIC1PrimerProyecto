@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,6 +24,8 @@ import proyecto.business.entities_managers.ReservationManager;
 import proyecto.business.exceptions.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -75,35 +78,44 @@ public class reservationView {
             tablaReserva.addRow(i);
             Text nombre = new Text(reservasList.get(i).getTurista().getUsername());
             tablaReserva.add(nombre,0,i);
-            //Text fecha = new Text(reservasList.get(i).) @FIXME ARREGLAR FECHA
+            GridPane.setHalignment(nombre, HPos.CENTER);
+            Text hora = new Text(reservasList.get(i).getHourStart()+":00"+"  "+ LocalDate.ofInstant(reservasList.get(i).getDate_reservation().toInstant(), ZoneId.systemDefault()));
+            tablaReserva.add(hora,1,i);
+            GridPane.setHalignment(hora, HPos.CENTER);
             Text cantPersonas = new Text(Integer.toString(reservasList.get(i).getCantidad()));
             tablaReserva.add(cantPersonas,2,i);
+            GridPane.setHalignment(cantPersonas, HPos.CENTER);
             Text telefono = new Text(reservasList.get(i).getTurista().getPhone());
             tablaReserva.add(telefono,4,i);
-            Button Validar = new Button();
-            int finalI = i;
-            Validar.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    reservasList.get(finalI).setValidated_reservation(true);
-                    try {
-                        reserManager.addReservation(reservasList.get(finalI));
-                    } catch (ReservationCreationError reservationCreationError) {
-                        reservationCreationError.printStackTrace();
-                    } catch (DataBaseError dataBaseError) {
-                        dataBaseError.printStackTrace();
+            GridPane.setHalignment(telefono, HPos.CENTER);
+            if(!reservasList.get(i).isValidated_reservation()) {
+                Button Validar = new Button();
+                int finalI = i;
+                Validar.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        reservasList.get(finalI).setValidated_reservation(true);
+                        try {
+                            reserManager.addReservation(reservasList.get(finalI));
+                        } catch (ReservationCreationError reservationCreationError) {
+                            reservationCreationError.printStackTrace();
+                        } catch (DataBaseError dataBaseError) {
+                            dataBaseError.printStackTrace();
+                        }
+                        try {
+                            agregarDatosReserva();
+                        } catch (InvalidPublicationInformation e) {
+                            e.printStackTrace();
+                        } catch (DataBaseError e) {
+                            e.printStackTrace();
+                        }
                     }
-                    try {
-                        agregarDatosReserva();
-                    } catch (InvalidPublicationInformation e) {
-                        e.printStackTrace();
-                    } catch (DataBaseError e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-            Validar.setPrefSize(58,27);
-            Validar.setText("Validar");
+                });
+                Validar.setPrefSize(58, 27);
+                Validar.setText("Validar");
+                tablaReserva.add(Validar, 3, i);
+                GridPane.setHalignment(Validar, HPos.CENTER);
+            }
         }
     }
 

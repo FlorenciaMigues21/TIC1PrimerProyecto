@@ -24,6 +24,7 @@ import proyecto.business.entities.TouristOperator;
 import proyecto.business.entities_managers.PublicationManager;
 import proyecto.business.exceptions.PublicationCreationError;
 import proyecto.business.exceptions.PublicationsLoadError;
+import proyecto.ui.MenuInicial;
 import proyecto.ui.carrito;
 import proyecto.ui.operator.reservationView;
 
@@ -52,6 +53,9 @@ public class Admin_init {
 
     @FXML
     private Button crearOp;
+
+    @FXML
+    private Button exit;
 
     ArrayList<Publication> publicVal;
     ArrayList<Publication> publicNoVal;
@@ -200,6 +204,17 @@ public class Admin_init {
                 expAValidar.getRowConstraints().remove(0);
             }
         }
+    }
+    @FXML
+    void salir(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(MenuInicial.class.getResourceAsStream("principalPage.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        Stage stage2 = (Stage) this.ap.getScene().getWindow();
+        stage2.close();
     }
 }
 

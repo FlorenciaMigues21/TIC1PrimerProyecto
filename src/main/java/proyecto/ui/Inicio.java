@@ -19,10 +19,7 @@ import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import proyecto.Main;
-import proyecto.business.entities.Photo;
-import proyecto.business.entities.Publication;
-import proyecto.business.entities.Tourist;
-import proyecto.business.entities.TouristOperator;
+import proyecto.business.entities.*;
 import proyecto.business.entities_managers.PhotoManager;
 import proyecto.business.entities_managers.PublicationManager;
 import proyecto.business.entities_managers.TypeofactivitiesManager;
@@ -131,16 +128,64 @@ public class Inicio {
                     ex.printStackTrace();
                 }
                 Stage stage = new Stage();
-                stage.setScene(new Scene(root));
                 doubleObjet db = new doubleObjet();
                 db.setPublicacion(pub);
                 db.setTurista(turista);
                 stage.setUserData(db);
+                stage.setScene(new Scene(root));
                 stage.show();
 
             });
             newItem.getChildren().add(newButton);
             gustos1.getChildren().add(newItem);
+        }
+    }
+    private void loadInfo1() throws IOException, DataBaseError {
+        ArrayList<Publication> publicaciones = new ArrayList<>();
+        ArrayList<String> estaciones = returnType();
+        for(int j=0;j<estaciones.size();j++){
+            publicaciones.addAll((pubMan.getRecomendedPublicationsByGroupByEspecific(turista.getMail(),estaciones.get(j))));
+        }
+        gustos2.getChildren().clear();
+        for(int i = 0; i<publicaciones.size();i++){
+            VBox newItem = new VBox();
+            newItem.setAlignment(Pos.CENTER);
+            newItem.setPrefHeight(126);
+            newItem.setPrefWidth(162);
+            Set<Photo> fotos = list.get(i).getPhotoList();
+            Photo aux = fotos.iterator().next();
+            Image newIm = aux.getImageFromByteArray(200,150);
+            ImageView imagen = new ImageView();
+            imagen.setImage(newIm);
+            imagen.setFitWidth(139);
+            imagen.setFitHeight(85);
+            newItem.getChildren().add(imagen);
+            Text newText = new Text();
+            newText.setText(list.get(i).getTitle());
+            newItem.getChildren().add(newText);
+            Button newButton = new Button();
+            Publication pub = list.get(i);
+            newButton.setText("Ir");
+            newButton.setOnAction(e ->{
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+                Parent root = null;
+                try {
+                    root = fxmlLoader.load(experiencePage.class.getResourceAsStream("ExperienciePage.fxml"));
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                Stage stage = new Stage();
+                doubleObjet db = new doubleObjet();
+                db.setPublicacion(pub);
+                db.setTurista(turista);
+                stage.setUserData(db);
+                stage.setScene(new Scene(root));
+                stage.show();
+
+            });
+            newItem.getChildren().add(newButton);
+            gustos2.getChildren().add(newItem);
         }
     }
     @FXML
@@ -196,6 +241,18 @@ public class Inicio {
         Stage stage2 = (Stage) this.setting.getScene().getWindow();
         stage2.close();
     }
+
+    private ArrayList<String> returnType(){
+        ArrayList<Typeofactivities> types = new ArrayList<>(turista.getIntereses());
+        ArrayList<String> result = new ArrayList<>();
+        for (int i = 0;i<types.size();i++){
+            if(types.get(i).getName().equals("Primavera") || types.get(i).getName().equals("Otoño") || types.get(i).getName().equals("Invierno") || types.get(i).getName().equals("Verano")){
+                result.add(types.get(i).getName());
+            }
+        }
+        return result;
+    }
+
 
 
 

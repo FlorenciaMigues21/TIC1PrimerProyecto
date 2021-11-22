@@ -72,8 +72,7 @@ public class experiencePage {
     @FXML
     private VBox boxComentary;
 
-    @FXML
-    private Button buttonMenu;
+
 
     @FXML
     private Button buttonReserva;
@@ -376,8 +375,8 @@ public class experiencePage {
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(Inicio.class.getResourceAsStream("Inicio.fxml"));
         Stage stage = new Stage();
-        stage.setScene(new Scene(root));
         stage.setUserData(userActual);
+        stage.setScene(new Scene(root));
         stage.show();
         Stage stage2 = (Stage) this.exper.getScene().getWindow();
         stage2.close();
@@ -421,6 +420,19 @@ public class experiencePage {
         else{
             return false;
         }
+    }
+
+    @FXML
+    void goToCalendar() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(carrito.class.getResourceAsStream("carrito.fxml"));
+        Stage stage = new Stage();
+        stage.setUserData(userActual);
+        stage.setScene(new Scene(root));
+        stage.show();
+        Stage stage2 = (Stage) this.exper.getScene().getWindow();
+        stage2.close();
     }
 
 
