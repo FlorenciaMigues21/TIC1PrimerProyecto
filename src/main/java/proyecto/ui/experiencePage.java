@@ -221,7 +221,6 @@ public class experiencePage {
             direccion.setText(publicacionActual.getUbication());
             infoExp.setText(publicacionActual.getDescription());
             telefono.setText(publicacionActual.getPhone());
-            pun.setText(String.valueOf(publicacionActual.getCalification()));
             AgregarComentarios();
         } catch (DataBaseError e) {
             e.printStackTrace();
@@ -321,6 +320,7 @@ public class experiencePage {
                 boxComentary.getChildren().add(section);
             }
             publicacionActual.setCalification(calificaciones/comentarios.size());
+            pun.setText(String.valueOf(publicacionActual.getCalification()));
             try {
                 pubManager.createPublication(publicacionActual);
             } catch (PublicationCreationError e) {

@@ -85,8 +85,12 @@ public class Inicio {
                                 System.out.println(turista);
                                 try {
                                     loadInfo();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                try{
                                     loadInfo1();
-                                } catch (IOException | DataBaseError e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                             }
