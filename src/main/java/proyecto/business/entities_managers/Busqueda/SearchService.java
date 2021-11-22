@@ -2,11 +2,11 @@ package proyecto.business.entities_managers.Busqueda;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.lucene.search.Query;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import proyecto.business.entities.Publication;
@@ -34,7 +34,7 @@ public class SearchService {                    //SERVICIO DE BUSQUEDA
                 .forEntity(Publication.class)
                 .get();
 
-        Query PublicationQuery = (Query) qb.keyword()
+        Query PublicationQuery = qb.keyword()
                 .onFields("title","description")
                 .matching(word)
                 .createQuery();
