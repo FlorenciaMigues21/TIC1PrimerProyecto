@@ -101,7 +101,7 @@ public class search {
 
     private void loadInfo(){
         boxItems.getChildren().clear();
-        /*List<Publication> listPub = searchMan.getPublicationBasedOnWord(itemBus);
+        List<Publication> listPub = searchMan.getPublicationBasedOnWord(itemBus);
         for(int i = 0; i< listPub.size();i++){
             HBox newHbox = new HBox();
             newHbox.setPrefWidth(200);
@@ -131,14 +131,15 @@ public class search {
                     ex.printStackTrace();
                 }
                 Stage stage = new Stage();
+                doubleObjet db = new doubleObjet();
+                db.setPublicacion(pub);
+                db.setTurista(turista);
                 stage.setScene(new Scene(root));
                 stage.show();
-                experiencePage.publicacionActual = pub;
-                experiencePage.userActual = turista;
             });
             newHbox.getChildren().add(newButton);
             boxItems.getChildren().add(newHbox);
-        }*/
+        }
     }
 
     public void buscar(ActionEvent event){
