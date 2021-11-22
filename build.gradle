@@ -4,6 +4,7 @@ plugins {
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.9'
+    id 'java-library'
 }
 
 
@@ -23,7 +24,10 @@ javafx {
     version = "15.0.1"
     modules = [ 'javafx.controls', 'javafx.fxml' , 'javafx.graphics', 'javafx.swing']
 }
-
+application{
+    mainModule = 'proyecto.Main'
+    mainClass = 'proyecto.Main'
+}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
