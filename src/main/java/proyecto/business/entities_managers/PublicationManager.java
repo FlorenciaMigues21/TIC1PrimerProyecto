@@ -109,6 +109,34 @@ public class PublicationManager {
         }
     }
 
+    public ArrayList<Publication> getRecomendedPublicationsByGroupBy(String mail) throws DataBaseError {
+        try{
+            Collection<Integer> publication_id_list = controller.findRecomendationsForUserByGroupBy(mail);
+            ArrayList<Publication> publications = new ArrayList<>();
+            for(Integer publication_id : publication_id_list){
+                publications.add(controller.findByIdEvent(publication_id));
+            }
+            return publications;
+        }catch(Exception e){
+            e.printStackTrace();
+            throw new DataBaseError("Error al cargar las publicaciones recomendadas",e.getMessage());
+        }
+    }
+
+    public ArrayList<Publication> getRecomendedPublicationsByGroupByEspecific(String mail, String groupByName) throws DataBaseError {
+        try{
+            Collection<Integer> publication_id_list = controller.findRecomendationsForUserByGroupByEspecific(mail,groupByName);
+            ArrayList<Publication> publications = new ArrayList<>();
+            for(Integer publication_id : publication_id_list){
+                publications.add(controller.findByIdEvent(publication_id));
+            }
+            return publications;
+        }catch(Exception e){
+            e.printStackTrace();
+            throw new DataBaseError("Error al cargar las publicaciones recomendadas",e.getMessage());
+        }
+    }
+
     /*public void updatePublication(Publication publication){
         try{
             controller.set(publication.getIdEvent(),publication);
