@@ -5,9 +5,9 @@ import com.sun.istack.NotNull;
 import javax.imageio.ImageIO;
 import javax.persistence.*;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
-import org.hibernate.engine.jdbc.LobCreator;
-import org.hibernate.type.descriptor.sql.LobTypeMappings;
+import javafx.scene.image.WritableImage;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -62,9 +62,11 @@ public class Photo {
         this.setPhoto(output.toByteArray());
     }
 
-    public Image getImageFromByteArray(byte[] byteArray) throws IOException {
+    public Image getImageFromByteArray(byte[] byteArray, int width, int height) throws IOException {
+        WritableImage img = new WritableImage(width, height);
         ByteArrayInputStream bais = new ByteArrayInputStream(byteArray);
         BufferedImage image = ImageIO.read(bais);
-        return new Image(bais);
+        img = SwingFXUtils.toFXImage(image,null);
+        return (Image) img;
     }
 }
