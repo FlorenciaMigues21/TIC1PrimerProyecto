@@ -1,10 +1,12 @@
 package proyecto.ui;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Cell;
 import javafx.scene.layout.AnchorPane;
@@ -19,6 +21,7 @@ import proyecto.business.entities.Tourist;
 import proyecto.business.entities_managers.ReservationManager;
 import proyecto.business.exceptions.DataBaseError;
 import proyecto.business.exceptions.InvalidUserInformation;
+import proyecto.business.exceptions.ReservationCreationError;
 
 import java.io.IOException;
 import java.sql.Time;
@@ -89,6 +92,22 @@ public class carrito {
                 tabla.add(hora,1,0);
                 tabla.add(estado,2,0);
                 tabla.add(telefono,3,0);
+                Button eliminar = new Button();
+                eliminar.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        try {
+                            reservMan.deleteReservation(reservaciones.get(0));
+                            showAlert("Reserva eliminada","Cuando vuelva a entrar al calendario, la reserva ya no se verá.");
+                        } catch (ReservationCreationError | DataBaseError e) {
+                            showAlert("Error","Inténtelo de nuevo");
+                        }
+
+                    }
+                });
+                eliminar.setPrefSize(58,27);
+                eliminar.setText("Eliminar");
+                tabla.add(eliminar,4,0);
             }
             else{
                 Text name = new Text(reservaciones.get(i).getPublication().getTitle());
@@ -106,6 +125,23 @@ public class carrito {
                 tabla.add(hora,1,i);
                 tabla.add(estado,2,i);
                 tabla.add(telefono,3,i);
+                int finalItem = i;
+                Button eliminar = new Button();
+                eliminar.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        try {
+                            reservMan.deleteReservation(reservaciones.get(finalItem));
+                            showAlert("Reserva eliminada","Cuando vuelva a entrar al calendario, la reserva ya no se verá.");
+                        } catch (ReservationCreationError | DataBaseError e) {
+                            showAlert("Error","Inténtelo de nuevo");
+                        }
+
+                    }
+                });
+                eliminar.setPrefSize(58,27);
+                eliminar.setText("Eliminar");
+                tabla.add(eliminar,4,i);
             }
         }
 
@@ -145,5 +181,12 @@ public class carrito {
             tabla.getRowConstraints().remove(0);
         }
 
+    }
+    private void showAlert(String title, String contextText) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(contextText);
+        alert.showAndWait();
     }
 }

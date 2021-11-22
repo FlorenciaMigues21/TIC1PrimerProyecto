@@ -8,6 +8,7 @@ import javafx.geometry.HPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -128,6 +129,7 @@ public class MainOperator {
                    @Override
                    public void handle(ActionEvent event) {
                         publiManager.deletePublication(publicList.get(finalI));
+                        showAlert("Publicación eliminada","Cuando vuelva a entrar, la publicación ya no se verá.");
                    }
                });
                eliminar.setPrefSize(58,27);
@@ -181,7 +183,13 @@ public class MainOperator {
         Stage stage2 = (Stage) this.ap.getScene().getWindow();
         stage2.close();
     }
-
+    private void showAlert(String title, String contextText) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(contextText);
+        alert.showAndWait();
+    }
 
 
 }
