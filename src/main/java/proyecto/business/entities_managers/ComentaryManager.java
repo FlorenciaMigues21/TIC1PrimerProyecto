@@ -50,4 +50,13 @@ public class ComentaryManager {
         }
     }
 
+    public void deleteComentary(Comentary comentario) throws ComentaryCreationError, DataBaseError {
+        if(comentario == null)
+            throw new ComentaryCreationError("Error, comentario vacio");
+        try{
+            controller.delete(comentario);
+        }catch(Exception e){
+            throw new DataBaseError("Error al guardar el comentario",e.getMessage());
+        }
+    }
 }

@@ -11,10 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import proyecto.business.entities.*;
-import proyecto.business.exceptions.DataBaseError;
-import proyecto.business.exceptions.InvalidUserInformation;
-import proyecto.business.exceptions.PublicationCreationError;
-import proyecto.business.exceptions.PublicationsLoadError;
+import proyecto.business.exceptions.*;
 import proyecto.business.persistence.PublicationDAO;
 
 import javax.persistence.EntityManager;
@@ -37,6 +34,12 @@ public class PublicationManager {
 
     @Autowired
     private PhotoManager photoManager;
+
+    @Autowired
+    private ReservationManager reservationManager;
+
+    @Autowired
+    private ComentaryManager comentaryManager;
 
     public void createPublication(Publication publication) throws PublicationCreationError {
         /*if (publication.verifyObjectIncomplete())
@@ -139,6 +142,32 @@ public class PublicationManager {
 
     public void deletePublication(Publication publication){
         try{
+            try {
+                Collection<Reservation> reservas = reservationManager.getAllReservationFromPublication(publication);
+                for (Reservation reserva : reservas){
+                    try {
+                        reservationManager.deleteReservation(reserva);
+                    } catch (ReservationCreationError e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (InvalidPublicationInformation e) {
+                e.printStackTrace();
+            } catch (DataBaseError e) {
+                e.printStackTrace();
+            }
+            try {
+                Collection<Comentary> cometarios = comentaryManager.getComentaryOfPublication(publication);
+                for (Comentary comentary : cometarios){
+                    try {
+                        comentaryManager.deleteComentary(comentary);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (DataBaseError e) {
+                e.printStackTrace();
+            }
             controller.delete(publication);
         }catch(Exception e){
             e.printStackTrace();

@@ -2,16 +2,15 @@ package proyecto.business.entities_managers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import proyecto.business.entities.Admin;
-import proyecto.business.entities.Tourist;
-import proyecto.business.entities.TouristOperator;
-import proyecto.business.entities.User;
+import proyecto.business.entities.*;
 import proyecto.business.exceptions.InvalidUserInformation;
 import proyecto.business.exceptions.UserAlreadyExist;
 import proyecto.business.exceptions.UserNotFound;
 import proyecto.business.persistence.AdminDAO;
 import proyecto.business.persistence.TouristDAO;
 import proyecto.business.persistence.TouristOperatorDAO;
+
+import java.util.Collection;
 
 @Service
 public class UserManager<T extends User> {
@@ -24,6 +23,9 @@ public class UserManager<T extends User> {
 
     @Autowired
     TouristOperatorDAO touristOperatorController;
+
+    @Autowired
+    PublicationManager publicationManager;
 
     public T findByMail(String mail)throws InvalidUserInformation, UserNotFound {
         if(mail.equals("") || mail == null)
@@ -71,8 +73,13 @@ public class UserManager<T extends User> {
         try{
             if (user instanceof Tourist)
                 touristController.delete( (Tourist) user);
-            if (user instanceof TouristOperator)
+            if (user instanceof TouristOperator) {
+                Collection<Publication> publications = publicationManager.getPublicationFromOperator((TouristOperator) user);
+                for (Publication publication : publications) {
+                    publicationManager.deletePublication(publication);
+                }
                 touristOperatorController.delete((TouristOperator) user);
+            }
             if (user instanceof Admin)
                 adminController.delete((Admin) user);
         }catch(Exception e){
