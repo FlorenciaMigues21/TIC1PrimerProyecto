@@ -71,11 +71,6 @@ public class MenuInicial {
                 newValue.windowProperty().addListener((observable1, oldValue1, newValue1) -> {
                             if (oldValue1 == null && newValue1 != null) {
                                 Stage stage = (Stage) inicio.getScene().getWindow();
-                                try {
-                                    indMan.initiateIndexing();
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
                                 loadTipoUsuario();
                             }
                         }
