@@ -6,6 +6,17 @@ PRESENTACIÓN: https://www.beautiful.ai/player/-Mp3QnSRkHzg2BJga8zW
 
 CONFIGURACIÓN:
 
+    1)Pre-Condiciones del equipo:
+        -Java 15.0.2
+        -MySQL server 8.0
+    
+    2)Pasos previos:
+        -Crear una base de datos en SQL y cambiar los valores en correspondientes a:
+            username: 
+            password: 
+            url: 
+        en el archivo application.yml.
+
 COMO OPERAR EN LA APLICACIÓN:
 
 Inicialmente se presentara una pantalla de inicio en la cual debe registrar su usuario o si este esta creado iniciar sesión.
