@@ -123,26 +123,31 @@ public class Inicio {
             Publication pub = list.get(i);
             newButton.setText("Ir");
             newButton.setOnAction(e ->{
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setControllerFactory(Main.getContext()::getBean);
-                Parent root = null;
                 try {
-                    root = fxmlLoader.load(experiencePage.class.getResourceAsStream("ExperienciePage.fxml"));
+                    Next(e,pub);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                Stage stage = new Stage();
-                doubleObjet db = new doubleObjet();
-                db.setPublicacion(pub);
-                db.setTurista(turista);
-                stage.setUserData(db);
-                stage.setScene(new Scene(root));
-                stage.show();
 
             });
             newItem.getChildren().add(newButton);
             gustos1.getChildren().add(newItem);
         }
+    }
+
+    void Next(ActionEvent event,Publication publicacion) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Main.getContext()::getBean);
+        Parent root = fxmlLoader.load(experiencePage.class.getResourceAsStream("ExperiencePage.fxml"));
+        Stage stage = new Stage();
+        doubleObjet db = new doubleObjet();
+        db.setPublicacion(publicacion);
+        db.setTurista(turista);
+        stage.setUserData(db);
+        stage.setScene(new Scene(root));
+        stage.show();
+        Stage stage2 = (Stage) inicio.getScene().getWindow();
+        stage2.close();
     }
     private void loadInfo1() throws IOException, DataBaseError {
         ArrayList<Publication> publicaciones = new ArrayList<>();
@@ -171,21 +176,11 @@ public class Inicio {
             Publication pub = list.get(i);
             newButton.setText("Ir");
             newButton.setOnAction(e ->{
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setControllerFactory(Main.getContext()::getBean);
-                Parent root = null;
                 try {
-                    root = fxmlLoader.load(experiencePage.class.getResourceAsStream("ExperienciePage.fxml"));
+                    Next(e,pub);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                Stage stage = new Stage();
-                doubleObjet db = new doubleObjet();
-                db.setPublicacion(pub);
-                db.setTurista(turista);
-                stage.setUserData(db);
-                stage.setScene(new Scene(root));
-                stage.show();
 
             });
             newItem.getChildren().add(newButton);
