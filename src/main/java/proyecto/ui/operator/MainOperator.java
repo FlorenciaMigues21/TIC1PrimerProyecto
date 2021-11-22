@@ -87,20 +87,18 @@ public class MainOperator {
                    Text validado = new Text("Validada");
                    tabla.add(validado, 1, i);
                    Text calificacion = new Text(String.valueOf(publicList.get(i).getCalification()));
-                   tabla.add(calificacion, 3, i);
+                   tabla.add(calificacion, 4, i);
                } else {
                    Text novalidado = new Text("No validada");
                    tabla.add(novalidado, 1, i);
-                   Text calificacion = new Text("-");
-                   tabla.add(calificacion, 3, i);
+                   Text calificacion = new Text("No disponible");
+                   tabla.add(calificacion, 4, i);
                }
                ArrayList<Reservation> reservasList = new ArrayList<>(reservManager.getAllReservationFromPublication(publicList.get(i)));
                Text cantidadReservas = new Text(Integer.toString(reservasList.size()));
                tabla.add(cantidadReservas, 2, i);
                GridPane.setHalignment(cantidadReservas, HPos.CENTER);
-
                Button botonReserva = new Button();
-               GridPane.setHalignment(botonReserva, HPos.CENTER);
                int finalI = i;
                botonReserva.setOnAction(new EventHandler<ActionEvent>() {
                    @Override
@@ -112,7 +110,9 @@ public class MainOperator {
                        }
                    }
                });
-
+               botonReserva.setPrefSize(58,27);
+               botonReserva.setText("Ir");
+               tabla.add(botonReserva,3,i);
            }
        }
        catch (InvalidUserInformation e){
