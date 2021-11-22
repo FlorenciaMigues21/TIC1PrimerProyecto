@@ -25,6 +25,7 @@ import java.util.ArrayList;
 public class Publication {
 
     @Id
+    @GeneratedValue
     private int idEvent;
 
     private Date Datefrom;
@@ -32,16 +33,14 @@ public class Publication {
     private boolean validated;
 
     @Field(name = "title",index = Index.YES,analyze=Analyze.YES)
-  //  @Field(name = "titleFiltered", analyzer = @Analyzer(definition = "stop"))
     @Field(normalizer = @Normalizer(definition = "lowercase"))
-    @Enumerated(EnumType.STRING)
+    //@Enumerated(EnumType.STRING)
     private String title;
 
     @Field (name = "description",index = Index.YES,analyze=Analyze.YES)
-    //@Field(name = "descriptionFiltered",
-    //        analyzer = @Analyzer(definition = "stop"))
     @Field(normalizer = @Normalizer(definition = "lowercase"))
-    @Enumerated(EnumType.STRING)
+    //@Enumerated(EnumType.STRING)
+    @NotNull
     private String description;
 
     private String ubication;
@@ -161,7 +160,7 @@ public class Publication {
         this.title = title;
     }
 
-    @NotNull
+
     public String getDescription() {
         return description;
     }
@@ -208,23 +207,12 @@ public class Publication {
         this.aforo = aforo;
     }
 
-    @Id
-    @NotNull
     public int getIdEvent() {
         return idEvent;
     }
 
     public void setIdEvent(int idEvent) {
         this.idEvent = idEvent;
-    }
-
-    @NotNull
-    public int getDivisa() {
-        return precio;
-    }
-
-    public void setDivisa(int precio) {
-        this.precio = precio;
     }
 
     @ManyToMany
