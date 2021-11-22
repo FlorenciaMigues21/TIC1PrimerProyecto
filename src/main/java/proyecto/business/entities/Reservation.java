@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.sql.Time;
+import java.util.Date;
 
 @Entity
 public class Reservation {
@@ -21,15 +22,20 @@ public class Reservation {
     private int IdReservation;
     private int cantidad;
     private int hourStart;
+    private Date date_reservation;
+    private boolean validated_reservation;
 
     public Reservation() {
     }
 
-    public Reservation(Tourist turista, Publication publication, int cantidad, int hourStart) {
+    public Reservation(Tourist turista, Publication publication, int idReservation, int cantidad, int hourStart, Date date_reservation, boolean validated_reservation) {
         this.turista = turista;
         this.publication = publication;
+        IdReservation = idReservation;
         this.cantidad = cantidad;
         this.hourStart = hourStart;
+        this.date_reservation = date_reservation;
+        this.validated_reservation = validated_reservation;
     }
 
     public Tourist getTurista() {
@@ -65,5 +71,31 @@ public class Reservation {
 
     public void setHourStart(int hourStart) {
         this.hourStart = hourStart;
+    }
+
+    public int getIdReservation() {
+        return IdReservation;
+    }
+
+    public void setIdReservation(int idReservation) {
+        IdReservation = idReservation;
+    }
+
+    @NotNull
+    public Date getDate_reservation() {
+        return date_reservation;
+    }
+
+    public void setDate_reservation(Date date_reservation) {
+        this.date_reservation = date_reservation;
+    }
+
+    @NotNull
+    public boolean isValidated_reservation() {
+        return validated_reservation;
+    }
+
+    public void setValidated_reservation(boolean validated_reservation) {
+        this.validated_reservation = validated_reservation;
     }
 }
