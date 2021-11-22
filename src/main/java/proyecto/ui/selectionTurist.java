@@ -96,9 +96,10 @@ public class selectionTurist {
         fxmlLoader.setControllerFactory(Main.getContext()::getBean);
         Parent root = fxmlLoader.load(Inicio.class.getResourceAsStream("Inicio.fxml"));
         Stage stage = new Stage();
+        stage.setUserData(userActual);
         stage.setScene(new Scene(root));
+
         stage.show();
-        Inicio.turista = userActual;
         Stage stage2 = (Stage) this.siguiente.getScene().getWindow();
         stage2.close();
     }
@@ -148,7 +149,7 @@ public class selectionTurist {
         ArrayList<Typeofactivities> listType = new ArrayList<>(manType.getAllActivityTypes());
         for (Typeofactivities typeofactivities : listType) {
             if (!typeofactivities.getName().equals("Verano") && !typeofactivities.getName().equals("Invierno") && !typeofactivities.getName().equals("Otoño") && !typeofactivities.getName().equals("Primavera")
-                && !typeofactivities.getName().equals("Confort") && !typeofactivities.getName().equals("Alternativo") && !typeofactivities.getName().equals("Lujo")){
+                && !typeofactivities.getName().equals("Viaje Confort") && !typeofactivities.getName().equals("Viaje alternativo") && !typeofactivities.getName().equals("Viaje de Lujo")){
                 CheckBox type = new CheckBox();
                 type.setId(typeofactivities.getName());
                 type.setText(typeofactivities.getName());
