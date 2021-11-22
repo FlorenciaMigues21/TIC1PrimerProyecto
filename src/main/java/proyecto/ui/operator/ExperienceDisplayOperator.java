@@ -252,7 +252,7 @@ public class ExperienceDisplayOperator{
         ArrayList<Typeofactivities> listType = new ArrayList<>(manType.getAllActivityTypes());
         for (Typeofactivities typeofactivities : listType) {
             if (!typeofactivities.getName().equals("Verano") && !typeofactivities.getName().equals("Invierno") && !typeofactivities.getName().equals("Otoño") && !typeofactivities.getName().equals("Primavera")
-                    && !typeofactivities.getName().equals("Confort") && !typeofactivities.getName().equals("Alternativo") && !typeofactivities.getName().equals("Lujo")){
+                    && !typeofactivities.getName().equals("Viaje Confort") && !typeofactivities.getName().equals("Viaje Alternativo") && !typeofactivities.getName().equals("Viaje de Lujo")){
                 CheckBox type = new CheckBox();
                 type.setId(typeofactivities.getName());
                 type.setText(typeofactivities.getName());

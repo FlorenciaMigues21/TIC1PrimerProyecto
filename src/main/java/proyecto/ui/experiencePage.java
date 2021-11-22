@@ -237,13 +237,8 @@ public class experiencePage {
         Integer hora = horarioSelect();
         //ARREGLAR TEMA FECHA @FIXME
         //ARREGLAR TEMA HORARIO
-       Collection<Reservation> reser = resManager.getAllReservationFromPublication(publicacionActual);
-       ArrayList<Reservation> reservasList = new ArrayList<>(reser);
-       int cantDisponible = cantidadReservas(reservasList);
-       int cantPersonas = Integer.parseInt(cantPer.getText());
-       if(cantDisponible-cantPersonas < 0){
-           String cantAux = String.valueOf(cantDisponible-cantPersonas);
-           showAlert("No hay lugares disponibles","Quedan " + cantAux + " lugares disponibles.");
+       if(VerificReservation(hora)){
+           Reservation newReser = new Reservation();
        }
         else if(!turistaReservaDisp()){
            showAlert("Ya reservó!","Usted ya reservó, si desea cambiar su reserva, vaya a su itinerario.");
@@ -371,6 +366,23 @@ public class experiencePage {
 
     private Integer horarioSelect(){
         return Integer.parseInt(horario.getValue().substring(0,2));
+    }
+
+    private boolean VerificReservation(Integer hora) throws InvalidPublicationInformation, DataBaseError {
+        Collection<Reservation> reser = resManager.getAllReservationFromPublication(publicacionActual);
+        ArrayList<Reservation> reservasList = new ArrayList<>(reser);
+        Integer aforo = publicacionActual.getAforo();
+        for(int i = 0; i<reservasList.size();i++){
+            if(reservasList.get(i).getHourStart() == hora){
+                aforo -= reservasList.get(i).getHourStart();
+            }
+        }
+        if(aforo - Integer.parseInt(cantPer.getText()) >= 0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 

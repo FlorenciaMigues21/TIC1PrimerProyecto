@@ -126,6 +126,8 @@ public class Admin_init {
                     } catch (PublicationCreationError e) {
                         e.printStackTrace();
                     }
+                    setExperienciasValidadas();
+                    setExrencieAValidar();
                     showAlert("La publicación fue aprobada","Ahora estará en la tabla siguiente");
                 }
             });
