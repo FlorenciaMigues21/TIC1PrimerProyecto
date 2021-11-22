@@ -234,7 +234,7 @@ public class experiencePage {
     }
 
     //Subir fotos
-    private void UpPhotos() throws IOException {
+    private void UpPhotos() {
         try {
             Set<Photo> fotos = publicacionActual.getPhotoList();
             Iterator<Photo> it = fotos.iterator();
@@ -305,6 +305,7 @@ public class experiencePage {
         boxComentary.getChildren().clear();
 
         ArrayList<Comentary> comentarios = new ArrayList<>(comManager.getComentaryOfPublication(publicacionActual));
+        int calificaciones = 0;
         if(comentarios.size()>0) {
             for (int i = 0; i < comentarios.size(); i++) {
                 Label usuarioNombre = new Label(comentarios.get(i).getTurista().getUsername());
@@ -314,11 +315,17 @@ public class experiencePage {
                 VBox section = new VBox();
                 String cssLayout = "-fx-border-color: black;\n" +
                         "-fx-border-width: 0.5;\n";
-
+                calificaciones = calificaciones + comentarios.get(i).getCalification();
                 section.setStyle(cssLayout);
                 section.getChildren().add(usuarioNombre);
                 section.getChildren().add(comentarioText);
                 boxComentary.getChildren().add(section);
+            }
+            publicacionActual.setCalification(calificaciones/comentarios.size());
+            try {
+                pubManager.createPublication(publicacionActual);
+            } catch (PublicationCreationError e) {
+                e.printStackTrace();
             }
         }
     }
