@@ -2,13 +2,14 @@
 Documento en el que se indican los pasos para la correcta instalación
 y ejecución del progama.
 
-Presentación: https://www.beautiful.ai/player/-Mp3QnSRkHzg2BJga8zW
+PRESENTACIÓN: https://www.beautiful.ai/player/-Mp3QnSRkHzg2BJga8zW
 
-Configuración:
+CONFIGURACIÓN:
 
-Como operar en la app:
+COMO OPERAR EN LA APLICACIÓN:
 
 Inicialmente se presentara una pantalla de inicio en la cual debe registrar su usuario o si este esta creado iniciar sesión.
+
 
 ADMIN:
 
@@ -20,6 +21,7 @@ en este caso iniciara sesion con "admin@gmail.com" y "admin"
 Cuando ingrese en la app podra validar experiencias a su vez que visualizarlas.
 
 Puede crear un operador turistico dandole al boton de arriba a la izquierda. Para salir de la sesion presione el boton de salida.
+
 
 OPERADOR:
 
