@@ -131,10 +131,11 @@ public class search {
                     ex.printStackTrace();
                 }
                 Stage stage = new Stage();
+                doubleObjet db = new doubleObjet();
+                db.setPublicacion(pub);
+                db.setTurista(turista);
                 stage.setScene(new Scene(root));
                 stage.show();
-                experiencePage.publicacionActual = pub;
-                experiencePage.userActual = turista;
             });
             newHbox.getChildren().add(newButton);
             boxItems.getChildren().add(newHbox);

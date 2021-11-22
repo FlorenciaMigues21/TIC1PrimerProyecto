@@ -20,6 +20,8 @@ import proyecto.business.exceptions.IncompleteObjectException;
 
 import java.io.IOException;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 
 @Component
@@ -82,6 +84,15 @@ public class experienceView {
     private Label telefono;
 
     @FXML
+    private Text reserve;
+
+    @FXML
+    private Text initDate;
+
+    @FXML
+    private Text initDate1;
+
+    @FXML
     void goBack(ActionEvent event) {
         Stage stage2 = (Stage) this.backButton.getScene().getWindow();
         stage2.close();
@@ -111,13 +122,30 @@ public class experienceView {
     private void loadInfo() throws IOException, DataBaseError, IncompleteObjectException {
         NombreAtraccion.setText(publicacion.getTitle());
         direccion.setText(publicacion.getUbication());
-        UpElements();
         infoExp.setText(publicacion.getDescription());
         telefono.setText(publicacion.getPhone());
-        subirHorarios();
+        puntaje.setText(String.valueOf(publicacion.getCalification()));
+        initDate1.setText(String.valueOf(LocalDate.ofInstant(publicacion.getDateto().toInstant(), ZoneId.systemDefault())));
+        initDate.setText(String.valueOf(LocalDate.ofInstant(publicacion.getDatefrom().toInstant(), ZoneId.systemDefault())));
+        if(publicacion.isUniqueReservation()){
+            horario.getItems().add(String.valueOf(publicacion.getHourStart()));
+            horario.getItems().add(String.valueOf(publicacion.getHourFinish()));
+            reserve.setText("La reserva es única para el horario");
+
+        }
+        else if(publicacion.isReservationAvailable()){
+            reserve.setText("Hay reservas para distintos horarios");
+            subirHorarios();
+        }
+        else{
+            horario.getItems().add(String.valueOf(publicacion.getHourStart()));
+            horario.getItems().add(String.valueOf(publicacion.getHourFinish()));
+            reserve.setText("No hay reservas disponibles");
+        }
         precio.setText(String.valueOf(publicacion.getPrecio()));
         UpPhotos();
         upComentaries();
+        UpElements();
 
     }
 

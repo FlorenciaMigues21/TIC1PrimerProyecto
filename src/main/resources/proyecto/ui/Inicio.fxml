@@ -52,7 +52,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="exit" layoutX="24.0" layoutY="475.0" mnemonicParsing="false" style="-fx-background-color: white;">
+            <Button fx:id="exit" onAction="#salir" layoutX="24.0" layoutY="475.0" mnemonicParsing="false" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="19.0">
                      <image>
