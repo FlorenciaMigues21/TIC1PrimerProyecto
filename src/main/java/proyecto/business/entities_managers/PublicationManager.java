@@ -10,8 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import proyecto.business.entities.Publication;
-import proyecto.business.entities.TouristOperator;
+import proyecto.business.entities.*;
 import proyecto.business.exceptions.DataBaseError;
 import proyecto.business.exceptions.InvalidUserInformation;
 import proyecto.business.exceptions.PublicationCreationError;
@@ -30,10 +29,35 @@ public class PublicationManager {
     @Autowired
     private PublicationDAO controller;
 
+    @Autowired
+    private HygieneManager hygieneManager;
+
+    @Autowired
+    private IncludedManager includedManager;
+
+    @Autowired
+    private PhotoManager photoManager;
+
     public void createAndUpdatePublication(Publication publication) throws PublicationCreationError {
-        if (publication.verifyObjectIncomplete())
-            throw new PublicationCreationError("Publicacion con datos incompletos");
+        /*if (publication.verifyObjectIncomplete())
+            throw new PublicationCreationError("Publicacion con datos incompletos");*/
         try {
+            for (Hygiene hygene: publication.getMedidas_de_higiene())
+                try {
+                    if (hygieneManager.searchHygiene(hygene.getMedidas()) == null)
+                        hygieneManager.createHygiene(hygene);
+                }catch(Exception e){
+                    hygieneManager.createHygiene(hygene);
+                }
+            for (IncludedInPublication included: publication.getIncluido())
+                try {
+                    if(includedManager.searchIncluded(included.getIncluido()) == null)
+                        includedManager.createIncluded(included);
+                }catch(Exception e){
+                    includedManager.createIncluded(included);
+                }
+            for(Photo foto: publication.getPhotoList())
+                photoManager.savePhoto(foto);
             controller.save(publication);
         } catch (Exception e) {
             e.printStackTrace();

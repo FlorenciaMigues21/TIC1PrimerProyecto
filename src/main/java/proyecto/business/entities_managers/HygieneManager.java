@@ -23,4 +23,15 @@ public class HygieneManager {
             throw new DataBaseError(e.getMessage(),"Error al crear medidas de higiene " + e.getMessage());
         }
     }
+
+    public Hygiene searchHygiene(String medidas) throws IncompleteObjectException, DataBaseError {
+        if(medidas.equals("") || medidas == null)
+            throw new IncompleteObjectException("Error datos de higiene incompletos");
+        try{
+            return controller.findAllByMedidas(medidas);
+        }catch(Exception e){
+            e.printStackTrace();
+            throw new DataBaseError(e.getMessage(),"Error al cargar medidas de higiene " + e.getMessage());
+        }
+    }
 }

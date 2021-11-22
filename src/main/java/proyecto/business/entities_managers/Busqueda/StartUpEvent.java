@@ -10,13 +10,18 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @RequiredArgsConstructor
 public class StartUpEvent implements ApplicationListener<ApplicationReadyEvent> {
-    private final IndexingService indMan;
+    //private final IndexingService indMan;
+
     @Override
+    public void onApplicationEvent(ApplicationReadyEvent event) {
+
+    }
+    /*@Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         try {
             indMan.initiateIndexing();
         } catch (InterruptedException e) {
             log.error("Failed to reindex entities ",e);
         }
-    }
+    }*/
 }

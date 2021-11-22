@@ -14,7 +14,7 @@ public class IncludedManager {
     @Autowired
     IncludedDAO controller;
 
-    public void createHygiene(IncludedInPublication included) throws IncompleteObjectException, DataBaseError {
+    public void createIncluded(IncludedInPublication included) throws IncompleteObjectException, DataBaseError {
         if(included == null)
             throw new IncompleteObjectException("Error datos de higiene incompletos");
         try {
@@ -22,6 +22,17 @@ public class IncludedManager {
         }catch(Exception e){
             e.printStackTrace();
             throw new DataBaseError(e.getMessage(),"Error al crear medidas de higiene " + e.getMessage());
+        }
+    }
+
+    public IncludedInPublication searchIncluded(String included) throws IncompleteObjectException, DataBaseError {
+        if(included.equals("") || included == null)
+            throw new IncompleteObjectException("Error datos de higiene incompletos");
+        try{
+            return controller.findAllByIncluido(included);
+        }catch(Exception e){
+            e.printStackTrace();
+            throw new DataBaseError(e.getMessage(),"Error al cargar included de higiene " + e.getMessage());
         }
     }
 }

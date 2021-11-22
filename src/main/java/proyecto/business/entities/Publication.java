@@ -44,19 +44,28 @@ public class Publication {
 
     private String ubication;
 
-    @Field (name = "calification",index = Index.YES,analyze=Analyze.YES)
     @Nullable
-    @Formula("(select AVG(c.calification) from comentary c where c.publication_id_event == id)")
+    //@Formula("(select AVG(c.calification) from comentary c where c.publication_id_event == id)")
     private float calification;
 
     private boolean needVaccination;
     private int aforo;
     private int precio;
+    @ManyToMany
+    @NotNull
     private Collection<Typeofactivities> listaActividadades;
+    @ManyToOne
+    @NotNull
     private TouristOperator operador;
+    @ManyToMany
+    @NotNull
     private Collection<Photo> photoList;
     private String phone;
+    @NotNull
+    @ManyToMany
     private Collection<Hygiene> medidas_de_higiene;
+    @NotNull
+    @ManyToMany
     private Collection<IncludedInPublication> incluido;
     private int hourStart;
     private int hourFinish;
@@ -214,8 +223,7 @@ public class Publication {
         this.idEvent = idEvent;
     }
 
-    @ManyToMany
-    @NotNull
+
     public Collection<Typeofactivities> getListaActividadades() {
         return listaActividadades;
     }
@@ -224,8 +232,7 @@ public class Publication {
         this.listaActividadades = listaActividadades;
     }
 
-    @ManyToOne
-    @NotNull
+
     public TouristOperator getOperador() {
         return operador;
     }
@@ -234,8 +241,7 @@ public class Publication {
         this.operador = operador;
     }
 
-    @ManyToMany
-    @NotNull
+
     public Collection<Photo> getPhotoList() {
         return photoList;
     }
@@ -257,8 +263,7 @@ public class Publication {
         this.phone = phone;
     }
 
-    @NotNull
-    @ManyToMany
+
     public Collection<Hygiene> getMedidas_de_higiene() {
         return medidas_de_higiene;
     }
@@ -267,8 +272,7 @@ public class Publication {
         this.medidas_de_higiene = medidas_de_higiene;
     }
 
-    @NotNull
-    @ManyToMany
+
     public Collection<IncludedInPublication> getIncluido() {
         return incluido;
     }

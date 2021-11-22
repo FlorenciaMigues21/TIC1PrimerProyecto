@@ -5,4 +5,5 @@ import proyecto.business.entities.Hygiene;
 
 public interface HygieneDAO extends CrudRepository<Hygiene,Integer> {
 
+    Hygiene findAllByMedidas(String medidas);
 }
