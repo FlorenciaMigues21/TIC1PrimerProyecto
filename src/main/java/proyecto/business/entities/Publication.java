@@ -267,7 +267,7 @@ public class Publication {
 
     @Access(AccessType.PROPERTY)
     @NotNull
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Hygiene.class)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, targetEntity = Hygiene.class)
     @JoinTable(name = "publication_medidas_de_higiene", joinColumns = @JoinColumn(name = "publication_id_event",referencedColumnName = "id_event"), inverseJoinColumns = @JoinColumn(name = "medidas_de_higiene_id",referencedColumnName = "id"))
     public Set<Hygiene> getMedidas_de_higiene() {
         return medidas_de_higiene;
@@ -278,7 +278,7 @@ public class Publication {
     }
     @Access(AccessType.PROPERTY)
     @NotNull
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = IncludedInPublication.class )
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, targetEntity = IncludedInPublication.class )
     @JoinTable(name = "publication_incluido", joinColumns = @JoinColumn(name = "publication_id_event",referencedColumnName = "id_event"), inverseJoinColumns = @JoinColumn(name = "incluido_id",referencedColumnName = "id"))
     public Set<IncludedInPublication> getIncluido() {
         return incluido;
