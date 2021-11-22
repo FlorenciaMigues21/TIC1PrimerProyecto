@@ -56,9 +56,7 @@ public class carrito {
                                 turista = (Tourist) stage.getUserData();
                                 try {
                                     loadInfo();
-                                } catch (InvalidUserInformation e) {
-                                    e.printStackTrace();
-                                } catch (DataBaseError e) {
+                                } catch (InvalidUserInformation | DataBaseError e) {
                                     e.printStackTrace();
                                 }
                             }

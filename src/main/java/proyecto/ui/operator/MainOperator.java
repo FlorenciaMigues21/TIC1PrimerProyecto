@@ -123,7 +123,13 @@ public class MainOperator {
                Text cantidadReservas = new Text(Integer.toString(reservasList.size()));
                tabla.add(cantidadReservas, 2, i);
                GridPane.setHalignment(cantidadReservas, HPos.CENTER);
-
+               Button eliminar = new Button();
+               eliminar.setOnAction(new EventHandler<ActionEvent>() {
+                   @Override
+                   public void handle(ActionEvent event) {
+                        publiManager.deletePublication(publicList.get(finalI));
+                   }
+               });
            }
        }
        catch (InvalidUserInformation e){
