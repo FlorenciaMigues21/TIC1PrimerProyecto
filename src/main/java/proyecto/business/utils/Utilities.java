@@ -12,7 +12,7 @@ public class Utilities {
     *   AÑO = 2000, MES = 3, DIA = 1
     */
     public static Date createDate(int anio, int mes, int dia){
-        return new Date(anio-1900,mes,dia);
+        return new Date(anio-1900,mes-1,dia);
     }
 
     public static boolean TimeVerification(int hora){

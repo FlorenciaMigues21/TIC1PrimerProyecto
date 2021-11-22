@@ -3,26 +3,27 @@ package proyecto.business.entities;
 import com.sun.istack.NotNull;
 
 import javax.imageio.ImageIO;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
+
 import javafx.scene.image.Image;
+import org.hibernate.engine.jdbc.LobCreator;
+import org.hibernate.type.descriptor.sql.LobTypeMappings;
+
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-
+import java.sql.Blob;
+import java.sql.SQLException;
+import javax.sql.rowset.serial.SerialBlob;
 
 @Entity
 public class Photo {
 
-    private byte[] photo;
-    /*private int height;
-    private int width;
-    private int hints;*/
-
+    @Lob
+    @NotNull
+    private Blob photo;
 
     @Id
     @GeneratedValue
@@ -31,57 +32,34 @@ public class Photo {
     public Photo() {
     }
 
-    public Photo(byte[] photo) {
+    public Photo(Blob photo) {
         this.photo = photo;
     }
 
-    @Lob
-    @NotNull
+
     public byte[] getPhoto() {
-        return photo;
+        try {
+            return photo.getBytes(1l, (int)photo.length());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new byte[]{};
+        }
     }
 
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
+    public void setPhoto(byte[] photo){
+        try {
+            this.photo = new SerialBlob(photo);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-
-    /*@NotNull
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    @NotNull
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    @NotNull
-    public int getHints() {
-        return hints;
-    }
-
-    public void setHints(int hints) {
-        this.hints = hints;
-    }*/
 
     public void getByteArrayImg(String imgPath) throws IOException {
         BufferedImage bufferimage = ImageIO.read(new File(imgPath));
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         ImageIO.write(bufferimage, "jpg", output );
-        this.photo= output.toByteArray();
-        /*this.height = bufferimage.getHeight();
-        this.width = bufferimage.getWidth();*/
-
+        this.setPhoto(output.toByteArray());
     }
-
 
     public Image getImageFromByteArray(byte[] byteArray) throws IOException {
         ByteArrayInputStream bais = new ByteArrayInputStream(byteArray);
