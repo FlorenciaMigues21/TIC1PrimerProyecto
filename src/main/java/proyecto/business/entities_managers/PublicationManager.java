@@ -48,9 +48,10 @@ public class PublicationManager {
             for (Hygiene hygene: publication.getMedidas_de_higiene()) {
                 try {
                     Hygiene aux = hygieneManager.searchHygiene(hygene.getMedidas());
-                    if (aux == null)
+                    if (aux == null) {
                         hygieneManager.createHygiene(hygene);
-                    else
+                        hygene = hygieneManager.searchHygiene(hygene.getMedidas());
+                    }else
                         hygene = aux;
                 } catch (Exception e) {
                     hygieneManager.createHygiene(hygene);
@@ -59,9 +60,10 @@ public class PublicationManager {
             for (IncludedInPublication included: publication.getIncluido()){
                 try {
                     IncludedInPublication aux = includedManager.searchIncluded(included.getIncluido());
-                    if(aux == null)
+                    if (aux == null){
                         includedManager.createIncluded(included);
-                    else
+                    included = includedManager.searchIncluded(included.getIncluido());
+                }else
                         included = aux;
                 }catch(Exception e){
                     includedManager.createIncluded(included);
