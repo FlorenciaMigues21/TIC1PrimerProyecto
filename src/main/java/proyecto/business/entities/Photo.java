@@ -62,9 +62,9 @@ public class Photo {
         this.setPhoto(output.toByteArray());
     }
 
-    public Image getImageFromByteArray(byte[] byteArray, int width, int height) throws IOException {
-        WritableImage img = new WritableImage(width, height);
-        ByteArrayInputStream bais = new ByteArrayInputStream(byteArray);
+    public Image getImageFromByteArray(int width, int height) throws IOException {
+        WritableImage img =  new WritableImage(width, height);
+        ByteArrayInputStream bais = new ByteArrayInputStream(this.getPhoto());
         BufferedImage image = ImageIO.read(bais);
         img = SwingFXUtils.toFXImage(image,null);
         return (Image) img;
