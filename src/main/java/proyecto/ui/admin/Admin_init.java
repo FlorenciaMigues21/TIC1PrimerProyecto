@@ -122,6 +122,9 @@ public class Admin_init {
                     showAlert("La publicación fue aprobada","Ahora estará en la tabla siguiente");
                 }
             });
+            Validar.setPrefSize(58,27);
+            Validar.setText("Validar");
+            expAValidar.add(Validar,2,i);
             /*Button Ver = new Button();
             Ver.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
