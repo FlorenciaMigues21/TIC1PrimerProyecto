@@ -306,10 +306,9 @@ Inicialmente se presentara una pantalla de inicio en la cual debe registrar su u
 
 ADMIN:
 
-Debe ingresar un usuario administrador en la base de datos mysql de la siguiente forma:
+mail: Admin
 
-ej:  INSERT INTO admin(mail,blocked,password,phone,username) VALUES ("admin@gmail.com",0,"admin",1,"admin")
-en este caso iniciara sesion con "admin@gmail.com" y "admin"
+contraseña: Admin
 
 Cuando ingrese en la app podra validar experiencias a su vez que visualizarlas.
 
@@ -338,7 +337,8 @@ un boton de log out y otro para reconfigurar sus gustos.
 
 
 
-Bugs conocidos:
+Bugs conocidos: 
+Actualmente ninguno
 
 Grupo:
 Agustín Caamaño, Florencia Migues, Juan Manuel Latorre.
