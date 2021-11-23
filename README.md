@@ -307,6 +307,7 @@ Inicialmente se presentara una pantalla de inicio en la cual debe registrar su u
 ADMIN:
 
 mail: Admin
+
 contraseña: Admin
 
 Cuando ingrese en la app podra validar experiencias a su vez que visualizarlas.
