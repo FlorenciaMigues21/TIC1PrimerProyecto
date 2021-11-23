@@ -35,7 +35,7 @@ import java.util.Set;
 
 @Component
 public class ExperienceDisplayOperator{
-    ObservableList<String> gusto = FXCollections.observableArrayList("Viaje Confort","Viaje alternativo","Viaje de Lujo");
+    ObservableList<String> gusto = FXCollections.observableArrayList("Viaje Confort","Viaje alternativo");
 
     @Autowired
     private PublicationManager publicMan;

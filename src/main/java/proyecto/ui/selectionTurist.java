@@ -32,7 +32,7 @@ import java.util.Iterator;
 
 @Component
 public class selectionTurist {
-    ObservableList<String> gusto = FXCollections.observableArrayList("Viaje Confort","Viaje alternativo","Viaje de Lujo");
+    ObservableList<String> gusto = FXCollections.observableArrayList("Viaje Confort","Viaje alternativo");
 
     @Autowired
     private UserManager<Tourist> controlador;

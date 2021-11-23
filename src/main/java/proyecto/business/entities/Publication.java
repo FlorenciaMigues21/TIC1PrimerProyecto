@@ -222,7 +222,8 @@ public class Publication {
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, targetEntity = Typeofactivities.class)
     @NotNull
     @JoinTable(name = "publication_lista_actividadades",
-            joinColumns = @JoinColumn(name = "publication_id_event", referencedColumnName = "id_event"), inverseJoinColumns = @JoinColumn(name = "lista_actividadades_name", referencedColumnName = "name"))
+            joinColumns = @JoinColumn(name = "publication_id_event", referencedColumnName = "id_event"),
+            inverseJoinColumns = @JoinColumn(name = "lista_actividadades_name", referencedColumnName = "name"))
     public Set<Typeofactivities> getListaActividadades() {
         return listaActividadades;
     }

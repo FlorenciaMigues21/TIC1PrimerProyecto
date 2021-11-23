@@ -16,9 +16,7 @@ import proyecto.business.persistence.PublicationDAO;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class PublicationManager {
@@ -41,34 +39,41 @@ public class PublicationManager {
     @Autowired
     private ComentaryManager comentaryManager;
 
+    @Transactional
     public void createPublication(Publication publication) throws PublicationCreationError {
         /*if (publication.verifyObjectIncomplete())
             throw new PublicationCreationError("Publicacion con datos incompletos");*/
         try {
+            Set<Hygiene> hygieneFinal = new HashSet<>();
             for (Hygiene hygene: publication.getMedidas_de_higiene()) {
                 try {
                     Hygiene aux = hygieneManager.searchHygiene(hygene.getMedidas());
                     if (aux == null) {
                         hygieneManager.createHygiene(hygene);
-                        hygene = hygieneManager.searchHygiene(hygene.getMedidas());
-                    }else
-                        hygene = aux;
+                        hygieneFinal.add( hygieneManager.searchHygiene(hygene.getMedidas()));
+                    }else {
+                        hygieneFinal.add(aux);
+                    }
                 } catch (Exception e) {
                     hygieneManager.createHygiene(hygene);
                 }
             }
+            publication.setMedidas_de_higiene(hygieneFinal);
+            Set<IncludedInPublication> includedFinal = new HashSet<>();
             for (IncludedInPublication included: publication.getIncluido()){
                 try {
                     IncludedInPublication aux = includedManager.searchIncluded(included.getIncluido());
                     if (aux == null){
                         includedManager.createIncluded(included);
-                    included = includedManager.searchIncluded(included.getIncluido());
-                }else
-                        included = aux;
+                        includedFinal.add(includedManager.searchIncluded(included.getIncluido()));
+                    }else {
+                        includedFinal.add(aux);
+                    }
                 }catch(Exception e){
                     includedManager.createIncluded(included);
                 }
             }
+            publication.setIncluido(includedFinal);
             for(Photo foto: publication.getPhotoList())
                 photoManager.savePhoto(foto);
             controller.save(publication);

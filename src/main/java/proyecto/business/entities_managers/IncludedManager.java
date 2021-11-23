@@ -25,6 +25,7 @@ public class IncludedManager {
         }
     }
 
+
     public IncludedInPublication searchIncluded(String included) throws IncompleteObjectException, DataBaseError {
         if(included.equals("") || included == null)
             throw new IncompleteObjectException("Error datos de higiene incompletos");
