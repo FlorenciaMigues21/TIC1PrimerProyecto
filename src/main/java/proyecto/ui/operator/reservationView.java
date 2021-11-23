@@ -8,6 +8,7 @@ import javafx.geometry.HPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -95,6 +96,7 @@ public class reservationView {
                     @Override
                     public void handle(ActionEvent event) {
                         reservasList.get(finalI).setValidated_reservation(true);
+                        showAlert("La reserva fue validada","Ya se le comunicará al turista sobre la validación");
                         try {
                             reserManager.addReservation(reservasList.get(finalI));
                         } catch (ReservationCreationError reservationCreationError) {
@@ -116,6 +118,11 @@ public class reservationView {
                 tablaReserva.add(Validar, 3, i);
                 GridPane.setHalignment(Validar, HPos.CENTER);
             }
+            else{
+                Text newT = new Text("Validada");
+                tablaReserva.add(newT, 3, i);
+                GridPane.setHalignment(newT, HPos.CENTER);
+            }
         }
     }
 
@@ -128,6 +135,13 @@ public class reservationView {
         Node source = (Node)  actionEvent.getSource();
         Stage stage1  = (Stage) source.getScene().getWindow();
         stage1.close();
+    }
+    private void showAlert(String title, String contextText) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(contextText);
+        alert.showAndWait();
     }
 
 }

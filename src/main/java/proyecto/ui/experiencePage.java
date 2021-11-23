@@ -265,6 +265,9 @@ public class experiencePage {
         else if(!turistaReservaDisp()){
            showAlert("Ya reservó!","Usted ya reservó, si desea cambiar su reserva, vaya a su itinerario.");
        }
+        else if(!VerificReservation(hora)){
+            showAlert("No hay espacio disponible", "Pruebe con otro horario");
+        }
 
     }
 

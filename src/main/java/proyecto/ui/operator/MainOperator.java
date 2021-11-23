@@ -100,28 +100,31 @@ public class MainOperator {
                    tabla.add(calificacion, 4, i);
                    GridPane.setHalignment(calificacion, HPos.CENTER);
                }
-               Button botonReserva = new Button();
-               int finalI = i;
-               botonReserva.setOnAction(new EventHandler<ActionEvent>() {
-                   @Override
-                   public void handle(ActionEvent event) {
-                       try {
-                           Next(event, publicList.get(finalI));
-                           System.out.println(publicList.get(finalI));
-                       } catch (IOException e) {
-                           e.printStackTrace();
+               if(publicList.get(i).isReservationAvailable()) {
+                   Button botonReserva = new Button();
+                   int finalI = i;
+                   botonReserva.setOnAction(new EventHandler<ActionEvent>() {
+                       @Override
+                       public void handle(ActionEvent event) {
+                           try {
+                               Next(event, publicList.get(finalI));
+                               System.out.println(publicList.get(finalI));
+                           } catch (IOException e) {
+                               e.printStackTrace();
+                           }
                        }
-                   }
-               });
-               botonReserva.setPrefSize(58,27);
-               botonReserva.setText("Ir");
-               tabla.add(botonReserva,3,i);
-               GridPane.setHalignment(botonReserva, HPos.CENTER);
-               ArrayList<Reservation> reservasList = new ArrayList<>(reservManager.getAllReservationFromPublication(publicList.get(i)));
-               Text cantidadReservas = new Text(Integer.toString(reservasList.size()));
-               tabla.add(cantidadReservas, 2, i);
-               GridPane.setHalignment(cantidadReservas, HPos.CENTER);
+                   });
+                   botonReserva.setPrefSize(58, 27);
+                   botonReserva.setText("Ir");
+                   tabla.add(botonReserva, 3, i);
+                   GridPane.setHalignment(botonReserva, HPos.CENTER);
+                   ArrayList<Reservation> reservasList = new ArrayList<>(reservManager.getAllReservationFromPublication(publicList.get(i)));
+                   Text cantidadReservas = new Text(Integer.toString(reservasList.size()));
+                   tabla.add(cantidadReservas, 2, i);
+                   GridPane.setHalignment(cantidadReservas, HPos.CENTER);
+               }
                Button eliminar = new Button();
+               int finalI=i;
                eliminar.setOnAction(new EventHandler<ActionEvent>() {
                    @Override
                    public void handle(ActionEvent event) {

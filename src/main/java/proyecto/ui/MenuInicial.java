@@ -163,12 +163,12 @@ public class MenuInicial {
                     try {
                         TouristOperator userSignIn = controladorOp.logIn(new TouristOperator(passowrdUser, mail));
                         System.out.println(userSignIn);
-                        if (userSignIn.getPassword().equals(passowrdUser)) {
+                        if (userSignIn.getPassword().equals(passowrdUser) && !userSignIn.isBlocked()) {
 
                             NextOperator(userSignIn);
                             close(event);
                         }else {
-                            showAlert("Datos incorrectos", "Verifique el mail y la contraseña");
+                            showAlert("Datos incorrectos", "Verifique el mail y la contraseña, y si su cuenta no fue bloqueada");
                         }
                     }
                     catch (InvalidUserInformation | UserNotFound | IOException e) {

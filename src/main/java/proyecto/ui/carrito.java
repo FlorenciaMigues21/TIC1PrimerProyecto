@@ -112,7 +112,7 @@ public class carrito {
             else{
                 Text name = new Text(reservaciones.get(i).getPublication().getTitle());
                 String start = reservaciones.get(i).getHourStart() + ":00";
-                Text hora = new Text(start+reservaciones.get(i).getDate_reservation());
+                Text hora = new Text(start+" "+ LocalDate.ofInstant(reservaciones.get(i).getDate_reservation().toInstant(), ZoneId.systemDefault()));
                 Text telefono = new Text(reservaciones.get(i).getPublication().getPhone());
                 Text estado;
                 if(reservaciones.get(i).isValidated_reservation()){
