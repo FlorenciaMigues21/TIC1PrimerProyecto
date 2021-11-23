@@ -12,9 +12,9 @@ CONFIGURACIÓN:
     
     2)Pasos previos:
         -Crear una base de datos en SQL y cambiar los valores en correspondientes a:
-            username: 
-            password: 
-            url: 
+    		url: jdbc:mysql://localhost:3306/proyecto
+    		username: root
+    		password: root
         en el archivo application.yml.
     3)Ejecutar en SQL:
         INSERT INTO country VALUES('Afghanistan');
